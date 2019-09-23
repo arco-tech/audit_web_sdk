@@ -1,0 +1,78 @@
+.check-box {
+  position: relative;
+  display: flex;
+  margin: 5px 0;
+  cursor: pointer;
+  align-items: top;
+}
+
+.check-box--no-button-transition {
+  cursor: default;
+}
+
+.check-box__tick-box {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-top: 2px;
+  border: 2px solid @colors[grey];
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color @transition-duration;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    top: 3px;
+    left: 2px;
+    border-left: 2px solid @colors[grey];
+    border-bottom: 2px solid @colors[grey];
+    transform: rotate(-40deg) scale(0) translate(2px);
+    transition:
+      border-color @transition-duration,
+      transform @transition-duration;
+  }
+}
+
+.check-box__tick-box--active {
+  border-color: @colors[primary];
+
+  &:after {
+    border-color: @colors[primary];
+    transform: rotate(-50deg) scale(1);
+  }
+}
+
+.check-box__text {
+  flex: 1;
+  color: @colors[grey];
+}
+
+@media only screen and (max-width: 800px) {
+  .check-box:not(.check-box--no-button-transition) {
+    display: block;
+
+    .check-box__text {
+      width: 100%;
+      .button();
+      background-color: @colors[grey];
+      transition: background-color @transition-duration;
+    }
+
+    .check-box__text--active {
+      background-color: @colors[primary];
+    }
+
+    .check-box__tick-box {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      margin: 0;
+      background-color: white;
+      z-index: 1;
+    }
+  }
+}

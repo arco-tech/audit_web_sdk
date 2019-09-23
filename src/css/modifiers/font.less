@@ -1,0 +1,11 @@
+@font-weights: {
+  light: 300;
+  regular: 400;
+  bold: 600;
+}
+
+each(@font-weights, .(@weight, @name) {
+  .weight-@{name} {
+    font-weight: @weight;
+  }
+});

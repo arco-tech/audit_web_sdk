@@ -1,0 +1,17 @@
+.hide {
+  display: none;
+}
+
+each(@content-widths, .(@width, @name) {
+  @media only screen and (max-width: @width) {
+    .hide-less-than-@{name} {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: @width + 1) {
+    .hide-more-than-@{name} {
+      display: none;
+    }
+  }
+});

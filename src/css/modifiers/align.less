@@ -1,0 +1,19 @@
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+each(@content-widths, .(@width, @name) {
+  @media only screen and (max-width: @width) {
+    .align-center-less-than-@{name} {
+      text-align: center;
+    }
+  }
+});

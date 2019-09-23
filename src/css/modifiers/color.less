@@ -1,0 +1,9 @@
+each(@colors, .(@color, @name) {
+  .color-@{name} {
+    color: @color;
+  }
+
+  .bg-@{name} {
+    background-color: @color;
+  }
+});

@@ -1,0 +1,40 @@
+select {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 6px 14px;
+  padding-right: 40px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid white;
+  outline: none;
+  font-family: @fonts[primary];
+  transition: border-color @transition-duration;
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &:invalid {
+    color: @colors[grey];
+  }
+
+  & option[value=""] {
+    color: @colors[grey];
+  }
+
+  &:focus {
+    border-color: @colors[primary];
+  }
+}
+
+.input-dim {
+  select {
+    background-color: @colors[background];
+    border-color: @colors[background];
+
+    &:focus {
+      border-color: @colors[primary];
+    }
+  }
+}

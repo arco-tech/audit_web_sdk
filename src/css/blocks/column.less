@@ -1,0 +1,32 @@
+.column-container {
+  display: flex;
+}
+
+.column-container--align-center {
+  align-items: center;
+}
+
+.column-container--align-end {
+  align-items: flex-end;
+}
+
+.column-container--wrap {
+  flex-wrap: wrap;
+}
+
+.column-container--justify-space-between {
+  justify-content: space-between;
+}
+
+each(@content-widths, .(@width, @name) {
+  @media only screen and (max-width: @width) {
+    .column-container--@{name}-cut-off {
+      display: block;
+
+      & > .column {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+});

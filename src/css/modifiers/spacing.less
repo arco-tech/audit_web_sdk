@@ -1,0 +1,42 @@
+@spacing-properties: margin, padding;
+@spacing-directions: left, right, top, bottom;
+@spacing-axis: {
+  x: left, right;
+  y: top, bottom;
+}
+@spacing-sizes: {
+  auto: auto;
+  none: 0;
+  extra-small: 5px;
+  small: 10px;
+  medium: 25px;
+  large: 50px;
+  extra-large: 100px;
+}
+
+each(@spacing-properties, .(@property) {
+  each(@spacing-sizes, .(@size, @size-name) {
+    .@{property}-@{size-name} {
+      @{property}: @size;
+    }
+  });
+
+  each(@spacing-directions, .(@direction) {
+    each(@spacing-sizes, .(@size, @size-name) {
+      .@{property}-@{direction}-@{size-name} {
+        @{property}-@{direction}: @size;
+      }
+    });
+  });
+
+  each(@spacing-axis, .(@axis-directions, @axis-name) {
+    each(@spacing-sizes, .(@size, @size-name) {
+      .@{property}-@{axis-name}-@{size-name} {
+        each(@axis-directions, .(@axis-direction) {
+          @{property}-@{axis-direction}: @size;
+          @{property}-@{axis-direction}: @size;
+        });
+      }
+    });
+  });
+});

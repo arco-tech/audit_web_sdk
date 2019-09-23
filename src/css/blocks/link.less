@@ -1,0 +1,13 @@
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color @transition-duration;
+}
+
+.link--primary {
+  color: @colors[primary];
+
+  &:hover {
+    color: @colors[light-primary];
+  }
+}

@@ -1,0 +1,59 @@
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: @colors[primary];
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color @transition-duration;
+
+  &:hover {
+    background-color: @colors[light-primary];
+  }
+
+  &:focus {
+    background-color: @colors[primary];
+  }
+
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+.button--outline {
+  background-color: transparent;
+  border: 1px solid @colors[primary];
+  color: @colors[black];
+
+  &:hover {
+    background-color: #e7eae4;
+  }
+
+  &:focus {
+    background-color: #d6dccf;
+  }
+
+  &:active {
+    background-color: white;
+  }
+}
+
+.button--grey {
+  background-color: @colors[grey];
+}
+
+.button--wide {
+  min-width: 200px;
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--inverse-primary {
+  background-color: @colors[white];
+  color: @colors[primary];
+}
