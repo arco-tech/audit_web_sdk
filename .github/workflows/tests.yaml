@@ -9,4 +9,5 @@ jobs:
       - name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        run: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && sudo apt-get install nodejs && npm install && npm test"
+        uses: actions/setup-node@master
+        run: "npm install && npm test"
