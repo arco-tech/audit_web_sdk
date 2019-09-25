@@ -10,7 +10,3 @@ test("block", (t) => {
 test("modifiers", (t) => {
   t.is(modifiers("block", ["m1", "m2"]), ".block--m1.block--m2");
 });
-
-test("failing test", (t) => {
-  t.is(1, 2);
-});
