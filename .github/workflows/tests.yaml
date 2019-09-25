@@ -10,4 +10,4 @@ jobs:
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
         uses: actions/setup-node@master
-        run: "npm install && npm test"
+        run: npm install && npm test
