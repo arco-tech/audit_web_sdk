@@ -1,5 +1,4 @@
 import * as m from "mithril";
-import {route} from "../Router";
 
 interface Attrs {}
 

@@ -10,6 +10,10 @@ import {
 
 const pathPrefix = "api/v1";
 
+const config: {endpoint: string} = {
+  endpoint: apiEndpoint,
+};
+
 export function request<T>(
   method: RequestMethod,
   path: RequestPath,
@@ -25,4 +29,8 @@ export function request<T>(
   }
   return m.request({method, url, ...options})
     .then(({data}: any) => data as T);
+}
+
+export function setEndpoint(endpoint: string): void {
+  config.endpoint = endpoint;
 }
