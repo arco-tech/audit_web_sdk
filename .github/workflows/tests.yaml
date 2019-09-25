@@ -6,8 +6,11 @@ jobs:
     name: Test Job
     runs-on: ubuntu-ubuntu-18.04
     steps:
-      - name: Test
+      - id: setup
+        name: Setup
+        uses: actions/setup-node@master
+      - id: test
+        name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        uses: actions/setup-node@master
         run: npm install && npm test
