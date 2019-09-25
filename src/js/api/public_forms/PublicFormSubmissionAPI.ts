@@ -1,6 +1,6 @@
-import {FormState, FormStateValues} from "../FormState";
-import {PublicFormSubmissionData} from "../PublicFormSubmission";
-import {PublishedForm} from "../PublishedForm";
+import {FormState, FormStateValues} from "../../FormState";
+import {PublicFormSubmissionData} from "../../PublicFormSubmission";
+import {PublishedForm} from "../../PublishedForm";
 import {request} from "./API";
 
 interface PublicFormSubmissionParams {
@@ -15,11 +15,6 @@ interface PublicFormSubmissionParams {
   has_submitted: boolean;
   values: FormStateValues;
   filtered_section_ids: number[];
-}
-
-interface CreatePublicFormSubmissionResponse {
-  token: string;
-  public_form_submission: PublicFormSubmissionData;
 }
 
 export function current(): Promise<PublicFormSubmissionData> {

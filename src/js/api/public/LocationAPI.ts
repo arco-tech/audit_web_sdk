@@ -1,4 +1,4 @@
-import {Location, LocationJSON} from "../Location";
+import {Location, LocationJSON} from "../../Location";
 import {request} from "./API";
 
 export function locations(): Promise<Location[]> {

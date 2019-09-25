@@ -1,4 +1,4 @@
-import {LocationAPI} from "./api";
+import * as LocationAPI from "./api/public/LocationAPI";
 import {Location} from "./Location";
 
 interface State {

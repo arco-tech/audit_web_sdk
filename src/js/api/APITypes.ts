@@ -3,6 +3,7 @@ export type RequestMethod = "get" | "post" | "put" | "patch" | "delete";
 export type RequestPath = string;
 
 export interface RequestOptions {
+  pathPrefix?: string;
   body?: any;
   headers?: {[key: string]: any};
   jwt?: string;

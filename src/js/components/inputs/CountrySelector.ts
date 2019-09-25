@@ -1,5 +1,5 @@
 import * as m from "mithril";
-import {LocationAPI} from "../../api";
+import * as LocationAPI from "../../api/public/LocationAPI";
 import {Changeset} from "../../Changeset";
 import {Location} from "../../Location";
 import {Option, Selector} from "./Selector";

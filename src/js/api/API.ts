@@ -19,7 +19,8 @@ export function request<T>(
   path: RequestPath,
   options: RequestOptions = {},
 ): Promise<T> {
-  const url = `${apiEndpoint}/${pathPrefix}/${path}`;
+  const prefix = options.pathPrefix || pathPrefix;
+  const url = `${apiEndpoint}/${prefix}/${path}`;
   const token = options.jwt || loadAuthToken();
   if (token) {
     options.headers = {
