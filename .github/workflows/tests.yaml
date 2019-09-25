@@ -9,8 +9,11 @@ jobs:
       - id: setup
         name: Setup
         uses: actions/setup-node@master
+      - id: install
+        name: Install
+        run: npm install
       - id: test
         name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        run: npm install && npm test
+        run: npm test
