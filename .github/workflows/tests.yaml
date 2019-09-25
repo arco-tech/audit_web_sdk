@@ -10,6 +10,9 @@ jobs:
         env:
           COLOR: "#4287f5"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: repo pushed (${GITHUB_EVENT_NAME})
@@ -22,6 +25,9 @@ jobs:
         env:
           COLOR: "#e6324d"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: action setup failed
@@ -34,6 +40,9 @@ jobs:
         env:
           COLOR: "#e6324d"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: action checkout failed
@@ -46,6 +55,9 @@ jobs:
         env:
           COLOR: "#e6324d"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: action install failed
@@ -60,6 +72,9 @@ jobs:
         env:
           COLOR: "#e6324d"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: action test failure
@@ -68,6 +83,9 @@ jobs:
         env:
           COLOR: "#83cf27"
           USERNAME: "Audit Web SDK GitHub Action"
+        secrets:
+          - "WEBHOOK_ID"
+          - "WEBHOOK_TOKEN"
         uses: Ilshidur/action-discord@master
         with:
           args: action test success
