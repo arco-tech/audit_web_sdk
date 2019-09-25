@@ -6,17 +6,68 @@ jobs:
     name: Test Job
     runs-on: ubuntu-18.04
     steps:
-      - id: setup
-        name: Setup
+      - name: Discord notification
+        env:
+          COLOR: "#4287f5"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: repo pushed (${{GITHUB_EVENT_NAME}})
+
+      - name: Setup
         uses: actions/setup-node@master
-      - id: checkout
-        name: Checkout
+
+      - name: Notify setup failure
+        if: failure()
+        env:
+          COLOR: "#e6324d"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: action setup failed
+
+      - name: Checkout
         uses: actions/checkout@v1
-      - id: install
-        name: Install
+
+      - name: Notify checkout failure
+        if: failure()
+        env:
+          COLOR: "#e6324d"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: action checkout failed
+
+      - name: Install
         run: npm install
-      - id: test
-        name: Test
+
+      - name: Notify install failure
+        if: failure()
+        env:
+          COLOR: "#e6324d"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: action install failed
+
+      - name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
         run: npm test
+
+      - name: Notify test failure
+        if: failure()
+        env:
+          COLOR: "#e6324d"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: action test failure
+
+      - name: Notify test success
+        env:
+          COLOR: "#83cf27"
+          USERNAME: "Audit Web SDK GitHub Action"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: action test success
