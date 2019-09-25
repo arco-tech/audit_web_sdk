@@ -13,4 +13,4 @@ jobs:
         name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        run: cd .. && npm install && npm test
+        run: cd .. && tree && npm install && npm test
