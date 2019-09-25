@@ -12,7 +12,7 @@ jobs:
           USERNAME: "Audit Web SDK GitHub Action"
         uses: Ilshidur/action-discord@master
         with:
-          args: repo pushed (${{GITHUB_EVENT_NAME}})
+          args: repo pushed (${GITHUB_EVENT_NAME})
 
       - name: Setup
         uses: actions/setup-node@master
