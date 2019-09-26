@@ -27,7 +27,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Install failure"
-        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
+        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
 
       - name: Test
         env:
@@ -48,4 +48,4 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
           MESSAGE: "Tests successful"
-        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
+        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
