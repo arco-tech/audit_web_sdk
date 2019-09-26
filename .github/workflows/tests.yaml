@@ -11,9 +11,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
           MESSAGE: "Update pushed (${GITHUB_REF})"
-          COMMIT_URL: "https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}"
-          WORKFLOW_URL: "https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}/checks"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}, \\\"fields\\\": [{\\\"name\\\": \\\"See changes\\\", \\\"value\\\": \\\"${COMMIT_URL}\\\"}, {\\\"name\\\": \\\"See workflow\\\", \\\"value\\\": \\\"${WORKFLOW_URL}\\\"}]}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}, \\\"fields\\\": [{\\\"name\\\": \\\"See changes\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}\\\"}, {\\\"name\\\": \\\"See workflow\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}/checks\\\"}]}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Setup
         uses: actions/setup-node@master
