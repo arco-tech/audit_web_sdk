@@ -13,5 +13,7 @@ export function create(
   authToken: string,
   params: CreatePublicUserRequest,
 ): Promise<PublicUserResponse> {
-  return request<PublicUserResponse>("post", "public-users", {jwt: authToken});
+  return request<PublicUserResponse>("post", "public-users", {
+    jwt: authToken,
+  });
 }

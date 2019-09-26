@@ -1,15 +1,13 @@
 import * as m from "mithril";
 import {Changeset} from "./Changeset";
-import {
-  CheckBoxList,
-  DateInput,
-  DateRangeInput,
-  Input,
-  InputList,
-  NumberInput,
-  RadioList,
-  Selector,
-} from "./components";
+import {CheckBoxList} from "./components/inputs/CheckBoxList";
+import {DateInput} from "./components/inputs/DateInput";
+import {DateRangeInput} from "./components/inputs/DateRangeInput";
+import {Input} from "./components/inputs/Input";
+import {InputList} from "./components/inputs/InputList";
+import {NumberInput} from "./components/inputs/NumberInput";
+import {RadioList} from "./components/inputs/RadioList";
+import {Selector} from "./components/inputs/Selector";
 import {
   PublishedFormGoesTo,
   PublishedFormOption,
