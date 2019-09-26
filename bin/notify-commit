@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl -X POST -d "{\"embeds\": [{\"title\": \"Update pushed ($GITHUB_REF)\", \"color\": 16777215, \"fields\": [{\"name\": \"See changes\", \"value\": \"https://github.com/arco-tech/audit_web_sdk/commit/$GITHUB_SHA\"}, {\"name\": \"See workflow\", \"value\": \"https://github.com/arco-tech/audit_web_sdk/commit/$GITHUB_SHA/checks\"}]}]}" -H "Content-Type: application/json" ${WEBHOOK_URL}

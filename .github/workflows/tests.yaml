@@ -13,18 +13,10 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
-        run: "sudo ./bin/notify-commit"
+        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"Update pushed ($GITHUB_REF)\\\", \\\"color\\\": 16777215, \\\"fields\\\": [{\\\"name\\\": \\\"See changes\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/$GITHUB_SHA\\\"}, {\\\"name\\\": \\\"See workflow\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/$GITHUB_SHA/checks\\\"}]}]}\" -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Setup
         uses: actions/setup-node@master
-
-      - name: Notify setup failure
-        if: failure()
-        env:
-          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          COLOUR: 15086157
-          MESSAGE: "Setup failure"
-        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Install
         run: npm install
@@ -35,7 +27,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Install failure"
-        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
+        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
 
       - name: Test
         env:
@@ -49,11 +41,11 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
+        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
           MESSAGE: "Tests successful"
-        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
+        run: "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"embeds\": [{\\\"title\\\": \\\"$MESSAGE\\\", \\\"color\\\": $COLOUR}]}\" ${WEBHOOK_URL}"

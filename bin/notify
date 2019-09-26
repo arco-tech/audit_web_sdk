@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Usage: ./bin/notify [COLOUR] [MESSAGE]
-
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d "{\"embeds\": [{\"title\": \"$2\", \"color\": $1}]}" \
-  ${WEBHOOK_URL}
