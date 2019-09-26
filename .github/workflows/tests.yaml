@@ -51,13 +51,16 @@ jobs:
           TEST_OUTPUT: $
         run: $(npm test)@Q
 
+      - name: Log
+        run: echo "${TEST_OUTPUT}"
+
       - name: Notify test failure
         if: failure()
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "echo \"${TEST_OUTPUT}\" && curl -X POST -d \"{\\\"content\\\": \\\"```${TEST_OUTPUT}```\\\", \\\"embeds\\\": [{\\\"title\\\": \\\"Tests failed\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "curl -X POST -d \"{\\\"content\\\": \\\"```${TEST_OUTPUT}```\\\", \\\"embeds\\\": [{\\\"title\\\": \\\"Tests failed\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
