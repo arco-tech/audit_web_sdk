@@ -10,7 +10,7 @@ jobs:
         env:
           COLOUR: 16777215
           MESSAGE: "Repo pushed"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
 
       - name: Setup
         uses: actions/setup-node@master
@@ -20,7 +20,7 @@ jobs:
         env:
           COLOUR: 15086157
           MESSAGE: "Action setup failure"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
 
       - name: Checkout
         uses: actions/checkout@v1
@@ -30,7 +30,7 @@ jobs:
         env:
           COLOUR: 15086157
           MESSAGE: "Action checkout failure"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
 
       - name: Install
         run: npm install
@@ -40,7 +40,7 @@ jobs:
         env:
           COLOUR: 15086157
           MESSAGE: "Action install failure"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
 
       - name: Test
         env:
@@ -52,10 +52,10 @@ jobs:
         env:
           COLOUR: 15086157
           MESSAGE: "Action test failure"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
 
       - name: Notify test success
         env:
           COLOUR: 8638247
           MESSAGE: "Action test successful"
-        run: curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL
+        run: 'curl -X POST -d "{\"embeds\": [{\"title\": \"$MESSAGE\", \"color\": $COLOUR}]}" -H "Content-Type: application/json" $DISCORD_WEBHOOK_URL'
