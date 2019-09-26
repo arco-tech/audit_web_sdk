@@ -48,7 +48,7 @@ jobs:
       - name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        run: npm test
+        run: TEST_OUTPUT=$(npm test)
 
       - name: Notify test failure
         if: failure()
@@ -56,7 +56,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${TEST_OUTPUT}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
