@@ -52,6 +52,7 @@ jobs:
         run: $(npm test)@Q
 
       - name: Log
+        if: failure()
         run: echo "${TEST_OUTPUT}"
 
       - name: Notify test failure
