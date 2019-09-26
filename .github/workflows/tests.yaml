@@ -56,7 +56,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "CONTENT=$(tail -42 test_output.log) curl -X POST -d \"{\\\"content\\\": \\\"${CONTENT}\\\", \\\"embeds\\\": [{\\\"title\\\": \\\"Tests failed\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "curl -X POST -d \"{\\\"content\\\": \\\"```${$(tail -42 test_output.log)}```\\\", \\\"embeds\\\": [{\\\"title\\\": \\\"Tests failed\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
