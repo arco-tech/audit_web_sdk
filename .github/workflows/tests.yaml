@@ -6,6 +6,9 @@ jobs:
     name: Test Job
     runs-on: ubuntu-18.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
       - name: Notify commit
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -21,17 +24,6 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Setup failure"
-        run: "./bin/notify $COLOUR \"$MESSAGE\""
-
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Notify checkout failure
-        if: failure()
-        env:
-          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          COLOUR: 15086157
-          MESSAGE: "Checkout failure"
         run: "./bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Install
