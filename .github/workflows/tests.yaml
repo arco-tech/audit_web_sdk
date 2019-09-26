@@ -8,9 +8,10 @@ jobs:
     steps:
       - name: Notify commit
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
           MESSAGE: "Repo pushed"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Setup
         uses: actions/setup-node@master
@@ -18,9 +19,10 @@ jobs:
       - name: Notify setup failure
         if: failure()
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Action setup failure"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Checkout
         uses: actions/checkout@v1
@@ -28,9 +30,10 @@ jobs:
       - name: Notify setup failure
         if: failure()
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Action checkout failure"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Install
         run: npm install
@@ -38,9 +41,10 @@ jobs:
       - name: Notify install failure
         if: failure()
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Action install failure"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Test
         env:
@@ -50,12 +54,14 @@ jobs:
       - name: Notify test failure
         if: failure()
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Action test failure"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
           MESSAGE: "Action test successful"
-        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${secrets.DISCORD_WEBHOOK_URL}"
+        run: "curl -X POST -d '{\"embeds\": [{\"title\": \"${MESSAGE}\", \"color\": ${COLOUR}}]}' -H \"Content-Type: application/json\" ${WEBHOOK_URL}"
