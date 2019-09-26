@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Notify setup failure
+      - name: Notify checkout failure
         if: failure()
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -48,7 +48,7 @@ jobs:
       - name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
-        run: TEST_OUTPUT=$(npm test)
+        run: TEST_OUTPUT=$(npm test 2>&1)
 
       - name: Notify test failure
         if: failure()
