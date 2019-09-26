@@ -13,7 +13,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
-        run: "./bin/notify-commit"
+        run: "sudo ./bin/notify-commit"
 
       - name: Setup
         uses: actions/setup-node@master
@@ -24,7 +24,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Setup failure"
-        run: "./bin/notify $COLOUR \"$MESSAGE\""
+        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Install
         run: npm install
@@ -35,7 +35,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Install failure"
-        run: "./bin/notify $COLOUR \"$MESSAGE\""
+        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Test
         env:
@@ -49,11 +49,11 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "./bin/notify $COLOUR \"$MESSAGE\""
+        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Notify test success
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
           MESSAGE: "Tests successful"
-        run: "./bin/notify $COLOUR \"$MESSAGE\""
+        run: "sudo ./bin/notify $COLOUR \"$MESSAGE\""
