@@ -27,7 +27,3 @@ test("sentence", (t) => {
   t.is(sentence(""), "");
   t.is(sentence("   \n \r "), "");
 });
-
-test("failing test", (t) => {
-  t.is(1, 2);
-});
