@@ -10,7 +10,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"Update pushed (${GITHUB_REF})\\\", \\\"color\\\": ${COLOUR}, \\\"fields\\\": [{\\\"name\\\": \\\"See changes\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}\\\"}, {\\\"name\\\": \\\"See workflow\\\", \\\"value\\\": \\\"https://github.com/arco-tech/audit_web_sdk/commit/${GITHUB_SHA}/checks\\\"}]}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify-commit"
 
       - name: Setup
         uses: actions/setup-node@master
@@ -21,7 +21,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Setup failure"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Checkout
         uses: actions/checkout@v1
@@ -32,7 +32,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Checkout failure"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Install
         run: npm install
@@ -43,17 +43,13 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Install failure"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Test
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
           TEST_OUTPUT: $
-        run: $(npm test)@Q
-
-      - name: Log
-        if: failure()
-        run: echo "${TEST_OUTPUT}"
+        run: npm test
 
       - name: Notify test failure
         if: failure()
@@ -61,11 +57,11 @@ jobs:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
           MESSAGE: "Test failure"
-        run: "curl -X POST -d \"{\\\"content\\\": \\\"```${TEST_OUTPUT}```\\\", \\\"embeds\\\": [{\\\"title\\\": \\\"Tests failed\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify $COLOUR \"$MESSAGE\""
 
       - name: Notify test success
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
           MESSAGE: "Tests successful"
-        run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
+        run: "bin/notify $COLOUR \"$MESSAGE\""
