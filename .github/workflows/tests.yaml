@@ -10,7 +10,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 16777215
-          MESSAGE: "Repo pushed"
+          MESSAGE: "Update pushed"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Setup
@@ -21,7 +21,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
-          MESSAGE: "Action setup failure"
+          MESSAGE: "Setup failure"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Checkout
@@ -32,7 +32,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
-          MESSAGE: "Action checkout failure"
+          MESSAGE: "Checkout failure"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Install
@@ -43,7 +43,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
-          MESSAGE: "Action install failure"
+          MESSAGE: "Install failure"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Test
@@ -56,12 +56,12 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 15086157
-          MESSAGE: "Action test failure"
+          MESSAGE: "Test failure"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
 
       - name: Notify test success
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           COLOUR: 8638247
-          MESSAGE: "Action test successful"
+          MESSAGE: "Tests successful"
         run: "curl -X POST -d \"{\\\"embeds\\\": [{\\\"title\\\": \\\"${MESSAGE}\\\", \\\"color\\\": ${COLOUR}}]}\" -H \\\"Content-Type: application/json\\\" ${WEBHOOK_URL}"
