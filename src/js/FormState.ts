@@ -255,4 +255,11 @@ export class FormState {
   public data(): FormStateData {
     return this._data;
   }
+
+  public fullName(): string {
+    return [this.detail("first_name"), this.detail("last_name")]
+      .map((name: string | null) => (name || "").trim())
+      .filter((name: string) => name)
+      .join(" ");
+  }
 }

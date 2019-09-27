@@ -77,6 +77,8 @@ test("constructs with given data", (t) => {
   };
   const formState = new FormState(data, () => {});
   t.is(formState.currentSectionID(), data.currentSectionID);
+  t.is(formState.fullName(),
+    `${data.details.first_name} ${data.details.last_name}`);
   t.deepEqual(formState.data(), data);
   t.deepEqual(formState.values(), data.values);
   t.deepEqual(formState.details(), data.details);
