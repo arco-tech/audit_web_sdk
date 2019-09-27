@@ -5,7 +5,6 @@ import {Header} from "./Header";
 
 interface Attrs {
   selector?: string;
-  modifiers?: string | string[];
 }
 
 type Vnode = m.Vnode<Attrs>;
@@ -16,8 +15,7 @@ export const Screen: m.Component<Attrs> = {
   },
 
   view: (vnode: Vnode) => {
-    const selector = vnode.attrs.selector || "";
-    return m(block("screen", vnode.attrs.modifiers || []) + selector, [
+    return m(".screen" + (vnode.attrs.selector || ""), [
       m(Header),
       m(".screen__content", vnode.children),
       m(Footer),
