@@ -299,6 +299,10 @@ export class PublishedForm {
     this._data = data;
   }
 
+  public data(): PublishedFormData {
+    return this._data;
+  }
+
   public id(): number {
     return this._data.id;
   }
