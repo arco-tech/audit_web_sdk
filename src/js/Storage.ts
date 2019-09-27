@@ -46,17 +46,17 @@ export function loadFormState(): FormState | null {
   if (cache.formState) {
     return cache.formState;
   } else {
-
-  try {
-    const stateData = JSON.parse(window.sessionStorage.getItem(formStateKey));
-    if (stateData.values && stateData.details) {
-      cache.formState = new FormState(stateData, saveFormState);
-      return cache.formState;
-    } else {
-      throw new Error("invalid");
+    try {
+      const stateData = JSON.parse(window.sessionStorage.getItem(formStateKey));
+      if (stateData.values && stateData.details) {
+        cache.formState = new FormState(stateData, saveFormState);
+        return cache.formState;
+      } else {
+        throw new Error("invalid");
+      }
+    } catch (error) {
+      return null;
     }
-  } catch (error) {
-    return null;
   }
 }
 
