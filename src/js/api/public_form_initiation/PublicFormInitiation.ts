@@ -9,7 +9,7 @@ export interface InitiatePublicFormResponse {
 export function initiate(
   initiateToken: string,
 ): Promise<InitiatePublicFormResponse> {
-  return request<InitiatePublicFormResponse>("post", "initiate-public-form", {
+  return request<InitiatePublicFormResponse>("post", "initiate", {
     jwt: initiateToken,
   });
 }
