@@ -3,6 +3,7 @@ import {PublicFormSubmissionData} from "../../PublicFormSubmission";
 
 export interface InitiatePublicFormResponse {
   token: string;
+  create_public_user_token?: string;
   public_form_submission: PublicFormSubmissionData;
 }
 
