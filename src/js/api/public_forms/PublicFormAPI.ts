@@ -1,4 +1,4 @@
-import {PublishedFormData} from "../PublishedForm";
+import {PublishedFormData} from "../../PublishedForm";
 import {request} from "./API";
 
 export function live(publicFormID: string): Promise<PublishedFormData> {
