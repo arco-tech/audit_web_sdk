@@ -62,7 +62,8 @@ export function loadFormState(): FormState | null {
 
 export function saveFormState(state: FormState) {
   cache.formState = state;
-  window.sessionStorage.setItem(formStateKey, JSON.stringify(state.data()));
+  window.sessionStorage.setItem(formStateKey,
+    state ? JSON.stringify(state.data()) : null);
 }
 
 export function saveAuthToken(token: string): void {
