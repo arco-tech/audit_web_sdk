@@ -4,8 +4,22 @@
   bold: 600;
 }
 
+@font-sizes: {
+  extra-small: 12px;
+  small: 16px;
+  medium: 20px;
+  large: 30px;
+  extra-large: 40px;
+}
+
 each(@font-weights, .(@weight, @name) {
   .weight-@{name} {
     font-weight: @weight;
+  }
+});
+
+each(@font-sizes, .(@size, @name) {
+  .font-size-@{name} {
+    font-size: @size;
   }
 });
