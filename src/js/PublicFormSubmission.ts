@@ -17,7 +17,7 @@ export interface PublicFormSubmissionData {
   updated_at: string;
 }
 
-export function publicFormSubmissionDataToFormStateData(
+export function stateDataFromSubmissionData(
   submission: PublicFormSubmissionData,
 ): FormStateData {
   return {

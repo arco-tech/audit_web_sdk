@@ -1,4 +1,5 @@
 import {request} from "./API";
+import {PublicFormSubmissionData} from "../../PublicFormSubmission";
 
 export interface InitiatePublicFormResponse {
   token: string;
