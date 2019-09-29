@@ -14,5 +14,6 @@ export function create(
 ): Promise<PublicUserResponse> {
   return request<PublicUserResponse>("post", "", {
     jwt: authToken,
+    body: {public_user: params},
   });
 }
