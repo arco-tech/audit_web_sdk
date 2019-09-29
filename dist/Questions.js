@@ -131,7 +131,12 @@ function goesTo(question, value) {
 }
 exports.goesTo = goesTo;
 function isComplete(question, value) {
-    return types[question.type()].isComplete(question, value);
+    if (types[question.type()]) {
+        return types[question.type()].isComplete(question, value);
+    }
+    else {
+        Log_1.log("error", ["Question type isn't defined", question.type()]);
+    }
 }
 exports.isComplete = isComplete;
 function findOption(question, id) {
@@ -141,7 +146,13 @@ function findOption(question, id) {
 }
 exports.findOption = findOption;
 function render(question, attrs) {
-    return types[question.type()].render(question, attrs);
+    if (types[question.type()]) {
+        return types[question.type()].render(question, attrs);
+    }
+    else {
+        Log_1.log("error", ["Question type isn't defined", question.type()]);
+        return null;
+    }
 }
 exports.render = render;
 function buildOptions(question) {

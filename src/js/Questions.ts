@@ -148,7 +148,11 @@ export function isComplete(
   question: PublishedFormQuestion,
   value: any,
 ): boolean {
-  return types[question.type()].isComplete(question, value);
+  if (types[question.type()]) {
+    return types[question.type()].isComplete(question, value);
+  } else {
+    log("error", ["Question type isn't defined", question.type()]);
+  }
 }
 
 export function findOption(
@@ -163,8 +167,13 @@ export function findOption(
 export function render(
   question: PublishedFormQuestion,
   attrs: Attrs,
-): m.Children {
-  return types[question.type()].render(question, attrs);
+): m.Children | null {
+  if (types[question.type()]) {
+    return types[question.type()].render(question, attrs);
+  } else {
+    log("error", ["Question type isn't defined", question.type()]);
+    return null;
+  }
 }
 
 function buildOptions(
