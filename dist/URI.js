@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function param(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(location.search);
+    var results = regex.exec(window.location.search);
     if (results !== null && typeof results[1] === "string") {
         return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
