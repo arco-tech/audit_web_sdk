@@ -43,6 +43,7 @@ export function mockSectionData(
     questions: [],
     icon: null,
     service_type: null,
+    required: false,
     ...attrs,
   };
 }

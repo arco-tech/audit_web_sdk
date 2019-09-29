@@ -63,6 +63,7 @@ export interface PublishedFormSectionData {
   summary: string;
   icon: PublishedFormSectionIconData | null;
   service_type: PublishedFormServiceTypeData | null;
+  required: boolean;
   questions: PublishedFormQuestionData[];
 }
 
@@ -265,6 +266,10 @@ export class PublishedFormSection {
     const icon =
       (this.icon() ? this.icon().namedID() : "business").toLowerCase();
     return `/images/section-icons/${icon}-${color || "black"}.svg`;
+  }
+
+  public required(): boolean {
+    return this._data.required || false;
   }
 
   public questions(): PublishedFormQuestion[] {

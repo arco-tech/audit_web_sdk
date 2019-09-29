@@ -2,33 +2,33 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
 var FormLogic = require("../FormLogic");
-var _PublishedFormMocks_1 = require("./_PublishedFormMocks");
-var publishedForm = _PublishedFormMocks_1.mockPublishedForm({
-    form: _PublishedFormMocks_1.mockFormData({
+var PublishedFormMocks_1 = require("../tests/PublishedFormMocks");
+var publishedForm = PublishedFormMocks_1.mockPublishedForm({
+    form: PublishedFormMocks_1.mockFormData({
         sections: [
-            _PublishedFormMocks_1.mockSectionData({
+            PublishedFormMocks_1.mockSectionData({
                 id: 1,
                 questions: [
-                    _PublishedFormMocks_1.mockQuestionData({
+                    PublishedFormMocks_1.mockQuestionData({
                         id: 1,
                         type: "button",
                         options: [
-                            _PublishedFormMocks_1.mockOptionData({
+                            PublishedFormMocks_1.mockOptionData({
                                 id: 1,
                                 goes_to: { type: "question", id: 3 },
                             }),
                         ],
                     }),
-                    _PublishedFormMocks_1.mockQuestionData({
+                    PublishedFormMocks_1.mockQuestionData({
                         id: 2,
                         type: "text",
                     }),
-                    _PublishedFormMocks_1.mockQuestionData({
+                    PublishedFormMocks_1.mockQuestionData({
                         id: 3,
                         type: "text",
                         goes_to: { type: "next_section" },
                     }),
-                    _PublishedFormMocks_1.mockQuestionData({
+                    PublishedFormMocks_1.mockQuestionData({
                         id: 4,
                         type: "text",
                     }),

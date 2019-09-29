@@ -153,6 +153,9 @@ var PublishedFormSection = /** @class */ (function () {
         var icon = (this.icon() ? this.icon().namedID() : "business").toLowerCase();
         return "/images/section-icons/" + icon + "-" + (color || "black") + ".svg";
     };
+    PublishedFormSection.prototype.required = function () {
+        return this._data.required || false;
+    };
     PublishedFormSection.prototype.questions = function () {
         return this._data.questions
             .map(function (data) { return new PublishedFormQuestion(data); })

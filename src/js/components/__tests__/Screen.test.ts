@@ -1,6 +1,6 @@
 import test from "ava";
 import * as m from "mithril";
-import * as Mock from "../../test_helpers/Mock";
+import * as Mock from "../../tests/Mock";
 import {Screen} from "../Screen";
 
 test("renders", async (t) => {

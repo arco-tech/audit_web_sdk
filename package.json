@@ -36,7 +36,7 @@
     ],
     "require": [
       "ts-node/register",
-      "./src/js/test_helpers/Setup.js"
+      "./src/js/tests/Setup.js"
     ],
     "files": [
       "./src/js/**/__tests__/*.test.ts"

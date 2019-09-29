@@ -6,7 +6,7 @@ import {
   mockPublishedForm,
   mockQuestionData,
   mockSectionData,
-} from "./_PublishedFormMocks";
+} from "../tests/PublishedFormMocks";
 
 const publishedForm = mockPublishedForm({
   form: mockFormData({

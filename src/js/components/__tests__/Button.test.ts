@@ -1,7 +1,7 @@
 import test from "ava";
 import * as m from "mithril";
-import * as Mock from "../../test_helpers/Mock";
-import {simulateMouseClick} from "../../test_helpers/Events";
+import * as Mock from "../../tests/Mock";
+import {simulateMouseClick} from "../../tests/Events";
 import {Button} from "../Button";
 
 test("renders", async (t) => {

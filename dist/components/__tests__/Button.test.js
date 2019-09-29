@@ -38,8 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
 var m = require("mithril");
-var Mock = require("../../test_helpers/Mock");
-var Events_1 = require("../../test_helpers/Events");
+var Mock = require("../../tests/Mock");
+var Events_1 = require("../../tests/Events");
 var Button_1 = require("../Button");
 ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var button, element;

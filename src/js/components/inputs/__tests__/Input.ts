@@ -1,9 +1,9 @@
 import test from "ava";
 import * as m from "mithril";
-import * as Mock from "../../../test_helpers/Mock";
+import * as Mock from "../../../tests/Mock";
 import {Changeset} from "../../../Changeset";
 import {Input} from "../Input";
-import {simulateInput} from "../../../test_helpers/Events";
+import {simulateInput} from "../../../tests/Events";
 
 test("renders", async (t) => {
   const changeset = new Changeset({property: "test value"});

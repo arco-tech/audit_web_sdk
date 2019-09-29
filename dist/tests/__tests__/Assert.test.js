@@ -38,38 +38,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
 var m = require("mithril");
-var Mock = require("../../tests/Mock");
-var Screen_1 = require("../Screen");
-ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
-    var screen, element;
+var Mock = require("../Mock");
+var Assert = require("../Assert");
+ava_1.default("findElementForText successfully finds text", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+    var element;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                screen = m(Screen_1.Screen, "test content");
-                return [4 /*yield*/, Mock.mount(screen)];
+            case 0: return [4 /*yield*/, Mock.mount(m("div", [
+                    "test_text_1",
+                    m("p", ["testing test_text_2 surrounded"]),
+                    m("div", [
+                        m("span", "then test_text_3"),
+                    ]),
+                ]))];
             case 1:
                 element = _a.sent();
-                t.is(element.className, "screen");
-                t.is(element.children.item(0).className, "header");
-                t.is(element.children.item(1).className, "screen__content");
-                t.is(element.children.item(1).textContent, "test content");
-                t.is(element.children.item(2).className, "footer");
+                t.true(Assert.findElementForText(element, "test_text_1"));
+                t.true(Assert.findElementForText(element, "test_text_2"));
+                t.true(Assert.findElementForText(element, "test_text_3"));
                 return [2 /*return*/];
         }
     });
 }); });
-ava_1.default("renders selector", function (t) { return __awaiter(void 0, void 0, void 0, function () {
-    var screen, element;
+ava_1.default("findElementForText successfully doesn't find text", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+    var element;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                screen = m(Screen_1.Screen, { selector: ".test.classes" });
-                return [4 /*yield*/, Mock.mount(screen)];
+            case 0: return [4 /*yield*/, Mock.mount(m("div", [
+                    "nothing",
+                    m("div", [
+                        m("span", "then nothing"),
+                    ]),
+                ]))];
             case 1:
                 element = _a.sent();
-                t.is(element.className, "screen test classes");
+                t.false(Assert.findElementForText(element, "test_text_1"));
+                t.false(Assert.findElementForText(element, "test_text_2"));
+                t.false(Assert.findElementForText(element, "test_text_3"));
                 return [2 /*return*/];
         }
     });
 }); });
-//# sourceMappingURL=Screen.test.js.map
+//# sourceMappingURL=Assert.test.js.map

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
 var FormState_1 = require("../FormState");
-var _PublishedFormMocks_1 = require("./_PublishedFormMocks");
+var PublishedFormMocks_1 = require("../tests/PublishedFormMocks");
 function mockFormState(data, saver) {
     if (!data.details) {
         data.details = {};
@@ -129,12 +129,12 @@ ava_1.default("save calls saver function with FormState", function (t) {
     });
 });
 ava_1.default("findCurrentSection returns the correct section", function (t) {
-    var publishedForm = _PublishedFormMocks_1.mockPublishedForm({
-        form: _PublishedFormMocks_1.mockFormData({
+    var publishedForm = PublishedFormMocks_1.mockPublishedForm({
+        form: PublishedFormMocks_1.mockFormData({
             sections: [
-                _PublishedFormMocks_1.mockSectionData({ id: 1, name: "Section 1" }),
-                _PublishedFormMocks_1.mockSectionData({ id: 2, name: "Section 2" }),
-                _PublishedFormMocks_1.mockSectionData({ id: 3, name: "Section 3" }),
+                PublishedFormMocks_1.mockSectionData({ id: 1, name: "Section 1" }),
+                PublishedFormMocks_1.mockSectionData({ id: 2, name: "Section 2" }),
+                PublishedFormMocks_1.mockSectionData({ id: 3, name: "Section 3" }),
             ],
         }),
     });
@@ -149,13 +149,13 @@ ava_1.default("findCurrentSection returns the correct section", function (t) {
     t.is(secondSection.name(), "Section 3");
 });
 ava_1.default("sectionProgress returns the correct percentage", function (t) {
-    var section = _PublishedFormMocks_1.mockSection({
+    var section = PublishedFormMocks_1.mockSection({
         questions: [
-            _PublishedFormMocks_1.mockQuestionData({ id: 1, type: "multi_button" }),
-            _PublishedFormMocks_1.mockQuestionData({ id: 2, type: "text" }),
-            _PublishedFormMocks_1.mockQuestionData({ id: 3, type: "multi_text" }),
-            _PublishedFormMocks_1.mockQuestionData({ id: 4, type: "number" }),
-            _PublishedFormMocks_1.mockQuestionData({ id: 5, type: "date" }),
+            PublishedFormMocks_1.mockQuestionData({ id: 1, type: "multi_button" }),
+            PublishedFormMocks_1.mockQuestionData({ id: 2, type: "text" }),
+            PublishedFormMocks_1.mockQuestionData({ id: 3, type: "multi_text" }),
+            PublishedFormMocks_1.mockQuestionData({ id: 4, type: "number" }),
+            PublishedFormMocks_1.mockQuestionData({ id: 5, type: "date" }),
         ],
     });
     var formState = mockFormState({});

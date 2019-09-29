@@ -7,7 +7,7 @@ import {
   mockQuestionData,
   mockSection,
   mockSectionData,
-} from "./_PublishedFormMocks";
+} from "../tests/PublishedFormMocks";
 
 function mockFormState(
   data: {[key: string]: any},
