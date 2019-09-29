@@ -3,7 +3,9 @@
   "version": "0.1.1",
   "description": "",
   "author": "arco",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc --outDir dist",
     "lint": "tslint --project tsconfig.json",
     "lint.fix": "tslint --project tsconfig.json --fix",
     "test": "ava"

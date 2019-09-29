@@ -3,10 +3,11 @@ export function elementDeepContainsText(
   element: Element,
   text: string,
 ): void {
-  const errorMessage = "Element did not deeply contain: " + text;
-  return t.notThrows(() => {
-    if (!findElementForText(element, text)) throw new Error(errorMessage);
-  }, errorMessage);
+  if (!findElementForText(element, text)) {
+    t.fail("Element did not deeply contain: " + text);
+  } else {
+    t.pass("Element contains text");
+  }
 }
 
 export function findElementForText(element: Element, text: string): boolean {
