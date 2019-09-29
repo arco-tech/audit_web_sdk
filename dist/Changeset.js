@@ -121,6 +121,9 @@ var Changeset = /** @class */ (function () {
     };
     // Handlers
     Changeset.prototype.errorResponse = function (response) {
+        if (typeof response === "object" && typeof response.response === "object") {
+            response = response.response;
+        }
         if (!response) {
             this.setResponseError("something went wrong");
         }

@@ -145,6 +145,9 @@ export class Changeset {
   // Handlers
 
   public errorResponse(response?: {[key: string]: any}): void {
+    if (typeof response === "object" && typeof response.response === "object") {
+      response = response.response;
+    }
     if (!response) {
       this.setResponseError("something went wrong");
     } else if (response.error_type === "changeset") {
