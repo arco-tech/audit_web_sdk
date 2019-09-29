@@ -1,7 +1,7 @@
 export function param(name: string): string | null {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
   let regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-  let results = regex.exec(location.search);
+  let results = regex.exec(window.location.search);
   if (results !== null && typeof results[1] === "string") {
     return decodeURIComponent(results[1].replace(/\+/g, " "));
   } else {
