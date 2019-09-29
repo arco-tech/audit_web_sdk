@@ -1,16 +1,18 @@
 interface Options {
   message?: string;
+  [key: string]: any;
 }
 
 type OptionsOrBoolean = Options | boolean;
 
-type CustomConstraint = (value: any) => string[];
+type CustomConstraint = (value: any, values: object) => string[];
 
 interface AttributeConstraints {
   true?: OptionsOrBoolean;
   string?: OptionsOrBoolean;
   number?: OptionsOrBoolean;
   notEmpty?: OptionsOrBoolean;
+  length?: OptionsOrBoolean;
   custom?: CustomConstraint | boolean;
 }
 
@@ -28,6 +30,7 @@ interface ConstraintValidators {
     (
       value: any,
       options: OptionsOrBoolean | CustomConstraint,
+      values: object,
     ) => string[];
 }
 
@@ -44,9 +47,24 @@ export const constraintValidators: ConstraintValidators = {
     return typeof value === "string" ? [] : [message(options, "must be valid")];
   },
 
-  custom: (value: any, constraint: CustomConstraint | boolean) => {
+  length: (value: any, options: OptionsOrBoolean) => {
+    if (typeof options === "object" && typeof value === "string") {
+      if (options.hasOwnProperty("min") && options.min > value.length) {
+        return [`must be at least ${options.min} characters`];
+      } else if (options.hasOwnProperty("max") && options.max < value.length) {
+        return [`must be at most ${options.max} characters`];
+      }
+    }
+    return [];
+  },
+
+  custom: (
+    value: any,
+    constraint: CustomConstraint | OptionsOrBoolean,
+    values: object,
+  ) => {
     if (typeof constraint === "function") {
-      return constraint(value);
+      return constraint(value, values);
     } else {
       return constraint ? [] : ["must be valid"];
     }
@@ -93,7 +111,7 @@ export function validate(
       const value = attributes[attribute];
       const options = constraints[attribute][constraint];
       const validator = constraintValidators[constraint];
-      const validatorErrors = validator(value, options);
+      const validatorErrors = validator(value, options, attributes);
       if (validatorErrors.length > 0) {
         if (errors[attribute] === undefined) { errors[attribute] = []; }
         errors[attribute] = errors[attribute].concat(validatorErrors);

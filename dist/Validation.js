@@ -12,9 +12,20 @@ exports.constraintValidators = {
     string: function (value, options) {
         return typeof value === "string" ? [] : [message(options, "must be valid")];
     },
-    custom: function (value, constraint) {
+    length: function (value, options) {
+        if (typeof options === "object" && typeof value === "string") {
+            if (options.hasOwnProperty("min") && options.min > value.length) {
+                return ["must be at least " + options.min + " characters"];
+            }
+            else if (options.hasOwnProperty("max") && options.max < value.length) {
+                return ["must be at most " + options.max + " characters"];
+            }
+        }
+        return [];
+    },
+    custom: function (value, constraint, values) {
         if (typeof constraint === "function") {
-            return constraint(value);
+            return constraint(value, values);
         }
         else {
             return constraint ? [] : ["must be valid"];
@@ -49,7 +60,7 @@ function validate(constraints, attributes) {
             var value = attributes[attribute];
             var options = constraints[attribute][constraint];
             var validator = exports.constraintValidators[constraint];
-            var validatorErrors = validator(value, options);
+            var validatorErrors = validator(value, options, attributes);
             if (validatorErrors.length > 0) {
                 if (errors[attribute] === undefined) {
                     errors[attribute] = [];
