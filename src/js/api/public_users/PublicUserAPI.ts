@@ -1,7 +1,6 @@
 import {request} from "./API";
 
 export interface CreatePublicUserRequest {
-  email: string;
   password: string;
 }
 
@@ -13,7 +12,7 @@ export function create(
   authToken: string,
   params: CreatePublicUserRequest,
 ): Promise<PublicUserResponse> {
-  return request<PublicUserResponse>("post", "public-users", {
+  return request<PublicUserResponse>("post", "", {
     jwt: authToken,
   });
 }

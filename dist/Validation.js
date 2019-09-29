@@ -61,7 +61,7 @@ function validate(constraints, attributes) {
             var options = constraints[attribute][constraint];
             var validator = exports.constraintValidators[constraint];
             var validatorErrors = validator(value, options, attributes);
-            if (validatorErrors.length > 0) {
+            if (validatorErrors && validatorErrors.length > 0) {
                 if (errors[attribute] === undefined) {
                     errors[attribute] = [];
                 }

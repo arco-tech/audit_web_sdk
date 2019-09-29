@@ -112,7 +112,7 @@ export function validate(
       const options = constraints[attribute][constraint];
       const validator = constraintValidators[constraint];
       const validatorErrors = validator(value, options, attributes);
-      if (validatorErrors.length > 0) {
+      if (validatorErrors && validatorErrors.length > 0) {
         if (errors[attribute] === undefined) { errors[attribute] = []; }
         errors[attribute] = errors[attribute].concat(validatorErrors);
       }
