@@ -131,11 +131,15 @@ export function goesTo(
   question: PublishedFormQuestion,
   value: any,
 ): PublishedFormGoesTo | null {
-  if (types[question.type()].optionGoesTo) {
-    const option = findOption(question, value);
-    return option ? option.goesTo() : null;
+  if (types[question.type()]) {
+    if (types[question.type()].optionGoesTo) {
+      const option = findOption(question, value);
+      return option ? option.goesTo() : null;
+    } else {
+      return question.goesTo();
+    }
   } else {
-    return question.goesTo();
+    log("error", ["Question type isn't defined", question.type()]);
   }
 }
 

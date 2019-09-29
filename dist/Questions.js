@@ -115,12 +115,17 @@ var types = {
     },
 };
 function goesTo(question, value) {
-    if (types[question.type()].optionGoesTo) {
-        var option = findOption(question, value);
-        return option ? option.goesTo() : null;
+    if (types[question.type()]) {
+        if (types[question.type()].optionGoesTo) {
+            var option = findOption(question, value);
+            return option ? option.goesTo() : null;
+        }
+        else {
+            return question.goesTo();
+        }
     }
     else {
-        return question.goesTo();
+        log("error", ["Question type isn't defined", question.type()]);
     }
 }
 exports.goesTo = goesTo;

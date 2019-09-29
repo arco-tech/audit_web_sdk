@@ -134,6 +134,7 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.sectionProgress = function (section) {
         var _this = this;
+        console.log(section.questions());
         var validQuestions = this.summary(section).validQuestions;
         var statuses = validQuestions
             .filter(function (question) { return question.type() !== "multi_button"; })

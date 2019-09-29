@@ -184,6 +184,7 @@ export class FormState {
   }
 
   public sectionProgress(section: PublishedFormSection): number {
+    console.log(section.questions());
     const {validQuestions} = this.summary(section);
     const statuses =
       validQuestions
