@@ -20,6 +20,7 @@ var InputList_1 = require("./components/inputs/InputList");
 var NumberInput_1 = require("./components/inputs/NumberInput");
 var RadioList_1 = require("./components/inputs/RadioList");
 var Selector_1 = require("./components/inputs/Selector");
+var Log_1 = require("./Log");
 var types = {
     text: {
         optionGoesTo: false,
@@ -125,7 +126,7 @@ function goesTo(question, value) {
         }
     }
     else {
-        log("error", ["Question type isn't defined", question.type()]);
+        Log_1.log("error", ["Question type isn't defined", question.type()]);
     }
 }
 exports.goesTo = goesTo;

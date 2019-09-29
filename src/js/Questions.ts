@@ -13,6 +13,7 @@ import {
   PublishedFormOption,
   PublishedFormQuestion,
 } from "./PublishedForm";
+import {log} from "./Log";
 
 interface Attrs {
   name: string;
