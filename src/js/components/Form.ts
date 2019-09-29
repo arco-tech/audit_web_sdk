@@ -17,7 +17,9 @@ export const Form: m.Component<Attrs> = {
         if (onSubmit) { onSubmit(changeset); }
       },
     }, [
-      m(ErrorMessage, {error: changeset.getResponseError()}),
+      changeset.getResponseError && m(".margin-bottom-medium", [
+        m(ErrorMessage, {error: changeset.getResponseError()}),
+      ]),
       children,
       m("input.hide", {name: "submit", type: "submit"}),
     ]);
