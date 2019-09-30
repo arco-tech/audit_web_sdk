@@ -1,9 +1,28 @@
+@flex-sizes: {1, 2, 3};
+
+@align-items: {
+  start: flex-start;
+  end: flex-end;
+  center: center;
+  stretch: stretch;
+  baseline: baseline;
+};
+
+@justify-content: {
+  start: flex-start;
+  end: flex-end;
+  center: center;
+  between: space-between;
+  around: space-around;
+  evenly: space-evenly;
+};
+
 .flex {
   display: flex;
 }
 
-.flex--row {
-  flex-direction: row;
+.flex--column {
+  flex-direction: colunn;
 }
 
 .flex--center {
@@ -11,8 +30,16 @@
   justify-content: center;
 }
 
-.flex--justify-between {
-  justify-content: space-between;
+each(@flex-sizes, .(@value) {
+  .flex__@{value} { flex: @value; }
+}
+
+each(@align-items, .(@value, @name) {
+  .flex--align-@{name} { align-items: @value; }
+}
+
+each(@justify-items, .(@value, @name) {
+  .flex--justify-@{name} { justify-content: @value; }
 }
 
 .flex__1 {
