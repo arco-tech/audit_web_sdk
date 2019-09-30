@@ -3,10 +3,22 @@ export function elementDeepContainsText(
   element: Element,
   text: string,
 ): void {
-  if (!findElementForText(element, text)) {
-    t.fail("Element did not deeply contain: " + text);
-  } else {
+  if (findElementForText(element, text)) {
     t.pass("Element contains text");
+  } else {
+    t.fail("Element did not deeply contain: " + text);
+  }
+}
+
+export function elementNotDeepContainsText(
+  t: any,
+  element: Element,
+  text: string,
+): void {
+  if (!findElementForText(element, test)) {
+    t.pass("Element doesn't contain text");
+  } else {
+    t.fail("Element deeply contained text: " + text)
   }
 }
 

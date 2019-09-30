@@ -1,14 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function elementDeepContainsText(t, element, text) {
-    if (!findElementForText(element, text)) {
-        t.fail("Element did not deeply contain: " + text);
+    if (findElementForText(element, text)) {
+        t.pass("Element contains text");
     }
     else {
-        t.pass("Element contains text");
+        t.fail("Element did not deeply contain: " + text);
     }
 }
 exports.elementDeepContainsText = elementDeepContainsText;
+function elementNotDeepContainsText(t, element, text) {
+    if (!findElementForText(element, test)) {
+        t.pass("Element doesn't contain text");
+    }
+    else {
+        t.fail("Element deeply contained text: " + text);
+    }
+}
+exports.elementNotDeepContainsText = elementNotDeepContainsText;
 function findElementForText(element, text) {
     if (typeof element.textContent === "string" &&
         element.textContent.indexOf(text) != -1) {
