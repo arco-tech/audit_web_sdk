@@ -86,7 +86,10 @@ export class FormState {
     sections: PublishedFormSection[],
   ): PublishedFormSection[] {
     return sections.filter((section: PublishedFormSection) => {
-      return this._data.filteredSectionIDs.indexOf(section.id()) !== -1;
+      return (
+        section.required() ||
+        this._data.filteredSectionIDs.indexOf(section.id()) !== -1
+      );
     });
   }
 

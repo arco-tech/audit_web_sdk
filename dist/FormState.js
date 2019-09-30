@@ -55,7 +55,8 @@ var FormState = /** @class */ (function () {
     FormState.prototype.filterSections = function (sections) {
         var _this = this;
         return sections.filter(function (section) {
-            return _this._data.filteredSectionIDs.indexOf(section.id()) !== -1;
+            return (section.required() ||
+                _this._data.filteredSectionIDs.indexOf(section.id()) !== -1);
         });
     };
     FormState.prototype.isExcludedSection = function (section) {
