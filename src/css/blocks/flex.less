@@ -1,4 +1,8 @@
-@flex-sizes: {1, 2, 3};
+@flex-sizes: {
+  1:1;
+  2:2;
+  3:3;
+};
 
 @align-items: {
   start: flex-start;
@@ -30,18 +34,14 @@
   justify-content: center;
 }
 
-each(@flex-sizes, .(@value) {
+each(@flex-sizes, .(@value, @name) {
   .flex__@{value} { flex: @value; }
-}
+});
 
 each(@align-items, .(@value, @name) {
   .flex--align-@{name} { align-items: @value; }
-}
+});
 
-each(@justify-items, .(@value, @name) {
+each(@justify-content, .(@value, @name) {
   .flex--justify-@{name} { justify-content: @value; }
-}
-
-.flex__1 {
-  flex: 1;
-}
+});
