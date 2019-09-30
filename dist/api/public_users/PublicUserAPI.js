@@ -8,4 +8,14 @@ function create(authToken, params) {
     });
 }
 exports.create = create;
+function authenticate_form(publicFormID, email, password) {
+    return API_1.request("post", "authenticate", {
+        body: {
+            resource: "public_form.submission",
+            public_form: publicFormID,
+            public_user: { email: email, password: password },
+        },
+    });
+}
+exports.authenticate_form = authenticate_form;
 //# sourceMappingURL=PublicUserAPI.js.map
