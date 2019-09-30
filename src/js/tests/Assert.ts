@@ -15,7 +15,7 @@ export function elementNotDeepContainsText(
   element: Element,
   text: string,
 ): void {
-  if (!findElementForText(element, test)) {
+  if (!findElementForText(element, text)) {
     t.pass("Element doesn't contain text");
   } else {
     t.fail("Element deeply contained text: " + text)

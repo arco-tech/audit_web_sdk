@@ -10,7 +10,7 @@ function elementDeepContainsText(t, element, text) {
 }
 exports.elementDeepContainsText = elementDeepContainsText;
 function elementNotDeepContainsText(t, element, text) {
-    if (!findElementForText(element, test)) {
+    if (!findElementForText(element, text)) {
         t.pass("Element doesn't contain text");
     }
     else {
