@@ -83,7 +83,7 @@ const types: {[type: string]: Type} = {
   },
   multi_button: {
     optionGoesTo: false,
-    isComplete: (quesiton: PublishedFormQuestion, value: any) => true,
+    isComplete: (question: PublishedFormQuestion, value: any) => true,
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(CheckBoxList, {options: buildOptions(question), ...attrs});
     },
@@ -128,14 +128,14 @@ const types: {[type: string]: Type} = {
   },
 };
 
-readonly const fallbackType = {
+const fallbackType = {
   optionGoesTo: false,
   isComplete: () => false,
   render: () => null,
 };
 
 function questionType(question: PublishedFormQuestion): Type {
-  return types[quesiton.type()] || fallbackType;
+  return types[question.type()] || fallbackType;
 }
 
 export function goesTo(

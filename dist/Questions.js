@@ -77,7 +77,7 @@ var types = {
     },
     multi_button: {
         optionGoesTo: false,
-        isComplete: function (quesiton, value) { return true; },
+        isComplete: function (question, value) { return true; },
         render: function (question, attrs) {
             return m(CheckBoxList_1.CheckBoxList, __assign({ options: buildOptions(question) }, attrs));
         },
@@ -121,7 +121,7 @@ var fallbackType = {
     render: function () { return null; },
 };
 function questionType(question) {
-    return types[quesiton.type()] || fallbackType;
+    return types[question.type()] || fallbackType;
 }
 function goesTo(question, value) {
     if (questionType(question)) {
