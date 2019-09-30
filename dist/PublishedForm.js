@@ -157,7 +157,7 @@ var PublishedFormSection = /** @class */ (function () {
         return this._data.required || false;
     };
     PublishedFormSection.prototype.questions = function () {
-        return this._data.questions
+        return (this._data.questions || [])
             .map(function (data) { return new PublishedFormQuestion(data); })
             .sort(function (a, b) { return a.index() - b.index(); });
     };

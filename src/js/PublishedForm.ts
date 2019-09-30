@@ -273,7 +273,7 @@ export class PublishedFormSection {
   }
 
   public questions(): PublishedFormQuestion[] {
-    return this._data.questions
+    return (this._data.questions || [])
       .map((data: PublishedFormQuestionData) => new PublishedFormQuestion(data))
       .sort((a, b) => a.index() - b.index());
   }
