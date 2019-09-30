@@ -2,6 +2,7 @@ import * as m from "mithril";
 import {block} from "../BEM";
 
 interface Attrs {
+  selector?: string;
   progress: number;
   color?: string;
 }
@@ -27,8 +28,11 @@ export const ProgressPercentage: m.Component<Attrs, State> = {
     const complete = vnode.state.display === 100;
     const modifiers = complete ? ["complete"] : [];
     const color = vnode.attrs.color || (complete ? "primary" : "grey");
-    return m(`.color-${color}` + block(".progress-percentage", modifiers),
-      `${Math.round(vnode.state.display)}%`);
+    const selector =
+      (vnode.attrs.selector || "") +
+      `.color-${color}` +
+      block(".progress-percentage", modifiers);
+    return m(selector, `${Math.round(vnode.state.display)}%`);
   },
 };
 

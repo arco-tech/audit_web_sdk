@@ -3,7 +3,7 @@ import {Changeset} from "../Changeset";
 import {ErrorMessage} from "./ErrorMessage";
 
 interface Attrs {
-  label?: string;
+  label?: string | m.Component<any>;
   name: string;
   changeset: Changeset;
   input: m.Component<{name: string, changeset: Changeset}>;

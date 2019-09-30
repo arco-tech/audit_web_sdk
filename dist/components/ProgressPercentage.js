@@ -14,7 +14,10 @@ exports.ProgressPercentage = {
         var complete = vnode.state.display === 100;
         var modifiers = complete ? ["complete"] : [];
         var color = vnode.attrs.color || (complete ? "primary" : "grey");
-        return m(".color-" + color + BEM_1.block(".progress-percentage", modifiers), Math.round(vnode.state.display) + "%");
+        var selector = (vnode.attrs.selector || "") +
+            (".color-" + color) +
+            BEM_1.block(".progress-percentage", modifiers);
+        return m(selector, Math.round(vnode.state.display) + "%");
     },
 };
 function updateState(vnode) {

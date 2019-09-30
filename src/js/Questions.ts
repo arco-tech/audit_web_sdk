@@ -128,12 +128,22 @@ const types: {[type: string]: Type} = {
   },
 };
 
+readonly const fallbackType = {
+  optionGoesTo: false,
+  isComplete: () => false,
+  render: () => null,
+};
+
+function questionType(question: PublishedFormQuestion): Type {
+  return types[quesiton.type()] || fallbackType;
+}
+
 export function goesTo(
   question: PublishedFormQuestion,
   value: any,
 ): PublishedFormGoesTo | null {
-  if (types[question.type()]) {
-    if (types[question.type()].optionGoesTo) {
+  if (questionType(question)) {
+    if (questionType(question).optionGoesTo) {
       const option = findOption(question, value);
       return option ? option.goesTo() : null;
     } else {
@@ -148,8 +158,8 @@ export function isComplete(
   question: PublishedFormQuestion,
   value: any,
 ): boolean {
-  if (types[question.type()]) {
-    return types[question.type()].isComplete(question, value);
+  if (questionType(question)) {
+    return questionType(question).isComplete(question, value);
   } else {
     log("error", ["Question type isn't defined", question.type()]);
   }
@@ -168,8 +178,8 @@ export function render(
   question: PublishedFormQuestion,
   attrs: Attrs,
 ): m.Children | null {
-  if (types[question.type()]) {
-    return types[question.type()].render(question, attrs);
+  if (questionType(question)) {
+    return questionType(question).render(question, attrs);
   } else {
     log("error", ["Question type isn't defined", question.type()]);
     return null;

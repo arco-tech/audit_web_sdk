@@ -115,9 +115,17 @@ var types = {
         },
     },
 };
+var fallbackType = {
+    optionGoesTo: false,
+    isComplete: function () { return false; },
+    render: function () { return null; },
+};
+function questionType(question) {
+    return types[quesiton.type()] || fallbackType;
+}
 function goesTo(question, value) {
-    if (types[question.type()]) {
-        if (types[question.type()].optionGoesTo) {
+    if (questionType(question)) {
+        if (questionType(question).optionGoesTo) {
             var option = findOption(question, value);
             return option ? option.goesTo() : null;
         }
@@ -131,8 +139,8 @@ function goesTo(question, value) {
 }
 exports.goesTo = goesTo;
 function isComplete(question, value) {
-    if (types[question.type()]) {
-        return types[question.type()].isComplete(question, value);
+    if (questionType(question)) {
+        return questionType(question).isComplete(question, value);
     }
     else {
         Log_1.log("error", ["Question type isn't defined", question.type()]);
@@ -146,8 +154,8 @@ function findOption(question, id) {
 }
 exports.findOption = findOption;
 function render(question, attrs) {
-    if (types[question.type()]) {
-        return types[question.type()].render(question, attrs);
+    if (questionType(question)) {
+        return questionType(question).render(question, attrs);
     }
     else {
         Log_1.log("error", ["Question type isn't defined", question.type()]);
