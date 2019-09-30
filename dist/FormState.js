@@ -98,6 +98,14 @@ var FormState = /** @class */ (function () {
         this._data.values["" + questionID] = value;
         this.save();
     };
+    FormState.prototype.changeValues = function (values) {
+        if (typeof values === "object") {
+            this._data.values = values;
+        }
+        else {
+            throw new Error("values must be an object");
+        }
+    };
     FormState.prototype.changeDetail = function (name, value) {
         this._data.details[name] = value;
         this.save();

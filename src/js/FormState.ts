@@ -141,6 +141,14 @@ export class FormState {
     this.save();
   }
 
+  public changeValues(values: FormStateValues): void {
+    if (typeof values === "object") {
+      this._data.values = values;
+    } else {
+      throw new Error("values must be an object");
+    }
+  }
+
   public changeDetail(name: string, value: any) {
     this._data.details[name] = value;
     this.save();
