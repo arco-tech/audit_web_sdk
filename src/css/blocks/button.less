@@ -30,34 +30,34 @@
 .button--outline {
   background-color: transparent;
   border: 1px solid @colors[primary];
-  color: @colors[black];
+  color: @colors[primary];
 
-  &.button--disable {
+  &:disabled {
     border-color: @colors[grey];
-    background-color: @colors[grey];
+    background-color: transparent;
   }
 
   &:hover {
     background-color: #e7eae4;
 
-    &.button--disable {
-      background-color: @colors[grey];
+    &:disabled {
+      background-color: transparent;
     }
   }
 
   &:focus {
     background-color: #d6dccf;
 
-    &.button--disable {
-      background-color: @colors[grey];
+    &:disabled {
+      background-color: transparent;
     }
   }
 
   &:active {
     background-color: white;
 
-    &.button--disable {
-      background-color: @colors[grey];
+    &:disabled {
+      background-color: transparent;
     }
   }
 }
