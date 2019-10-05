@@ -37,7 +37,7 @@ function relative(date) {
     var diff = new Date().getTime() - date.getTime();
     for (var p = periods.length - 1; p >= 0; p--) {
         if (diff > periods[p].milliseconds) {
-            var time = parseInt(diff / periods[p].milliseconds);
+            var time = Math.round(diff / periods[p].milliseconds);
             return time + " " + periods[p].name + (time == 1 ? "" : "s") + " ago";
         }
     }

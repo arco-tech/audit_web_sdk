@@ -37,11 +37,10 @@ export function relative(date: Date) {
 
   for(let p = periods.length - 1; p >= 0; p--) {
     if(diff > periods[p].milliseconds) {
-      const time = parseInt(diff / periods[p].milliseconds);
+      const time = Math.round(diff / periods[p].milliseconds);
       return `${time} ${periods[p].name}${time == 1 ? "" : "s"} ago`;
     }
   }
 
   return "now";
-},
-
+}
