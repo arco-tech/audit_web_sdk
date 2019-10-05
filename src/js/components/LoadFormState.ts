@@ -1,12 +1,14 @@
+import * as m from "mithril";
+
 import * as Storage from "../Storage";
-import {PublishedForm} from "../PublishedForm";
+import {PublishedForm, PublishedFormData} from "../PublishedForm";
 import {FormState} from "../FormState";
+import {stateDataFromSubmissionData} from "../PublicFormSubmission";
 import {log} from "../Log";
 
-import {PublicFormAPI} from "../api/public_forms/PublicFormAPI";
-import {
-  PublicFormSubmissionAPI,
-} from "../api/public_forms/PublicFormSubmissionAPI";
+import * as PublicFormAPI from "../api/public_forms/PublicFormAPI";
+import * as PublicFormSubmissionAPI from
+  "../api/public_forms/PublicFormSubmissionAPI";
 
 import {Spinner} from "../components/Spinner";
 
@@ -32,7 +34,9 @@ export const LoadFormState: m.Component<Attrs> = {
       PublicFormAPI.current(),
       PublicFormSubmissionAPI.current(),
     ])
-      .then((publishedFormData, formStateData) => {
+      .then(([publishedFormData, publicFormSubmissionData]) => {
+        const formStateData =
+          stateDataFromSubmissionData(publicFormSubmissionData);
         const formState = new FormState(formStateData, Storage.saveFormState);
         formState.save();
         const publishedForm = new PublishedForm(publishedFormData);

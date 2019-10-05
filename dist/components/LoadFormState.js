@@ -1,19 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var m = require("mithril");
 var Storage = require("../Storage");
 var PublishedForm_1 = require("../PublishedForm");
 var FormState_1 = require("../FormState");
+var PublicFormSubmission_1 = require("../PublicFormSubmission");
 var Log_1 = require("../Log");
-var PublicFormAPI_1 = require("../api/public_forms/PublicFormAPI");
-var PublicFormSubmissionAPI_1 = require("../api/public_forms/PublicFormSubmissionAPI");
+var PublicFormAPI = require("../api/public_forms/PublicFormAPI");
+var PublicFormSubmissionAPI = require("../api/public_forms/PublicFormSubmissionAPI");
 var Spinner_1 = require("../components/Spinner");
 exports.LoadFormState = {
     oninit: function (vnode) {
         Promise.all([
-            PublicFormAPI_1.PublicFormAPI.current(),
-            PublicFormSubmissionAPI_1.PublicFormSubmissionAPI.current(),
+            PublicFormAPI.current(),
+            PublicFormSubmissionAPI.current(),
         ])
-            .then(function (publishedFormData, formStateData) {
+            .then(function (_a) {
+            var publishedFormData = _a[0], publicFormSubmissionData = _a[1];
+            var formStateData = PublicFormSubmission_1.stateDataFromSubmissionData(publicFormSubmissionData);
             var formState = new FormState_1.FormState(formStateData, Storage.saveFormState);
             formState.save();
             var publishedForm = new PublishedForm_1.PublishedForm(publishedFormData);
