@@ -39,7 +39,7 @@ export function requestReturnLink(
   email: string,
 ): Promise<null> {
   return request<null>("patch", "public-form-submissions/request-return-link", {
-    body: {email, form_type_named_id: formType},
+    body: {email, public_form_named_id: formType},
   });
 }
 
