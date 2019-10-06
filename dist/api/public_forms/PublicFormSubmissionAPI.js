@@ -13,9 +13,9 @@ function update(formState) {
     });
 }
 exports.update = update;
-function requestReturnLink(email) {
+function requestReturnLink(formType, email) {
     return API_1.request("patch", "public-form-submissions/request-return-link", {
-        body: { email: email }
+        body: { email: email, form_type_named_id: formType },
     });
 }
 exports.requestReturnLink = requestReturnLink;
