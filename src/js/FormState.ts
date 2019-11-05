@@ -33,6 +33,7 @@ export interface FormStateData {
   filteredSectionIDs: number[];
   isComplete: boolean;
   hasSubmitted: boolean;
+  metadata: {[key: string]: any};
 }
 
 export type FormStateSaver = (state: FormState) => void;
@@ -47,6 +48,7 @@ export class FormState {
       filteredSectionIDs: [],
       isComplete: false,
       hasSubmitted: false,
+      metadata: {},
       details: {
         email: "",
         first_name: "",
@@ -80,6 +82,18 @@ export class FormState {
 
   public detail(name: keyof FormStateDetails): any {
     return this.details()[name];
+  }
+
+  public metadata(): {[key: string]: any} {
+    return this._data.metadata;
+  }
+
+  public getMetadata(key: string): any {
+    return this._data.metadata[key];
+  }
+
+  public putMetadata(key: string, value: any): void {
+    this._data.metadata[key] = value;
   }
 
   public filterSections(

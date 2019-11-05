@@ -28,6 +28,7 @@ var FormState = /** @class */ (function () {
             filteredSectionIDs: [],
             isComplete: false,
             hasSubmitted: false,
+            metadata: {},
             details: {
                 email: "",
                 first_name: "",
@@ -51,6 +52,15 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.detail = function (name) {
         return this.details()[name];
+    };
+    FormState.prototype.metadata = function () {
+        return this._data.metadata;
+    };
+    FormState.prototype.getMetadata = function (key) {
+        return this._data.metadata[key];
+    };
+    FormState.prototype.putMetadata = function (key, value) {
+        this._data.metadata[key] = value;
     };
     FormState.prototype.filterSections = function (sections) {
         var _this = this;
