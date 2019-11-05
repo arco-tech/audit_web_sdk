@@ -130,6 +130,12 @@ var PublishedFormSection = /** @class */ (function () {
     PublishedFormSection.prototype.name = function () {
         return this._data.name;
     };
+    PublishedFormSection.prototype.namedID = function () {
+        return this._data.named_id;
+    };
+    PublishedFormSection.prototype.group = function () {
+        return this._data.group;
+    };
     PublishedFormSection.prototype.summary = function () {
         return this._data.summary;
     };

@@ -61,6 +61,8 @@ export interface PublishedFormSectionData {
   index: number;
   name: string;
   summary: string;
+  named_id: string;
+  group: string;
   icon: PublishedFormSectionIconData | null;
   service_type: PublishedFormServiceTypeData | null;
   required: boolean;
@@ -240,6 +242,14 @@ export class PublishedFormSection {
 
   public name(): string {
     return this._data.name;
+  }
+
+  public namedID(): string | null {
+    return this._data.named_id;
+  }
+
+  public group(): string | null {
+    return this._data.group;
   }
 
   public summary(): string {
