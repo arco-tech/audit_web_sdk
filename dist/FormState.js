@@ -54,7 +54,7 @@ var FormState = /** @class */ (function () {
         return this.details()[name];
     };
     FormState.prototype.metadata = function () {
-        return this._data.metadata;
+        return this._data.metadata || {};
     };
     FormState.prototype.getMetadata = function (key) {
         return this._data.metadata[key];

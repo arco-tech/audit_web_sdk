@@ -7,6 +7,7 @@ function stateDataFromSubmissionData(submission) {
         filteredSectionIDs: submission.filtered_section_ids,
         hasSubmitted: submission.has_submitted,
         isComplete: false,
+        metadata: submission.metadata || {},
         details: {
             email: submission.email,
             first_name: submission.first_name,

@@ -85,7 +85,7 @@ export class FormState {
   }
 
   public metadata(): {[key: string]: any} {
-    return this._data.metadata;
+    return this._data.metadata || {};
   }
 
   public getMetadata(key: string): any {

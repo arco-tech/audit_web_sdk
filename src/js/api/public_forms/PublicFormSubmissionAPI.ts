@@ -15,6 +15,7 @@ interface PublicFormSubmissionParams {
   has_submitted: boolean;
   values: FormStateValues;
   filtered_section_ids: number[];
+  metadata: {[key: string]: any};
 }
 
 export function current(): Promise<PublicFormSubmissionData> {
@@ -56,5 +57,6 @@ function formStateToParams(formState: FormState): PublicFormSubmissionParams {
     has_submitted: formState.hasSubmitted(),
     values: formState.values(),
     filtered_section_ids: formState.filteredSectionIDs(),
+    metadata: formState.metadata(),
   };
 }

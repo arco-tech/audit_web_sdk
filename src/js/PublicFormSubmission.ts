@@ -13,6 +13,7 @@ export interface PublicFormSubmissionData {
   has_submitted: boolean;
   values: {[questionID: string]: any};
   filtered_section_ids: number[];
+  metadata: {[key: string]: any};
   inserted_at: string;
   updated_at: string;
 }
@@ -26,6 +27,7 @@ export function stateDataFromSubmissionData(
     filteredSectionIDs: submission.filtered_section_ids,
     hasSubmitted: submission.has_submitted,
     isComplete: false,
+    metadata: submission.metadata || {},
     details: {
       email: submission.email,
       first_name: submission.first_name,

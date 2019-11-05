@@ -32,6 +32,7 @@ function formStateToParams(formState) {
         has_submitted: formState.hasSubmitted(),
         values: formState.values(),
         filtered_section_ids: formState.filteredSectionIDs(),
+        metadata: formState.metadata(),
     };
 }
 //# sourceMappingURL=PublicFormSubmissionAPI.js.map

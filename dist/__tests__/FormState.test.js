@@ -13,6 +13,7 @@ function mockFormState(data, saver) {
         filteredSectionIDs: data.filteredSectionIDs || [],
         isComplete: data.isComplete || false,
         hasSubmitted: data.hasSubmitted || false,
+        metadata: { test: true },
         details: {
             email: data.details.email || "",
             first_name: data.details.first_name || "",
@@ -32,6 +33,7 @@ ava_1.default("initiate creates an empty FormState instance", function (t) {
     var formState = FormState_1.FormState.initiate(function () { });
     t.is(formState instanceof FormState_1.FormState, true);
     t.deepEqual(formState.values(), {});
+    t.deepEqual(formState.metadata(), {});
     t.deepEqual(formState.details(), {
         email: "",
         first_name: "",
@@ -52,6 +54,7 @@ ava_1.default("constructs with given data", function (t) {
         filteredSectionIDs: [],
         isComplete: false,
         hasSubmitted: false,
+        metadata: { some: "thing" },
         details: {
             email: "someone@mail.nz",
             first_name: "Jack",
@@ -70,6 +73,7 @@ ava_1.default("constructs with given data", function (t) {
     t.is(formState.fullName(), data.details.first_name + " " + data.details.last_name);
     t.deepEqual(formState.data(), data);
     t.deepEqual(formState.values(), data.values);
+    t.deepEqual(formState.metadata(), data.metadata);
     t.deepEqual(formState.details(), data.details);
 });
 ava_1.default("value returns the correct value", function (t) {
