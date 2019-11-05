@@ -61,8 +61,8 @@ export interface PublishedFormSectionData {
   index: number;
   name: string;
   summary: string;
-  named_id: string;
-  group: string;
+  named_id?: string;
+  group?: string;
   icon: PublishedFormSectionIconData | null;
   service_type: PublishedFormServiceTypeData | null;
   required: boolean;
