@@ -16,6 +16,7 @@ var CheckBoxList_1 = require("./components/inputs/CheckBoxList");
 var DateInput_1 = require("./components/inputs/DateInput");
 var DateRangeInput_1 = require("./components/inputs/DateRangeInput");
 var Input_1 = require("./components/inputs/Input");
+var TextArea_1 = require("./components/inputs/TextArea");
 var InputList_1 = require("./components/inputs/InputList");
 var NumberInput_1 = require("./components/inputs/NumberInput");
 var RadioList_1 = require("./components/inputs/RadioList");
@@ -29,6 +30,15 @@ var types = {
         },
         render: function (question, attrs) {
             return m(Input_1.Input, attrs);
+        },
+    },
+    paragraph: {
+        optionGoesTo: false,
+        isComplete: function (question, value) {
+            return typeof value === "string" && value.trim() !== "";
+        },
+        render: function (question, attrs) {
+            return m(TextArea_1.TextArea, attrs);
         },
     },
     multi_text: {

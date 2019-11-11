@@ -4,6 +4,7 @@ import {CheckBoxList} from "./components/inputs/CheckBoxList";
 import {DateInput} from "./components/inputs/DateInput";
 import {DateRangeInput} from "./components/inputs/DateRangeInput";
 import {Input} from "./components/inputs/Input";
+import {TextArea} from "./components/inputs/TextArea";
 import {InputList} from "./components/inputs/InputList";
 import {NumberInput} from "./components/inputs/NumberInput";
 import {RadioList} from "./components/inputs/RadioList";
@@ -35,6 +36,15 @@ const types: {[type: string]: Type} = {
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(Input, attrs);
+    },
+  },
+  paragraph: {
+    optionGoesTo: false,
+    isComplete: (question: PublishedFormQuestion, value: any) => {
+      return typeof value === "string" && value.trim() !== "";
+    },
+    render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
+      return m(TextArea, attrs);
     },
   },
   multi_text: {
