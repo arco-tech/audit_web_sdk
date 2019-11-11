@@ -25,10 +25,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 exports.TextArea = {
     view: function (_a) {
-        var _b = _a.attrs, selector = _b.selector, changeset = _b.changeset, name = _b.name, attrs = __rest(_b, ["selector", "changeset", "name"]);
+        var _b = _a.attrs, selector = _b.selector, changeset = _b.changeset, name = _b.name, _c = _b.rows, rows = _c === void 0 ? 10 : _c, attrs = __rest(_b, ["selector", "changeset", "name", "rows"]);
         return m("textarea" + (selector || ""), __assign({ value: changeset.getValue(name), oninput: function (event) {
                 changeset.change(name, event.target.value);
-            } }, attrs));
+            }, rows: rows }, attrs));
     },
 };
 //# sourceMappingURL=TextArea.js.map
