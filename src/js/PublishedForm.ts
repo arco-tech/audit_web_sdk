@@ -46,6 +46,7 @@ export interface PublishedFormQuestionData {
   type: PublishedFormQuestionType;
   index: number;
   label: string;
+  named_id: string;
   goes_to: PublishedFormGoesToData;
   service_type: PublishedFormServiceTypeData | null;
   localisation: string[] | null;
@@ -188,6 +189,10 @@ export class PublishedFormQuestion {
 
   public index(): number {
     return this._data.index;
+  }
+
+  public namedID(): string | null {
+    return this._data.named_id;
   }
 
   public localisation(): string[] | null {

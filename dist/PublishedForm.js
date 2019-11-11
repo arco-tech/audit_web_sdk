@@ -85,6 +85,9 @@ var PublishedFormQuestion = /** @class */ (function () {
     PublishedFormQuestion.prototype.index = function () {
         return this._data.index;
     };
+    PublishedFormQuestion.prototype.namedID = function () {
+        return this._data.named_id;
+    };
     PublishedFormQuestion.prototype.localisation = function () {
         return this._data.localisation;
     };
