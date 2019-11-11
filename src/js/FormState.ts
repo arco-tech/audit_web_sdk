@@ -208,16 +208,25 @@ export class FormState {
     }) || sections[0];
   }
 
-  public sectionProgress(section: PublishedFormSection): number {
-    const {validQuestions} = this.summary(section);
-    const statuses =
-      validQuestions
-      .filter((question) => question.type() !== "multi_button")
-      .map((question) => {
-        return Questions.isComplete(question, this.value(question.id()));
+  public sectionsProgress(sections: PublishedFormSection[]): number {
+    let total = 0;
+    let complete = 0;
+    sections.forEach((section) => {
+      const {validQuestions} = this.summary(section);
+      validQuestions.forEach((question) => {
+        if (question.type() !== "multi_button") {
+          total += 1;
+          if (Questions.isComplete(question, this.value(question.id()))) {
+            complete += 1;
+          }
+        }
       });
-    const completed = statuses.filter((complete) => complete);
-    return (completed.length / statuses.length) * 100;
+    });
+    return (complete / total) * 100;
+  }
+
+  public sectionProgress(section: PublishedFormSection): number {
+    return this.sectionsProgress([section]);
   }
 
   public summary(section: PublishedFormSection): FormLogic.SectionSummary {
