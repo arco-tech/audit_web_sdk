@@ -1,5 +1,6 @@
 export type PublishedFormQuestionType = (
   "text" |
+  "paragraph" |
   "multi_text" |
   "number" |
   "percentage" |

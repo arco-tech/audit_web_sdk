@@ -33,7 +33,7 @@ function mockQuestion(attrs) {
 }
 exports.mockQuestion = mockQuestion;
 function mockQuestionData(attrs) {
-    return __assign({ id: 1, type: "text", index: 1, label: "Some question?", goes_to: { type: "next_question" }, localisation: null, options: [], service_type: null }, attrs);
+    return __assign({ id: 1, type: "text", index: 1, named_id: "some_id", label: "Some question?", goes_to: { type: "next_question" }, localisation: null, options: [], service_type: null }, attrs);
 }
 exports.mockQuestionData = mockQuestionData;
 function mockOptionData(attrs) {
