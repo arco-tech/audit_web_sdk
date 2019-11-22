@@ -8,7 +8,7 @@ export const Header: m.Component<Attrs> = {
   view: (vnode: Vnode) => {
     return m(".header", [
       m("a", {
-        href: "https://prod.businesslinkpacific.com",
+        href: "https://businesslinkpacific.com",
         target: "_blank",
       }, [
         m("img.header__logo", {
