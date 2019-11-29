@@ -1,0 +1,1 @@
+{"version":3,"file":"ReadOnlyInput.js","sourceRoot":"","sources":["../../../components/inputs/ReadOnlyInput.ts"],"names":[],"mappings":";;AAAA,2BAA6B;AAUhB,QAAA,aAAa,GAAuB;IAC/C,IAAI,EAAE,UAAC,EAA0B;YAAzB,aAAwB,EAAhB,wBAAS,EAAE,cAAI;QAC7B,OAAO,CAAC,CAAC,QAAQ,EAAE,SAAS,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC,CAAC;IAC/C,CAAC;CACF,CAAC"}
