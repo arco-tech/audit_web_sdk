@@ -94,6 +94,7 @@ export class FormState {
 
   public putMetadata(key: string, value: any): void {
     this._data.metadata[key] = value;
+    this.save();
   }
 
   public filterSections(

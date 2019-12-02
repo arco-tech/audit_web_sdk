@@ -61,6 +61,7 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.putMetadata = function (key, value) {
         this._data.metadata[key] = value;
+        this.save();
     };
     FormState.prototype.filterSections = function (sections) {
         var _this = this;

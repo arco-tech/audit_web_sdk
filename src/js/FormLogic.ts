@@ -46,9 +46,7 @@ export function validateLocalisation(
   location: Location | null,
 ): boolean {
   const localisation = question.localisation();
-  return !location || !localisation || (
-    Array.isArray(localisation) &&
-    localisation.length > 0 &&
-    localisation.indexOf(location.countryCode()) !== -1
-  );
+  return !location || !localisation ||
+    !Array.isArray(localisation) || localisation.length === 0 ||
+    localisation.indexOf(location.countryCode()) !== -1;
 }

@@ -20,9 +20,9 @@ function summary(section, location, values) {
 exports.summary = summary;
 function validateLocalisation(question, location) {
     var localisation = question.localisation();
-    return !location || !localisation || (Array.isArray(localisation) &&
-        localisation.length > 0 &&
-        localisation.indexOf(location.countryCode()) !== -1);
+    return !location || !localisation ||
+        !Array.isArray(localisation) || localisation.length === 0 ||
+        localisation.indexOf(location.countryCode()) !== -1;
 }
 exports.validateLocalisation = validateLocalisation;
 //# sourceMappingURL=FormLogic.js.map
