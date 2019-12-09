@@ -1,49 +1,38 @@
 import * as m from "mithril";
-import {Changeset} from "../../Changeset";
+import {DateInput} from "./DateInput";
+import {Changeset} from "audit/Changeset";
 
 interface Attrs {
-  name: string;
   changeset: Changeset;
-  [key: string]: any;
+  name: string;
 }
 
-type Vnode = m.Vnode<Attrs>;
+interface State {
+  dateChangeset: Changeset;
+}
 
-export const DateRangeInput: m.Component<Attrs> = {
-  view: ({attrs: {name, changeset, ...attrs}}: Vnode) => {
-    const value = changeset.getValue(name) || {};
-    if (!value.from) { value.from = new Date().toISOString().substring(0, 10); }
-    if (!value.to) { value.to = new Date().toISOString().substring(0, 10); }
-    return [
-      m("input", {
-        type: "date",
-        value: value.from,
-        oninput: (event) => {
-          const fromDate = new Date(event.target.value);
-          if (!isNaN(fromDate.getTime())) {
-            changeset.change(name, {
-              from: fromDate.toISOString().substring(0, 10),
-              to: value.to,
-            });
-          }
-        },
-        ...attrs,
-      }),
-      m(".align-center.color-grey", "to"),
-      m("input", {
-        type: "date",
-        value: value.to,
-        oninput: (event) => {
-          const toDate = new Date(event.target.value);
-          if (!isNaN(toDate.getTime())) {
-            changeset.change(name, {
-              from: value.from,
-              to: toDate.toISOString().substring(0, 10),
-            });
-          }
-        },
-        ...attrs,
-      }),
-    ];
+export const DateRangeInput: m.Component<Attrs, State> = {
+  oninit: ({attrs: {changeset, name}, state}) => {
+    const value = changeset.getValue(name);
+    if (value && typeof value === "object") {
+      state.dateChangeset = new Changeset({from: value.from, to: value.to});
+    } else {
+      state.dateChangeset = new Changeset({from: null, to: null});
+    }
+    state.dateChangeset.listen(() => {
+      changeset.change(name, state.dateChangeset.getValues());
+    });
+  },
+
+  view: ({state: {dateChangeset}}) => {
+    return m(".date-range-input", [
+      m(".date-range-input__date-input", [
+        m(DateInput, {changeset: dateChangeset, name: "from"}),
+      ]),
+      m(".date-range-input__divider", "to"),
+      m(".date-range-input__date-input", [
+        m(DateInput, {changeset: dateChangeset, name: "to"}),
+      ]),
+    ]);
   },
 };

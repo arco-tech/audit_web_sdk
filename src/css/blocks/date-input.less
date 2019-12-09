@@ -1,0 +1,127 @@
+.date-input {
+  position: relative;
+  width: 100%;
+  padding: 8px 14px;
+  padding-right: 54px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid white;
+  outline: none;
+  font-family: @fonts[primary];
+  text-align: left;
+  transition: border-color @transition-duration;
+  background-color: white;
+  cursor: pointer;
+
+  &:focus {
+    border-color: @colors[primary];
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: @colors[grey];
+    background-image: url("/images/icons/calendar-white.svg");
+    background-position: center;
+    background-size: 24px;
+    background-repeat: no-repeat;
+  }
+}
+
+.input-dim {
+  .date-input {
+    background-color: @colors[background];
+    border-color: @colors[background];
+
+    &:focus {
+      border-color: @colors[primary];
+    }
+  }
+}
+
+.date-input__display-value {
+  .truncate();
+}
+
+.date-input__display-value--placeholder {
+  color: @colors[grey];
+}
+
+.date-input__picker-dropdown {
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 0;
+  width: 100%;
+  padding: 14px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 20px rgba(black, 0.2);
+  z-index: @z-indexes[dropdown];
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px 0;
+    background-color: white;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+.date-input__picker-dropdown__title {
+  color: @colors[grey];
+  font-size: 18px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.date-input__picker-dropdown__pickers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.date-input__picker-dropdown__picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.date-input__picker-dropdown__picker__arrow {
+  width: 40px;
+  height: 40px;
+  background-image: url("/images/icons/down-black.svg");
+  background-position: center;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.date-input__picker-dropdown__picker__arrow--up {
+  transform: rotate(180deg);
+}
+
+.date-input__picker-dropdown__picker__value {
+  min-width: 40px;
+  padding: 5px;
+  background-color: @colors[background];
+  border-radius: 5px;
+  text-align: center;
+}
+
+.date-input__picker-dropdown__button-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

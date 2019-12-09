@@ -1,5 +1,5 @@
 import * as m from "mithril";
-import {Changeset} from "../..//Changeset";
+import {Changeset} from "../../Changeset";
 
 interface Attrs {
   selector?: string;

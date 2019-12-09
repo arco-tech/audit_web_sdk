@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -23,15 +12,95 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
+var DateTime = require("audit/DateTime");
+var BEM_1 = require("audit/BEM");
 exports.DateInput = {
+    oninit: function (_a) {
+        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, state = _a.state;
+        state.date = dateFromChangeset(changeset, name);
+    },
     view: function (_a) {
-        var _b = _a.attrs, name = _b.name, changeset = _b.changeset, attrs = __rest(_b, ["name", "changeset"]);
-        return m("input", __assign({ type: "date", value: changeset.getValue(name), oninput: function (event) {
-                var date = new Date(event.target.value);
-                if (!isNaN(date.getTime())) {
-                    changeset.change(name, date.toISOString().substring(0, 10));
+        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, _c = _b.placeholder, placeholder = _c === void 0 ? "Select a Date" : _c, attrs = __rest(_b, ["changeset", "name", "placeholder"]), state = _a.state;
+        var date = state.date;
+        return m(BEM_1.block("date-input", state.expand && "active"), {
+            onclick: function () {
+                if (!state.expand) {
+                    state.expand = true;
                 }
-            } }, attrs));
+            },
+        }, [
+            displayValue(changeset.getValue(name), placeholder),
+            state.expand && m(".date-input__picker-dropdown", [
+                m(".date-input__picker-dropdown__title", "Select a Date"),
+                m(".date-input__picker-dropdown__pickers", [
+                    m(Picker, {
+                        display: date.getDate(),
+                        change: function (amount) { date.setDate(date.getDate() + amount); },
+                    }),
+                    m(Picker, {
+                        display: DateTime.monthName(date.getMonth()),
+                        change: function (amount) { date.setMonth(date.getMonth() + amount); },
+                    }),
+                    m(Picker, {
+                        display: date.getFullYear(),
+                        change: function (amount) {
+                            date.setFullYear(date.getFullYear() + amount);
+                        },
+                    }),
+                ]),
+                m(".date-input__picker-dropdown__button-row", [
+                    m(".link.link--primary.margin-right-medium", {
+                        onclick: function () {
+                            state.date = dateFromChangeset(changeset, name);
+                            setTimeout(function () {
+                                state.expand = false;
+                                m.redraw();
+                            });
+                        },
+                    }, "Revert"),
+                    m(".link.link--primary", {
+                        onclick: function () {
+                            var value = date.getFullYear() + "-" + (date.getMonth() + 1) +
+                                ("-" + date.getDate());
+                            changeset.change(name, value);
+                            setTimeout(function () {
+                                state.expand = false;
+                                m.redraw();
+                            });
+                        },
+                    }, "Apply"),
+                ]),
+            ]),
+        ]);
     },
 };
+var Picker = {
+    view: function (_a) {
+        var _b = _a.attrs, display = _b.display, change = _b.change;
+        return m(".date-input__picker-dropdown__picker", [
+            m(BEM_1.block("date-input__picker-dropdown__picker__arrow", "up"), {
+                onclick: function () { change(1); },
+            }),
+            m(".date-input__picker-dropdown__picker__value", display),
+            m(BEM_1.block("date-input__picker-dropdown__picker__arrow", "down"), { onclick: function () { change(-1); } }),
+        ]);
+    },
+};
+function displayValue(value, placeholder) {
+    if (value) {
+        var date = new Date(value);
+        if (!isNaN(date.getTime())) {
+            var monthName = DateTime.shortMonthName(date.getMonth());
+            return m(".date-input__display-value", [
+                date.getDate() + " " + monthName + " " + date.getFullYear(),
+            ]);
+        }
+    }
+    return m(BEM_1.block("date-input__display-value", "placeholder"), placeholder);
+}
+function dateFromChangeset(changeset, name) {
+    var dateValue = changeset.getValue(name);
+    var date = dateValue ? new Date(dateValue) : new Date();
+    return !isNaN(date.getTime()) ? date : new Date();
+}
 //# sourceMappingURL=DateInput.js.map
