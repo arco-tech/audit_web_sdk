@@ -13,10 +13,6 @@
   background-color: white;
   cursor: pointer;
 
-  &:focus {
-    border-color: @colors[primary];
-  }
-
   &:after {
     content: "";
     position: absolute;
@@ -38,10 +34,6 @@
   .date-input {
     background-color: @colors[background];
     border-color: @colors[background];
-
-    &:focus {
-      border-color: @colors[primary];
-    }
   }
 }
 
@@ -56,8 +48,8 @@
 .date-input__picker-dropdown {
   position: absolute;
   top: calc(100% + 20px);
-  left: 0;
-  width: 100%;
+  right: 0;
+  min-width: 100%;
   padding: 14px;
   background-color: white;
   border-radius: 5px;
@@ -68,9 +60,9 @@
     content: "";
     position: absolute;
     top: 0;
-    left: 50%;
-    width: 20px;
-    height: 20px;
+    right: 8px;
+    width: 14px;
+    height: 14px;
     border-radius: 5px 0;
     background-color: white;
     transform: translate(-50%, -50%) rotate(45deg);
@@ -88,7 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .date-input__picker-dropdown__picker {
@@ -100,15 +92,24 @@
 }
 
 .date-input__picker-dropdown__picker__arrow {
+  position: relative;
   width: 40px;
   height: 40px;
-  background-image: url("/images/icons/down-black.svg");
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border-top: 2px solid @colors[primary];
+    border-left: 2px solid @colors[primary];
+  }
 }
 
-.date-input__picker-dropdown__picker__arrow--up {
+.date-input__picker-dropdown__picker__arrow--down {
   transform: rotate(180deg);
 }
 
@@ -118,6 +119,7 @@
   background-color: @colors[background];
   border-radius: 5px;
   text-align: center;
+  border: 1px solid @colors[primary];
 }
 
 .date-input__picker-dropdown__button-row {
