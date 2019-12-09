@@ -1,6 +1,6 @@
 import * as m from "mithril";
 import {DateInput} from "./DateInput";
-import {Changeset} from "audit/Changeset";
+import {Changeset} from "../../Changeset";
 
 interface Attrs {
   changeset: Changeset;

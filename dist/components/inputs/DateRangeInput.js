@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var DateInput_1 = require("./DateInput");
-var Changeset_1 = require("audit/Changeset");
+var Changeset_1 = require("../../Changeset");
 exports.DateRangeInput = {
     oninit: function (_a) {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, state = _a.state;

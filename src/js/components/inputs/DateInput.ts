@@ -1,7 +1,7 @@
 import * as m from "mithril";
-import * as DateTime from "audit/DateTime";
-import {block} from "audit/BEM";
-import {Changeset} from "audit/Changeset";
+import * as DateTime from "../../DateTime";
+import {block} from "../../BEM";
+import {Changeset} from "../../Changeset";
 
 interface Attrs {
   changeset: Changeset;

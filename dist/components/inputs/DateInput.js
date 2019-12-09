@@ -12,8 +12,8 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
-var DateTime = require("audit/DateTime");
-var BEM_1 = require("audit/BEM");
+var DateTime = require("../../DateTime");
+var BEM_1 = require("../../BEM");
 exports.DateInput = {
     oninit: function (_a) {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, state = _a.state;
