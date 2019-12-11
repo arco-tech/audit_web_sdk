@@ -1,11 +1,11 @@
 export function param(name: string): string | null {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  let regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-  let results = regex.exec(window.location.search);
-  if (results !== null && typeof results[1] === "string") {
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
-  } else {
-    return null;
+  const params = window.location.search.replace("?", "").split("&");
+  for (let index in params) {
+    const param = params[index].split("=");
+    const key = decodeURIComponent(param[0]);
+    if (key === name) {
+      return decodeURIComponent(param.length === 1 ? "" : param[1]);
+    }
   }
 }
 

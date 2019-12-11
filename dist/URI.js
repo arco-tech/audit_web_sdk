@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function param(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(window.location.search);
-    if (results !== null && typeof results[1] === "string") {
-        return decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    else {
-        return null;
+    var params = window.location.search.replace("?", "").split("&");
+    for (var index in params) {
+        var param_1 = params[index].split("=");
+        var key = decodeURIComponent(param_1[0]);
+        if (key === name) {
+            return decodeURIComponent(param_1.length === 1 ? "" : param_1[1]);
+        }
     }
 }
 exports.param = param;
