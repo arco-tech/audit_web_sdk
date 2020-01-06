@@ -113,6 +113,10 @@ export class Changeset {
     this.fieldErrors[name] = errors;
   }
 
+  public getFieldErrors(): FieldErrors {
+    return this.fieldErrors;
+  }
+
   public getFieldError(name: string): string[] {
     return this.fieldErrors[name];
   }

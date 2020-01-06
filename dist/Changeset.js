@@ -98,6 +98,9 @@ var Changeset = /** @class */ (function () {
     Changeset.prototype.setFieldError = function (name, errors) {
         this.fieldErrors[name] = errors;
     };
+    Changeset.prototype.getFieldErrors = function () {
+        return this.fieldErrors;
+    };
     Changeset.prototype.getFieldError = function (name) {
         return this.fieldErrors[name];
     };
