@@ -57,7 +57,16 @@ export const DateInput: m.Component<Attrs, State> = {
                 m.redraw();
               });
             },
-          }, "Revert"),
+          }, "Cancel"),
+          m(".link.link--primary.margin-right-medium", {
+            onclick: () => {
+              changeset.change(name, null);
+              setTimeout(() => {
+                state.expand = false;
+                m.redraw();
+              });
+            },
+          }, "Clear"),
           m(".link.link--primary", {
             onclick: () => {
               const value =

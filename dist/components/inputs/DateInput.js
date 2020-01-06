@@ -57,7 +57,16 @@ exports.DateInput = {
                                 m.redraw();
                             });
                         },
-                    }, "Revert"),
+                    }, "Cancel"),
+                    m(".link.link--primary.margin-right-medium", {
+                        onclick: function () {
+                            changeset.change(name, null);
+                            setTimeout(function () {
+                                state.expand = false;
+                                m.redraw();
+                            });
+                        },
+                    }, "Clear"),
                     m(".link.link--primary", {
                         onclick: function () {
                             var value = date.getFullYear() + "-" + (date.getMonth() + 1) +
