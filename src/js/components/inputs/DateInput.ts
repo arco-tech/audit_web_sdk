@@ -119,7 +119,7 @@ function displayValue(
 }
 
 function formatValue(date: Date): string {
-  `${date.getFullYear()}-${zeroPad(date.getMonth() + 1)}` +
+  return `${date.getFullYear()}-${zeroPad(date.getMonth() + 1)}` +
   `-${zeroPad(date.getDate())}`;
 }
 

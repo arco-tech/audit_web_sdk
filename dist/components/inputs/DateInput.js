@@ -107,7 +107,7 @@ function displayValue(value, placeholder) {
     return m(BEM_1.block("date-input__display-value", "placeholder"), placeholder);
 }
 function formatValue(date) {
-    date.getFullYear() + "-" + zeroPad(date.getMonth() + 1) +
+    return date.getFullYear() + "-" + zeroPad(date.getMonth() + 1) +
         ("-" + zeroPad(date.getDate()));
 }
 function zeroPad(value) {
