@@ -69,8 +69,7 @@ exports.DateInput = {
                     }, "Clear"),
                     m(".link.link--primary", {
                         onclick: function () {
-                            var value = date.getFullYear() + "-" + (date.getMonth() + 1) +
-                                ("-" + date.getDate());
+                            var value = formatValue(date);
                             changeset.change(name, value);
                             setTimeout(function () {
                                 state.expand = false;
@@ -106,6 +105,13 @@ function displayValue(value, placeholder) {
         }
     }
     return m(BEM_1.block("date-input__display-value", "placeholder"), placeholder);
+}
+function formatValue(date) {
+    date.getFullYear() + "-" + zeroPad(date.getMonth() + 1) +
+        ("-" + zeroPad(date.getDate()));
+}
+function zeroPad(value) {
+    return value < 10 ? "0" + value : "" + value;
 }
 function dateFromChangeset(changeset, name) {
     var dateValue = changeset.getValue(name);

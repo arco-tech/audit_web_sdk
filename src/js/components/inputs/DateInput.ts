@@ -69,9 +69,7 @@ export const DateInput: m.Component<Attrs, State> = {
           }, "Clear"),
           m(".link.link--primary", {
             onclick: () => {
-              const value =
-                `${date.getFullYear()}-${date.getMonth() + 1}` +
-                `-${date.getDate()}`;
+              const value = formatValue(date);
               changeset.change(name, value);
               setTimeout(() => {
                 state.expand = false;
@@ -118,6 +116,15 @@ function displayValue(
     }
   }
   return m(block("date-input__display-value", "placeholder"), placeholder);
+}
+
+function formatValue(date: Date): string {
+  `${date.getFullYear()}-${zeroPad(date.getMonth() + 1)}` +
+  `-${zeroPad(date.getDate())}`;
+}
+
+function zeroPad(value: number): string {
+  return value < 10 ? `0${value}` : `${value}`;
 }
 
 function dateFromChangeset(changeset: Changeset, name: string): Date {
