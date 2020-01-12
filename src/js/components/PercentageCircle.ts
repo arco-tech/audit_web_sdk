@@ -11,7 +11,19 @@ type Vnode = m.Vnode<Attrs>;
 const pi = 3.14159;
 
 export const PercentageCircle: m.Component<Attrs> = {
-  view: ({attrs: {percentage, color, lineWidth=1.5}}: Vnode) => {
+  oninit: ({state}) => {
+    state.initialising = true;
+    setTimeout(() => {
+      state.initialising = false;
+      m.redraw();
+    }, 50);
+  },
+
+  view: ({
+    attrs: {percentage, color, lineWidth=1.5},
+    state: {initialising},
+  }) => {
+    if (initialising) { percentage = 0; }
     const boxSize = 36;
     const circumference = 100;
     const radius = circumference / (pi * 2);

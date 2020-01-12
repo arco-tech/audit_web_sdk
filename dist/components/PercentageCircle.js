@@ -3,8 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var pi = 3.14159;
 exports.PercentageCircle = {
+    oninit: function (_a) {
+        var state = _a.state;
+        state.initialising = true;
+        setTimeout(function () {
+            state.initialising = false;
+            m.redraw();
+        }, 50);
+    },
     view: function (_a) {
-        var _b = _a.attrs, percentage = _b.percentage, color = _b.color, _c = _b.lineWidth, lineWidth = _c === void 0 ? 1.5 : _c;
+        var _b = _a.attrs, percentage = _b.percentage, color = _b.color, _c = _b.lineWidth, lineWidth = _c === void 0 ? 1.5 : _c, initialising = _a.state.initialising;
+        if (initialising) {
+            percentage = 0;
+        }
         var boxSize = 36;
         var circumference = 100;
         var radius = circumference / (pi * 2);
