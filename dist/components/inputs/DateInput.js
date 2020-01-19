@@ -14,10 +14,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var DateTime = require("../../DateTime");
 var BEM_1 = require("../../BEM");
+var BodyListener = require("../../BodyListener");
 exports.DateInput = {
     oninit: function (_a) {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, state = _a.state;
         state.date = dateFromChangeset(changeset, name);
+    },
+    oncreate: function (_a) {
+        var state = _a.state, dom = _a.dom;
+        state.listenerID = BodyListener.listen("click", function (event) {
+            if (!dom.contains(event.target)) {
+                state.expand = false;
+            }
+        });
+    },
+    onbeforeremove: function (_a) {
+        var state = _a.state;
+        BodyListener.remove(state.listenerID);
     },
     view: function (_a) {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, _c = _b.placeholder, placeholder = _c === void 0 ? "Select a Date" : _c, attrs = __rest(_b, ["changeset", "name", "placeholder"]), state = _a.state;

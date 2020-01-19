@@ -2,6 +2,7 @@ import * as m from "mithril";
 import * as DateTime from "../../DateTime";
 import {block} from "../../BEM";
 import {Changeset} from "../../Changeset";
+import * as BodyListener from "../../BodyListener";
 
 interface Attrs {
   changeset: Changeset;
@@ -17,6 +18,18 @@ interface State {
 export const DateInput: m.Component<Attrs, State> = {
   oninit: ({attrs: {changeset, name}, state}) => {
     state.date = dateFromChangeset(changeset, name);
+  },
+
+  oncreate: ({state, dom}) => {
+    state.listenerID = BodyListener.listen("click", (event) => {
+      if (!dom.contains(event.target)) {
+        state.expand = false;
+      }
+    });
+  },
+
+  onbeforeremove: ({state}) => {
+    BodyListener.remove(state.listenerID);
   },
 
   view: ({
