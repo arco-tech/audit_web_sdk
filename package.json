@@ -1,6 +1,6 @@
 {
   "name": "audit_web_sdk",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "",
   "author": "arco",
   "main": "dist/index.js",
