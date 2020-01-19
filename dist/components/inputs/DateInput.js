@@ -25,6 +25,7 @@ exports.DateInput = {
         state.listenerID = BodyListener.listen("click", function (event) {
             if (!dom.contains(event.target)) {
                 state.expand = false;
+                m.redraw();
             }
         });
     },

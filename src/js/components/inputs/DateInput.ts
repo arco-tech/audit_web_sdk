@@ -24,6 +24,7 @@ export const DateInput: m.Component<Attrs, State> = {
     state.listenerID = BodyListener.listen("click", (event) => {
       if (!dom.contains(event.target)) {
         state.expand = false;
+        m.redraw();
       }
     });
   },
