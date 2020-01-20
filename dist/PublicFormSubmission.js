@@ -8,6 +8,7 @@ function stateDataFromSubmissionData(submission) {
         hasSubmitted: submission.has_submitted,
         isComplete: false,
         metadata: submission.metadata || {},
+        trashed: submission.trashed,
         details: {
             email: submission.email,
             first_name: submission.first_name,

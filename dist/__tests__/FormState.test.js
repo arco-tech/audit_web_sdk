@@ -14,6 +14,7 @@ function mockFormState(data, saver) {
         isComplete: data.isComplete || false,
         hasSubmitted: data.hasSubmitted || false,
         metadata: { test: true },
+        trashed: false,
         details: {
             email: data.details.email || "",
             first_name: data.details.first_name || "",
@@ -32,6 +33,7 @@ function mockFormState(data, saver) {
 ava_1.default("initiate creates an empty FormState instance", function (t) {
     var formState = FormState_1.FormState.initiate(function () { });
     t.is(formState instanceof FormState_1.FormState, true);
+    t.is(formState.isTrashed(), false);
     t.deepEqual(formState.values(), {});
     t.deepEqual(formState.metadata(), {});
     t.deepEqual(formState.details(), {
@@ -54,6 +56,7 @@ ava_1.default("constructs with given data", function (t) {
         filteredSectionIDs: [],
         isComplete: false,
         hasSubmitted: false,
+        trashed: false,
         metadata: { some: "thing" },
         details: {
             email: "someone@mail.nz",

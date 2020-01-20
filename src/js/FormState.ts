@@ -33,6 +33,7 @@ export interface FormStateData {
   filteredSectionIDs: number[];
   isComplete: boolean;
   hasSubmitted: boolean;
+  trashed: boolean;
   metadata: {[key: string]: any};
 }
 
@@ -49,6 +50,7 @@ export class FormState {
       isComplete: false,
       hasSubmitted: false,
       metadata: {},
+      trashed: false,
       details: {
         email: "",
         first_name: "",
@@ -281,6 +283,10 @@ export class FormState {
 
   public hasSubmitted(): boolean {
     return this._data.hasSubmitted;
+  }
+
+  public isTrashed(): boolean {
+    return this._data.trashed;
   }
 
   public location(): Location | null {

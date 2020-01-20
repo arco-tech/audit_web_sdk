@@ -29,6 +29,7 @@ var FormState = /** @class */ (function () {
             isComplete: false,
             hasSubmitted: false,
             metadata: {},
+            trashed: false,
             details: {
                 email: "",
                 first_name: "",
@@ -219,6 +220,9 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.hasSubmitted = function () {
         return this._data.hasSubmitted;
+    };
+    FormState.prototype.isTrashed = function () {
+        return this._data.trashed;
     };
     FormState.prototype.location = function () {
         return Locations.location(this._data.details.location_id);

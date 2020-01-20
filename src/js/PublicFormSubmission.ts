@@ -14,6 +14,7 @@ export interface PublicFormSubmissionData {
   values: {[questionID: string]: any};
   filtered_section_ids: number[];
   metadata: {[key: string]: any};
+  trashed: boolean;
   inserted_at: string;
   updated_at: string;
 }
@@ -28,6 +29,7 @@ export function stateDataFromSubmissionData(
     hasSubmitted: submission.has_submitted,
     isComplete: false,
     metadata: submission.metadata || {},
+    trashed: submission.trashed,
     details: {
       email: submission.email,
       first_name: submission.first_name,
