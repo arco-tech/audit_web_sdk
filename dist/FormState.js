@@ -153,14 +153,16 @@ var FormState = /** @class */ (function () {
             return section.id() === currentID;
         }) || sections[0];
     };
-    FormState.prototype.sectionsProgress = function (sections) {
+    FormState.prototype.sectionsProgress = function (sections, ignoreQuestions) {
         var _this = this;
+        if (ignoreQuestions === void 0) { ignoreQuestions = []; }
         var total = 0;
         var complete = 0;
         sections.forEach(function (section) {
             var validQuestions = _this.summary(section).validQuestions;
             validQuestions.forEach(function (question) {
-                if (question.type() !== "multi_button") {
+                if (question.type() !== "multi_button" &&
+                    ignoreQuestions.indexOf(question.namedID()) === -1) {
                     total += 1;
                     if (Questions.isComplete(question, _this.value(question.id()))) {
                         complete += 1;
@@ -170,8 +172,9 @@ var FormState = /** @class */ (function () {
         });
         return (complete / total) * 100;
     };
-    FormState.prototype.sectionProgress = function (section) {
-        return this.sectionsProgress([section]);
+    FormState.prototype.sectionProgress = function (section, ignoreQuestions) {
+        if (ignoreQuestions === void 0) { ignoreQuestions = []; }
+        return this.sectionsProgress([section], ignoreQuestions);
     };
     FormState.prototype.summary = function (section) {
         return FormLogic.summary(section, this.location(), this.values());

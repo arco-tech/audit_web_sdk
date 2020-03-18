@@ -186,20 +186,22 @@ test("sectionProgress returns the correct percentage", (t) => {
     mockSection({
       questions: [
         mockQuestionData({id: 1, type: "multi_button"}),
-        mockQuestionData({id: 2, type: "text"}),
-        mockQuestionData({id: 3, type: "multi_text"}),
-        mockQuestionData({id: 4, type: "number"}),
-        mockQuestionData({id: 5, type: "date"}),
+        mockQuestionData({id: 2, type: "text", named_id: "ignored"}),
+        mockQuestionData({id: 3, type: "text"}),
+        mockQuestionData({id: 4, type: "multi_text"}),
+        mockQuestionData({id: 5, type: "number"}),
+        mockQuestionData({id: 6, type: "date"}),
       ],
     });
   const formState = mockFormState({});
-  t.is(formState.sectionProgress(section), 0);
-  formState.changeValue(2, "some text");
-  t.is(formState.sectionProgress(section), 25);
-  formState.changeValue(3, ["something"]);
-  t.is(formState.sectionProgress(section), 50);
-  formState.changeValue(4, 23);
-  t.is(formState.sectionProgress(section), 75);
-  formState.changeValue(5, "2019-01-01");
-  t.is(formState.sectionProgress(section), 100);
+  t.is(formState.sectionProgress(section, ["ignored"]), 0);
+  formState.changeValue(3, "some text");
+  t.is(formState.sectionProgress(section), 20);
+  t.is(formState.sectionProgress(section, ["ignored"]), 25);
+  formState.changeValue(4, ["something"]);
+  t.is(formState.sectionProgress(section, ["ignored"]), 50);
+  formState.changeValue(5, 23);
+  t.is(formState.sectionProgress(section, ["ignored"]), 75);
+  formState.changeValue(6, "2019-01-01");
+  t.is(formState.sectionProgress(section, ["ignored"]), 100);
 });
