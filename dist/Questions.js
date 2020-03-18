@@ -173,6 +173,15 @@ function render(question, attrs) {
     }
 }
 exports.render = render;
+function overrideRender(questionType, render) {
+    if (types[questionType]) {
+        types[questionType].render = render;
+    }
+    else {
+        throw new Error("Question type '" + questionType + " doesn't exist");
+    }
+}
+exports.overrideRender = overrideRender;
 function buildOptions(question) {
     return question.options().map(function (option) {
         return { label: option.label(), value: option.id() };

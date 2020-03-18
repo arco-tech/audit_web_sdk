@@ -22,10 +22,13 @@ interface Attrs {
   [key: string]: any;
 }
 
+export type RenderFunction =
+  (question: PublishedFormQuestion, attrs: Attrs) => m.Children;
+
 export interface Type {
   optionGoesTo: boolean;
   isComplete: (question: PublishedFormQuestion, value: any) => boolean;
-  render: (question: PublishedFormQuestion, attrs: Attrs) => m.Children;
+  render: RenderFunction;
 }
 
 const types: {[type: string]: Type} = {
@@ -193,6 +196,17 @@ export function render(
   } else {
     log("error", ["Question type isn't defined", question.type()]);
     return null;
+  }
+}
+
+export function overrideRender(
+  questionType: string,
+  render: RenderFunction,
+): void {
+  if (types[questionType]) {
+    types[questionType].render = render;
+  } else {
+    throw new Error(`Question type '${questionType} doesn't exist`);
   }
 }
 
