@@ -133,12 +133,14 @@ function displayValue(
 }
 
 function formatValue(date: Date): string {
-  return `${date.getFullYear()}-${zeroPad(date.getMonth() + 1)}` +
-  `-${zeroPad(date.getDate())}`;
+  return zeroPad(date.getFullYear(), 4) + "-" +
+    zeroPad(date.getMonth() + 1, 2) + "-" +
+    zeroPad(date.getDate(), 2);
 }
 
-function zeroPad(value: number): string {
-  return value < 10 ? `0${value}` : `${value}`;
+function zeroPad(value: number, digits: number): string {
+  const zeros = "0".repeat(digits);
+  return `${zeros}${value}`.slice(-digits);
 }
 
 function dateFromChangeset(changeset: Changeset, name: string): Date {

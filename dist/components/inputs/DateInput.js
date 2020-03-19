@@ -121,11 +121,13 @@ function displayValue(value, placeholder) {
     return m(BEM_1.block("date-input__display-value", "placeholder"), placeholder);
 }
 function formatValue(date) {
-    return date.getFullYear() + "-" + zeroPad(date.getMonth() + 1) +
-        ("-" + zeroPad(date.getDate()));
+    return zeroPad(date.getFullYear(), 4) + "-" +
+        zeroPad(date.getMonth() + 1, 2) + "-" +
+        zeroPad(date.getDate(), 2);
 }
-function zeroPad(value) {
-    return value < 10 ? "0" + value : "" + value;
+function zeroPad(value, digits) {
+    var zeros = "0".repeat(digits);
+    return ("" + zeros + value).slice(-digits);
 }
 function dateFromChangeset(changeset, name) {
     var dateValue = changeset.getValue(name);
