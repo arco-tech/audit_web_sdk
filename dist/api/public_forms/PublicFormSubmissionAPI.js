@@ -13,6 +13,11 @@ function update(formState) {
     });
 }
 exports.update = update;
+function migrate() {
+    return API_1.request("patch", "public-form-submissions/migrate");
+}
+exports.migrate = migrate;
+;
 function requestReturnLink(formType, email) {
     return API_1.request("patch", "public-form-submissions/request-return-link", {
         body: { email: email, public_form_named_id: formType },
