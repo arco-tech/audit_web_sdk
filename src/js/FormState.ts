@@ -35,7 +35,7 @@ export interface FormStateData {
   hasSubmitted: boolean;
   trashed: boolean;
   metadata: {[key: string]: any};
-  migratePublishedFormID: number | null;
+  migratePublishedFormID?: number | null;
 }
 
 export type FormStateSaver = (state: FormState) => void;
