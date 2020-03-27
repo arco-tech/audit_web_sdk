@@ -13,6 +13,8 @@ export interface PublicFormSubmissionData {
   has_submitted: boolean;
   values: {[questionID: string]: any};
   filtered_section_ids: number[];
+  published_form_id: number;
+  migrate_published_form_id: number | null;
   metadata: {[key: string]: any};
   trashed: boolean;
   inserted_at: string;
@@ -30,6 +32,7 @@ export function stateDataFromSubmissionData(
     isComplete: false,
     metadata: submission.metadata || {},
     trashed: submission.trashed,
+    migratePublishedFormID: submission.migrate_published_form_id,
     details: {
       email: submission.email,
       first_name: submission.first_name,

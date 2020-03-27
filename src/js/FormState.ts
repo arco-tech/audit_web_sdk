@@ -35,6 +35,7 @@ export interface FormStateData {
   hasSubmitted: boolean;
   trashed: boolean;
   metadata: {[key: string]: any};
+  migratePublishedFormID: number | null;
 }
 
 export type FormStateSaver = (state: FormState) => void;
@@ -51,6 +52,7 @@ export class FormState {
       hasSubmitted: false,
       metadata: {},
       trashed: false,
+      migratePublishedFormID: null,
       details: {
         email: "",
         first_name: "",
@@ -300,6 +302,10 @@ export class FormState {
 
   public location(): Location | null {
     return Locations.location(this._data.details.location_id);
+  }
+
+  public migratePublishedFormID(): number | null {
+    return this._data.migratePublishedFormID;
   }
 
   public data(): FormStateData {

@@ -9,6 +9,7 @@ function stateDataFromSubmissionData(submission) {
         isComplete: false,
         metadata: submission.metadata || {},
         trashed: submission.trashed,
+        migratePublishedFormID: submission.migrate_published_form_id,
         details: {
             email: submission.email,
             first_name: submission.first_name,

@@ -30,6 +30,7 @@ var FormState = /** @class */ (function () {
             hasSubmitted: false,
             metadata: {},
             trashed: false,
+            migratePublishedFormID: null,
             details: {
                 email: "",
                 first_name: "",
@@ -229,6 +230,9 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.location = function () {
         return Locations.location(this._data.details.location_id);
+    };
+    FormState.prototype.migratePublishedFormID = function () {
+        return this._data.migratePublishedFormID;
     };
     FormState.prototype.data = function () {
         return this._data;
