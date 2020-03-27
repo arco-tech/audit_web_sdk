@@ -39,7 +39,7 @@ export function migrate(): Promise<PublicFormSubmissionData> {
   return request<PublicFormSubmissionData>(
     "patch",
     "public-form-submissions/migrate",
-  });
+  );
 }
 
 export function requestReturnLink(
