@@ -80,7 +80,7 @@ ava_1.default("isComplete date_range", function (t) {
     t.is(Questions_1.isComplete(question, null), false);
     t.is(Questions_1.isComplete(question, "nope"), false);
     t.is(Questions_1.isComplete(question, "2019-01-01"), false);
-    t.is(Questions_1.isComplete(question, { from: "2019-01-01" }), false);
+    t.is(Questions_1.isComplete(question, { from: "2019-01-01" }), true);
     t.is(Questions_1.isComplete(question, { to: "2019-01-01" }), false);
     t.is(Questions_1.isComplete(question, { from: null, to: null }), false);
     t.is(Questions_1.isComplete(question, { from: "2019-01-01", to: "2019-01-01" }), true);

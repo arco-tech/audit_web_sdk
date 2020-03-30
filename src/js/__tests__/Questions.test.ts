@@ -90,7 +90,7 @@ test("isComplete date_range", (t) => {
   t.is(isComplete(question, null), false);
   t.is(isComplete(question, "nope"), false);
   t.is(isComplete(question, "2019-01-01"), false);
-  t.is(isComplete(question, {from: "2019-01-01"}), false);
+  t.is(isComplete(question, {from: "2019-01-01"}), true);
   t.is(isComplete(question, {to: "2019-01-01"}), false);
   t.is(isComplete(question, {from: null, to: null}), false);
   t.is(isComplete(question, {from: "2019-01-01", to: "2019-01-01"}), true);
