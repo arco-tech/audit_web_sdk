@@ -116,9 +116,7 @@ var types = {
             return (value != null &&
                 typeof value === "object" &&
                 value.from != null &&
-                value.to != null &&
-                !isNaN(new Date(value.from).getTime()) &&
-                !isNaN(new Date(value.to).getTime()));
+                !isNaN(new Date(value.from).getTime()));
         },
         render: function (question, attrs) {
             return m(DateRangeInput_1.DateRangeInput, attrs);

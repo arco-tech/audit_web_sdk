@@ -130,9 +130,7 @@ const types: {[type: string]: Type} = {
         value != null &&
         typeof value === "object" &&
         value.from != null &&
-        value.to != null &&
-        !isNaN(new Date(value.from).getTime()) &&
-        !isNaN(new Date(value.to).getTime())
+        !isNaN(new Date(value.from).getTime())
       );
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
