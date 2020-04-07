@@ -29,7 +29,11 @@ export function request<T>(
     };
   }
   return m.request({method, url, ...options})
-    .then(({data}: any) => data as T);
+    .then(({data}: any) => data as T)
+    .catch((error) => {
+      if (error.code === 401) { window.location.reload(); }
+      throw error;
+    })
 }
 
 export function setEndpoint(endpoint: string): void {
