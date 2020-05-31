@@ -5,6 +5,18 @@ function current() {
     return API_1.request("get", "public-form-submissions/current");
 }
 exports.current = current;
+function create(publicFormNamedID, publishedFormID, params) {
+    return API_1.request("post", "public-form-submissions", {
+        body: {
+            data: {
+                public_form_named_id: publicFormNamedID,
+                published_form_id: publishedFormID,
+                public_form_submission: params,
+            },
+        },
+    });
+}
+exports.create = create;
 function update(formState) {
     return API_1.request("put", "public-form-submissions", {
         body: {

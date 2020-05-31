@@ -18,11 +18,34 @@ interface PublicFormSubmissionParams {
   metadata: {[key: string]: any};
 }
 
+interface CreatePublicFormSubmissionParams {
+  email: string;
+  first_name: string;
+  last_name: string;
+  company_name?: string;
+}
+
 export function current(): Promise<PublicFormSubmissionData> {
   return request<PublicFormSubmissionData>(
     "get",
     "public-form-submissions/current",
   );
+}
+
+export function create(
+  publicFormNamedID: string,
+  publishedFormID: string,
+  params: CreatePublicFormSubmissionParams,
+): Promise<PublicFormSubmission> {
+  return request<PublicFormSubmissionData>("post", "public-form-submissions", {
+    body: {
+      data: {
+        public_form_named_id: publicFormNamedID,
+        published_form_id: publishedFormID,
+        public_form_submission: params,
+      },
+    },
+  });
 }
 
 export function update(
