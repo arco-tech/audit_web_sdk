@@ -36,7 +36,7 @@ export function create(
   publicFormNamedID: string,
   publishedFormID: string,
   params: CreatePublicFormSubmissionParams,
-): Promise<PublicFormSubmission> {
+): Promise<PublicFormSubmissionData> {
   return request<PublicFormSubmissionData>("post", "public-form-submissions", {
     body: {
       data: {
