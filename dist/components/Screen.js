@@ -9,9 +9,9 @@ exports.Screen = {
     },
     view: function (vnode) {
         return m(".screen" + (vnode.attrs.selector || ""), [
-            m(Header_1.Header),
+            m(vnode.attrs.headerComponent || Header_1.Header),
             m(".screen__content", vnode.children),
-            m(Footer_1.Footer),
+            m(vnode.attrs.footerComponent || Footer_1.Footer),
         ]);
     },
 };
