@@ -8,11 +8,9 @@ exports.current = current;
 function create(publicFormNamedID, publishedFormID, params) {
     return API_1.request("post", "public-form-submissions", {
         body: {
-            data: {
-                public_form_named_id: publicFormNamedID,
-                published_form_id: publishedFormID,
-                public_form_submission: params,
-            },
+            public_form_named_id: publicFormNamedID,
+            published_form_id: publishedFormID,
+            public_form_submission: params,
         },
     });
 }
