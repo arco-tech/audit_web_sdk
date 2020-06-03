@@ -5,8 +5,8 @@ if (!Array.prototype.find) {
             throw new Error("matcher must be a function");
         }
         for (var index = 0; index < _this.length; index++) {
-            if (matcher(value, index, _this)) {
-                return value;
+            if (matcher(_this[index], index, _this)) {
+                return _this[index];
             }
         }
     };
@@ -17,7 +17,7 @@ if (!Array.prototype.findIndex) {
             throw new Error("matcher must be a function");
         }
         for (var index = 0; index < _this.length; index++) {
-            if (matcher(value, index, _this)) {
+            if (matcher(_this[index], index, _this)) {
                 return index;
             }
         }
