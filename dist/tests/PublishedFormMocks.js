@@ -13,7 +13,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var PublishedForm_1 = require("../PublishedForm");
 function mockPublishedForm(attrs) {
-    return new PublishedForm_1.PublishedForm(__assign({ id: 1, version: "1.0", inserted_at: "2019-01-01T00:00:00", form: mockFormData(attrs.form || {}) }, attrs));
+    return new PublishedForm_1.PublishedForm(__assign({ id: 1, version: "1.0", inserted_at: "2019-01-01T00:00:00", form: mockFormData(attrs.form || {}), form_type_id: 1 }, attrs));
 }
 exports.mockPublishedForm = mockPublishedForm;
 function mockFormData(attrs) {

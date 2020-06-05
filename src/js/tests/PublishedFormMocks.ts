@@ -16,6 +16,7 @@ export function mockPublishedForm(attrs: {[key: string]: any}): PublishedForm {
     version: "1.0",
     inserted_at: "2019-01-01T00:00:00",
     form: mockFormData(attrs.form || {}),
+    form_type_id: 1,
     ...attrs,
   });
 }

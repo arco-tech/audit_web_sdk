@@ -81,6 +81,7 @@ export interface PublishedFormData {
   version: string;
   inserted_at: string;
   form: PublishedFormFormData;
+  form_type_id: number;
 }
 
 export class PublishedFormGoesTo {
