@@ -12,7 +12,7 @@ exports.FormQuestionBox = {
         });
     },
     view: function (_a) {
-        var _b = _a.attrs, publishedForm = _b.publishedForm, formState = _b.formState, validationErrors = _b.validationErrors, changeset = _a.state.changeset;
+        var _b = _a.attrs, publishedForm = _b.publishedForm, formState = _b.formState, validationErrors = _b.validationErrors, hideIgnored = _b.hideIgnored, changeset = _a.state.changeset;
         var section = formState.findCurrentSection(publishedForm);
         var _c = formState.summary(section), validQuestions = _c.validQuestions, ignoredQuestions = _c.ignoredQuestions;
         changeset.validationErrors(validationErrors);
@@ -27,7 +27,7 @@ exports.FormQuestionBox = {
                         question: question,
                     });
                 }
-                else {
+                else if (!hideIgnored) {
                     return m(".form__field.form__field--ignored", question.label());
                 }
             }

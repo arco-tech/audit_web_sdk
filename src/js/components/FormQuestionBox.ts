@@ -12,6 +12,7 @@ import {QuestionInput} from "./inputs/QuestionInput";
 interface Attrs {
   publishedForm: PublishedForm;
   formState: FormState;
+  hideIgnored?: boolean;
 }
 
 type Vnode = m.Vnode<Attrs>;
@@ -26,7 +27,7 @@ export const FormQuestionBox: m.Component<Attrs> = {
 
   view: (
     {
-      attrs: {publishedForm, formState, validationErrors},
+      attrs: {publishedForm, formState, validationErrors, hideIgnored},
       state: {changeset},
     }: Vnode,
   ) => {
@@ -43,7 +44,7 @@ export const FormQuestionBox: m.Component<Attrs> = {
             input: QuestionInput,
             question,
           });
-        } else {
+        } else if (!hideIgnored) {
           return m(".form__field.form__field--ignored", question.label());
         }
       }

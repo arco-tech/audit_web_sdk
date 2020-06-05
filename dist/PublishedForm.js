@@ -207,6 +207,9 @@ var PublishedForm = /** @class */ (function () {
     PublishedForm.prototype.form = function () {
         return new PublishedFormForm(this._data.form);
     };
+    PublishedForm.prototype.formTypeID = function () {
+        return this._data.form_type_id;
+    };
     return PublishedForm;
 }());
 exports.PublishedForm = PublishedForm;

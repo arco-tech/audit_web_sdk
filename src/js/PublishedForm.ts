@@ -339,4 +339,8 @@ export class PublishedForm {
   public form(): PublishedFormForm {
     return new PublishedFormForm(this._data.form);
   }
+
+  public formTypeID(): number {
+    return this._data.form_type_id;
+  }
 }
