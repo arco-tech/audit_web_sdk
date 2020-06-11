@@ -1,25 +1,53 @@
 if (!Array.prototype.find) {
-    Array.prototype.find = function (matcher) {
-        if (typeof matcher !== "function") {
-            throw new Error("matcher must be a function");
-        }
-        for (var index = 0; index < this.length; index++) {
-            if (matcher(this[index], index, this)) {
-                return this[index];
+    Object.defineProperty(Array.prototype, 'find', {
+        value: function (predicate) {
+            if (this == null) {
+                throw TypeError('"this" is null or not defined');
             }
-        }
-    };
+            var o = Object(this);
+            var len = o.length >>> 0;
+            if (typeof predicate !== 'function') {
+                throw TypeError('predicate must be a function');
+            }
+            var thisArg = arguments[1];
+            var k = 0;
+            while (k < len) {
+                var kValue = o[k];
+                if (predicate.call(thisArg, kValue, k, o)) {
+                    return kValue;
+                }
+                k++;
+            }
+            return undefined;
+        },
+        configurable: true,
+        writable: true
+    });
 }
 if (!Array.prototype.findIndex) {
-    Array.prototype.find = function (matcher) {
-        if (typeof matcher !== "function") {
-            throw new Error("matcher must be a function");
-        }
-        for (var index = 0; index < this.length; index++) {
-            if (matcher(this[index], index, this)) {
-                return index;
+    Object.defineProperty(Array.prototype, 'findIndex', {
+        value: function (predicate) {
+            if (this == null) {
+                throw new TypeError('"this" is null or not defined');
             }
-        }
-    };
+            var o = Object(this);
+            var len = o.length >>> 0;
+            if (typeof predicate !== 'function') {
+                throw new TypeError('predicate must be a function');
+            }
+            var thisArg = arguments[1];
+            var k = 0;
+            while (k < len) {
+                var kValue = o[k];
+                if (predicate.call(thisArg, kValue, k, o)) {
+                    return k;
+                }
+                k++;
+            }
+            return -1;
+        },
+        configurable: true,
+        writable: true
+    });
 }
 //# sourceMappingURL=Array.js.map
