@@ -1,5 +1,5 @@
 if (!Array.prototype.find) {
-  Array.prototype.find = (matcher) => {
+  Array.prototype.find = function (matcher) {
     if (typeof matcher !== "function") {
       throw new Error("matcher must be a function");
     }
@@ -12,7 +12,7 @@ if (!Array.prototype.find) {
 }
 
 if (!Array.prototype.findIndex) {
-  Array.prototype.find = (matcher) => {
+  Array.prototype.find = function (matcher) {
     if (typeof matcher !== "function") {
       throw new Error("matcher must be a function");
     }

@@ -1,12 +1,11 @@
-var _this = this;
 if (!Array.prototype.find) {
     Array.prototype.find = function (matcher) {
         if (typeof matcher !== "function") {
             throw new Error("matcher must be a function");
         }
-        for (var index = 0; index < _this.length; index++) {
-            if (matcher(_this[index], index, _this)) {
-                return _this[index];
+        for (var index = 0; index < this.length; index++) {
+            if (matcher(this[index], index, this)) {
+                return this[index];
             }
         }
     };
@@ -16,8 +15,8 @@ if (!Array.prototype.findIndex) {
         if (typeof matcher !== "function") {
             throw new Error("matcher must be a function");
         }
-        for (var index = 0; index < _this.length; index++) {
-            if (matcher(_this[index], index, _this)) {
+        for (var index = 0; index < this.length; index++) {
+            if (matcher(this[index], index, this)) {
                 return index;
             }
         }
