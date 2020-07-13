@@ -61,6 +61,8 @@ export function mockQuestionData(
     type: "text",
     index: 1,
     named_id: "some_id",
+    note: "Note",
+    info: "Info",
     label: "Some question?",
     goes_to: {type: "next_question"},
     localisation: null,

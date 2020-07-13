@@ -48,6 +48,8 @@ export interface PublishedFormQuestionData {
   index: number;
   label: string;
   named_id: string;
+  note: string | null;
+  info: string | null;
   goes_to: PublishedFormGoesToData;
   service_type: PublishedFormServiceTypeData | null;
   localisation: string[] | null;
@@ -195,6 +197,14 @@ export class PublishedFormQuestion {
 
   public namedID(): string | null {
     return this._data.named_id;
+  }
+
+  public note(): string | null {
+    return this._data.note;
+  }
+
+  public info(): string | null {
+    return this._data.info;
   }
 
   public localisation(): string[] | null {
