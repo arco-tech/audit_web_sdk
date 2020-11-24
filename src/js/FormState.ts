@@ -233,7 +233,12 @@ export class FormState {
         }
       });
     });
-    return (complete / total) * 100;
+
+    if (total === 0 && complete === 0) {
+      return 0;
+    } else {
+      return (complete / total) * 100;
+    }
   }
 
   public sectionProgress(
