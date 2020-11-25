@@ -4,7 +4,7 @@ type ID = number;
 
 interface Listener {
   id: ID;
-  callback: (event: Event) => void;
+  callback: (event: any) => void;
 }
 
 interface Listeners {
@@ -17,7 +17,7 @@ const listeners: Listeners = {};
 
 export function listen(
   eventName: string,
-  callback: (event: Event) => void
+  callback: (event: any) => void
 ): ID {
   if (!listeners[eventName]) {
     listeners[eventName] = [];
