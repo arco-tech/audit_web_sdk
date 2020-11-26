@@ -3,7 +3,7 @@ export interface JWTPayload {
 }
 
 function fromBase64(base64: string): string {
-  return atob(base64);
+  return Buffer.from(base64, "base64").toString();
 }
 
 export function decodePayload(token: string): JWTPayload {
