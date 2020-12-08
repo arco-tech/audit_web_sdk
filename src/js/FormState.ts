@@ -248,8 +248,11 @@ export class FormState {
     return this.sectionsProgress([section], ignoreQuestions);
   }
 
-  public summary(section: PublishedFormSection): FormLogic.SectionSummary {
-    return FormLogic.summary(section, this.location(), this.values());
+  public summary(
+    section: PublishedFormSection,
+    values?: {[questionID: string]: any},
+  ): FormLogic.SectionSummary {
+    return FormLogic.summary(section, this.location(), values || this.values());
   }
 
   public validate(section: PublishedFormSection): ValidationResult {
