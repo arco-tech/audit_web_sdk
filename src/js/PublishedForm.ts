@@ -75,6 +75,7 @@ export interface PublishedFormQuestionColumnSettingsData {
   title: string
   info: string
   data_type: null | "string" | "integer" | "float"
+  sum: boolean
 }
 
 export interface PublishedFormSectionIconData {
@@ -210,6 +211,10 @@ export class PublishedFormQuestionColumnSettings {
 
   public dataType(): string {
     return this._data.data_type
+  }
+
+  public sum(): boolean {
+    return this._data.sum
   }
 }
 
