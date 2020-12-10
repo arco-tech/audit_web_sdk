@@ -11,7 +11,7 @@ const monthNames = [
   "October",
   "November",
   "December",
-];
+]
 
 const periods = [
   {name: "second", milliseconds: 1000},
@@ -21,26 +21,50 @@ const periods = [
   {name: "week", milliseconds: 604800000},
   {name: "month", milliseconds: 2592000000},
   {name: "year", milliseconds: 31536000000},
-];
+]
 
 export function monthName(month: number): string | null {
-  return monthNames[month] || null;
+  return monthNames[month] || null
 }
 
 export function shortMonthName(month: number): string | null {
-  return monthNames[month] ? monthNames[month].substring(0, 3) : null;
+  return monthNames[month] ? monthNames[month].substring(0, 3) : null
 }
 
 export function relative(date: Date) {
-  if(!date) return "never";
-  const diff = new Date().getTime() - date.getTime();
+  if(!date) return "never"
+  const diff = new Date().getTime() - date.getTime()
 
   for(let p = periods.length - 1; p >= 0; p--) {
     if(diff > periods[p].milliseconds) {
-      const time = Math.round(diff / periods[p].milliseconds);
-      return `${time} ${periods[p].name}${time == 1 ? "" : "s"} ago`;
+      const time = Math.round(diff / periods[p].milliseconds)
+      return `${time} ${periods[p].name}${time == 1 ? "" : "s"} ago`
     }
   }
 
-  return "now";
+  return "now"
+}
+
+export function formatDateTime(date: Date): string {
+  return `${formatDate(date)} ${formatTime(date)}`
+}
+
+export function formatTime(date: Date): string {
+  const hours = date.getHours()
+  const displayMinutes = padNumber(date.getMinutes())
+  const displayHours = padNumber(hours % 12 === 0 ? 12 : hours % 12)
+  return `${displayHours}:${displayMinutes}${hours >= 12 ? "pm" : "am"}`
+}
+
+export function formatDate(date: Date): string {
+  const day = padNumber(date.getDate())
+  const month = padNumber(date.getMonth() + 1)
+  const year = date.getFullYear()
+
+  return `${day}/${month}/${year}`
+}
+
+function padNumber(num: number): string {
+  const numString = `${num}`
+  return numString.length == 1 ? "0" + numString : numString
 }

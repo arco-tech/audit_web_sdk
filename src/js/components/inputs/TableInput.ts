@@ -2,17 +2,17 @@ import * as m from "mithril"
 import { Changeset } from "../../Changeset"
 import {
   PublishedFormQuestion,
-  PublishedFormQuestionGridSettings,
+  PublishedFormQuestionTableSettings,
 } from "../../PublishedForm"
 
 interface Attrs {
   changeset: Changeset
   name: string
-  settings: PublishedFormQuestionGridSettings
+  settings: PublishedFormQuestionTableSettings
 }
 
-export const GridInput: m.Component<Attrs> = {
-  view: ({attrs: {changeset, name, settings: {rows, columns}}}) => {
+export const TableInput: m.Component<Attrs> = {
+  view: ({attrs: {changeset, name, settings: {columns}}}) => {
     return m(".c-grey", "Not implemented")
   },
 }

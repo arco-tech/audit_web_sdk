@@ -9,6 +9,7 @@ import { InputList } from "./components/inputs/InputList"
 import { NumberInput } from "./components/inputs/NumberInput"
 import { RadioList } from "./components/inputs/RadioList"
 import { GridInput } from "./components/inputs/GridInput"
+import { TableInput } from "./components/inputs/TableInput"
 import { Selector } from "./components/inputs/Selector"
 import {
   PublishedFormGoesTo,
@@ -43,6 +44,7 @@ const types: {[type: string]: Type} = {
       return m(Input, attrs)
     },
   },
+
   paragraph: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -52,6 +54,7 @@ const types: {[type: string]: Type} = {
       return m(TextArea, attrs)
     },
   },
+
   multi_text: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, valueList: any) => {
@@ -69,6 +72,7 @@ const types: {[type: string]: Type} = {
       return m(InputList, attrs)
     },
   },
+
   number: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -78,6 +82,7 @@ const types: {[type: string]: Type} = {
       return m(NumberInput, attrs)
     },
   },
+
   percentage: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -87,6 +92,7 @@ const types: {[type: string]: Type} = {
       return m(NumberInput, attrs)
     },
   },
+
   button: {
     optionGoesTo: true,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -96,6 +102,7 @@ const types: {[type: string]: Type} = {
       return m(RadioList, {options: buildOptions(question), ...attrs})
     },
   },
+
   multi_button: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => true,
@@ -103,6 +110,7 @@ const types: {[type: string]: Type} = {
       return m(CheckBoxList, {options: buildOptions(question), ...attrs})
     },
   },
+
   dropdown: {
     optionGoesTo: true,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -116,6 +124,7 @@ const types: {[type: string]: Type} = {
       })
     },
   },
+
   date: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -125,6 +134,7 @@ const types: {[type: string]: Type} = {
       return m(DateInput, attrs)
     },
   },
+
   date_range: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -139,6 +149,7 @@ const types: {[type: string]: Type} = {
       return m(DateRangeInput, attrs)
     },
   },
+
   grid: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -146,16 +157,16 @@ const types: {[type: string]: Type} = {
         return false
       }
       for (let rowIndex in value) {
-        for (let columnIndex in value) {
+        for (let columnIndex in value[rowIndex]) {
           if (
-            !value[rowIndex][columnIndex] &&
-            value[rowIndex][columnIndex] !== 0
+            value[rowIndex][columnIndex] ||
+            value[rowIndex][columnIndex] === 0
           ) {
-            return false
+            return true
           }
         }
       }
-      return true
+      return false
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       const settings = question.metadata().gridSettings()
@@ -163,6 +174,34 @@ const types: {[type: string]: Type} = {
         return m(GridInput, {...attrs, settings})
       } else {
         return m(ErrorMessage, {error: "invalid grid settings"})
+      }
+    },
+  },
+
+  table: {
+    optionGoesTo: false,
+    isComplete: (question: PublishedFormQuestion, value: any) => {
+      if (!Array.isArray(value)) {
+        return false
+      }
+      for (let rowIndex in value) {
+        for (let columnIndex in value[rowIndex]) {
+          if (
+            value[rowIndex][columnIndex] ||
+            value[rowIndex][columnIndex] === 0
+          ) {
+            return true
+          }
+        }
+      }
+      return false
+    },
+    render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
+      const settings = question.metadata().tableSettings()
+      if (settings) {
+        return m(TableInput, {...attrs, settings})
+      } else {
+        return m(ErrorMessage, {error: "invalid table settings"})
       }
     },
   },
