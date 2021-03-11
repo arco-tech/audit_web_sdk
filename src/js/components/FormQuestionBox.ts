@@ -24,17 +24,16 @@ export const FormQuestionBox: m.Component<Attrs> = {
     });
   },
 
-  view: (
-    {
-      attrs: {
-        publishedForm,
-        formState,
-        validationErrors,
-        hideIgnored,
-        previousValues = {},
-      },
-      state: {changeset},
-    }: Vnode,
+  view: ({
+    attrs: {
+      publishedForm,
+      formState,
+      validationErrors,
+      hideIgnored,
+      previousValues = {},
+    },
+    state: { changeset },
+  }: Vnode,
   ) => {
     const section = formState.findCurrentSection(publishedForm);
     const {validQuestions, ignoredQuestions} = formState.summary(section);
@@ -42,16 +41,19 @@ export const FormQuestionBox: m.Component<Attrs> = {
     return m(".margin-top-medium", section.questions().map((question) => {
       if (formState.validateLocalisation(question)) {
         if (validQuestions.find((q) => q.id() === question.id())) {
-          return [m(FormField, {
-            name: `${question.id()}`,
-            changeset,
-            label: question.label(),
-            input: QuestionInput,
-            question,
-          }),
-          previousValues && previousValues[question.namedID()] && 
-            m(PreviousValue, {question, previousValues, changeset})
-        ];
+          return [
+            m(
+FormField, {
+              name: `${question.id()}`,
+              changeset,
+              label: question.label(),
+              input: QuestionInput,
+              question,
+            }),
+            previousValues && 
+              previousValues[question.namedID()] && 
+              m(PreviousValue, {question, previousValues, changeset})
+          ];
         } else if (!hideIgnored) {
           return m(".form__field.form__field--ignored", question.label());
         }

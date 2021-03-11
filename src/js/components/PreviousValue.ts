@@ -3,10 +3,11 @@ import { Changeset } from "../Changeset"
 import { PublishedFormQuestion } from "../PublishedForm"
 import * as Questions from "../Questions"
 import { block } from "../BEM"
+import { PreviousValues } from "../PublicFormSubmission"
 
 interface Attrs {
   question: PublishedFormQuestion
-  previousValues: { [namedID: string]: string | [string] }
+  previousValues: PreviousValues
   changeset: Changeset
 }
 
@@ -57,9 +58,9 @@ export const PreviousValue: m.Component<Attrs, State> = {
             height: 19,
           }),
           m(block("previous-response__tooltip", state.hover && "open"), [
-            m(".previous-response__tooltip--value", value),
+            m(".previous-response__tooltip__value", value),
             m(
-              ".previous-response__tooltip--message",
+              ".previous-response__tooltip__message",
               state.copyFailed ? "FAILED TO COPY" : "CLICK TO USE"
             ),
           ]),

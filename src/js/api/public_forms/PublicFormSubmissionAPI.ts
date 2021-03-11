@@ -25,7 +25,7 @@ interface CreatePublicFormSubmissionParams {
   company_name?: string;
 }
 
-interface CreatePublicFormSubmissionDate {
+interface CreatePublicFormSubmissionData {
   public_form_submission: PublicFormSubmissionData,
   token: string;
 }
@@ -41,8 +41,8 @@ export function create(
   publicFormNamedID: string,
   publishedFormID: string,
   params: CreatePublicFormSubmissionParams,
-): Promise<CreatePublicFormSubmissionDate> {
-  return request<CreatePublicFormSubmissionDate>(
+): Promise<CreatePublicFormSubmissionData> {
+  return request<CreatePublicFormSubmissionData>(
     "post",
     "public-form-submissions",
     {

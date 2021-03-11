@@ -22,7 +22,7 @@ export interface PublicFormSubmissionData {
 }
 
 export interface PreviousValues {
-  [namedID: string]: string | [string] | number | [number] 
+  [namedID: string]: string | string[] | number
 }
 
 export function stateDataFromSubmissionData(

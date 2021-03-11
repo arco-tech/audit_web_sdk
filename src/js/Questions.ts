@@ -44,15 +44,15 @@ export interface Type {
 }
 
 const setValueText: SetValueFunction = (question, value, changeset) => {
-  const formatedValue = Array.isArray(value) ? value.join(", ") : value
-  changeset.change(question.id().toString(), formatedValue)
+  const formattedValue = Array.isArray(value) ? value.join(", ") : value
+  changeset.change(question.id().toString(), formattedValue)
   return true
 }
 
 const setValueFloat: SetValueFunction = (question, value, changeset) => {
   let num;
   if (Array.isArray(value)) {
-    num = typeof value[0] == "string" ? parseFloat(value[0]) : value[0]
+    num = parseFloat(value[0])
   } else {
     num = typeof value == "string" ? parseFloat(value) : value
   }
@@ -172,7 +172,6 @@ const types: { [type: string]: Type } = {
         option && acc.push(option.id())
         return acc
       }, [])
-      console.log(ids)
       changeset.change(question.id().toString(), ids)
       return ids.length != 0
     },
