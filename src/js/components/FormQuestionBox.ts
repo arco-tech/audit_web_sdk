@@ -42,8 +42,7 @@ export const FormQuestionBox: m.Component<Attrs> = {
       if (formState.validateLocalisation(question)) {
         if (validQuestions.find((q) => q.id() === question.id())) {
           return [
-            m(
-FormField, {
+            m(FormField, {
               name: `${question.id()}`,
               changeset,
               label: question.label(),
