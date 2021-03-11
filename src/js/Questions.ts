@@ -25,16 +25,46 @@ interface Attrs {
   [key: string]: any
 }
 
-export type RenderFunction =
-  (question: PublishedFormQuestion, attrs: Attrs) => m.Children
+export type RenderFunction = (
+  question: PublishedFormQuestion,
+  attrs: Attrs
+) => m.Children
+
+type SetValueFunction = (
+  question: PublishedFormQuestion,
+  value: string | string[] | number,
+  changeset: Changeset
+) => boolean
 
 export interface Type {
   optionGoesTo: boolean
   isComplete: (question: PublishedFormQuestion, value: any) => boolean
   render: RenderFunction
+  setValue?: SetValueFunction
 }
 
-const types: {[type: string]: Type} = {
+const setValueText: SetValueFunction = (question, value, changeset) => {
+  const formatedValue = Array.isArray(value) ? value.join(", ") : value
+  changeset.change(question.id().toString(), formatedValue)
+  return true
+}
+
+const setValueFloat: SetValueFunction = (question, value, changeset) => {
+  let num;
+  if (Array.isArray(value)) {
+    num = typeof value[0] == "string" ? parseFloat(value[0]) : value[0]
+  } else {
+    num = typeof value == "string" ? parseFloat(value) : value
+  }
+
+  if (num) {
+    changeset.change(question.id().toString(), num)
+    return true
+  }
+  return false
+}
+
+const types: { [type: string]: Type } = {
   text: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => {
@@ -43,6 +73,7 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(Input, attrs)
     },
+    setValue: setValueText,
   },
 
   paragraph: {
@@ -53,16 +84,16 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(TextArea, attrs)
     },
+    setValue: setValueText,
   },
 
   multi_text: {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, valueList: any) => {
       if (Array.isArray(valueList)) {
-        const validValues =
-          valueList.map((value) => {
-            return typeof value === "string" && value.trim() !== ""
-          })
+        const validValues = valueList.map((value) => {
+          return typeof value === "string" && value.trim() !== ""
+        })
         return validValues.indexOf(true) !== -1
       } else {
         return false
@@ -70,6 +101,14 @@ const types: {[type: string]: Type} = {
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(InputList, attrs)
+    },
+    setValue: (question, values, changeset) => {
+      const list = typeof values == "string" ? values.split(",") : values
+      if (list) {
+        changeset.change(question.id().toString(), list)
+        return true
+      }
+      return false
     },
   },
 
@@ -81,6 +120,7 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(NumberInput, attrs)
     },
+    setValue: setValueFloat,
   },
 
   percentage: {
@@ -91,6 +131,7 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(NumberInput, attrs)
     },
+    setValue: setValueFloat,
   },
 
   button: {
@@ -99,7 +140,17 @@ const types: {[type: string]: Type} = {
       return typeof value === "number" && findOption(question, value) !== null
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
-      return m(RadioList, {options: buildOptions(question), ...attrs})
+      return m(RadioList, { options: buildOptions(question), ...attrs })
+    },
+    setValue: (question, value, changeset) => {
+      const option = question.options().find((option) => {
+        return option.label() === value
+      })
+      if (option) {
+        changeset.change(question.id().toString(), option.id())
+        return true
+      }
+      return false
     },
   },
 
@@ -107,7 +158,23 @@ const types: {[type: string]: Type} = {
     optionGoesTo: false,
     isComplete: (question: PublishedFormQuestion, value: any) => true,
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
-      return m(CheckBoxList, {options: buildOptions(question), ...attrs})
+      return m(CheckBoxList, { options: buildOptions(question), ...attrs })
+    },
+    setValue: (question, values, changeset) => {
+      if (typeof values == "number") {
+        return false
+      }
+      const list = typeof values == "string" ? values.split(",") : values
+      const ids = (list || []).reduce((acc, value) => {
+        const option = question.options().find((option) => {
+          return option.label() === value
+        })
+        option && acc.push(option.id())
+        return acc
+      }, [])
+      console.log(ids)
+      changeset.change(question.id().toString(), ids)
+      return ids.length != 0
     },
   },
 
@@ -123,6 +190,16 @@ const types: {[type: string]: Type} = {
         ...attrs,
       })
     },
+    setValue: (question, value, changeset) => {
+      const option = question.options().find((option) => {
+        return option.label() === value
+      })
+      if (option) {
+        changeset.change(question.id().toString(), option.id().toString())
+        return true
+      }
+      return false
+    },
   },
 
   date: {
@@ -132,6 +209,15 @@ const types: {[type: string]: Type} = {
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(DateInput, attrs)
+    },
+    setValue: (question, value, changeset) => {
+      const date =
+        typeof value == "string" ? new Date(value) : new Date(value[0])
+      if (date.toString() != "Invalid Date") {
+        changeset.change(question.id().toString(), date)
+        return true
+      }
+      return false
     },
   },
 
@@ -147,6 +233,21 @@ const types: {[type: string]: Type} = {
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(DateRangeInput, attrs)
+    },
+    setValue: (question, values, changeset) => {
+      if (typeof(values) == "number") {
+        return false
+      }
+      const list = typeof values == "string" ? values.split(",") : values
+      const [from, to] = list.map((date) => new Date(date))
+      if (
+        from.toString() != "Invalid Date" &&
+        to.toString() != "Invalid Date"
+      ) {
+        changeset.change(question.id().toString(), { from, to })
+        return true
+      }
+      return false
     },
   },
 
@@ -171,9 +272,9 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       const settings = question.metadata().gridSettings()
       if (settings) {
-        return m(GridInput, {...attrs, settings})
+        return m(GridInput, { ...attrs, settings })
       } else {
-        return m(ErrorMessage, {error: "invalid grid settings"})
+        return m(ErrorMessage, { error: "invalid grid settings" })
       }
     },
   },
@@ -199,9 +300,9 @@ const types: {[type: string]: Type} = {
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       const settings = question.metadata().tableSettings()
       if (settings) {
-        return m(TableInput, {...attrs, settings})
+        return m(TableInput, { ...attrs, settings })
       } else {
-        return m(ErrorMessage, {error: "invalid table settings"})
+        return m(ErrorMessage, { error: "invalid table settings" })
       }
     },
   },
@@ -219,7 +320,7 @@ function questionType(question: PublishedFormQuestion): Type {
 
 export function goesTo(
   question: PublishedFormQuestion,
-  value: any,
+  value: any
 ): PublishedFormGoesTo | null {
   if (questionType(question)) {
     if (questionType(question).optionGoesTo) {
@@ -235,7 +336,7 @@ export function goesTo(
 
 export function isComplete(
   question: PublishedFormQuestion,
-  value: any,
+  value: any
 ): boolean {
   if (questionType(question)) {
     return questionType(question).isComplete(question, value)
@@ -246,16 +347,18 @@ export function isComplete(
 
 export function findOption(
   question: PublishedFormQuestion,
-  id: number,
+  id: number
 ): PublishedFormOption | null {
-  return question.options().find((option: PublishedFormOption) => {
-    return option.id() === id
-  }) || null
+  return (
+    question.options().find((option: PublishedFormOption) => {
+      return option.id() === id
+    }) || null
+  )
 }
 
 export function render(
   question: PublishedFormQuestion,
-  attrs: Attrs,
+  attrs: Attrs
 ): m.Children | null {
   if (questionType(question)) {
     return questionType(question).render(question, attrs)
@@ -265,9 +368,22 @@ export function render(
   }
 }
 
+export function setValue(
+  question: PublishedFormQuestion,
+  value: string | string[],
+  changeset: Changeset
+): m.Children | null {
+  if (questionType(question)) {
+    return questionType(question).setValue(question, value, changeset)
+  } else {
+    log("error", ["Question type isn't defined", question.type()])
+    return null
+  }
+}
+
 export function overrideRender(
   questionType: string,
-  render: RenderFunction,
+  render: RenderFunction
 ): void {
   if (types[questionType]) {
     types[questionType].render = render
@@ -277,9 +393,9 @@ export function overrideRender(
 }
 
 function buildOptions(
-  question: PublishedFormQuestion,
-): Array<{label: string, value: number}> {
+  question: PublishedFormQuestion
+): Array<{ label: string; value: number }> {
   return question.options().map((option) => {
-    return {label: option.label(), value: option.id()}
+    return { label: option.label(), value: option.id() }
   })
 }

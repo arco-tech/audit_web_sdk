@@ -1,19 +1,22 @@
 import {FormState} from "./FormState";
 import {PublishedForm, PublishedFormData} from "./PublishedForm";
+import {PreviousValues} from "./PublicFormSubmission"
 
 interface Cache {
   publishedForm: PublishedForm | null;
   formState: FormState | null;
+  previousValues: PreviousValues | null;
 }
 
-const cache = {
+const cache: Cache = {
   publishedForm: null,
   formState: null,
+  previousValues: null,
 };
 
 const publishedFormKey = "publishedForm";
 const formStateKey = "formState";
-const formSubmissionKey = "publicFormSubmission";
+const previousValuesKey = "previousValues";
 const authTokenKey = "authToken";
 
 export function loadPublishedForm(): PublishedForm | null {
@@ -65,6 +68,24 @@ export function saveFormState(state: FormState) {
   window.sessionStorage.setItem(formStateKey,
     state ? JSON.stringify(state.data()) : null);
 }
+
+export function savePreviousValues(values: PreviousValues) {
+  cache.previousValues = values;
+  window.sessionStorage.setItem(
+    previousValuesKey, 
+    values ? JSON.stringify(values) : null
+  );
+}
+
+export function loadPreviousValues(): PreviousValues | null {
+  if (cache.previousValues) {
+    return cache.previousValues;
+  } else {
+    return cache.previousValues = JSON.parse(
+      window.sessionStorage.getItem(previousValuesKey)
+    );
+  }
+} 
 
 export function saveAuthToken(token: string): void {
   window.sessionStorage.setItem(authTokenKey, token);

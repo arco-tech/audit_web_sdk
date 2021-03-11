@@ -1,0 +1,64 @@
+.previous-response {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.previous-response__response {
+  color: @colors[grey];
+  margin: 0 10px;
+}
+
+.previous-response__copy {
+  position: relative;
+  display: flex;
+  color: @colors[green];
+  cursor: pointer;
+}
+
+.previous-response__copy__icon {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+.previous-response__tooltip {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform-origin: 0 center;
+  transform: scale(0) translateX(-50%);
+  background-color: @colors[black];
+  padding: 10px;
+  color: white;
+  border-radius: 3px;
+  width: fit-content;
+  min-width: 200px;
+  text-align: center;
+  z-index: @z-indexes[dropdown];
+  transition: transform 0.2s;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    background-color: @colors[black];
+    border-radius: 3px;
+    transform: translate(-50%, calc(-50% + 2px)) rotate(45deg);
+  }
+}
+
+.previous-response__tooltip--open {
+  transform: scale(1) translateX(-50%);
+}
+
+.previous-response__tooltip--value {
+  margin-bottom: 10px;
+}
+
+.previous-response__tooltip--message {
+  font-size: 12px;
+  font-weight: bold;
+  color: @colors[grey];
+}

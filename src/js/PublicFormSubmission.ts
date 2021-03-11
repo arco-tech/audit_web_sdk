@@ -21,6 +21,10 @@ export interface PublicFormSubmissionData {
   updated_at: string;
 }
 
+export interface PreviousValues {
+  [namedID: string]: string | [string] | number | [number] 
+}
+
 export function stateDataFromSubmissionData(
   submission: PublicFormSubmissionData,
 ): FormStateData {
