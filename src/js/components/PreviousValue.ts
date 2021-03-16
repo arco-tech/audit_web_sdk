@@ -30,11 +30,11 @@ export const PreviousValue: m.Component<Attrs, State> = {
     const value = parseRespone(response)
     if (value == "") return null
 
-    return m(".previous-response", [
-      m(".color-grey", "Previous response: "),
-      m(".previous-response__response", value),
+    return m(".previous-values", [
+      m(".previous-values__title", "Previous response: "),
+      m(".previous-values__value", value),
       m(
-        ".previous-response__copy",
+        ".previous-values__copy",
         {
           onclick: () => {
             state.copyFailed = !Questions.setValue(
@@ -52,15 +52,15 @@ export const PreviousValue: m.Component<Attrs, State> = {
         },
         [
           "copy",
-          m("img.previous-response__copy__icon", {
+          m("img.previous-values__copy__icon", {
             src: "/images/icons/copy-with-arrow.svg",
             width: 20.9,
             height: 19,
           }),
-          m(block("previous-response__tooltip", state.hover && "open"), [
-            m(".previous-response__tooltip__value", value),
+          m(block("previous-values__tooltip", state.hover && "open"), [
+            m(".previous-values__tooltip__value", value),
             m(
-              ".previous-response__tooltip__message",
+              ".previous-values__tooltip__message",
               state.copyFailed ? "FAILED TO COPY" : "CLICK TO USE"
             ),
           ]),

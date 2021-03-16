@@ -104,8 +104,8 @@ const types: { [type: string]: Type } = {
     },
     setValue: (question, values, changeset) => {
       const list = typeof values == "string" ? values.split(",") : values
-      if (list) {
-        changeset.change(question.id().toString(), list)
+      if (Array.isArray(list)) {
+        changeset.change(question.id().toString(), [...list])
         return true
       }
       return false
