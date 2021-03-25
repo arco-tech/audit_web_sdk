@@ -171,14 +171,19 @@ var FormState = /** @class */ (function () {
                 }
             });
         });
-        return (complete / total) * 100;
+        if (total === 0 && complete === 0) {
+            return 0;
+        }
+        else {
+            return (complete / total) * 100;
+        }
     };
     FormState.prototype.sectionProgress = function (section, ignoreQuestions) {
         if (ignoreQuestions === void 0) { ignoreQuestions = []; }
         return this.sectionsProgress([section], ignoreQuestions);
     };
-    FormState.prototype.summary = function (section) {
-        return FormLogic.summary(section, this.location(), this.values());
+    FormState.prototype.summary = function (section, values) {
+        return FormLogic.summary(section, this.location(), values || this.values());
     };
     FormState.prototype.validate = function (section) {
         var _this = this;

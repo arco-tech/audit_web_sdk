@@ -1,0 +1,1 @@
+{"version":3,"file":"TableInput.js","sourceRoot":"","sources":["../../../src/js/components/inputs/TableInput.ts"],"names":[],"mappings":";;AAAA,2BAA4B;AAaf,QAAA,UAAU,GAAuB;IAC5C,IAAI,EAAE,UAAC,EAA+C;YAA9C,aAA6C,EAArC,wBAAS,EAAE,cAAI,EAAa,6BAAO;QACjD,OAAO,CAAC,CAAC,SAAS,EAAE,iBAAiB,CAAC,CAAA;IACxC,CAAC;CACF,CAAA"}

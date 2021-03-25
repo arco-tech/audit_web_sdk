@@ -5,10 +5,11 @@ var PublishedForm_1 = require("./PublishedForm");
 var cache = {
     publishedForm: null,
     formState: null,
+    previousValues: null,
 };
 var publishedFormKey = "publishedForm";
 var formStateKey = "formState";
-var formSubmissionKey = "publicFormSubmission";
+var previousValuesKey = "previousValues";
 var authTokenKey = "authToken";
 function loadPublishedForm() {
     if (cache.publishedForm) {
@@ -62,6 +63,20 @@ function saveFormState(state) {
     window.sessionStorage.setItem(formStateKey, state ? JSON.stringify(state.data()) : null);
 }
 exports.saveFormState = saveFormState;
+function savePreviousValues(values) {
+    cache.previousValues = values;
+    window.sessionStorage.setItem(previousValuesKey, values ? JSON.stringify(values) : null);
+}
+exports.savePreviousValues = savePreviousValues;
+function loadPreviousValues() {
+    if (cache.previousValues) {
+        return cache.previousValues;
+    }
+    else {
+        return cache.previousValues = JSON.parse(window.sessionStorage.getItem(previousValuesKey));
+    }
+}
+exports.loadPreviousValues = loadPreviousValues;
 function saveAuthToken(token) {
     window.sessionStorage.setItem(authTokenKey, token);
 }
