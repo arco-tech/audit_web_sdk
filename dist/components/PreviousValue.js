@@ -56,8 +56,12 @@ var parseRespone = function (response) {
     else if (typeof response == "number") {
         return response.toString();
     }
-    else if (typeof response == "string" && response.search(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
+    else if (typeof response == "string" &&
+        response.search(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) != -1) {
         return DateTime_1.displayDate(new Date(response));
+    }
+    else if (response.from || response.to) {
+        return DateTime_1.displayDate(new Date(response.from)) + " - " + DateTime_1.displayDate(new Date(response.to));
     }
     return response.replace(",", ", ");
 };

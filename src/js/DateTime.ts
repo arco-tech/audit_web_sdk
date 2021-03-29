@@ -70,6 +70,9 @@ function padNumber(num: number): string {
 }
 
 export function displayDate(date: Date): string {
-  var monthName = shortMonthName(date.getMonth());
+  if (isNaN(date.getDate())) {
+    return "not set"
+  }
+  let monthName = shortMonthName(date.getMonth());
   return `${date.getDate()} ${monthName} ${date.getFullYear()}`
 }

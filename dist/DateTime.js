@@ -67,6 +67,9 @@ function padNumber(num) {
     return numString.length == 1 ? "0" + numString : numString;
 }
 function displayDate(date) {
+    if (isNaN(date.getDate())) {
+        return "not set";
+    }
     var monthName = shortMonthName(date.getMonth());
     return date.getDate() + " " + monthName + " " + date.getFullYear();
 }

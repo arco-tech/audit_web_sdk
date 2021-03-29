@@ -76,9 +76,15 @@ const parseRespone = (response) => {
     return response.join(", ")
   } else if (typeof response == "number") {
     return response.toString()
-  }
-  else if(typeof response == "string" && response.search(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)){
+  } else if (
+    typeof response == "string" &&
+    response.search(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) != -1
+  ) {
     return displayDate(new Date(response))
+  } else if (response.from || response.to) {
+    return `${displayDate(new Date(response.from))} - ${displayDate(
+      new Date(response.to)
+    )}`
   }
 
   return response.replace(",", ", ")
