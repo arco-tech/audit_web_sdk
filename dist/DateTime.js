@@ -66,4 +66,9 @@ function padNumber(num) {
     var numString = "" + num;
     return numString.length == 1 ? "0" + numString : numString;
 }
+function displayDate(date) {
+    var monthName = shortMonthName(date.getMonth());
+    return date.getDate() + " " + monthName + " " + date.getFullYear();
+}
+exports.displayDate = displayDate;
 //# sourceMappingURL=DateTime.js.map

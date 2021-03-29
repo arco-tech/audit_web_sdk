@@ -68,3 +68,8 @@ function padNumber(num: number): string {
   const numString = `${num}`
   return numString.length == 1 ? "0" + numString : numString
 }
+
+export function displayDate(date: Date): string {
+  var monthName = shortMonthName(date.getMonth());
+  return `${date.getDate()} ${monthName} ${date.getFullYear()}`
+}

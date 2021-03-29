@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var Questions = require("../Questions");
 var BEM_1 = require("../BEM");
+var DateTime_1 = require("../DateTime");
 exports.PreviousValue = {
     oninit: function (_a) {
         var state = _a.state;
@@ -54,6 +55,9 @@ var parseRespone = function (response) {
     }
     else if (typeof response == "number") {
         return response.toString();
+    }
+    else if (typeof response == "string" && response.search(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
+        return DateTime_1.displayDate(new Date(response));
     }
     return response.replace(",", ", ");
 };

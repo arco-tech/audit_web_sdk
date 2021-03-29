@@ -4,6 +4,7 @@ import { PublishedFormQuestion } from "../PublishedForm"
 import * as Questions from "../Questions"
 import { block } from "../BEM"
 import { PreviousValues } from "../PublicFormSubmission"
+import { displayDate } from "../DateTime"
 
 interface Attrs {
   question: PublishedFormQuestion
@@ -76,5 +77,9 @@ const parseRespone = (response) => {
   } else if (typeof response == "number") {
     return response.toString()
   }
+  else if(typeof response == "string" && response.search(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)){
+    return displayDate(new Date(response))
+  }
+
   return response.replace(",", ", ")
 }
