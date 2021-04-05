@@ -73,6 +73,20 @@ export const PreviousValue: m.Component<Attrs, State> = {
 
 const parseRespone = (response) => {
   if (Array.isArray(response)) {
+    if (response.length > 0 && Array.isArray(response[0])) {
+      return response
+        .map((row) => {
+          return row
+            .map((value) => {
+              if (!value) {
+                return "empty"
+              }
+              return value
+            })
+            .join(", ")
+        })
+        .join("\n")
+    }
     return response.join(", ")
   } else if (typeof response == "number") {
     return response.toString()

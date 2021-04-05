@@ -51,6 +51,20 @@ exports.PreviousValue = {
 };
 var parseRespone = function (response) {
     if (Array.isArray(response)) {
+        if (response.length > 0 && Array.isArray(response[0])) {
+            return response
+                .map(function (row) {
+                return row
+                    .map(function (value) {
+                    if (!value) {
+                        return "empty";
+                    }
+                    return value;
+                })
+                    .join(", ");
+            })
+                .join("\n");
+        }
         return response.join(", ");
     }
     else if (typeof response == "number") {

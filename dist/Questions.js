@@ -206,7 +206,7 @@ var types = {
             return m(DateRangeInput_1.DateRangeInput, attrs);
         },
         setValue: function (question, values, changeset) {
-            if (typeof (values) == "number") {
+            if (typeof values == "number") {
                 return false;
             }
             var list = typeof values == "string" ? values.split(",") : values;
@@ -244,6 +244,15 @@ var types = {
                 return m(ErrorMessage_1.ErrorMessage, { error: "invalid grid settings" });
             }
         },
+        setValue: function (question, values, changeset) {
+            if (Array.isArray(values) &&
+                values[0].length > 0 &&
+                Array.isArray(values[0])) {
+                changeset.change(question.id().toString(), values);
+                return true;
+            }
+            return false;
+        },
     },
     table: {
         optionGoesTo: false,
@@ -269,6 +278,15 @@ var types = {
             else {
                 return m(ErrorMessage_1.ErrorMessage, { error: "invalid table settings" });
             }
+        },
+        setValue: function (question, values, changeset) {
+            if (Array.isArray(values) &&
+                values[0].length > 0 &&
+                Array.isArray(values[0])) {
+                changeset.change(question.id().toString(), values);
+                return true;
+            }
+            return false;
         },
     },
 };

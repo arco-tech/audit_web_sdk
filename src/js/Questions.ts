@@ -50,7 +50,7 @@ const setValueText: SetValueFunction = (question, value, changeset) => {
 }
 
 const setValueFloat: SetValueFunction = (question, value, changeset) => {
-  let num;
+  let num
   if (Array.isArray(value)) {
     num = parseFloat(value[0])
   } else {
@@ -234,7 +234,7 @@ const types: { [type: string]: Type } = {
       return m(DateRangeInput, attrs)
     },
     setValue: (question, values, changeset) => {
-      if (typeof(values) == "number") {
+      if (typeof values == "number") {
         return false
       }
       const list = typeof values == "string" ? values.split(",") : values
@@ -276,6 +276,17 @@ const types: { [type: string]: Type } = {
         return m(ErrorMessage, { error: "invalid grid settings" })
       }
     },
+    setValue: (question, values, changeset) => {
+      if (
+        Array.isArray(values) &&
+        values[0].length > 0 &&
+        Array.isArray(values[0])
+      ) {
+        changeset.change(question.id().toString(), values)
+        return true
+      }
+      return false
+    },
   },
 
   table: {
@@ -303,6 +314,17 @@ const types: { [type: string]: Type } = {
       } else {
         return m(ErrorMessage, { error: "invalid table settings" })
       }
+    },
+    setValue: (question, values, changeset) => {
+      if (
+        Array.isArray(values) &&
+        values[0].length > 0 &&
+        Array.isArray(values[0])
+      ) {
+        changeset.change(question.id().toString(), values)
+        return true
+      }
+      return false
     },
   },
 }
