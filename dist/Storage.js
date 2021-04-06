@@ -2,15 +2,44 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var FormState_1 = require("./FormState");
 var PublishedForm_1 = require("./PublishedForm");
+var PublicForm_1 = require("./PublicForm");
 var cache = {
+    publicForm: null,
     publishedForm: null,
     formState: null,
     previousValues: null,
 };
+var publicFormKey = "publicForm";
 var publishedFormKey = "publishedForm";
 var formStateKey = "formState";
 var previousValuesKey = "previousValues";
 var authTokenKey = "authToken";
+function loadPublicForm() {
+    if (cache.publicForm) {
+        return cache.publicForm;
+    }
+    else {
+        try {
+            var data = JSON.parse(window.sessionStorage.getItem(publicFormKey));
+            if (data.name) {
+                cache.publicForm = new PublicForm_1.PublicForm(data);
+                return cache.publicForm;
+            }
+            else {
+                throw new Error("invalid");
+            }
+        }
+        catch (error) {
+            return null;
+        }
+    }
+}
+exports.loadPublicForm = loadPublicForm;
+function savePublicForm(publicForm) {
+    cache.publicForm = publicForm;
+    window.sessionStorage.setItem(publicFormKey, JSON.stringify(publicForm.data()));
+}
+exports.savePublicForm = savePublicForm;
 function loadPublishedForm() {
     if (cache.publishedForm) {
         return cache.publishedForm;

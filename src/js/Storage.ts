@@ -1,23 +1,53 @@
 import {FormState} from "./FormState";
 import {PublishedForm, PublishedFormData} from "./PublishedForm";
 import {PreviousValues} from "./PublicFormSubmission"
+import { PublicForm } from "./PublicForm";
 
 interface Cache {
+  publicForm: PublicForm | null;
   publishedForm: PublishedForm | null;
   formState: FormState | null;
   previousValues: PreviousValues | null;
 }
 
 const cache: Cache = {
+  publicForm: null,
   publishedForm: null,
   formState: null,
   previousValues: null,
 };
 
+const publicFormKey = "publicForm";
 const publishedFormKey = "publishedForm";
 const formStateKey = "formState";
 const previousValuesKey = "previousValues";
 const authTokenKey = "authToken";
+
+export function loadPublicForm(): PublicForm | null {
+  if (cache.publicForm) {
+    return cache.publicForm;
+  } else {
+    try {
+      const data = JSON.parse(window.sessionStorage.getItem(publicFormKey));
+      if (data.name) {
+        cache.publicForm = new PublicForm(data);
+        return cache.publicForm;
+      } else {
+        throw new Error("invalid");
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+}
+
+export function savePublicForm(publicForm: PublicForm): void {
+  cache.publicForm = publicForm;
+  window.sessionStorage.setItem(
+    publicFormKey,
+    JSON.stringify(publicForm.data()),
+  );
+}
 
 export function loadPublishedForm(): PublishedForm | null {
   if (cache.publishedForm) {
