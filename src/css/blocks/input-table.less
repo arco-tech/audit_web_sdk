@@ -1,0 +1,47 @@
+.input-table {
+  border: 1px solid @colors[light-grey];
+  border-spacing: 0;
+  width: 100%;
+}
+
+.input-table__cell {
+  border: 1px solid @colors[light-grey];
+}
+
+.input-table__cell--header {
+  padding: 5px;
+}
+
+.input-table__cell--input {
+  white-space: pre-wrap;
+  background-color: #f6f5fa;
+  color: @colors[grey];
+
+  &:focus {
+    color: @colors[blue];
+    outline: none;
+    border: 1px solid @colors[blue];
+  }
+}
+
+.input-table__cell--control {
+  text-align: center;
+  width: 80px;
+}
+
+.input-table__cell__input {
+  border: 1px solid transparent;
+  padding: 8px;
+  transition: color 0.2s, border-color 0.2s;
+  color: @colors[grey];
+  margin: 0;
+  border-radius: 0;
+  outline: none;
+  font-size: 16px;
+
+  &:focus {
+    border-color: @colors[blue];
+    color: @colors[blue];
+    outline: none;
+  }
+}

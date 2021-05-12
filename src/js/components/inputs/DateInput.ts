@@ -123,9 +123,8 @@ function displayValue(
   if (value) {
     const date = new Date(value);
     if (!isNaN(date.getTime())) {
-      const monthName = DateTime.shortMonthName(date.getMonth());
       return m(".date-input__display-value", [
-        `${date.getDate()} ${monthName} ${date.getFullYear()}`,
+        DateTime.displayDate(date)
       ]);
     }
   }

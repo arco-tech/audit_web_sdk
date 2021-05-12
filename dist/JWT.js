@@ -1,7 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function fromBase64(base64) {
-    return Buffer.from(base64, "base64").toString();
+    if (window.atob) {
+        return window.atob(base64);
+    }
+    else {
+        return Buffer.from(base64, "base64").toString();
+    }
 }
 function decodePayload(token) {
     return JSON.parse(fromBase64(token.split(".")[1]));

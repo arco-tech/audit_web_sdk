@@ -44,4 +44,34 @@ function relative(date) {
     return "now";
 }
 exports.relative = relative;
+function formatDateTime(date) {
+    return formatDate(date) + " " + formatTime(date);
+}
+exports.formatDateTime = formatDateTime;
+function formatTime(date) {
+    var hours = date.getHours();
+    var displayMinutes = padNumber(date.getMinutes());
+    var displayHours = padNumber(hours % 12 === 0 ? 12 : hours % 12);
+    return displayHours + ":" + displayMinutes + (hours >= 12 ? "pm" : "am");
+}
+exports.formatTime = formatTime;
+function formatDate(date) {
+    var day = padNumber(date.getDate());
+    var month = padNumber(date.getMonth() + 1);
+    var year = date.getFullYear();
+    return day + "/" + month + "/" + year;
+}
+exports.formatDate = formatDate;
+function padNumber(num) {
+    var numString = "" + num;
+    return numString.length == 1 ? "0" + numString : numString;
+}
+function displayDate(date) {
+    if (isNaN(date.getDate())) {
+        return "not set";
+    }
+    var monthName = shortMonthName(date.getMonth());
+    return date.getDate() + " " + monthName + " " + date.getFullYear();
+}
+exports.displayDate = displayDate;
 //# sourceMappingURL=DateTime.js.map

@@ -69,6 +69,64 @@ var PublishedFormServiceType = /** @class */ (function () {
     return PublishedFormServiceType;
 }());
 exports.PublishedFormServiceType = PublishedFormServiceType;
+var PublishedFormQuestionColumnSettings = /** @class */ (function () {
+    function PublishedFormQuestionColumnSettings(data) {
+        this._data = data;
+    }
+    PublishedFormQuestionColumnSettings.prototype.title = function () {
+        return this._data.title;
+    };
+    PublishedFormQuestionColumnSettings.prototype.info = function () {
+        return this._data.info;
+    };
+    PublishedFormQuestionColumnSettings.prototype.dataType = function () {
+        return this._data.data_type;
+    };
+    return PublishedFormQuestionColumnSettings;
+}());
+exports.PublishedFormQuestionColumnSettings = PublishedFormQuestionColumnSettings;
+var PublishedFormQuestionGridSettings = /** @class */ (function () {
+    function PublishedFormQuestionGridSettings(data) {
+        this._data = data;
+    }
+    PublishedFormQuestionGridSettings.prototype.rows = function () {
+        return this._data.rows.map(function (rowData) {
+            return new PublishedFormQuestionColumnSettings(rowData);
+        });
+    };
+    PublishedFormQuestionGridSettings.prototype.columns = function () {
+        return this._data.columns.map(function (columnData) {
+            return new PublishedFormQuestionColumnSettings(columnData);
+        });
+    };
+    return PublishedFormQuestionGridSettings;
+}());
+exports.PublishedFormQuestionGridSettings = PublishedFormQuestionGridSettings;
+var PublishedFormQuestionTableSettings = /** @class */ (function () {
+    function PublishedFormQuestionTableSettings(data) {
+        this._data = data;
+    }
+    PublishedFormQuestionTableSettings.prototype.columns = function () {
+        return this._data.columns.map(function (columnData) {
+            return new PublishedFormQuestionColumnSettings(columnData);
+        });
+    };
+    return PublishedFormQuestionTableSettings;
+}());
+exports.PublishedFormQuestionTableSettings = PublishedFormQuestionTableSettings;
+var PublishedFormQuestionMetadata = /** @class */ (function () {
+    function PublishedFormQuestionMetadata(data) {
+        this._data = data;
+    }
+    PublishedFormQuestionMetadata.prototype.gridSettings = function () {
+        return new PublishedFormQuestionGridSettings(this._data.grid_settings);
+    };
+    PublishedFormQuestionMetadata.prototype.tableSettings = function () {
+        return new PublishedFormQuestionTableSettings(this._data.table_settings);
+    };
+    return PublishedFormQuestionMetadata;
+}());
+exports.PublishedFormQuestionMetadata = PublishedFormQuestionMetadata;
 var PublishedFormQuestion = /** @class */ (function () {
     function PublishedFormQuestion(data) {
         this._data = data;
@@ -107,6 +165,9 @@ var PublishedFormQuestion = /** @class */ (function () {
         else {
             return null;
         }
+    };
+    PublishedFormQuestion.prototype.metadata = function () {
+        return new PublishedFormQuestionMetadata(this._data.metadata || {});
     };
     PublishedFormQuestion.prototype.options = function () {
         return this._data.options
