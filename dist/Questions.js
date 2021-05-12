@@ -30,6 +30,7 @@ var RadioList_1 = require("./components/inputs/RadioList");
 var GridInput_1 = require("./components/inputs/GridInput");
 var TableInput_1 = require("./components/inputs/TableInput");
 var Selector_1 = require("./components/inputs/Selector");
+var FileUploadInput_1 = require("./components/inputs/FileUploadInput");
 var Log_1 = require("./Log");
 var ErrorMessage_1 = require("./components/ErrorMessage");
 var setValueText = function (question, value, changeset) {
@@ -287,6 +288,15 @@ var types = {
                 return true;
             }
             return false;
+        },
+    },
+    files: {
+        optionGoesTo: false,
+        isComplete: function (question, value) {
+            return Array.isArray(value) && value.length > 0;
+        },
+        render: function (question, attrs) {
+            return m(FileUploadInput_1.FileUploadInput, attrs);
         },
     },
 };
