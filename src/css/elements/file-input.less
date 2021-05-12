@@ -1,15 +1,20 @@
 .file-input__status {
   color: @colors[grey];
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .file-input__value {
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .file-input__value__remove-button {
   color: @colors[red];
   text-align: right;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
