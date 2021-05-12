@@ -22,6 +22,7 @@ exports.FileUploadInput = {
                     }
                 },
                 ondragover: function (event) {
+                    event.preventDefault();
                     state.drag = true;
                 },
                 ondragleave: function (event) {
@@ -29,7 +30,7 @@ exports.FileUploadInput = {
                 },
             }, [
                 "Drag and drop files or ",
-                m(".file-input__link", {
+                m("span.file-input__link", {
                     onclick: function () {
                         state.input.click();
                     }

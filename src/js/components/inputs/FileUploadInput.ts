@@ -40,6 +40,7 @@ export const FileUploadInput: m.Component<Attrs> = {
           }
         },
         ondragover: (event) => {
+          event.preventDefault()
           state.drag = true
         },
         ondragleave: (event) => {
@@ -47,7 +48,7 @@ export const FileUploadInput: m.Component<Attrs> = {
         },
       }, [
         "Drag and drop files or ",
-        m(".file-input__link", {
+        m("span.file-input__link", {
           onclick: () => {
             state.input.click()
           }
