@@ -1,6 +1,26 @@
+.file-input {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+  text-align: center;
+  transition: border-color @transition-duration, padding @transition-duration;
+  background-color: @colors[background];
+  border-color: @colors[background];
+}
+
+.file-input--drag {
+  border-color: @colors[grey];
+  padding: 20px 10px;
+}
+
 .file-input__status {
   color: @colors[grey];
   margin: 10px 0;
+}
+
+.file-input__status--failed {
+  color: @colors[red];
 }
 
 .file-input__value {

@@ -15,6 +15,7 @@ interface Attrs {
 
 interface State {
   statuses: UploadStatus[]
+  drag?: boolean
 }
 
 export const FileUploadInput: m.Component<Attrs> = {
@@ -23,9 +24,23 @@ export const FileUploadInput: m.Component<Attrs> = {
   },
 
   view: ({ attrs: { changeset, name, questionID }, state }) => {
-    const value = (changeset.getValue(name) || [])
+    let value = (changeset.getValue(name) || [])
 
     return [
+      m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
+        ondrop: (event) => {
+          console.log("drop", event)
+        },
+        ondragover: (event) => {
+          state.drag = true
+          console.log("drag", event)
+        },
+        ondragleave: (event) => {
+          state.drag = false
+          console.log("leave")
+        },
+      }, [
+      ]),
       m("input", {
         type: "file",
         multiple: true,
@@ -40,21 +55,25 @@ export const FileUploadInput: m.Component<Attrs> = {
           event.target.value = ""
         },
       }),
-      state.statuses.map(({ name, status }) => {
-        if (status !== "success") {
-          return m(".file-input__status", `${name} - ${status}`)
-        }
-      }),
       value.map(({ name }, index) => {
         return m(".file-input__value", [
           m(".file-input__value__name", name),
           m(".file-input__value__remove-button", {
             onclick: () => {
+              value = (changeset.getValue(name) || [])
               changeset.change(name, [].concat(value.splice(index, 1)))
             },
           }, "remove"),
         ])
-      })
+      }),
+      state.statuses.map(({ name, status }) => {
+        if (status === "failed") {
+          return m(".file-input__status.file-input__status--failed",
+            `${name} - failed`)
+        } else if (status !== "success") {
+          return m(".file-input__status", `${name} - ${status}`)
+        }
+      }),
     ]
   },
 }

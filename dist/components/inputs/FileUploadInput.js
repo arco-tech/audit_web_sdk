@@ -11,6 +11,19 @@ exports.FileUploadInput = {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, questionID = _b.questionID, state = _a.state;
         var value = (changeset.getValue(name) || []);
         return [
+            m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
+                ondrop: function (event) {
+                    console.log("drop", event);
+                },
+                ondragover: function (event) {
+                    state.drag = true;
+                    console.log("drag", event);
+                },
+                ondragleave: function (event) {
+                    state.drag = false;
+                    console.log("leave");
+                },
+            }, []),
             m("input", {
                 type: "file",
                 multiple: true,
@@ -24,23 +37,27 @@ exports.FileUploadInput = {
                     event.target.value = "";
                 },
             }),
-            state.statuses.map(function (_a) {
-                var name = _a.name, status = _a.status;
-                if (status !== "success") {
-                    return m(".file-input__status", name + " - " + status);
-                }
-            }),
             value.map(function (_a, index) {
                 var name = _a.name;
                 return m(".file-input__value", [
                     m(".file-input__value__name", name),
                     m(".file-input__value__remove-button", {
                         onclick: function () {
+                            value = (changeset.getValue(name) || []);
                             changeset.change(name, [].concat(value.splice(index, 1)));
                         },
                     }, "remove"),
                 ]);
-            })
+            }),
+            state.statuses.map(function (_a) {
+                var name = _a.name, status = _a.status;
+                if (status === "failed") {
+                    return m(".file-input__status.file-input__status--failed", name + " - failed");
+                }
+                else if (status !== "success") {
+                    return m(".file-input__status", name + " - " + status);
+                }
+            }),
         ];
     },
 };
