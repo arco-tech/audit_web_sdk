@@ -9,6 +9,7 @@ import {InputList} from "./components/inputs/InputList";
 import {NumberInput} from "./components/inputs/NumberInput";
 import {RadioList} from "./components/inputs/RadioList";
 import {Selector} from "./components/inputs/Selector";
+import {FileUploadInput} from "./components/inputs/FileUploadInput"
 import {
   PublishedFormGoesTo,
   PublishedFormOption,
@@ -135,6 +136,15 @@ const types: {[type: string]: Type} = {
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
       return m(DateRangeInput, attrs);
+    },
+  },
+  files: {
+    optionGoesTo: false,
+    isComplete: (question: PublishedFormQuestion, value: any) => {
+      return Array.isArray(value) && value.length > 0
+    },
+    render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
+      return m(FileUploadInput, attrs)
     },
   },
 };
