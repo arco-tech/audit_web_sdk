@@ -23,13 +23,15 @@ export const FileUploadInput: m.Component<Attrs> = {
   },
 
   view: ({ attrs: { changeset, name, questionID }, state }) => {
+    const value = (changeset.getValue(name) || [])
+
     return [
       m("input", {
         type: "file",
         multiple: true,
         value: changeset.getValue(name),
         oninput: (event) => {
-          event.target.files.forEach((file) => {
+          Array.from(event.target.files).forEach((file) => {
             upload(file, questionID, state)
               .then(({ id, name }) => {
                 const value = changeset.getValue(name) || []
@@ -39,7 +41,19 @@ export const FileUploadInput: m.Component<Attrs> = {
           event.target.value = ""
         },
       }),
-      state.statuses.map(({ name, status }) => `${name} - ${status}`),
+      state.statuses.map(({ name, status }) => {
+        m(".file-input__status", `${name} - ${status}`),
+      }),
+      value.map(({ name }, index) => {
+        return m(".file-input__value", [
+          m(".file-input__value__name", name),
+          m(".file-input__value__remove-button", {
+            onclick: () => {
+              changeset.setValue(name, [].concat(value.splice(index, 1)))
+            },
+          }, "remove"),
+        ])
+      })
     ]
   },
 }

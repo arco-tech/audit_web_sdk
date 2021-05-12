@@ -335,7 +335,7 @@ const types: { [type: string]: Type } = {
       return Array.isArray(value) && value.length > 0
     },
     render: (question: PublishedFormQuestion, attrs: Attrs): m.Children => {
-      return m(FileUploadInput, attrs)
+      return m(FileUploadInput, { questionID: question.id(), ...attrs })
     },
   },
 }
