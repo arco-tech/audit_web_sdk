@@ -34,8 +34,10 @@ export const FileUploadInput: m.Component<Attrs> = {
 
           if (event.dataTransfer.items) {
             for (let i = 0; i < event.dataTransfer.items.length; i++) {
-              const file = event.dataTransfer.items[i].getAsFile()
-              upload(changeset, name, file as File, questionID, state)
+              if (event.dataTransfer.items[i].kind === "file") {
+                const file = event.dataTransfer.items[i].getAsFile()
+                upload(changeset, name, file, questionID, state)
+              }
             }
           }
         },

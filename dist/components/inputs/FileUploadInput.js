@@ -16,8 +16,10 @@ exports.FileUploadInput = {
                     event.preventDefault();
                     if (event.dataTransfer.items) {
                         for (var i = 0; i < event.dataTransfer.items.length; i++) {
-                            var file = event.dataTransfer.items[i].getAsFile();
-                            upload(changeset, name, file, questionID, state);
+                            if (event.dataTransfer.items[i].kind === "file") {
+                                var file = event.dataTransfer.items[i].getAsFile();
+                                upload(changeset, name, file, questionID, state);
+                            }
                         }
                     }
                 },
