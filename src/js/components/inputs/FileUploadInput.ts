@@ -30,6 +30,8 @@ export const FileUploadInput: m.Component<Attrs> = {
     return [
       m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
         ondrop: (event) => {
+          state.drag = false
+
           event.preventDefault()
 
           if (event.dataTransfer.items) {

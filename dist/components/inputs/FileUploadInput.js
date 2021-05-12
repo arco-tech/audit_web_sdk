@@ -13,6 +13,7 @@ exports.FileUploadInput = {
         return [
             m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
                 ondrop: function (event) {
+                    state.drag = false;
                     event.preventDefault();
                     if (event.dataTransfer.items) {
                         for (var i = 0; i < event.dataTransfer.items.length; i++) {
