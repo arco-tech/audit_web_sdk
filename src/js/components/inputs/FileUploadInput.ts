@@ -29,13 +29,12 @@ export const FileUploadInput: m.Component<Attrs> = {
       m("input", {
         type: "file",
         multiple: true,
-        value: changeset.getValue(name),
         oninput: (event) => {
           Array.from(event.target.files).forEach((file) => {
             upload(file as File, questionID, state)
-              .then(({ id, name }) => {
-                const value = changeset.getValue(name) || []
-                changeset.change(name, value.concat([{ id, name }]))
+              .then((upload) => {
+                changeset.change(name,
+                  value.concat([{ id: upload.id, name: upload.name }]))
               })
           })
           event.target.value = ""
@@ -51,7 +50,7 @@ export const FileUploadInput: m.Component<Attrs> = {
           m(".file-input__value__name", name),
           m(".file-input__value__remove-button", {
             onclick: () => {
-              changeset.setValue(name, [].concat(value.splice(index, 1)))
+              changeset.change(name, [].concat(value.splice(index, 1)))
             },
           }, "remove"),
         ])

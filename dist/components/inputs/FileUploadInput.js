@@ -14,14 +14,11 @@ exports.FileUploadInput = {
             m("input", {
                 type: "file",
                 multiple: true,
-                value: changeset.getValue(name),
                 oninput: function (event) {
                     Array.from(event.target.files).forEach(function (file) {
                         upload(file, questionID, state)
-                            .then(function (_a) {
-                            var id = _a.id, name = _a.name;
-                            var value = changeset.getValue(name) || [];
-                            changeset.change(name, value.concat([{ id: id, name: name }]));
+                            .then(function (upload) {
+                            changeset.change(name, value.concat([{ id: upload.id, name: upload.name }]));
                         });
                     });
                     event.target.value = "";
@@ -39,7 +36,7 @@ exports.FileUploadInput = {
                     m(".file-input__value__name", name),
                     m(".file-input__value__remove-button", {
                         onclick: function () {
-                            changeset.setValue(name, [].concat(value.splice(index, 1)));
+                            changeset.change(name, [].concat(value.splice(index, 1)));
                         },
                     }, "remove"),
                 ]);
