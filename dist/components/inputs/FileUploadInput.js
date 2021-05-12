@@ -13,15 +13,19 @@ exports.FileUploadInput = {
         return [
             m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
                 ondrop: function (event) {
-                    console.log("drop", event);
+                    event.preventDefault();
+                    if (event.dataTransfer.items) {
+                        for (var i = 0; i < event.dataTransfer.items.length; i++) {
+                            var file = event.dataTransfer.items[i].getAsFile();
+                            upload(changeset, name, file, questionID, state);
+                        }
+                    }
                 },
                 ondragover: function (event) {
                     state.drag = true;
-                    console.log("drag", event);
                 },
                 ondragleave: function (event) {
                     state.drag = false;
-                    console.log("leave");
                 },
             }, [
                 "Drag and drop files or ",
@@ -40,10 +44,7 @@ exports.FileUploadInput = {
                 },
                 oninput: function (event) {
                     Array.from(event.target.files).forEach(function (file) {
-                        upload(file, questionID, state)
-                            .then(function (upload) {
-                            changeset.change(name, value.concat([{ id: upload.id, name: upload.name }]));
-                        });
+                        upload(changeset, name, file, questionID, state);
                     });
                     event.target.value = "";
                 },
@@ -54,7 +55,6 @@ exports.FileUploadInput = {
                     m(".file-input__value__name", name),
                     m(".file-input__value__remove-button", {
                         onclick: function () {
-                            value = (changeset.getValue(name) || []);
                             changeset.change(name, [].concat(value.splice(index, 1)));
                         },
                     }, "remove"),
@@ -72,7 +72,7 @@ exports.FileUploadInput = {
         ];
     },
 };
-function upload(file, questionID, state) {
+function upload(changeset, name, file, questionID, state) {
     var uploadStatus = { name: file.name, status: "uploading..." };
     state.statuses.push(uploadStatus);
     return new Promise(function (resolve, reject) {
@@ -85,6 +85,8 @@ function upload(file, questionID, state) {
             })
                 .then(function (fileUpload) {
                 uploadStatus.status = "success";
+                var value = (changeset.getValue(name) || []);
+                changeset.change(name, value.concat([{ id: fileUpload.id, name: fileUpload.name }]));
                 resolve(fileUpload);
                 m.redraw();
             })

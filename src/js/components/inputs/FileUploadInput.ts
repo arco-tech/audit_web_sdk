@@ -25,20 +25,25 @@ export const FileUploadInput: m.Component<Attrs> = {
   },
 
   view: ({ attrs: { changeset, name, questionID }, state }) => {
-    let value = (changeset.getValue(name) || [])
+    const value = (changeset.getValue(name) || [])
 
     return [
       m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
         ondrop: (event) => {
-          console.log("drop", event)
+          event.preventDefault()
+
+          if (event.dataTransfer.items) {
+            for (let i = 0; i < event.dataTransfer.items.length; i++) {
+              const file = event.dataTransfer.items[i].getAsFile()
+              upload(changeset, name, file as File, questionID, state)
+            }
+          }
         },
         ondragover: (event) => {
           state.drag = true
-          console.log("drag", event)
         },
         ondragleave: (event) => {
           state.drag = false
-          console.log("leave")
         },
       }, [
         "Drag and drop files or ",
@@ -57,11 +62,7 @@ export const FileUploadInput: m.Component<Attrs> = {
         },
         oninput: (event) => {
           Array.from(event.target.files).forEach((file) => {
-            upload(file as File, questionID, state)
-              .then((upload) => {
-                changeset.change(name,
-                  value.concat([{ id: upload.id, name: upload.name }]))
-              })
+            upload(changeset, name, file as File, questionID, state)
           })
           event.target.value = ""
         },
@@ -71,7 +72,6 @@ export const FileUploadInput: m.Component<Attrs> = {
           m(".file-input__value__name", name),
           m(".file-input__value__remove-button", {
             onclick: () => {
-              value = (changeset.getValue(name) || [])
               changeset.change(name, [].concat(value.splice(index, 1)))
             },
           }, "remove"),
@@ -90,6 +90,8 @@ export const FileUploadInput: m.Component<Attrs> = {
 }
 
 function upload(
+  changeset: Changeset,
+  name: string,
   file: File,
   questionID: number,
   state: State,
@@ -107,6 +109,11 @@ function upload(
         })
           .then((fileUpload) => {
             uploadStatus.status = "success"
+
+            const value = (changeset.getValue(name) || [])
+            changeset.change(name,
+              value.concat([{ id: fileUpload.id, name: fileUpload.name }]))
+
             resolve(fileUpload)
             m.redraw()
           })
