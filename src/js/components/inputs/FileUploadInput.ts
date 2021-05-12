@@ -32,7 +32,7 @@ export const FileUploadInput: m.Component<Attrs> = {
         value: changeset.getValue(name),
         oninput: (event) => {
           Array.from(event.target.files).forEach((file) => {
-            upload(file, questionID, state)
+            upload(file as File, questionID, state)
               .then(({ id, name }) => {
                 const value = changeset.getValue(name) || []
                 changeset.change(name, value.concat([{ id, name }]))
@@ -42,7 +42,9 @@ export const FileUploadInput: m.Component<Attrs> = {
         },
       }),
       state.statuses.map(({ name, status }) => {
-        m(".file-input__status", `${name} - ${status}`),
+        if (status !== "success") {
+          return m(".file-input__status", `${name} - ${status}`)
+        }
       }),
       value.map(({ name }, index) => {
         return m(".file-input__value", [
@@ -63,7 +65,7 @@ function upload(
   questionID: number,
   state: State,
 ): Promise<FileUploadAPI.FileUpload> {
-  const uploadStatus = {name: file.name, status: "uploading"}
+  const uploadStatus = {name: file.name, status: "uploading..."}
   state.statuses.push(uploadStatus)
 
   return new Promise((resolve, reject) => {

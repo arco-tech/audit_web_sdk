@@ -296,7 +296,7 @@ var types = {
             return Array.isArray(value) && value.length > 0;
         },
         render: function (question, attrs) {
-            return m(FileUploadInput_1.FileUploadInput, attrs);
+            return m(FileUploadInput_1.FileUploadInput, __assign({ questionID: question.id() }, attrs));
         },
     },
 };
