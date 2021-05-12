@@ -14,6 +14,7 @@ interface Attrs {
 }
 
 interface State {
+  input: HTMLInputElement
   statuses: UploadStatus[]
   drag?: boolean
 }
@@ -40,10 +41,20 @@ export const FileUploadInput: m.Component<Attrs> = {
           console.log("leave")
         },
       }, [
+        "Drag and drop files or ",
+        m(".file-input__link", {
+          onclick: () => {
+            state.input.click()
+          }
+        }, "select files"),
       ]),
       m("input", {
         type: "file",
         multiple: true,
+        style: "display: none;",
+        oncreate: (vnode) => {
+          state.input = vnode.dom
+        },
         oninput: (event) => {
           Array.from(event.target.files).forEach((file) => {
             upload(file as File, questionID, state)

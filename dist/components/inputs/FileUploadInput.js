@@ -23,10 +23,21 @@ exports.FileUploadInput = {
                     state.drag = false;
                     console.log("leave");
                 },
-            }, []),
+            }, [
+                "Drag and drop files or ",
+                m(".file-input__link", {
+                    onclick: function () {
+                        state.input.click();
+                    }
+                }, "select files"),
+            ]),
             m("input", {
                 type: "file",
                 multiple: true,
+                style: "display: none;",
+                oncreate: function (vnode) {
+                    state.input = vnode.dom;
+                },
                 oninput: function (event) {
                     Array.from(event.target.files).forEach(function (file) {
                         upload(file, questionID, state)
