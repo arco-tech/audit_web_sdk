@@ -1,7 +1,7 @@
 export interface PublicFormData {
   named_id: string
   name: string
-  colour: string
+  colour_code: string
   description: string
 }
 
@@ -21,7 +21,7 @@ export class PublicForm {
   }
 
   public color(): string {
-    return this._data.colour
+    return this._data.colour_code
   }
 
   public description(): string {
