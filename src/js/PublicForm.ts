@@ -3,6 +3,7 @@ export interface PublicFormData {
   name: string
   colour_code: string
   description: string
+  ui_type: string
 }
 
 export class PublicForm {
@@ -26,6 +27,10 @@ export class PublicForm {
 
   public description(): string {
     return this._data.description
+  }
+
+  public uiType(): string {
+    return this._data.ui_type
   }
 
   public name(): string {

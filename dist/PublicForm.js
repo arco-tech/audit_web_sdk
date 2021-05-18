@@ -16,6 +16,9 @@ var PublicForm = /** @class */ (function () {
     PublicForm.prototype.description = function () {
         return this._data.description;
     };
+    PublicForm.prototype.uiType = function () {
+        return this._data.ui_type;
+    };
     PublicForm.prototype.name = function () {
         return this._data.name;
     };
