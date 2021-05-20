@@ -105,33 +105,33 @@ function upload(
   state.statuses.push(uploadStatus)
 
   return new Promise((resolve, reject) => {
-    (file as any).text()
-      .then((content) => {
-        FileUploadAPI.upload({
-          name: file.name,
-          content,
-          question_id: questionID,
+    const reader = new FileReader()
+
+    reader.onload = (event) => {
+      const content = (event.target.result as string).split(",")[1]
+
+      FileUploadAPI.upload({
+        name: file.name,
+        content,
+        question_id: questionID,
+      })
+        .then((fileUpload) => {
+          uploadStatus.status = "success"
+
+          const value = (changeset.getValue(name) || [])
+          changeset.change(name,
+            value.concat([{ id: fileUpload.id, name: fileUpload.name }]))
+
+          resolve(fileUpload)
+          m.redraw()
         })
-          .then((fileUpload) => {
-            uploadStatus.status = "success"
+        .catch((error) => {
+          uploadStatus.status = "failed"
+          reject(error)
+          m.redraw()
+        })
+    }
 
-            const value = (changeset.getValue(name) || [])
-            changeset.change(name,
-              value.concat([{ id: fileUpload.id, name: fileUpload.name }]))
-
-            resolve(fileUpload)
-            m.redraw()
-          })
-          .catch((error) => {
-            uploadStatus.status = "failed"
-            reject(error)
-            m.redraw()
-          })
-      })
-      .catch((error) => {
-        uploadStatus.status = "failed"
-        reject(error)
-        m.redraw()
-      })
+    reader.readAsDataURL(file)
   })
 }
