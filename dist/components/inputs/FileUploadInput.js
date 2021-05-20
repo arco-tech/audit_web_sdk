@@ -80,8 +80,9 @@ function upload(changeset, name, file, questionID, state) {
     var uploadStatus = { name: file.name, status: "uploading..." };
     state.statuses.push(uploadStatus);
     return new Promise(function (resolve, reject) {
-        file.text()
-            .then(function (content) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var content = event.target.result.split(",")[1];
             FileUploadAPI.upload({
                 name: file.name,
                 content: content,
@@ -99,12 +100,8 @@ function upload(changeset, name, file, questionID, state) {
                 reject(error);
                 m.redraw();
             });
-        })
-            .catch(function (error) {
-            uploadStatus.status = "failed";
-            reject(error);
-            m.redraw();
-        });
+        };
+        reader.readAsDataURL(file);
     });
 }
 //# sourceMappingURL=FileUploadInput.js.map
