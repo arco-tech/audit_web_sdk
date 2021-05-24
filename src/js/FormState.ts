@@ -245,7 +245,7 @@ export class FormState {
     section: PublishedFormSection,
     ignoreQuestions: string[] = [],
   ): number {
-    return this.sectionsProgress([section], ignoreQuestions);
+    return this.sectionsProgress(section ? [section] : [], ignoreQuestions);
   }
 
   public summary(
