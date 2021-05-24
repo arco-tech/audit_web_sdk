@@ -180,7 +180,7 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.sectionProgress = function (section, ignoreQuestions) {
         if (ignoreQuestions === void 0) { ignoreQuestions = []; }
-        return this.sectionsProgress([section], ignoreQuestions);
+        return this.sectionsProgress(section ? [section] : [], ignoreQuestions);
     };
     FormState.prototype.summary = function (section, values) {
         return FormLogic.summary(section, this.location(), values || this.values());
