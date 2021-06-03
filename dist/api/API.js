@@ -32,9 +32,6 @@ function request(method, path, options) {
         return data;
     })
         .catch(function (error) {
-        if (error.code === 401) {
-            window.location.reload();
-        }
         throw error;
     });
 }
