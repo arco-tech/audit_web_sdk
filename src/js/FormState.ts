@@ -110,9 +110,7 @@ export class FormState {
         this._data.filteredSectionIDs.indexOf(section.id()) !== -1
       );
     });
-    if (filtered.length === 0) {
-      return sections
-    }
+    return filtered.length === 0 ? sections : filtered
   }
 
   public isExcludedSection(section: PublishedFormSection): boolean {
