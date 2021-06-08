@@ -104,12 +104,15 @@ export class FormState {
   public filterSections(
     sections: PublishedFormSection[],
   ): PublishedFormSection[] {
-    return sections.filter((section: PublishedFormSection) => {
+    const filtered = sections.filter((section: PublishedFormSection) => {
       return (
         section.required() ||
         this._data.filteredSectionIDs.indexOf(section.id()) !== -1
       );
     });
+    if (filtered.length === 0) {
+      return sections
+    }
   }
 
   public isExcludedSection(section: PublishedFormSection): boolean {
@@ -206,8 +209,11 @@ export class FormState {
   public findCurrentSection(
     publishedForm: PublishedForm,
   ): PublishedFormSection {
-    const sections = this.filterSections(publishedForm.form().sections());
+    let sections = this.filterSections(publishedForm.form().sections());
     const currentID = this.currentSectionID();
+    if (sections.length === 0) {
+      sections = publishedForm.form().sections()
+    }
     return sections.find((section) => {
       return section.id() === currentID;
     }) || sections[0];
