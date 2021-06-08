@@ -104,12 +104,13 @@ export class FormState {
   public filterSections(
     sections: PublishedFormSection[],
   ): PublishedFormSection[] {
-    return sections.filter((section: PublishedFormSection) => {
+    const filtered = sections.filter((section: PublishedFormSection) => {
       return (
         section.required() ||
         this._data.filteredSectionIDs.indexOf(section.id()) !== -1
       );
     });
+    return filtered.length === 0 ? sections : filtered
   }
 
   public isExcludedSection(section: PublishedFormSection): boolean {
