@@ -207,11 +207,8 @@ export class FormState {
   public findCurrentSection(
     publishedForm: PublishedForm,
   ): PublishedFormSection {
-    let sections = this.filterSections(publishedForm.form().sections());
+    const sections = this.filterSections(publishedForm.form().sections());
     const currentID = this.currentSectionID();
-    if (sections.length === 0) {
-      sections = publishedForm.form().sections()
-    }
     return sections.find((section) => {
       return section.id() === currentID;
     }) || sections[0];
