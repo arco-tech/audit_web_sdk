@@ -67,10 +67,11 @@ var FormState = /** @class */ (function () {
     };
     FormState.prototype.filterSections = function (sections) {
         var _this = this;
-        return sections.filter(function (section) {
+        var filtered = sections.filter(function (section) {
             return (section.required() ||
                 _this._data.filteredSectionIDs.indexOf(section.id()) !== -1);
         });
+        return filtered.length === 0 ? sections : filtered;
     };
     FormState.prototype.isExcludedSection = function (section) {
         return this._data.filteredSectionIDs.indexOf(section.id()) === -1;
