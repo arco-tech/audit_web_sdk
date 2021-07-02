@@ -7,7 +7,9 @@ function summary(section, location, values) {
     var goesTo = null;
     section.questions().forEach(function (question) {
         if (!validateLocalisation(question, location)) {
-            if (goesTo.type() === "question" && goesTo.id() === question.id()) {
+            if (goesTo &&
+                goesTo.type() === "question" &&
+                goesTo.id() === question.id()) {
                 goesTo = null;
             }
             ignoredQuestions.push(question);

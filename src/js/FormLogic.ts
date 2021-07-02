@@ -24,7 +24,11 @@ export function summary(
 
   section.questions().forEach((question) => {
     if (!validateLocalisation(question, location)) {
-      if (goesTo.type() === "question" && goesTo.id() === question.id()) {
+      if (
+        goesTo &&
+        goesTo.type() === "question" &&
+        goesTo.id() === question.id()
+      ) {
         goesTo = null
       }
       ignoredQuestions.push(question);
