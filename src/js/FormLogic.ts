@@ -23,12 +23,15 @@ export function summary(
   let goesTo: PublishedFormGoesTo | null = null;
 
   section.questions().forEach((question) => {
-    if (
-      !validateLocalisation(question, location) || (
-        goesTo && (
-          goesTo.type() === "next_section" ||
-          (goesTo.type() === "question" && goesTo.id() !== question.id())
-        )
+    if (!validateLocalisation(question, location)) {
+      if (goesTo.type() === "question" && goesTo.id() === question.id()) {
+        goesTo = null
+      }
+      ignoredQuestions.push(question);
+    } else if (
+      goesTo && (
+        goesTo.type() === "next_section" ||
+        (goesTo.type() === "question" && goesTo.id() !== question.id())
       )
     ) {
       ignoredQuestions.push(question);
