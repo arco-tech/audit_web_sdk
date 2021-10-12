@@ -1,11 +1,12 @@
 import * as m from "mithril";
-import {Changeset} from "../Changeset";
-import {FormState} from "../FormState";
-import {PublishedForm} from "../PublishedForm";
-import {FormField} from "./FormField";
-import {QuestionInput} from "./inputs/QuestionInput";
-import {PreviousValues} from "../PublicFormSubmission"
-import {PreviousValue} from "./PreviousValue"
+import { Changeset } from "../Changeset";
+import { FormState } from "../FormState";
+import { PublishedForm} from "../PublishedForm";
+import { FormField } from "./FormField";
+import { QuestionInput } from "./inputs/QuestionInput";
+import { PreviousValues } from "../PublicFormSubmission"
+import { FormSaver } from "../FormSaver";
+import { PreviousValue } from "./PreviousValue"
 
 interface Attrs {
   publishedForm: PublishedForm;
@@ -19,9 +20,13 @@ type Vnode = m.Vnode<Attrs>;
 export const FormQuestionBox: m.Component<Attrs> = {
   oninit: (vnode: Vnode) => {
     vnode.state.changeset = new Changeset(vnode.attrs.formState.values());
+    /*
     vnode.state.changeset.listen((id, value) => {
       vnode.attrs.formState.changeValue(id, value);
     });
+    */
+    vnode.state.formSaver =
+      new FormSaver(vnode.attrs.formState, vnode.state.changeset)
   },
 
   view: ({
@@ -32,7 +37,10 @@ export const FormQuestionBox: m.Component<Attrs> = {
       hideIgnored,
       previousValues = {},
     },
-    state: { changeset },
+    state: {
+      changeset,
+      formSaver,
+    },
   }: Vnode,
   ) => {
     const section = formState.findCurrentSection(publishedForm);
@@ -48,6 +56,7 @@ export const FormQuestionBox: m.Component<Attrs> = {
               label: question.label(),
               input: QuestionInput,
               question,
+              formSaver,
             }),
             previousValues && 
               previousValues[question.namedID()] && 
