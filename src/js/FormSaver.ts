@@ -17,7 +17,7 @@ export class FormSaver {
   private lastSavedAt: Date
   private lastChangedAt: Date
   private lastErrorAt: Date
-  private saveTask: Task
+  private saveTask: Task<any>
 
   constructor(formState: FormState, changeset: Changeset) {
     this.formState = formState
@@ -62,7 +62,7 @@ export class FormSaver {
     }, loopFrequency)
   }
 
-  private save(): void {
+  private save(): Promise<any> {
     setTimeout(() => { m.redraw() })
     this.formState.changeValues(this.changeset.getValues())
     return PublicFormSubmissionAPI.update(this.formState)

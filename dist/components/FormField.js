@@ -26,9 +26,16 @@ var m = require("mithril");
 var ErrorMessage_1 = require("./ErrorMessage");
 exports.FormField = {
     view: function (_a) {
-        var _b = _a.attrs, label = _b.label, name = _b.name, changeset = _b.changeset, input = _b.input, attrs = __rest(_b, ["label", "name", "changeset", "input"]);
+        var _b = _a.attrs, label = _b.label, name = _b.name, changeset = _b.changeset, formSaver = _b.formSaver, input = _b.input, question = _b.question, attrs = __rest(_b, ["label", "name", "changeset", "formSaver", "input", "question"]);
+        var saved = formSaver && !formSaver.valueDiff(question.id());
+        var saving = formSaver && !saved && formSaver.isSaving();
         return m(".form__field", [
-            label && m(".form__field__label", label),
+            formSaver && m(".form__field__label", [
+                m("div", label),
+                saved && m(".form__field__label__status", "Saved"),
+                saving && m(".form__field__label__status", "Saving..."),
+            ]),
+            !formSaver && label && m(".form__field__label", label),
             m(input, __assign({ name: name, changeset: changeset }, attrs)),
             m(ErrorMessage_1.ErrorMessage, { error: changeset.getFieldError(name) }),
         ]);
