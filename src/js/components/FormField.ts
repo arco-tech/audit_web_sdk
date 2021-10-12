@@ -27,7 +27,7 @@ export const FormField: m.Component<Attrs> = {
         saving && m(".form__field__label__status", "Saving..."),
       ]),
       !formSaver && label && m(".form__field__label", label),
-      m(input, {name, changeset, ...attrs}),
+      m(input, {name, changeset, question, ...attrs}),
       m(ErrorMessage, {error: changeset.getFieldError(name)}),
     ]);
   },

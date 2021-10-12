@@ -36,7 +36,7 @@ exports.FormField = {
                 saving && m(".form__field__label__status", "Saving..."),
             ]),
             !formSaver && label && m(".form__field__label", label),
-            m(input, __assign({ name: name, changeset: changeset }, attrs)),
+            m(input, __assign({ name: name, changeset: changeset, question: question }, attrs)),
             m(ErrorMessage_1.ErrorMessage, { error: changeset.getFieldError(name) }),
         ]);
     },
