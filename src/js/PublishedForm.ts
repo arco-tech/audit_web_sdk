@@ -446,6 +446,28 @@ export class PublishedForm {
     return new PublishedFormForm(this._data.form)
   }
 
+  public questionByID(id: number): PublishedFormQuestion | null {
+    return this.findQuestion((question) => question.id() === id)
+  }
+
+  public questionByNamedID(namedID: string): PublishedFormQuestion | null {
+    return this.findQuestion((question) => question.namedID() === namedID)
+  }
+
+  public findQuestion(
+    check: (question: PublishedFormQuestion) => boolean,
+  ): PublishedFormQuestion | null {
+    this.form().sections().forEach((section) => {
+      section.questions().forEach((question) => {
+        if (check(question)) {
+          return question
+        }
+      })
+    })
+
+    return null
+  }
+
   public formTypeID(): number {
     return this._data.form_type_id
   }
