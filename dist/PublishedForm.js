@@ -274,6 +274,22 @@ var PublishedForm = /** @class */ (function () {
     PublishedForm.prototype.form = function () {
         return new PublishedFormForm(this._data.form);
     };
+    PublishedForm.prototype.questionByID = function (id) {
+        return this.findQuestion(function (question) { return question.id() === id; });
+    };
+    PublishedForm.prototype.questionByNamedID = function (namedID) {
+        return this.findQuestion(function (question) { return question.namedID() === namedID; });
+    };
+    PublishedForm.prototype.findQuestion = function (check) {
+        this.form().sections().forEach(function (section) {
+            section.questions().forEach(function (question) {
+                if (check(question)) {
+                    return question;
+                }
+            });
+        });
+        return null;
+    };
     PublishedForm.prototype.formTypeID = function () {
         return this._data.form_type_id;
     };
