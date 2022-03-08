@@ -41,7 +41,8 @@ export class FormSaver {
 
   valueDiff(id: number | string): boolean {
     id = `${id}`
-    return this.changeset.getOriginal(id) !== this.changeset.getValue(id)
+    return JSON.stringify(this.changeset.getOriginal(id)) !==
+      JSON.stringify(this.changeset.getValue(id))
   }
 
   private loop(): void {
