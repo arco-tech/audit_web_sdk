@@ -28,8 +28,9 @@ export const InputList: m.Component<Attrs> = {
             m("input", {
               value,
               oninput: (event) => {
-                valueList[index] = event.target.value;
-                changeset.change(name, valueList);
+                const newValueList = [...valueList]
+                newValueList[index] = event.target.value;
+                changeset.change(name, newValueList);
               },
               ...attrs,
             }),
@@ -41,8 +42,7 @@ export const InputList: m.Component<Attrs> = {
             m("img.cursor-pointer", {
               src: "/images/icons/cross-circle-red.svg",
               onclick: () => {
-                valueList.splice(index, 1);
-                changeset.change(name, valueList);
+                changeset.change(name, valueList.filter((_, i) => i !== index));
               },
             }),
           ]),
@@ -52,8 +52,7 @@ export const InputList: m.Component<Attrs> = {
         selector: ".margin-top-small.cursor-pointer",
         modifiers: "align-center",
         onclick: () => {
-          valueList.push("");
-          changeset.change(name, valueList);
+          changeset.change(name, [...valueList, ""]);
         },
       }, [
         m("img.margin-right-small", {

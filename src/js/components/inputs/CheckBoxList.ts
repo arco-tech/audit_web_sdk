@@ -19,11 +19,10 @@ export const CheckBoxList: m.Component<Attrs> = {
       return m(".check-box", {
         onclick: () => {
           if (active) {
-            selected.splice(selected.indexOf(value), 1);
+            changeset.change(name, selected.filter((v) => v !== value))
           } else {
-            selected.push(value);
+            changeset.change(name, [...selected, value])
           }
-          changeset.change(name, selected);
         },
       }, [
         m(block("check-box__tick-box", active ? ["active"] : [])),
