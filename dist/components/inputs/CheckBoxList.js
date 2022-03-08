@@ -1,4 +1,11 @@
 "use strict";
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
@@ -12,12 +19,11 @@ exports.CheckBoxList = {
             return m(".check-box", {
                 onclick: function () {
                     if (active) {
-                        selected.splice(selected.indexOf(value), 1);
+                        changeset.change(name, selected.filter(function (v) { return v !== value; }));
                     }
                     else {
-                        selected.push(value);
+                        changeset.change(name, __spreadArrays(selected, [value]));
                     }
-                    changeset.change(name, selected);
                 },
             }, [
                 m(BEM_1.block("check-box__tick-box", active ? ["active"] : [])),

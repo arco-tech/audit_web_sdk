@@ -31,7 +31,8 @@ var FormSaver = /** @class */ (function () {
     };
     FormSaver.prototype.valueDiff = function (id) {
         id = "" + id;
-        return this.changeset.getOriginal(id) !== this.changeset.getValue(id);
+        return JSON.stringify(this.changeset.getOriginal(id)) !==
+            JSON.stringify(this.changeset.getValue(id));
     };
     FormSaver.prototype.loop = function () {
         var _this = this;

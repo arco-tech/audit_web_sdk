@@ -21,6 +21,13 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var Column_1 = require("../Column");
@@ -40,8 +47,9 @@ exports.InputList = {
                 }, [
                     m(Column_1.Column, { flex: 1 }, [
                         m("input", __assign({ value: value, oninput: function (event) {
-                                valueList[index] = event.target.value;
-                                changeset.change(name, valueList);
+                                var newValueList = __spreadArrays(valueList);
+                                newValueList[index] = event.target.value;
+                                changeset.change(name, newValueList);
                             } }, attrs)),
                     ]),
                     index !== 0 && m(Column_1.Column, {
@@ -51,8 +59,7 @@ exports.InputList = {
                         m("img.cursor-pointer", {
                             src: "/images/icons/cross-circle-red.svg",
                             onclick: function () {
-                                valueList.splice(index, 1);
-                                changeset.change(name, valueList);
+                                changeset.change(name, valueList.filter(function (_, i) { return i !== index; }));
                             },
                         }),
                     ]),
@@ -62,8 +69,7 @@ exports.InputList = {
                 selector: ".margin-top-small.cursor-pointer",
                 modifiers: "align-center",
                 onclick: function () {
-                    valueList.push("");
-                    changeset.change(name, valueList);
+                    changeset.change(name, __spreadArrays(valueList, [""]));
                 },
             }, [
                 m("img.margin-right-small", {
