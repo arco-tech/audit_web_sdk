@@ -23,8 +23,10 @@ export const FormField: m.Component<Attrs> = {
     return m(".form__field", [
       formSaver && m(".form__field__label", [
         m("div", label),
-        saved && m(".form__field__label__status", "Saved"),
-        saving && m(".form__field__label__status", "Saving..."),
+        m(".form__field__label__status", [
+          saved && "Saved",
+          saving && "Saving...",
+        ]),
       ]),
       !formSaver && label && m(".form__field__label", label),
       m(input, {name, changeset, question, ...attrs}),
