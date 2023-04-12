@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.findElementForText = exports.elementNotDeepContainsText = exports.elementDeepContainsText = void 0;
 function elementDeepContainsText(t, element, text) {
     if (findElementForText(element, text)) {
         t.pass("Element contains text");

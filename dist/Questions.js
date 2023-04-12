@@ -10,14 +10,17 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.overrideRender = exports.setValue = exports.render = exports.findOption = exports.isComplete = exports.goesTo = void 0;
 var m = require("mithril");
 var CheckBoxList_1 = require("./components/inputs/CheckBoxList");
 var DateInput_1 = require("./components/inputs/DateInput");
@@ -92,7 +95,7 @@ var types = {
         setValue: function (question, values, changeset) {
             var list = typeof values == "string" ? values.split(",") : values;
             if (Array.isArray(list)) {
-                changeset.change(question.id().toString(), __spreadArrays(list));
+                changeset.change(question.id().toString(), __spreadArray([], list, true));
                 return true;
             }
             return false;
@@ -319,7 +322,7 @@ function goesTo(question, value) {
         }
     }
     else {
-        Log_1.log("error", ["Question type isn't defined", question.type()]);
+        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
     }
 }
 exports.goesTo = goesTo;
@@ -328,7 +331,7 @@ function isComplete(question, value) {
         return questionType(question).isComplete(question, value);
     }
     else {
-        Log_1.log("error", ["Question type isn't defined", question.type()]);
+        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
     }
 }
 exports.isComplete = isComplete;
@@ -343,7 +346,7 @@ function render(question, attrs) {
         return questionType(question).render(question, attrs);
     }
     else {
-        Log_1.log("error", ["Question type isn't defined", question.type()]);
+        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
         return null;
     }
 }
@@ -353,7 +356,7 @@ function setValue(question, value, changeset) {
         return questionType(question).setValue(question, value, changeset);
     }
     else {
-        Log_1.log("error", ["Question type isn't defined", question.type()]);
+        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
         return null;
     }
 }
@@ -363,7 +366,7 @@ function overrideRender(questionType, render) {
         types[questionType].render = render;
     }
     else {
-        throw new Error("Question type '" + questionType + " doesn't exist");
+        throw new Error("Question type '".concat(questionType, " doesn't exist"));
     }
 }
 exports.overrideRender = overrideRender;

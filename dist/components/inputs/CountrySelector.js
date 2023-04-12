@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CountrySelector = void 0;
 var m = require("mithril");
 var LocationAPI = require("../../api/public/LocationAPI");
 var Selector_1 = require("./Selector");

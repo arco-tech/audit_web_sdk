@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mockOptionData = exports.mockQuestionData = exports.mockQuestion = exports.mockSectionData = exports.mockSection = exports.mockFormData = exports.mockPublishedForm = void 0;
 var PublishedForm_1 = require("../PublishedForm");
 function mockPublishedForm(attrs) {
     return new PublishedForm_1.PublishedForm(__assign({ id: 1, version: "1.0", inserted_at: "2019-01-01T00:00:00", form: mockFormData(attrs.form || {}), form_type_id: 1 }, attrs));

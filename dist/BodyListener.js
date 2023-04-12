@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.remove = exports.listen = void 0;
 var Log_1 = require("./Log");
 var idCounter = 1;
 var listeners = {};
@@ -13,7 +14,7 @@ function listen(eventName, callback) {
                     callback(event);
                 }
                 catch (error) {
-                    Log_1.log("error", error);
+                    (0, Log_1.log)("error", error);
                 }
             });
         });

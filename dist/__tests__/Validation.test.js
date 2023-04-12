@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
 var Validation_1 = require("../Validation");
-ava_1.default("validate succeeds and fails", function (t) {
+(0, ava_1.default)("validate succeeds and fails", function (t) {
     var constraints = {
         accept: {
             true: true,
@@ -15,8 +15,8 @@ ava_1.default("validate succeeds and fails", function (t) {
             length: { min: 6 },
         },
     };
-    t.deepEqual(Validation_1.validate(constraints, { accept: true, name: "Sam", password: "abc123" }), { valid: true, errors: {} });
-    t.deepEqual(Validation_1.validate(constraints, { accept: false, name: null, password: "abc" }), {
+    t.deepEqual((0, Validation_1.validate)(constraints, { accept: true, name: "Sam", password: "abc123" }), { valid: true, errors: {} });
+    t.deepEqual((0, Validation_1.validate)(constraints, { accept: false, name: null, password: "abc" }), {
         valid: false,
         errors: {
             accept: ["required"],
@@ -25,7 +25,7 @@ ava_1.default("validate succeeds and fails", function (t) {
         },
     });
 });
-ava_1.default("custom validation messages", function (t) {
+(0, ava_1.default)("custom validation messages", function (t) {
     var constraints = {
         accept: {
             true: { message: "must be accepted" },
@@ -34,7 +34,7 @@ ava_1.default("custom validation messages", function (t) {
             number: { message: "must be a valid count" },
         },
     };
-    t.deepEqual(Validation_1.validate(constraints, { accept: false, count: null }), {
+    t.deepEqual((0, Validation_1.validate)(constraints, { accept: false, count: null }), {
         valid: false,
         errors: {
             accept: ["must be accepted"],
@@ -42,7 +42,7 @@ ava_1.default("custom validation messages", function (t) {
         },
     });
 });
-ava_1.default("custom validator", function (t) {
+(0, ava_1.default)("custom validator", function (t) {
     var constraints = {
         password: {
             length: { min: 6 },
@@ -53,8 +53,8 @@ ava_1.default("custom validator", function (t) {
             },
         },
     };
-    t.deepEqual(Validation_1.validate(constraints, { password: "abc123", confirm_password: "abc123" }), { valid: true, errors: {} });
-    t.deepEqual(Validation_1.validate(constraints, { password: "abc123", confirm_password: "invalid" }), {
+    t.deepEqual((0, Validation_1.validate)(constraints, { password: "abc123", confirm_password: "abc123" }), { valid: true, errors: {} });
+    t.deepEqual((0, Validation_1.validate)(constraints, { password: "abc123", confirm_password: "invalid" }), {
         valid: false,
         errors: {
             confirm_password: ["must match password"],

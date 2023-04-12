@@ -22,11 +22,12 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Column = void 0;
 var m = require("mithril");
 exports.Column = {
     view: function (_a) {
         var _b = _a.attrs, _c = _b.selector, selector = _c === void 0 ? "" : _c, flex = _b.flex, attrs = __rest(_b, ["selector", "flex"]), children = _a.children;
-        return m(selector + ".column", __assign({ style: flex ? "flex: " + flex + ";" : "" }, attrs), children);
+        return m(selector + ".column", __assign({ style: flex ? "flex: ".concat(flex, ";") : "" }, attrs), children);
     },
 };
 //# sourceMappingURL=Column.js.map

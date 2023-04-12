@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.validate = exports.constraintValidators = void 0;
 exports.constraintValidators = {
     true: function (value, options) {
         if (value !== true && options) {
@@ -15,10 +16,10 @@ exports.constraintValidators = {
     length: function (value, options) {
         if (typeof options === "object" && typeof value === "string") {
             if (options.hasOwnProperty("min") && options.min > value.length) {
-                return ["must be at least " + options.min + " characters"];
+                return ["must be at least ".concat(options.min, " characters")];
             }
             else if (options.hasOwnProperty("max") && options.max < value.length) {
-                return ["must be at most " + options.max + " characters"];
+                return ["must be at most ".concat(options.max, " characters")];
             }
         }
         return [];

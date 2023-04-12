@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -41,7 +41,7 @@ var m = require("mithril");
 var Mock = require("../../tests/Mock");
 var Events_1 = require("../../tests/Events");
 var Button_1 = require("../Button");
-ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var button, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -56,7 +56,7 @@ ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); });
-ava_1.default("renders selector", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("renders selector", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var button, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -70,7 +70,7 @@ ava_1.default("renders selector", function (t) { return __awaiter(void 0, void 0
         }
     });
 }); });
-ava_1.default("renders modifiers", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("renders modifiers", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var button, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -84,7 +84,7 @@ ava_1.default("renders modifiers", function (t) { return __awaiter(void 0, void 
         }
     });
 }); });
-ava_1.default("onClick is called when clicked", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("onClick is called when clicked", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var clicked, button, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -94,7 +94,7 @@ ava_1.default("onClick is called when clicked", function (t) { return __awaiter(
                 return [4 /*yield*/, Mock.mount(button)];
             case 1:
                 element = _a.sent();
-                Events_1.simulateMouseClick(element);
+                (0, Events_1.simulateMouseClick)(element);
                 return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve); })];
             case 2:
                 _a.sent();

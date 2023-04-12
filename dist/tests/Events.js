@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.simulateInput = exports.simulateMouseClick = void 0;
 function simulateMouseClick(element) {
     element.dispatchEvent(new window.MouseEvent("click", {
         bubbles: true,

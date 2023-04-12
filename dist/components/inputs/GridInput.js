@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GridInput = void 0;
 var m = require("mithril");
 exports.GridInput = {
     view: function (_a) {
@@ -112,7 +113,7 @@ function applySums(gridValue, settings) {
                         }
                     }
                 }
-                gridValue[rowIndex][columnIndex] = "" + sum;
+                gridValue[rowIndex][columnIndex] = "".concat(sum);
             }
         }
     }

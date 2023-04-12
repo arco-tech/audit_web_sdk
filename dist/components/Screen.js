@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Screen = void 0;
 var m = require("mithril");
 var Footer_1 = require("./Footer");
 var Header_1 = require("./Header");

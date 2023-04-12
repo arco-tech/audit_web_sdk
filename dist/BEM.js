@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.modifiers = exports.block = void 0;
 function block(blockName, modifierNames) {
-    return "." + blockName + modifiers(blockName, modifierNames || []);
+    return ".".concat(blockName).concat(modifiers(blockName, modifierNames || []));
 }
 exports.block = block;
 function modifiers(blockName, modifierNames) {
@@ -11,11 +12,11 @@ function modifiers(blockName, modifierNames) {
             return typeof modifierName === "string";
         })
             .map(function (modifierName) {
-            return "." + blockName + "--" + modifierName;
+            return ".".concat(blockName, "--").concat(modifierName);
         }).join("");
     }
     else if (typeof modifierNames === "string") {
-        return "." + blockName + "--" + modifierNames;
+        return ".".concat(blockName, "--").concat(modifierNames);
     }
     else {
         return "";

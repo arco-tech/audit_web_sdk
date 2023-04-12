@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProgressBar = void 0;
 var m = require("mithril");
 exports.ProgressBar = {
     oninit: function (_a) {
@@ -18,8 +19,8 @@ exports.ProgressBar = {
         if (progress > 100) {
             progress = 100;
         }
-        return m(".progress-bar" + (color ? ".bg-" + color : ""), [
-            m(".progress-bar__progress", { style: "width: " + progress + "%" }),
+        return m(".progress-bar" + (color ? ".bg-".concat(color) : ""), [
+            m(".progress-bar__progress", { style: "width: ".concat(progress, "%") }),
         ]);
     },
 };

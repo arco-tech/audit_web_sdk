@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RadioList = void 0;
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
 exports.RadioList = {
@@ -11,8 +12,8 @@ exports.RadioList = {
             return m(".radio", {
                 onclick: function () { return changeset.change(name, value); },
             }, [
-                m(BEM_1.block("radio__dot", active === value ? ["active"] : [])),
-                m(BEM_1.block("radio__text", active === value ? ["active"] : []), label),
+                m((0, BEM_1.block)("radio__dot", active === value ? ["active"] : [])),
+                m((0, BEM_1.block)("radio__text", active === value ? ["active"] : []), label),
             ]);
         });
     },

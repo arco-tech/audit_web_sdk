@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PublishedForm = exports.PublishedFormForm = exports.PublishedFormSection = exports.PublishedFormSectionIcon = exports.PublishedFormQuestion = exports.PublishedFormQuestionMetadata = exports.PublishedFormQuestionTableSettings = exports.PublishedFormQuestionGridSettings = exports.PublishedFormQuestionColumnSettings = exports.PublishedFormServiceType = exports.PublishedFormOption = exports.PublishedFormAction = exports.PublishedFormGoesTo = void 0;
 var PublishedFormGoesTo = /** @class */ (function () {
     function PublishedFormGoesTo(data) {
         this._data = data;
@@ -227,7 +228,7 @@ var PublishedFormSection = /** @class */ (function () {
     };
     PublishedFormSection.prototype.iconURL = function (color) {
         var icon = (this.icon() ? this.icon().namedID() : "business").toLowerCase();
-        return "/images/section-icons/" + icon + "-" + (color || "black") + ".svg";
+        return "/images/section-icons/".concat(icon, "-").concat(color || "black", ".svg");
     };
     PublishedFormSection.prototype.required = function () {
         return this._data.required || false;

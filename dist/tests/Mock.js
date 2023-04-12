@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mount = exports.createElement = void 0;
 var m = require("mithril");
 function createElement(parent) {
     var element = document.createElement("div");

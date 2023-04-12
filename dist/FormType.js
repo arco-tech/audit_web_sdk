@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormType = void 0;
 var FormType = /** @class */ (function () {
     function FormType(data) {
         this._data = data;

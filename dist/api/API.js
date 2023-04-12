@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.setEndpoint = exports.request = void 0;
 var m = require("mithril");
 var Environment_1 = require("../Environment");
 var Storage_1 = require("../Storage");
@@ -21,10 +22,10 @@ var config = {
 function request(method, path, options) {
     if (options === void 0) { options = {}; }
     var prefix = options.pathPrefix || pathPrefix;
-    var url = Environment_1.apiEndpoint + "/" + prefix + "/" + path;
-    var token = options.jwt || Storage_1.loadAuthToken();
+    var url = "".concat(Environment_1.apiEndpoint, "/").concat(prefix, "/").concat(path);
+    var token = options.jwt || (0, Storage_1.loadAuthToken)();
     if (token) {
-        options.headers = __assign({ Authorization: "Bearer " + token }, (options.headers || {}));
+        options.headers = __assign({ Authorization: "Bearer ".concat(token) }, (options.headers || {}));
     }
     return m.request(__assign({ method: method, url: url }, options))
         .then(function (_a) {

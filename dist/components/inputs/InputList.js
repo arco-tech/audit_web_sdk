@@ -21,14 +21,17 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.InputList = void 0;
 var m = require("mithril");
 var Column_1 = require("../Column");
 var ColumnContainer_1 = require("../ColumnContainer");
@@ -47,7 +50,7 @@ exports.InputList = {
                 }, [
                     m(Column_1.Column, { flex: 1 }, [
                         m("input", __assign({ value: value, oninput: function (event) {
-                                var newValueList = __spreadArrays(valueList);
+                                var newValueList = __spreadArray([], valueList, true);
                                 newValueList[index] = event.target.value;
                                 changeset.change(name, newValueList);
                             } }, attrs)),
@@ -69,7 +72,7 @@ exports.InputList = {
                 selector: ".margin-top-small.cursor-pointer",
                 modifiers: "align-center",
                 onclick: function () {
-                    changeset.change(name, __spreadArrays(valueList, [""]));
+                    changeset.change(name, __spreadArray(__spreadArray([], valueList, true), [""], false));
                 },
             }, [
                 m("img.margin-right-small", {

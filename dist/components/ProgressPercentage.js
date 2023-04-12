@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProgressPercentage = void 0;
 var m = require("mithril");
 var BEM_1 = require("../BEM");
 exports.ProgressPercentage = {
@@ -15,9 +16,9 @@ exports.ProgressPercentage = {
         var modifiers = complete ? ["complete"] : [];
         var color = vnode.attrs.color || (complete ? "primary" : "grey");
         var selector = (vnode.attrs.selector || "") +
-            (".color-" + color) +
-            BEM_1.block(".progress-percentage", modifiers);
-        return m(selector, Math.round(vnode.state.display) + "%");
+            ".color-".concat(color) +
+            (0, BEM_1.block)(".progress-percentage", modifiers);
+        return m(selector, "".concat(Math.round(vnode.state.display), "%"));
     },
 };
 function updateState(vnode) {

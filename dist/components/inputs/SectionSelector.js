@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SectionSelector = void 0;
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
 exports.SectionSelector = {
@@ -12,8 +13,8 @@ exports.SectionSelector = {
                     changeset.change(section.id(), active ? false : true);
                 },
             }, [
-                m(BEM_1.block("icon-selector__icon", active ? "active" : []), {
-                    style: "background-image: url(\"" + section.iconURL() + "\")",
+                m((0, BEM_1.block)("icon-selector__icon", active ? "active" : []), {
+                    style: "background-image: url(\"".concat(section.iconURL(), "\")"),
                 }),
                 m(".icon-selector__label", section.name()),
             ]);

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isValid = exports.decodePayload = void 0;
 function fromBase64(base64) {
     if (window.atob) {
         return window.atob(base64);

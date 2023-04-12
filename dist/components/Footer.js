@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Footer = void 0;
 var m = require("mithril");
 var BEM_1 = require("../BEM");
 var Column_1 = require("./Column");
@@ -28,13 +29,13 @@ exports.Footer = {
                             ]),
                             m(Column_1.Column, { flex: 1 }, [
                                 m("h4.footer__title", "FOLLOW US"),
-                                m("a" + BEM_1.block("footer__link", ["icon", "facebook-icon"]), {
+                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "facebook-icon"]), {
                                     href: "https://facebook.com/businesslinkpacific",
                                 }, "Facebook"),
-                                m("a" + BEM_1.block("footer__link", ["icon", "twitter-icon"]), {
+                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "twitter-icon"]), {
                                     href: "https://twitter.com/businesslinkpac",
                                 }, "Twitter"),
-                                m("a" + BEM_1.block("footer__link", ["icon", "linkedin-icon"]), {
+                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "linkedin-icon"]), {
                                     href: "https://linkedin.com/company/business-link-pacific",
                                 }, "Linkedin"),
                             ]),

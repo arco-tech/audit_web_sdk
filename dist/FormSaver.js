@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormSaver = void 0;
 var m = require("mithril");
 var PublicFormSubmissionAPI = require("./api/public_forms/PublicFormSubmissionAPI");
 var Task_1 = require("./Task");
@@ -30,7 +31,7 @@ var FormSaver = /** @class */ (function () {
             .filter(function (id) { return id; });
     };
     FormSaver.prototype.valueDiff = function (id) {
-        id = "" + id;
+        id = "".concat(id);
         return JSON.stringify(this.changeset.getOriginal(id)) !==
             JSON.stringify(this.changeset.getValue(id));
     };
@@ -63,7 +64,7 @@ var FormSaver = /** @class */ (function () {
         })
             .catch(function (error) {
             _this.lastErrorAt = new Date();
-            Log_1.log("error", ["failed to update submission", error]);
+            (0, Log_1.log)("error", ["failed to update submission", error]);
         });
     };
     FormSaver.prototype.isSaving = function () {

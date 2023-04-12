@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.locations = exports.locationByCode = exports.location = void 0;
 var LocationAPI = require("./api/public/LocationAPI");
 var state = {
     locations: null,

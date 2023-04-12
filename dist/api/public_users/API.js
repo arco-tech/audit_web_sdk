@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.request = void 0;
 var API = require("../API");
 function request(method, path, options) {
     if (options === void 0) { options = {}; }

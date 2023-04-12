@@ -11,6 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DateInput = void 0;
 var m = require("mithril");
 var DateTime = require("../../DateTime");
 var BEM_1 = require("../../BEM");
@@ -36,7 +37,7 @@ exports.DateInput = {
     view: function (_a) {
         var _b = _a.attrs, changeset = _b.changeset, name = _b.name, _c = _b.placeholder, placeholder = _c === void 0 ? "Select a Date" : _c, attrs = __rest(_b, ["changeset", "name", "placeholder"]), state = _a.state;
         var date = state.date;
-        return m(BEM_1.block("date-input", state.expand && "active"), {
+        return m((0, BEM_1.block)("date-input", state.expand && "active"), {
             onclick: function () {
                 if (!state.expand) {
                     state.expand = true;
@@ -100,11 +101,11 @@ var Picker = {
     view: function (_a) {
         var _b = _a.attrs, display = _b.display, change = _b.change;
         return m(".date-input__picker-dropdown__picker", [
-            m(BEM_1.block("date-input__picker-dropdown__picker__arrow", "up"), {
+            m((0, BEM_1.block)("date-input__picker-dropdown__picker__arrow", "up"), {
                 onclick: function () { change(1); },
             }),
             m(".date-input__picker-dropdown__picker__value", display),
-            m(BEM_1.block("date-input__picker-dropdown__picker__arrow", "down"), { onclick: function () { change(-1); } }),
+            m((0, BEM_1.block)("date-input__picker-dropdown__picker__arrow", "down"), { onclick: function () { change(-1); } }),
         ]);
     },
 };
@@ -117,7 +118,7 @@ function displayValue(value, placeholder) {
             ]);
         }
     }
-    return m(BEM_1.block("date-input__display-value", "placeholder"), placeholder);
+    return m((0, BEM_1.block)("date-input__display-value", "placeholder"), placeholder);
 }
 function formatValue(date) {
     return zeroPad(date.getFullYear(), 4) + "-" +
@@ -126,7 +127,7 @@ function formatValue(date) {
 }
 function zeroPad(value, digits) {
     var zeros = "0".repeat(digits);
-    return ("" + zeros + value).slice(-digits);
+    return "".concat(zeros).concat(value).slice(-digits);
 }
 function dateFromChangeset(changeset, name) {
     var dateValue = changeset.getValue(name);

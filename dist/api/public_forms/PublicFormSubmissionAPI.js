@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.requestReturnLink = exports.migrate = exports.update = exports.create = exports.current = void 0;
 var API_1 = require("./API");
 function current() {
-    return API_1.request("get", "public-form-submissions/current");
+    return (0, API_1.request)("get", "public-form-submissions/current");
 }
 exports.current = current;
 function create(publicFormNamedID, publishedFormID, params) {
-    return API_1.request("post", "public-form-submissions", {
+    return (0, API_1.request)("post", "public-form-submissions", {
         body: {
             public_form_named_id: publicFormNamedID,
             published_form_id: publishedFormID,
@@ -16,7 +17,7 @@ function create(publicFormNamedID, publishedFormID, params) {
 }
 exports.create = create;
 function update(formState) {
-    return API_1.request("put", "public-form-submissions", {
+    return (0, API_1.request)("put", "public-form-submissions", {
         body: {
             public_form_submission: formStateToParams(formState),
         },
@@ -24,11 +25,11 @@ function update(formState) {
 }
 exports.update = update;
 function migrate() {
-    return API_1.request("patch", "public-form-submissions/migrate");
+    return (0, API_1.request)("patch", "public-form-submissions/migrate");
 }
 exports.migrate = migrate;
 function requestReturnLink(formType, email) {
-    return API_1.request("patch", "public-form-submissions/request-return-link", {
+    return (0, API_1.request)("patch", "public-form-submissions/request-return-link", {
         body: { email: email, public_form_named_id: formType },
     });
 }

@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -42,7 +42,7 @@ var Mock = require("../../../tests/Mock");
 var Changeset_1 = require("../../../Changeset");
 var Input_1 = require("../Input");
 var Events_1 = require("../../../tests/Events");
-ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("renders", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var changeset, input, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -65,7 +65,7 @@ ava_1.default("renders", function (t) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); });
-ava_1.default("updates changeset on input", function (t) { return __awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("updates changeset on input", function (t) { return __awaiter(void 0, void 0, void 0, function () {
     var changeset, input, element;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -75,7 +75,7 @@ ava_1.default("updates changeset on input", function (t) { return __awaiter(void
                 return [4 /*yield*/, Mock.mount(input)];
             case 1:
                 element = _a.sent();
-                Events_1.simulateInput(element, "updated value");
+                (0, Events_1.simulateInput)(element, "updated value");
                 t.is(changeset.getValue("property"), "updated value");
                 return [2 /*return*/];
         }

@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TextArea = void 0;
 var m = require("mithril");
 exports.TextArea = {
     view: function (_a) {

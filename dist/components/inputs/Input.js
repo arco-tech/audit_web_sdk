@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Input = void 0;
 var m = require("mithril");
 exports.Input = {
     view: function (_a) {

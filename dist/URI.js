@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildParams = exports.param = void 0;
 function param(name) {
     var params = window.location.search.replace("?", "").split("&");
     for (var index in params) {
@@ -16,7 +17,7 @@ function buildParams(params) {
         .filter(function (key) { return params[key]; })
         .map(function (key) {
         if (params[key]) {
-            return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
+            return "".concat(encodeURIComponent(key), "=").concat(encodeURIComponent(params[key]));
         }
     })
         .join("&");

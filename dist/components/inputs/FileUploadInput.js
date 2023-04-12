@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FileUploadInput = void 0;
 var m = require("mithril");
 var FileUploadAPI = require("../../api/public_forms/FileUploadAPI");
 exports.FileUploadInput = {
@@ -67,10 +68,10 @@ exports.FileUploadInput = {
             state.statuses.map(function (_a) {
                 var name = _a.name, status = _a.status;
                 if (status === "failed") {
-                    return m(".file-input__status.file-input__status--failed", name + " - failed");
+                    return m(".file-input__status.file-input__status--failed", "".concat(name, " - failed"));
                 }
                 else if (status !== "success") {
-                    return m(".file-input__status", name + " - " + status);
+                    return m(".file-input__status", "".concat(name, " - ").concat(status));
                 }
             }),
         ];

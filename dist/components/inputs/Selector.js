@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Selector = void 0;
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
 exports.Selector = {
@@ -10,7 +11,7 @@ exports.Selector = {
             m("select.input-wrapper__input", {
                 required: true,
                 value: value === null ? "" :
-                    objectValues ? JSON.stringify(value) : "" + value,
+                    objectValues ? JSON.stringify(value) : "".concat(value),
                 onchange: function (event) {
                     var changeValue = event.target.value;
                     if (changeValue === "") {
@@ -31,11 +32,11 @@ exports.Selector = {
                     m("option", { value: "" }, vnode.attrs.nullLabel),
                 options.map(function (option) {
                     return m("option", {
-                        value: objectValues ? JSON.stringify(option.value) : "" + option.value,
+                        value: objectValues ? JSON.stringify(option.value) : "".concat(option.value),
                     }, option.label);
                 }),
             ]),
-            m(BEM_1.block("input-wrapper__icon", ["arrow-icon", "click-through"])),
+            m((0, BEM_1.block)("input-wrapper__icon", ["arrow-icon", "click-through"])),
         ]);
     },
 };

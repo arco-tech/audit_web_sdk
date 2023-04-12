@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CheckBox = void 0;
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
 exports.CheckBox = {
@@ -7,13 +8,13 @@ exports.CheckBox = {
         var _b = _a.attrs, name = _b.name, changeset = _b.changeset, text = _b.text, textUnselectable = _b.textUnselectable;
         var active = changeset.getValue(name);
         var change = function () { return changeset.change(name, !active); };
-        return m(BEM_1.block("check-box", [textUnselectable && "no-button-transition"]), {
+        return m((0, BEM_1.block)("check-box", [textUnselectable && "no-button-transition"]), {
             onclick: !textUnselectable ? change : null,
         }, [
-            m(BEM_1.block("check-box__tick-box", active ? ["active"] : []), {
+            m((0, BEM_1.block)("check-box__tick-box", active ? ["active"] : []), {
                 onclick: textUnselectable ? change : null,
             }),
-            m(BEM_1.block("check-box__text", active ? ["active"] : []), text),
+            m((0, BEM_1.block)("check-box__text", active ? ["active"] : []), text),
         ]);
     },
 };

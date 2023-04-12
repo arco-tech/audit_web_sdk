@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TableInput = void 0;
 var m = require("mithril");
 exports.TableInput = {
     view: function (_a) {
@@ -102,7 +103,7 @@ function applySums(tableValue, settings) {
                         }
                     }
                 }
-                tableValue[rowIndex][columnIndex] = "" + sum;
+                tableValue[rowIndex][columnIndex] = "".concat(sum);
             }
         }
     }

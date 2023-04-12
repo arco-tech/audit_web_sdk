@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.close = exports.open = void 0;
 var m = require("mithril");
 var state = {
     element: null,

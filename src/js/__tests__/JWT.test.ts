@@ -1,4 +1,5 @@
 import test from "ava";
+import { JSDOM } from 'jsdom';
 import {decodePayload, isValid} from "../JWT";
 
 function toBase64(content: string): string {
@@ -15,11 +16,15 @@ function mockToken(payload: {[key: string]: any}): string {
 }
 
 test("decodePayload", (t) => {
+  const dom = new JSDOM('<div id="my-element-id" />');
+  global.window = dom.window;
   const token = mockToken({test: "value"});
   t.deepEqual(decodePayload(token), {test: "value"});
 });
 
 test("isValid", (t) => {
+  const dom = new JSDOM('<div id="my-element-id" />');
+  global.window = dom.window;
   const expiredTime = Math.floor(new Date().getTime() / 1000) - 1;
   const expiredToken = mockToken({exp: expiredTime});
   t.is(isValid(expiredToken), false);

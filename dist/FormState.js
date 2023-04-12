@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormState = void 0;
 var FormLogic = require("./FormLogic");
 var Locations = require("./Locations");
 var Questions = require("./Questions");
@@ -50,7 +51,7 @@ var FormState = /** @class */ (function () {
         return this._data.currentSectionID;
     };
     FormState.prototype.value = function (questionID) {
-        return this._data.values["" + questionID];
+        return this._data.values["".concat(questionID)];
     };
     FormState.prototype.detail = function (name) {
         return this.details()[name];
@@ -109,7 +110,7 @@ var FormState = /** @class */ (function () {
         this.save();
     };
     FormState.prototype.changeValue = function (questionID, value) {
-        this._data.values["" + questionID] = value;
+        this._data.values["".concat(questionID)] = value;
         this.save();
     };
     FormState.prototype.changeValues = function (values) {
@@ -204,7 +205,7 @@ var FormState = /** @class */ (function () {
                 },
             };
         });
-        return Validation_1.validate(constraints, this.values());
+        return (0, Validation_1.validate)(constraints, this.values());
     };
     FormState.prototype.validateLocalisation = function (question) {
         var localisation = question.localisation();

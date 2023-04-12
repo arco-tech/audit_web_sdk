@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DateRangeInput = void 0;
 var m = require("mithril");
 var DateInput_1 = require("./DateInput");
 var Changeset_1 = require("../../Changeset");

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PreviousValue = void 0;
 var m = require("mithril");
 var Questions = require("../Questions");
 var BEM_1 = require("../BEM");
@@ -41,7 +42,7 @@ exports.PreviousValue = {
                     width: 20.9,
                     height: 19,
                 }),
-                m(BEM_1.block("previous-values__tooltip", state.hover && "open"), [
+                m((0, BEM_1.block)("previous-values__tooltip", state.hover && "open"), [
                     m(".previous-values__tooltip__value", value),
                     m(".previous-values__tooltip__message", state.copyFailed ? "FAILED TO COPY" : "CLICK TO USE"),
                 ]),
@@ -72,10 +73,10 @@ var parseRespone = function (response) {
     }
     else if (typeof response == "string" &&
         response.search(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) != -1) {
-        return DateTime_1.displayDate(new Date(response));
+        return (0, DateTime_1.displayDate)(new Date(response));
     }
     else if (response.from || response.to) {
-        return DateTime_1.displayDate(new Date(response.from)) + " - " + DateTime_1.displayDate(new Date(response.to));
+        return "".concat((0, DateTime_1.displayDate)(new Date(response.from)), " - ").concat((0, DateTime_1.displayDate)(new Date(response.to)));
     }
     return response.replace(",", ", ");
 };

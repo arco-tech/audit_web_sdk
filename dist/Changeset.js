@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Changeset = void 0;
 var Log_1 = require("./Log");
 var Changeset = /** @class */ (function () {
     function Changeset(originals) {
@@ -60,7 +61,7 @@ var Changeset = /** @class */ (function () {
                 listener(name, value);
             }
             catch (error) {
-                Log_1.log("error", error);
+                (0, Log_1.log)("error", error);
             }
         });
     };
@@ -138,7 +139,7 @@ var Changeset = /** @class */ (function () {
             this.setResponseError(response.errors.detail);
         }
         else {
-            Log_1.log("error", "unknown response error", response);
+            (0, Log_1.log)("error", "unknown response error", response);
             this.setResponseError("something went wrong");
         }
     };

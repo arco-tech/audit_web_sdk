@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateLocalisation = exports.summary = void 0;
 var Questions = require("./Questions");
 function summary(section, location, values) {
     var validQuestions = [];
@@ -19,7 +20,7 @@ function summary(section, location, values) {
             ignoredQuestions.push(question);
         }
         else {
-            goesTo = Questions.goesTo(question, values["" + question.id()]);
+            goesTo = Questions.goesTo(question, values["".concat(question.id())]);
             validQuestions.push(question);
         }
     });

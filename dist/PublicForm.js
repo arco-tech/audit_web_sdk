@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PublicForm = void 0;
 var PublicForm = /** @class */ (function () {
     function PublicForm(data) {
         this._data = data;

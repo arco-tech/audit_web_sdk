@@ -1,10 +1,16 @@
-require("browser-env")(["window"], {
-  url: "http://localhost:8080",
-});
 
-window.scrollTo = () => {};
+//dom.window.scrollTo = () => {};
 
-global.document = window.document;
+var jsdom = require("jsdom")
+var dom = new jsdom.JSDOM("", {
+    // So we can get `requestAnimationFrame`
+    pretendToBeVisual: true,
+})
 
-global.requestAnimationFrame = (callback) => callback();
+dom.window.scrollTo = () => {};
 
+// Fill in the globals Mithril.js needs to operate. Also, the first two are often
+// useful to have just in tests.
+global.window = dom.window
+global.document = dom.window.document
+global.requestAnimationFrame = dom.window.requestAnimationFrame

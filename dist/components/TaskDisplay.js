@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TaskDisplay = void 0;
 var m = require("mithril");
 var Spinner_1 = require("./Spinner");
 exports.TaskDisplay = {

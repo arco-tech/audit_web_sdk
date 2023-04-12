@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoadFormState = void 0;
 var m = require("mithril");
 var Storage = require("../Storage");
 var PublishedForm_1 = require("../PublishedForm");
@@ -17,7 +18,7 @@ exports.LoadFormState = {
         ])
             .then(function (_a) {
             var publishedFormData = _a[0], publicFormSubmissionData = _a[1];
-            var formStateData = PublicFormSubmission_1.stateDataFromSubmissionData(publicFormSubmissionData);
+            var formStateData = (0, PublicFormSubmission_1.stateDataFromSubmissionData)(publicFormSubmissionData);
             var formState = new FormState_1.FormState(formStateData, Storage.saveFormState);
             formState.save();
             var publishedForm = new PublishedForm_1.PublishedForm(publishedFormData);
@@ -25,7 +26,7 @@ exports.LoadFormState = {
             vnode.attrs.onSuccess({ publishedForm: publishedForm, formState: formState });
         })
             .catch(function (error) {
-            Log_1.log("error", error);
+            (0, Log_1.log)("error", error);
             vnode.state.errorMessage =
                 "sorry, something went wrong while loading your form";
             if (vnode.attrs.onFailure) {

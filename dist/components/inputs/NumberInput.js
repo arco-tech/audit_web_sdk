@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.NumberInput = void 0;
 var m = require("mithril");
 var BEM_1 = require("../../BEM");
 exports.NumberInput = {
@@ -33,14 +34,14 @@ exports.NumberInput = {
                     var numberValue = value ? parseFloat(value) : null;
                     changeset.change(name, numberValue);
                 } }, attrs)),
-            m(BEM_1.block("input-wrapper__icon", ["split"]), [
-                m(BEM_1.block("input-wrapper__icon__split", ["up-arrow"]), {
+            m((0, BEM_1.block)("input-wrapper__icon", ["split"]), [
+                m((0, BEM_1.block)("input-wrapper__icon__split", ["up-arrow"]), {
                     onclick: function () {
                         var value = changeset.getValue(name) || 0;
                         changeset.change(name, Math.round(value + 1));
                     },
                 }),
-                m(BEM_1.block("input-wrapper__icon__split", ["down-arrow"]), {
+                m((0, BEM_1.block)("input-wrapper__icon__split", ["down-arrow"]), {
                     onclick: function () {
                         var value = changeset.getValue(name) || 0;
                         changeset.change(name, Math.round(value - 1));

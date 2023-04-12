@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormQuestionBox = void 0;
 var m = require("mithril");
 var Changeset_1 = require("../Changeset");
 var FormField_1 = require("./FormField");
@@ -27,7 +28,7 @@ exports.FormQuestionBox = {
                 if (validQuestions.find(function (q) { return q.id() === question.id(); })) {
                     return [
                         m(FormField_1.FormField, {
-                            name: "" + question.id(),
+                            name: "".concat(question.id()),
                             changeset: changeset,
                             label: question.label(),
                             input: QuestionInput_1.QuestionInput,
