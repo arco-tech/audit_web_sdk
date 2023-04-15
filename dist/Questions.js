@@ -1,48 +1,25 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.overrideRender = exports.setValue = exports.render = exports.findOption = exports.isComplete = exports.goesTo = void 0;
-var m = require("mithril");
-var CheckBoxList_1 = require("./components/inputs/CheckBoxList");
-var DateInput_1 = require("./components/inputs/DateInput");
-var DateRangeInput_1 = require("./components/inputs/DateRangeInput");
-var Input_1 = require("./components/inputs/Input");
-var TextArea_1 = require("./components/inputs/TextArea");
-var InputList_1 = require("./components/inputs/InputList");
-var NumberInput_1 = require("./components/inputs/NumberInput");
-var RadioList_1 = require("./components/inputs/RadioList");
-var GridInput_1 = require("./components/inputs/GridInput");
-var TableInput_1 = require("./components/inputs/TableInput");
-var Selector_1 = require("./components/inputs/Selector");
-var FileUploadInput_1 = require("./components/inputs/FileUploadInput");
-var Log_1 = require("./Log");
-var ErrorMessage_1 = require("./components/ErrorMessage");
-var setValueText = function (question, value, changeset) {
-    var formattedValue = Array.isArray(value) ? value.join(", ") : value;
+import * as m from "mithril";
+import { CheckBoxList } from "./components/inputs/CheckBoxList.js";
+import { DateInput } from "./components/inputs/DateInput.js";
+import { DateRangeInput } from "./components/inputs/DateRangeInput.js";
+import { Input } from "./components/inputs/Input.js";
+import { TextArea } from "./components/inputs/TextArea.js";
+import { InputList } from "./components/inputs/InputList.js";
+import { NumberInput } from "./components/inputs/NumberInput.js";
+import { RadioList } from "./components/inputs/RadioList.js";
+import { GridInput } from "./components/inputs/GridInput.js";
+import { TableInput } from "./components/inputs/TableInput.js";
+import { Selector } from "./components/inputs/Selector.js";
+import { FileUploadInput } from "./components/inputs/FileUploadInput.js";
+import { log } from "./Log.js";
+import { ErrorMessage } from "./components/ErrorMessage.js";
+const setValueText = (question, value, changeset) => {
+    const formattedValue = Array.isArray(value) ? value.join(", ") : value;
     changeset.change(question.id().toString(), formattedValue);
     return true;
 };
-var setValueFloat = function (question, value, changeset) {
-    var num;
+const setValueFloat = (question, value, changeset) => {
+    let num;
     if (Array.isArray(value)) {
         num = parseFloat(value[0]);
     }
@@ -55,32 +32,32 @@ var setValueFloat = function (question, value, changeset) {
     }
     return false;
 };
-var types = {
+const types = {
     text: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "string" && value.trim() !== "";
         },
-        render: function (question, attrs) {
-            return m(Input_1.Input, attrs);
+        render: (question, attrs) => {
+            return m(Input, attrs);
         },
         setValue: setValueText,
     },
     paragraph: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "string" && value.trim() !== "";
         },
-        render: function (question, attrs) {
-            return m(TextArea_1.TextArea, attrs);
+        render: (question, attrs) => {
+            return m(TextArea, attrs);
         },
         setValue: setValueText,
     },
     multi_text: {
         optionGoesTo: false,
-        isComplete: function (question, valueList) {
+        isComplete: (question, valueList) => {
             if (Array.isArray(valueList)) {
-                var validValues = valueList.map(function (value) {
+                const validValues = valueList.map((value) => {
                     return typeof value === "string" && value.trim() !== "";
                 });
                 return validValues.indexOf(true) !== -1;
@@ -89,13 +66,13 @@ var types = {
                 return false;
             }
         },
-        render: function (question, attrs) {
-            return m(InputList_1.InputList, attrs);
+        render: (question, attrs) => {
+            return m(InputList, attrs);
         },
-        setValue: function (question, values, changeset) {
-            var list = typeof values == "string" ? values.split(",") : values;
+        setValue: (question, values, changeset) => {
+            const list = typeof values == "string" ? values.split(",") : values;
             if (Array.isArray(list)) {
-                changeset.change(question.id().toString(), __spreadArray([], list, true));
+                changeset.change(question.id().toString(), [...list]);
                 return true;
             }
             return false;
@@ -103,34 +80,34 @@ var types = {
     },
     number: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "number";
         },
-        render: function (question, attrs) {
-            return m(NumberInput_1.NumberInput, attrs);
+        render: (question, attrs) => {
+            return m(NumberInput, attrs);
         },
         setValue: setValueFloat,
     },
     percentage: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "number";
         },
-        render: function (question, attrs) {
-            return m(NumberInput_1.NumberInput, attrs);
+        render: (question, attrs) => {
+            return m(NumberInput, attrs);
         },
         setValue: setValueFloat,
     },
     button: {
         optionGoesTo: true,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "number" && findOption(question, value) !== null;
         },
-        render: function (question, attrs) {
-            return m(RadioList_1.RadioList, __assign({ options: buildOptions(question) }, attrs));
+        render: (question, attrs) => {
+            return m(RadioList, { options: buildOptions(question), ...attrs });
         },
-        setValue: function (question, value, changeset) {
-            var option = question.options().find(function (option) {
+        setValue: (question, value, changeset) => {
+            const option = question.options().find((option) => {
                 return option.label() === value;
             });
             if (option) {
@@ -142,17 +119,17 @@ var types = {
     },
     multi_button: {
         optionGoesTo: false,
-        isComplete: function (question, value) { return true; },
-        render: function (question, attrs) {
-            return m(CheckBoxList_1.CheckBoxList, __assign({ options: buildOptions(question) }, attrs));
+        isComplete: (question, value) => true,
+        render: (question, attrs) => {
+            return m(CheckBoxList, { options: buildOptions(question), ...attrs });
         },
-        setValue: function (question, values, changeset) {
+        setValue: (question, values, changeset) => {
             if (typeof values == "number") {
                 return false;
             }
-            var list = typeof values == "string" ? values.split(",") : values;
-            var ids = (list || []).reduce(function (acc, value) {
-                var option = question.options().find(function (option) {
+            const list = typeof values == "string" ? values.split(",") : values;
+            const ids = (list || []).reduce((acc, value) => {
+                const option = question.options().find((option) => {
                     return option.label() === value;
                 });
                 option && acc.push(option.id());
@@ -164,14 +141,18 @@ var types = {
     },
     dropdown: {
         optionGoesTo: true,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return typeof value === "number" && findOption(question, value) !== null;
         },
-        render: function (question, attrs) {
-            return m(Selector_1.Selector, __assign({ options: buildOptions(question), integerValues: true }, attrs));
+        render: (question, attrs) => {
+            return m(Selector, {
+                options: buildOptions(question),
+                integerValues: true,
+                ...attrs,
+            });
         },
-        setValue: function (question, value, changeset) {
-            var option = question.options().find(function (option) {
+        setValue: (question, value, changeset) => {
+            const option = question.options().find((option) => {
                 return option.label() === value;
             });
             if (option) {
@@ -183,14 +164,14 @@ var types = {
     },
     date: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return value != null && !isNaN(new Date(value).getTime());
         },
-        render: function (question, attrs) {
-            return m(DateInput_1.DateInput, attrs);
+        render: (question, attrs) => {
+            return m(DateInput, attrs);
         },
-        setValue: function (question, value, changeset) {
-            var date = typeof value == "string" ? new Date(value) : new Date(value[0]);
+        setValue: (question, value, changeset) => {
+            const date = typeof value == "string" ? new Date(value) : new Date(value[0]);
             if (date.toString() != "Invalid Date") {
                 changeset.change(question.id().toString(), date);
                 return true;
@@ -200,24 +181,24 @@ var types = {
     },
     date_range: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return (value != null &&
                 typeof value === "object" &&
                 value.from != null &&
                 !isNaN(new Date(value.from).getTime()));
         },
-        render: function (question, attrs) {
-            return m(DateRangeInput_1.DateRangeInput, attrs);
+        render: (question, attrs) => {
+            return m(DateRangeInput, attrs);
         },
-        setValue: function (question, values, changeset) {
+        setValue: (question, values, changeset) => {
             if (typeof values == "number") {
                 return false;
             }
-            var list = typeof values == "string" ? values.split(",") : values;
-            var _a = list.map(function (date) { return new Date(date); }), from = _a[0], to = _a[1];
+            const list = typeof values == "string" ? values.split(",") : values;
+            const [from, to] = list.map((date) => new Date(date));
             if (from.toString() != "Invalid Date" &&
                 to.toString() != "Invalid Date") {
-                changeset.change(question.id().toString(), { from: from, to: to });
+                changeset.change(question.id().toString(), { from, to });
                 return true;
             }
             return false;
@@ -225,12 +206,12 @@ var types = {
     },
     grid: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             if (!Array.isArray(value)) {
                 return false;
             }
-            for (var rowIndex in value) {
-                for (var columnIndex in value[rowIndex]) {
+            for (const rowIndex in value) {
+                for (const columnIndex in value[rowIndex]) {
                     if (value[rowIndex][columnIndex] ||
                         value[rowIndex][columnIndex] === 0) {
                         return true;
@@ -239,16 +220,16 @@ var types = {
             }
             return false;
         },
-        render: function (question, attrs) {
-            var settings = question.metadata().gridSettings();
+        render: (question, attrs) => {
+            const settings = question.metadata().gridSettings();
             if (settings) {
-                return m(GridInput_1.GridInput, __assign(__assign({}, attrs), { settings: settings }));
+                return m(GridInput, { ...attrs, settings });
             }
             else {
-                return m(ErrorMessage_1.ErrorMessage, { error: "invalid grid settings" });
+                return m(ErrorMessage, { error: "invalid grid settings" });
             }
         },
-        setValue: function (question, values, changeset) {
+        setValue: (question, values, changeset) => {
             if (Array.isArray(values) &&
                 values[0].length > 0 &&
                 Array.isArray(values[0])) {
@@ -260,12 +241,12 @@ var types = {
     },
     table: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             if (!Array.isArray(value)) {
                 return false;
             }
-            for (var rowIndex in value) {
-                for (var columnIndex in value[rowIndex]) {
+            for (const rowIndex in value) {
+                for (const columnIndex in value[rowIndex]) {
                     if (value[rowIndex][columnIndex] ||
                         value[rowIndex][columnIndex] === 0) {
                         return true;
@@ -274,16 +255,16 @@ var types = {
             }
             return false;
         },
-        render: function (question, attrs) {
-            var settings = question.metadata().tableSettings();
+        render: (question, attrs) => {
+            const settings = question.metadata().tableSettings();
             if (settings) {
-                return m(TableInput_1.TableInput, __assign(__assign({}, attrs), { settings: settings }));
+                return m(TableInput, { ...attrs, settings });
             }
             else {
-                return m(ErrorMessage_1.ErrorMessage, { error: "invalid table settings" });
+                return m(ErrorMessage, { error: "invalid table settings" });
             }
         },
-        setValue: function (question, values, changeset) {
+        setValue: (question, values, changeset) => {
             if (Array.isArray(values) &&
                 values[0].length > 0 &&
                 Array.isArray(values[0])) {
@@ -295,26 +276,26 @@ var types = {
     },
     files: {
         optionGoesTo: false,
-        isComplete: function (question, value) {
+        isComplete: (question, value) => {
             return Array.isArray(value) && value.length > 0;
         },
-        render: function (question, attrs) {
-            return m(FileUploadInput_1.FileUploadInput, __assign({ questionID: question.id() }, attrs));
+        render: (question, attrs) => {
+            return m(FileUploadInput, { questionID: question.id(), ...attrs });
         },
     },
 };
-var fallbackType = {
+const fallbackType = {
     optionGoesTo: false,
-    isComplete: function () { return false; },
-    render: function () { return null; },
+    isComplete: () => false,
+    render: () => null,
 };
 function questionType(question) {
     return types[question.type()] || fallbackType;
 }
-function goesTo(question, value) {
+export function goesTo(question, value) {
     if (questionType(question)) {
         if (questionType(question).optionGoesTo) {
-            var option = findOption(question, value);
+            const option = findOption(question, value);
             return option ? option.goesTo() : null;
         }
         else {
@@ -322,56 +303,50 @@ function goesTo(question, value) {
         }
     }
     else {
-        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
+        log("error", ["Question type isn't defined", question.type()]);
     }
 }
-exports.goesTo = goesTo;
-function isComplete(question, value) {
+export function isComplete(question, value) {
     if (questionType(question)) {
         return questionType(question).isComplete(question, value);
     }
     else {
-        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
+        log("error", ["Question type isn't defined", question.type()]);
     }
 }
-exports.isComplete = isComplete;
-function findOption(question, id) {
-    return (question.options().find(function (option) {
+export function findOption(question, id) {
+    return (question.options().find((option) => {
         return option.id() === id;
     }) || null);
 }
-exports.findOption = findOption;
-function render(question, attrs) {
+export function render(question, attrs) {
     if (questionType(question)) {
         return questionType(question).render(question, attrs);
     }
     else {
-        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
+        log("error", ["Question type isn't defined", question.type()]);
         return null;
     }
 }
-exports.render = render;
-function setValue(question, value, changeset) {
+export function setValue(question, value, changeset) {
     if (questionType(question)) {
         return questionType(question).setValue(question, value, changeset);
     }
     else {
-        (0, Log_1.log)("error", ["Question type isn't defined", question.type()]);
+        log("error", ["Question type isn't defined", question.type()]);
         return null;
     }
 }
-exports.setValue = setValue;
-function overrideRender(questionType, render) {
+export function overrideRender(questionType, render) {
     if (types[questionType]) {
         types[questionType].render = render;
     }
     else {
-        throw new Error("Question type '".concat(questionType, " doesn't exist"));
+        throw new Error(`Question type '${questionType} doesn't exist`);
     }
 }
-exports.overrideRender = overrideRender;
 function buildOptions(question) {
-    return question.options().map(function (option) {
+    return question.options().map((option) => {
         return { label: option.label(), value: option.id() };
     });
 }

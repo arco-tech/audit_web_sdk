@@ -1,13 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.requestReturnLink = exports.migrate = exports.update = exports.create = exports.current = void 0;
-var API_1 = require("./API");
-function current() {
-    return (0, API_1.request)("get", "public-form-submissions/current");
+import { request } from "./API.js";
+export function current() {
+    return request("get", "public-form-submissions/current");
 }
-exports.current = current;
-function create(publicFormNamedID, publishedFormID, params) {
-    return (0, API_1.request)("post", "public-form-submissions", {
+export function create(publicFormNamedID, publishedFormID, params) {
+    return request("post", "public-form-submissions", {
         body: {
             public_form_named_id: publicFormNamedID,
             published_form_id: publishedFormID,
@@ -15,25 +11,21 @@ function create(publicFormNamedID, publishedFormID, params) {
         },
     });
 }
-exports.create = create;
-function update(formState) {
-    return (0, API_1.request)("put", "public-form-submissions", {
+export function update(formState) {
+    return request("put", "public-form-submissions", {
         body: {
             public_form_submission: formStateToParams(formState),
         },
     });
 }
-exports.update = update;
-function migrate() {
-    return (0, API_1.request)("patch", "public-form-submissions/migrate");
+export function migrate() {
+    return request("patch", "public-form-submissions/migrate");
 }
-exports.migrate = migrate;
-function requestReturnLink(formType, email) {
-    return (0, API_1.request)("patch", "public-form-submissions/request-return-link", {
-        body: { email: email, public_form_named_id: formType },
+export function requestReturnLink(formType, email) {
+    return request("patch", "public-form-submissions/request-return-link", {
+        body: { email, public_form_named_id: formType },
     });
 }
-exports.requestReturnLink = requestReturnLink;
 function formStateToParams(formState) {
     return {
         email: formState.detail("email"),

@@ -1,25 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ava_1 = require("ava");
-var DateTime = require("../DateTime");
-(0, ava_1.default)("monthName returns the correct month name", function (t) {
+import test from "ava";
+import * as DateTime from "../DateTime.js";
+test("monthName returns the correct month name", (t) => {
     t.is(DateTime.monthName(0), "January");
     t.is(DateTime.monthName(2), "March");
     t.is(DateTime.monthName(11), "December");
 });
-(0, ava_1.default)("monthName returns null when out of range", function (t) {
+test("monthName returns null when out of range", (t) => {
     t.is(DateTime.monthName(12), null);
 });
-(0, ava_1.default)("shortMonthName returns the correct shortened month name", function (t) {
+test("shortMonthName returns the correct shortened month name", (t) => {
     t.is(DateTime.shortMonthName(0), "Jan");
     t.is(DateTime.shortMonthName(3), "Apr");
     t.is(DateTime.shortMonthName(4), "May");
 });
-(0, ava_1.default)("shortMonthName returns null when out of range", function (t) {
+test("shortMonthName returns null when out of range", (t) => {
     t.is(DateTime.shortMonthName(12), null);
 });
-(0, ava_1.default)("relative returns the correctly formatted string", function (t) {
-    var date = new Date();
+test("relative returns the correctly formatted string", (t) => {
+    let date = new Date();
     t.is(DateTime.relative(date), "now");
     date.setSeconds(date.getSeconds() - 43);
     t.is(DateTime.relative(date), "43 seconds ago");

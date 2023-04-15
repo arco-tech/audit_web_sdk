@@ -1,13 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ava_1 = require("ava");
-var FormState_1 = require("../FormState");
-var PublishedFormMocks_1 = require("../tests/PublishedFormMocks");
+import test from "ava";
+import { FormState } from "../FormState.js";
+import { mockFormData, mockPublishedForm, mockSectionData, } from "../tests/PublishedFormMocks.js";
 function mockFormState(data, saver) {
     if (!data.details) {
         data.details = {};
     }
-    var mockData = {
+    const mockData = {
         currentSectionID: data.currentSectionID || null,
         values: data.values || {},
         filteredSectionIDs: data.filteredSectionIDs || [],
@@ -28,11 +26,11 @@ function mockFormState(data, saver) {
             accepted_terms_and_conditions: data.details.accepted_terms_and_conditions || false,
         },
     };
-    return new FormState_1.FormState(mockData, saver ? saver : function () { });
+    return new FormState(mockData, saver ? saver : () => { });
 }
-(0, ava_1.default)("initiate creates an empty FormState instance", function (t) {
-    var formState = FormState_1.FormState.initiate(function () { });
-    t.is(formState instanceof FormState_1.FormState, true);
+test("initiate creates an empty FormState instance", (t) => {
+    const formState = FormState.initiate(() => { });
+    t.is(formState instanceof FormState, true);
     t.is(formState.isTrashed(), false);
     t.deepEqual(formState.values(), {});
     t.deepEqual(formState.metadata(), {});
@@ -49,8 +47,8 @@ function mockFormState(data, saver) {
         accepted_terms_and_conditions: false,
     });
 });
-(0, ava_1.default)("constructs with given data", function (t) {
-    var data = {
+test("constructs with given data", (t) => {
+    const data = {
         currentSectionID: 3,
         values: { 1: "abc", 2: 46, 3: "2019-01-01" },
         filteredSectionIDs: [],
@@ -71,21 +69,21 @@ function mockFormState(data, saver) {
             accepted_terms_and_conditions: true,
         },
     };
-    var formState = new FormState_1.FormState(data, function () { });
+    const formState = new FormState(data, () => { });
     t.is(formState.currentSectionID(), data.currentSectionID);
-    t.is(formState.fullName(), "".concat(data.details.first_name, " ").concat(data.details.last_name));
+    t.is(formState.fullName(), `${data.details.first_name} ${data.details.last_name}`);
     t.deepEqual(formState.data(), data);
     t.deepEqual(formState.values(), data.values);
     t.deepEqual(formState.metadata(), data.metadata);
     t.deepEqual(formState.details(), data.details);
 });
-(0, ava_1.default)("value returns the correct value", function (t) {
-    var formState = mockFormState({ values: { 1: "abc" } });
+test("value returns the correct value", (t) => {
+    const formState = mockFormState({ values: { 1: "abc" } });
     t.is(formState.value(1), "abc");
     t.is(formState.value(2), undefined);
 });
-(0, ava_1.default)("detail returns the correct detail", function (t) {
-    var formState = mockFormState({
+test("detail returns the correct detail", (t) => {
+    const formState = mockFormState({
         details: {
             email: "example@mail.nz",
             first_name: "someone",
@@ -94,29 +92,29 @@ function mockFormState(data, saver) {
     t.is(formState.detail("email"), "example@mail.nz");
     t.is(formState.detail("first_name"), "someone");
 });
-(0, ava_1.default)("changeCurrentSectionID updates the currentSectionID", function (t) {
-    return new Promise(function (resolve) {
-        var formState = mockFormState({ currentSectionID: 1 }, function () { return resolve(); });
+test("changeCurrentSectionID updates the currentSectionID", (t) => {
+    return new Promise((resolve) => {
+        const formState = mockFormState({ currentSectionID: 1 }, () => resolve());
         formState.changeCurrentSectionID(5);
         t.is(formState.currentSectionID(), 5);
     });
 });
-(0, ava_1.default)("changeValue updates the given value", function (t) {
-    return new Promise(function (resolve) {
-        var formState = mockFormState({ values: { 1: "a" } }, function () { return resolve(); });
+test("changeValue updates the given value", (t) => {
+    return new Promise((resolve) => {
+        const formState = mockFormState({ values: { 1: "a" } }, () => resolve());
         formState.changeValue(1, "b");
         formState.changeValue(2, "c");
         t.deepEqual(formState.values(), { 1: "b", 2: "c" });
     });
 });
-(0, ava_1.default)("changeDetails merges details", function (t) {
-    return new Promise(function (resolve) {
-        var formState = mockFormState({
+test("changeDetails merges details", (t) => {
+    return new Promise((resolve) => {
+        const formState = mockFormState({
             details: {
                 email: "someone@mail.nz",
                 first_name: "Someone",
             },
-        }, function () { return resolve(); });
+        }, () => resolve());
         formState.changeDetails({
             first_name: "Another",
             last_name: "Person",
@@ -126,33 +124,33 @@ function mockFormState(data, saver) {
         t.is(formState.detail("last_name"), "Person");
     });
 });
-(0, ava_1.default)("save calls saver function with FormState", function (t) {
-    return new Promise(function (resolve) {
-        var formState = mockFormState({}, function (formStateParam) {
+test("save calls saver function with FormState", (t) => {
+    return new Promise((resolve) => {
+        const formState = mockFormState({}, (formStateParam) => {
             t.deepEqual(formState, formStateParam);
             resolve();
         });
         formState.save();
     });
 });
-(0, ava_1.default)("findCurrentSection returns the correct section", function (t) {
-    var publishedForm = (0, PublishedFormMocks_1.mockPublishedForm)({
-        form: (0, PublishedFormMocks_1.mockFormData)({
+test("findCurrentSection returns the correct section", (t) => {
+    const publishedForm = mockPublishedForm({
+        form: mockFormData({
             sections: [
-                (0, PublishedFormMocks_1.mockSectionData)({ id: 1, name: "Section 1" }),
-                (0, PublishedFormMocks_1.mockSectionData)({ id: 2, name: "Section 2" }),
-                (0, PublishedFormMocks_1.mockSectionData)({ id: 3, name: "Section 3" }),
+                mockSectionData({ id: 1, name: "Section 1" }),
+                mockSectionData({ id: 2, name: "Section 2" }),
+                mockSectionData({ id: 3, name: "Section 3" }),
             ],
         }),
     });
-    var formState = mockFormState({
+    const formState = mockFormState({
         currentSectionID: null,
         filteredSectionIDs: [2, 3],
     });
-    var firstSection = formState.findCurrentSection(publishedForm);
+    const firstSection = formState.findCurrentSection(publishedForm);
     t.is(firstSection.name(), "Section 2");
     formState.changeCurrentSectionID(3);
-    var secondSection = formState.findCurrentSection(publishedForm);
+    const secondSection = formState.findCurrentSection(publishedForm);
     t.is(secondSection.name(), "Section 3");
 });
 // failure caused by move to JSDOM

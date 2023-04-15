@@ -1,20 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormType = void 0;
-var FormType = /** @class */ (function () {
-    function FormType(data) {
+export class FormType {
+    constructor(data) {
         this._data = data;
     }
-    FormType.prototype.named_id = function () {
+    named_id() {
         return this._data.named_id;
-    };
-    FormType.prototype.name = function () {
+    }
+    name() {
         return this._data.name;
-    };
-    FormType.prototype.description = function () {
+    }
+    description() {
         return this._data.description;
-    };
-    return FormType;
-}());
-exports.FormType = FormType;
+    }
+}
 //# sourceMappingURL=FormType.js.map

@@ -1,43 +1,39 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormQuestionBox = void 0;
-var m = require("mithril");
-var Changeset_1 = require("../Changeset");
-var FormField_1 = require("./FormField");
-var QuestionInput_1 = require("./inputs/QuestionInput");
-var FormSaver_1 = require("../FormSaver");
-var PreviousValue_1 = require("./PreviousValue");
-exports.FormQuestionBox = {
-    oninit: function (vnode) {
-        vnode.state.changeset = new Changeset_1.Changeset(vnode.attrs.formState.values());
+import * as m from "mithril";
+import { Changeset } from "../Changeset.js";
+import { FormField } from "./FormField.js";
+import { QuestionInput } from "./inputs/QuestionInput.js";
+import { FormSaver } from "../FormSaver.js";
+import { PreviousValue } from "./PreviousValue.js";
+export const FormQuestionBox = {
+    oninit: (vnode) => {
+        vnode.state.changeset = new Changeset(vnode.attrs.formState.values());
         /*
         vnode.state.changeset.listen((id, value) => {
           vnode.attrs.formState.changeValue(id, value);
         });
         */
         vnode.state.formSaver =
-            new FormSaver_1.FormSaver(vnode.attrs.formState, vnode.state.changeset);
+            new FormSaver(vnode.attrs.formState, vnode.state.changeset);
     },
-    view: function (_a) {
-        var _b = _a.attrs, publishedForm = _b.publishedForm, formState = _b.formState, validationErrors = _b.validationErrors, hideIgnored = _b.hideIgnored, _c = _b.previousValues, previousValues = _c === void 0 ? {} : _c, _d = _a.state, changeset = _d.changeset, formSaver = _d.formSaver;
-        var section = formState.findCurrentSection(publishedForm);
-        var _e = formState.summary(section), validQuestions = _e.validQuestions, ignoredQuestions = _e.ignoredQuestions;
+    view: ({ attrs: { publishedForm, formState, validationErrors, hideIgnored, previousValues = {}, }, state: { changeset, formSaver, }, }) => {
+        const section = formState.findCurrentSection(publishedForm);
+        const { validQuestions, ignoredQuestions } = formState.summary(section);
         changeset.validationErrors(validationErrors);
-        return m(".margin-top-medium", section.questions().map(function (question) {
+        return m(".margin-top-medium", section.questions().map((question) => {
             if (formState.validateLocalisation(question)) {
-                if (validQuestions.find(function (q) { return q.id() === question.id(); })) {
+                if (validQuestions.find((q) => q.id() === question.id())) {
                     return [
-                        m(FormField_1.FormField, {
-                            name: "".concat(question.id()),
-                            changeset: changeset,
+                        m(FormField, {
+                            name: `${question.id()}`,
+                            changeset,
                             label: question.label(),
-                            input: QuestionInput_1.QuestionInput,
-                            question: question,
-                            formSaver: formSaver,
+                            input: QuestionInput,
+                            question,
+                            formSaver,
                         }),
                         previousValues &&
                             previousValues[question.namedID()] &&
-                            m(PreviousValue_1.PreviousValue, { question: question, previousValues: previousValues, changeset: changeset })
+                            m(PreviousValue, { question, previousValues, changeset })
                     ];
                 }
                 else if (!hideIgnored) {

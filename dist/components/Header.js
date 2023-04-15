@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Header = void 0;
-var m = require("mithril");
-exports.Header = {
-    view: function (vnode) {
+import * as m from "mithril";
+export const Header = {
+    view: (vnode) => {
         return m(".header", [
             m("a", {
                 href: "https://businesslinkpacific.com",

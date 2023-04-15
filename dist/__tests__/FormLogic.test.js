@@ -1,34 +1,32 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ava_1 = require("ava");
-var FormLogic = require("../FormLogic");
-var PublishedFormMocks_1 = require("../tests/PublishedFormMocks");
-var publishedForm = (0, PublishedFormMocks_1.mockPublishedForm)({
-    form: (0, PublishedFormMocks_1.mockFormData)({
+import test from "ava";
+import * as FormLogic from "../FormLogic.js";
+import { mockFormData, mockOptionData, mockPublishedForm, mockQuestionData, mockSectionData, } from "../tests/PublishedFormMocks.js";
+const publishedForm = mockPublishedForm({
+    form: mockFormData({
         sections: [
-            (0, PublishedFormMocks_1.mockSectionData)({
+            mockSectionData({
                 id: 1,
                 questions: [
-                    (0, PublishedFormMocks_1.mockQuestionData)({
+                    mockQuestionData({
                         id: 1,
                         type: "button",
                         options: [
-                            (0, PublishedFormMocks_1.mockOptionData)({
+                            mockOptionData({
                                 id: 1,
                                 goes_to: { type: "question", id: 3 },
                             }),
                         ],
                     }),
-                    (0, PublishedFormMocks_1.mockQuestionData)({
+                    mockQuestionData({
                         id: 2,
                         type: "text",
                     }),
-                    (0, PublishedFormMocks_1.mockQuestionData)({
+                    mockQuestionData({
                         id: 3,
                         type: "text",
                         goes_to: { type: "next_section" },
                     }),
-                    (0, PublishedFormMocks_1.mockQuestionData)({
+                    mockQuestionData({
                         id: 4,
                         type: "text",
                     }),
@@ -37,16 +35,16 @@ var publishedForm = (0, PublishedFormMocks_1.mockPublishedForm)({
         ],
     }),
 });
-(0, ava_1.default)("summary", function (t) {
-    var section = publishedForm.form().sections()[0];
-    var _a = FormLogic.summary(section, null, {
+test("summary", (t) => {
+    const section = publishedForm.form().sections()[0];
+    const { validQuestions, ignoredQuestions } = FormLogic.summary(section, null, {
         1: 1,
         2: "anything",
         3: "anything",
         4: "anything",
-    }), validQuestions = _a.validQuestions, ignoredQuestions = _a.ignoredQuestions;
-    var validQuestionIDs = validQuestions.map(function (question) { return question.id(); });
-    var ignoredQuestionIDs = ignoredQuestions.map(function (question) { return question.id(); });
+    });
+    const validQuestionIDs = validQuestions.map((question) => question.id());
+    const ignoredQuestionIDs = ignoredQuestions.map((question) => question.id());
     t.deepEqual(validQuestionIDs, [1, 3]);
     t.deepEqual(ignoredQuestionIDs, [2, 4]);
 });

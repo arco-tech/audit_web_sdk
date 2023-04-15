@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Spinner = void 0;
-var m = require("mithril");
-exports.Spinner = {
-    view: function (vnode) {
+import * as m from "mithril";
+export const Spinner = {
+    view: (vnode) => {
         return m(".spinner-container", [
             m(".spinner"),
         ]);

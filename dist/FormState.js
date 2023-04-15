@@ -1,29 +1,11 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormState = void 0;
-var FormLogic = require("./FormLogic");
-var Locations = require("./Locations");
-var Questions = require("./Questions");
-var Validation_1 = require("./Validation");
-var storageID = "formState";
-var FormState = /** @class */ (function () {
-    function FormState(data, saver) {
-        this._data = data;
-        this._saver = saver;
-    }
-    FormState.initiate = function (saver) {
-        var stateData = {
+import * as FormLogic from "./FormLogic.js";
+import * as Locations from "./Locations.js";
+import * as Questions from "./Questions.js";
+import { validate } from "./Validation.js";
+const storageID = "formState";
+export class FormState {
+    static initiate(saver) {
+        const stateData = {
             currentSectionID: null,
             values: {},
             filteredSectionIDs: [],
@@ -46,128 +28,128 @@ var FormState = /** @class */ (function () {
             },
         };
         return new FormState(stateData, saver);
-    };
-    FormState.prototype.currentSectionID = function () {
+    }
+    constructor(data, saver) {
+        this._data = data;
+        this._saver = saver;
+    }
+    currentSectionID() {
         return this._data.currentSectionID;
-    };
-    FormState.prototype.value = function (questionID) {
-        return this._data.values["".concat(questionID)];
-    };
-    FormState.prototype.detail = function (name) {
+    }
+    value(questionID) {
+        return this._data.values[`${questionID}`];
+    }
+    detail(name) {
         return this.details()[name];
-    };
-    FormState.prototype.metadata = function () {
+    }
+    metadata() {
         return this._data.metadata || {};
-    };
-    FormState.prototype.getMetadata = function (key) {
+    }
+    getMetadata(key) {
         return this._data.metadata[key];
-    };
-    FormState.prototype.putMetadata = function (key, value) {
+    }
+    putMetadata(key, value) {
         this._data.metadata[key] = value;
         this.save();
-    };
-    FormState.prototype.filterSections = function (sections) {
-        var _this = this;
-        var filtered = sections.filter(function (section) {
+    }
+    filterSections(sections) {
+        const filtered = sections.filter((section) => {
             return (section.required() ||
-                _this._data.filteredSectionIDs.indexOf(section.id()) !== -1);
+                this._data.filteredSectionIDs.indexOf(section.id()) !== -1);
         });
         return filtered.length === 0 ? sections : filtered;
-    };
-    FormState.prototype.isExcludedSection = function (section) {
+    }
+    isExcludedSection(section) {
         return this._data.filteredSectionIDs.indexOf(section.id()) === -1;
-    };
-    FormState.prototype.excludedSections = function (sections) {
-        var _this = this;
-        return sections.filter(function (section) {
-            return _this._data.filteredSectionIDs.indexOf(section.id()) === -1;
+    }
+    excludedSections(sections) {
+        return sections.filter((section) => {
+            return this._data.filteredSectionIDs.indexOf(section.id()) === -1;
         });
-    };
-    FormState.prototype.currentSectionIndex = function (publishedForm) {
-        var currentSection = this.findCurrentSection(publishedForm);
-        var filteredSections = this.filterSections(publishedForm.form().sections());
-        return filteredSections.findIndex(function (section) {
+    }
+    currentSectionIndex(publishedForm) {
+        const currentSection = this.findCurrentSection(publishedForm);
+        const filteredSections = this.filterSections(publishedForm.form().sections());
+        return filteredSections.findIndex((section) => {
             return section.id() === currentSection.id();
         });
-    };
-    FormState.prototype.previousSection = function (publishedForm) {
-        var current = this.currentSectionIndex(publishedForm);
-        var sections = this.filterSections(publishedForm.form().sections());
+    }
+    previousSection(publishedForm) {
+        const current = this.currentSectionIndex(publishedForm);
+        const sections = this.filterSections(publishedForm.form().sections());
         if (sections[current - 1]) {
             this.changeCurrentSectionID(sections[current - 1].id());
         }
-    };
-    FormState.prototype.nextSection = function (publishedForm) {
-        var current = this.currentSectionIndex(publishedForm);
-        var sections = this.filterSections(publishedForm.form().sections());
+    }
+    nextSection(publishedForm) {
+        const current = this.currentSectionIndex(publishedForm);
+        const sections = this.filterSections(publishedForm.form().sections());
         if (sections[current + 1]) {
             this.changeCurrentSectionID(sections[current + 1].id());
         }
-    };
-    FormState.prototype.changeCurrentSectionID = function (sectionID) {
+    }
+    changeCurrentSectionID(sectionID) {
         this._data.currentSectionID = sectionID;
         this._data.isComplete = false;
         this.save();
-    };
-    FormState.prototype.changeValue = function (questionID, value) {
-        this._data.values["".concat(questionID)] = value;
+    }
+    changeValue(questionID, value) {
+        this._data.values[`${questionID}`] = value;
         this.save();
-    };
-    FormState.prototype.changeValues = function (values) {
+    }
+    changeValues(values) {
         if (typeof values === "object") {
             this._data.values = values;
         }
         else {
             throw new Error("values must be an object");
         }
-    };
-    FormState.prototype.changeDetail = function (name, value) {
+    }
+    changeDetail(name, value) {
         this._data.details[name] = value;
         this.save();
-    };
-    FormState.prototype.changeDetails = function (details) {
-        this._data.details = __assign(__assign({}, this._data.details), details);
+    }
+    changeDetails(details) {
+        this._data.details = { ...this._data.details, ...details };
         this.save();
-    };
-    FormState.prototype.changeFilteredSectionIDs = function (filteredSectionIDs) {
+    }
+    changeFilteredSectionIDs(filteredSectionIDs) {
         this._data.filteredSectionIDs = filteredSectionIDs;
         this.save();
-    };
-    FormState.prototype.addFilteredSection = function (section) {
+    }
+    addFilteredSection(section) {
         if (this._data.filteredSectionIDs.indexOf(section.id()) === -1) {
             this._data.filteredSectionIDs.push(section.id());
         }
-    };
-    FormState.prototype.changeIsComplete = function (isComplete) {
+    }
+    changeIsComplete(isComplete) {
         this._data.isComplete = isComplete;
         this.save();
-    };
-    FormState.prototype.changeHasSubmitted = function (hasSubmitted) {
+    }
+    changeHasSubmitted(hasSubmitted) {
         this._data.hasSubmitted = hasSubmitted;
         this.save();
-    };
-    FormState.prototype.save = function () {
+    }
+    save() {
         this._saver(this);
-    };
-    FormState.prototype.findCurrentSection = function (publishedForm) {
-        var sections = this.filterSections(publishedForm.form().sections());
-        var currentID = this.currentSectionID();
-        return sections.find(function (section) {
+    }
+    findCurrentSection(publishedForm) {
+        const sections = this.filterSections(publishedForm.form().sections());
+        const currentID = this.currentSectionID();
+        return sections.find((section) => {
             return section.id() === currentID;
         }) || sections[0];
-    };
-    FormState.prototype.sectionsProgress = function (sections, ignoreQuestions) {
-        var _this = this;
-        if (ignoreQuestions === void 0) { ignoreQuestions = []; }
-        var total = 0;
-        var complete = 0;
-        sections.forEach(function (section) {
-            var validQuestions = _this.summary(section).validQuestions;
-            validQuestions.forEach(function (question) {
+    }
+    sectionsProgress(sections, ignoreQuestions = []) {
+        let total = 0;
+        let complete = 0;
+        sections.forEach((section) => {
+            const { validQuestions } = this.summary(section);
+            validQuestions.forEach((question) => {
                 if (question.type() !== "multi_button" &&
                     ignoreQuestions.indexOf(question.namedID()) === -1) {
                     total += 1;
-                    if (Questions.isComplete(question, _this.value(question.id()))) {
+                    if (Questions.isComplete(question, this.value(question.id()))) {
                         complete += 1;
                     }
                 }
@@ -179,23 +161,21 @@ var FormState = /** @class */ (function () {
         else {
             return (complete / total) * 100;
         }
-    };
-    FormState.prototype.sectionProgress = function (section, ignoreQuestions) {
-        if (ignoreQuestions === void 0) { ignoreQuestions = []; }
+    }
+    sectionProgress(section, ignoreQuestions = []) {
         return this.sectionsProgress(section ? [section] : [], ignoreQuestions);
-    };
-    FormState.prototype.summary = function (section, values) {
+    }
+    summary(section, values) {
         return FormLogic.summary(section, this.location(), values || this.values());
-    };
-    FormState.prototype.validate = function (section) {
-        var _this = this;
-        var constraints = {};
-        var validQuestions = this.summary(section).validQuestions;
+    }
+    validate(section) {
+        const constraints = {};
+        const { validQuestions } = this.summary(section);
         validQuestions
-            .filter(function (question) { return _this.validateLocalisation(question); })
-            .forEach(function (question) {
+            .filter((question) => this.validateLocalisation(question))
+            .forEach((question) => {
             constraints[question.id()] = {
-                custom: function (value) {
+                custom: (value) => {
                     if (Questions.isComplete(question, value)) {
                         return [];
                     }
@@ -205,52 +185,50 @@ var FormState = /** @class */ (function () {
                 },
             };
         });
-        return (0, Validation_1.validate)(constraints, this.values());
-    };
-    FormState.prototype.validateLocalisation = function (question) {
-        var localisation = question.localisation();
+        return validate(constraints, this.values());
+    }
+    validateLocalisation(question) {
+        const localisation = question.localisation();
         if (localisation && localisation.length > 0) {
-            var location_1 = this.location();
-            return location_1 && localisation.indexOf(location_1.countryCode()) !== -1;
+            const location = this.location();
+            return location && localisation.indexOf(location.countryCode()) !== -1;
         }
         else {
             return true;
         }
-    };
-    FormState.prototype.details = function () {
+    }
+    details() {
         return this._data.details;
-    };
-    FormState.prototype.values = function () {
-        return __assign({}, this._data.values);
-    };
-    FormState.prototype.filteredSectionIDs = function () {
+    }
+    values() {
+        return { ...this._data.values };
+    }
+    filteredSectionIDs() {
         return this._data.filteredSectionIDs;
-    };
-    FormState.prototype.isComplete = function () {
+    }
+    isComplete() {
         return this._data.isComplete;
-    };
-    FormState.prototype.hasSubmitted = function () {
+    }
+    hasSubmitted() {
         return this._data.hasSubmitted;
-    };
-    FormState.prototype.isTrashed = function () {
+    }
+    isTrashed() {
         return this._data.trashed;
-    };
-    FormState.prototype.location = function () {
+    }
+    location() {
         return Locations.location(this._data.details.location_id);
-    };
-    FormState.prototype.migratePublishedFormID = function () {
+    }
+    migratePublishedFormID() {
         return this._data.migratePublishedFormID;
-    };
-    FormState.prototype.data = function () {
+    }
+    data() {
         return this._data;
-    };
-    FormState.prototype.fullName = function () {
+    }
+    fullName() {
         return [this.detail("first_name"), this.detail("last_name")]
-            .map(function (name) { return (name || "").trim(); })
-            .filter(function (name) { return name; })
+            .map((name) => (name || "").trim())
+            .filter((name) => name)
             .join(" ");
-    };
-    return FormState;
-}());
-exports.FormState = FormState;
+    }
+}
 //# sourceMappingURL=FormState.js.map

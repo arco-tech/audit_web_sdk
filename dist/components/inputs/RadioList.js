@@ -1,19 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.RadioList = void 0;
-var m = require("mithril");
-var BEM_1 = require("../../BEM");
-exports.RadioList = {
-    view: function (_a) {
-        var _b = _a.attrs, name = _b.name, changeset = _b.changeset, options = _b.options;
-        var active = changeset.getValue(name);
-        return options.map(function (_a) {
-            var label = _a.label, value = _a.value;
+import * as m from "mithril";
+import { block } from "../../BEM.js";
+export const RadioList = {
+    view: ({ attrs: { name, changeset, options } }) => {
+        const active = changeset.getValue(name);
+        return options.map(({ label, value }) => {
             return m(".radio", {
-                onclick: function () { return changeset.change(name, value); },
+                onclick: () => changeset.change(name, value),
             }, [
-                m((0, BEM_1.block)("radio__dot", active === value ? ["active"] : [])),
-                m((0, BEM_1.block)("radio__text", active === value ? ["active"] : []), label),
+                m(block("radio__dot", active === value ? ["active"] : [])),
+                m(block("radio__text", active === value ? ["active"] : []), label),
             ]);
         });
     },

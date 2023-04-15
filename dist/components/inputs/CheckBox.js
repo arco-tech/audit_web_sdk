@@ -1,20 +1,16 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckBox = void 0;
-var m = require("mithril");
-var BEM_1 = require("../../BEM");
-exports.CheckBox = {
-    view: function (_a) {
-        var _b = _a.attrs, name = _b.name, changeset = _b.changeset, text = _b.text, textUnselectable = _b.textUnselectable;
-        var active = changeset.getValue(name);
-        var change = function () { return changeset.change(name, !active); };
-        return m((0, BEM_1.block)("check-box", [textUnselectable && "no-button-transition"]), {
+import * as m from "mithril";
+import { block } from "../../BEM.js";
+export const CheckBox = {
+    view: ({ attrs: { name, changeset, text, textUnselectable } }) => {
+        const active = changeset.getValue(name);
+        const change = () => changeset.change(name, !active);
+        return m(block("check-box", [textUnselectable && "no-button-transition"]), {
             onclick: !textUnselectable ? change : null,
         }, [
-            m((0, BEM_1.block)("check-box__tick-box", active ? ["active"] : []), {
+            m(block("check-box__tick-box", active ? ["active"] : []), {
                 onclick: textUnselectable ? change : null,
             }),
-            m((0, BEM_1.block)("check-box__text", active ? ["active"] : []), text),
+            m(block("check-box__text", active ? ["active"] : []), text),
         ]);
     },
 };

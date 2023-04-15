@@ -1,41 +1,36 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FileUploadInput = void 0;
-var m = require("mithril");
-var FileUploadAPI = require("../../api/public_forms/FileUploadAPI");
-exports.FileUploadInput = {
-    oninit: function (_a) {
-        var state = _a.state;
+import * as m from "mithril";
+import * as FileUploadAPI from "../../api/public_forms/FileUploadAPI.js";
+export const FileUploadInput = {
+    oninit: ({ state }) => {
         state.statuses = [];
     },
-    view: function (_a) {
-        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, questionID = _b.questionID, state = _a.state;
-        var value = (changeset.getValue(name) || []);
+    view: ({ attrs: { changeset, name, questionID }, state }) => {
+        const value = (changeset.getValue(name) || []);
         return [
             m(".file-input" + (state.drag ? ".file-input--drag" : ""), {
-                ondrop: function (event) {
+                ondrop: (event) => {
                     state.drag = false;
                     event.preventDefault();
                     if (event.dataTransfer.items) {
-                        for (var i = 0; i < event.dataTransfer.items.length; i++) {
+                        for (let i = 0; i < event.dataTransfer.items.length; i++) {
                             if (event.dataTransfer.items[i].kind === "file") {
-                                var file = event.dataTransfer.items[i].getAsFile();
+                                const file = event.dataTransfer.items[i].getAsFile();
                                 upload(changeset, name, file, questionID, state);
                             }
                         }
                     }
                 },
-                ondragover: function (event) {
+                ondragover: (event) => {
                     event.preventDefault();
                     state.drag = true;
                 },
-                ondragleave: function (event) {
+                ondragleave: (event) => {
                     state.drag = false;
                 },
             }, [
                 "Drag and drop files or ",
                 m("span.file-input__link", {
-                    onclick: function () {
+                    onclick: () => {
                         state.input.click();
                     }
                 }, "select files"),
@@ -44,59 +39,57 @@ exports.FileUploadInput = {
                 type: "file",
                 multiple: true,
                 style: "display: none;",
-                oncreate: function (vnode) {
+                oncreate: (vnode) => {
                     state.input = vnode.dom;
                 },
-                oninput: function (event) {
-                    Array.from(event.target.files).forEach(function (file) {
+                oninput: (event) => {
+                    Array.from(event.target.files).forEach((file) => {
                         upload(changeset, name, file, questionID, state);
                     });
                     event.target.value = "";
                 },
             }),
-            value.map(function (_a, index) {
-                var name = _a.name;
+            value.map(({ name }, index) => {
                 return m(".file-input__value", [
                     m(".file-input__value__name", name),
                     m(".file-input__value__remove-button", {
-                        onclick: function () {
+                        onclick: () => {
                             changeset.change(name, [].concat(value.splice(index, 1)));
                         },
                     }, "remove"),
                 ]);
             }),
-            state.statuses.map(function (_a) {
-                var name = _a.name, status = _a.status;
+            state.statuses.map(({ name, status }) => {
                 if (status === "failed") {
-                    return m(".file-input__status.file-input__status--failed", "".concat(name, " - failed"));
+                    return m(".file-input__status.file-input__status--failed", `${name} - failed`);
                 }
                 else if (status !== "success") {
-                    return m(".file-input__status", "".concat(name, " - ").concat(status));
+                    return m(".file-input__status", `${name} - ${status}`);
                 }
             }),
         ];
     },
 };
 function upload(changeset, name, file, questionID, state) {
-    var uploadStatus = { name: file.name, status: "uploading..." };
+    const uploadStatus = { name: file.name, status: "uploading..." };
     state.statuses.push(uploadStatus);
-    return new Promise(function (resolve, reject) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            var content = event.target.result.split(",")[1];
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const content = event.target.result.split(",")[1];
             FileUploadAPI.upload({
                 name: file.name,
-                content: content,
+                content,
                 question_id: questionID,
             })
-                .then(function (fileUpload) {
+                .then((fileUpload) => {
                 uploadStatus.status = "success";
-                var value = (changeset.getValue(name) || []);
+                const value = (changeset.getValue(name) || []);
                 changeset.change(name, value.concat([{ id: fileUpload.id, name: fileUpload.name }]));
                 resolve(fileUpload);
                 m.redraw();
             })
-                .catch(function (error) {
+                .catch((error) => {
                 uploadStatus.status = "failed";
                 reject(error);
                 m.redraw();

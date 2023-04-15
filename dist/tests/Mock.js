@@ -1,21 +1,16 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mount = exports.createElement = void 0;
-var m = require("mithril");
-function createElement(parent) {
-    var element = document.createElement("div");
+import * as m from "mithril";
+export function createElement(parent) {
+    const element = document.createElement("div");
     (parent || document.body).appendChild(element);
     return element;
 }
-exports.createElement = createElement;
-function mount(content) {
-    var element = createElement();
-    return new Promise(function (resolve) {
+export function mount(content) {
+    const element = createElement();
+    return new Promise((resolve) => {
         m.mount(element, {
-            oncreate: function (vnode) { return resolve(vnode.dom); },
-            view: function (vnode) { return content; },
+            oncreate: (vnode) => resolve(vnode.dom),
+            view: (vnode) => content,
         });
     });
 }
-exports.mount = mount;
 //# sourceMappingURL=Mock.js.map

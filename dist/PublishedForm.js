@@ -1,300 +1,271 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PublishedForm = exports.PublishedFormForm = exports.PublishedFormSection = exports.PublishedFormSectionIcon = exports.PublishedFormQuestion = exports.PublishedFormQuestionMetadata = exports.PublishedFormQuestionTableSettings = exports.PublishedFormQuestionGridSettings = exports.PublishedFormQuestionColumnSettings = exports.PublishedFormServiceType = exports.PublishedFormOption = exports.PublishedFormAction = exports.PublishedFormGoesTo = void 0;
-var PublishedFormGoesTo = /** @class */ (function () {
-    function PublishedFormGoesTo(data) {
+export class PublishedFormGoesTo {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormGoesTo.prototype.type = function () {
+    type() {
         return this._data.type;
-    };
-    PublishedFormGoesTo.prototype.id = function () {
+    }
+    id() {
         return this._data.id;
-    };
-    return PublishedFormGoesTo;
-}());
-exports.PublishedFormGoesTo = PublishedFormGoesTo;
-var PublishedFormAction = /** @class */ (function () {
-    function PublishedFormAction(data) {
+    }
+}
+export class PublishedFormAction {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormAction.prototype.text = function () {
+    text() {
         return this._data.text;
-    };
-    PublishedFormAction.prototype.whenSelected = function () {
+    }
+    whenSelected() {
         return this._data.when_selected;
-    };
-    PublishedFormAction.prototype.markAsDone = function () {
+    }
+    markAsDone() {
         return this._data.mark_as_done;
-    };
-    return PublishedFormAction;
-}());
-exports.PublishedFormAction = PublishedFormAction;
-var PublishedFormOption = /** @class */ (function () {
-    function PublishedFormOption(data) {
+    }
+}
+export class PublishedFormOption {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormOption.prototype.id = function () {
+    id() {
         return this._data.id;
-    };
-    PublishedFormOption.prototype.label = function () {
+    }
+    label() {
         return this._data.label;
-    };
-    PublishedFormOption.prototype.index = function () {
+    }
+    index() {
         return this._data.index;
-    };
-    PublishedFormOption.prototype.actions = function () {
-        return this._data.actions.map(function (actionData) {
+    }
+    actions() {
+        return this._data.actions.map((actionData) => {
             return new PublishedFormAction(actionData);
         });
-    };
-    PublishedFormOption.prototype.goesTo = function () {
+    }
+    goesTo() {
         return new PublishedFormGoesTo(this._data.goes_to);
-    };
-    return PublishedFormOption;
-}());
-exports.PublishedFormOption = PublishedFormOption;
-var PublishedFormServiceType = /** @class */ (function () {
-    function PublishedFormServiceType(data) {
+    }
+}
+export class PublishedFormServiceType {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormServiceType.prototype.namedID = function () {
+    namedID() {
         return this._data.named_id;
-    };
-    PublishedFormServiceType.prototype.basnetRelatedNamedID = function () {
+    }
+    basnetRelatedNamedID() {
         return this._data.basnet_related_named_id;
-    };
-    PublishedFormServiceType.prototype.label = function () {
+    }
+    label() {
         return this._data.label;
-    };
-    return PublishedFormServiceType;
-}());
-exports.PublishedFormServiceType = PublishedFormServiceType;
-var PublishedFormQuestionColumnSettings = /** @class */ (function () {
-    function PublishedFormQuestionColumnSettings(data) {
+    }
+}
+export class PublishedFormQuestionColumnSettings {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormQuestionColumnSettings.prototype.title = function () {
+    title() {
         return this._data.title;
-    };
-    PublishedFormQuestionColumnSettings.prototype.info = function () {
+    }
+    info() {
         return this._data.info;
-    };
-    PublishedFormQuestionColumnSettings.prototype.dataType = function () {
+    }
+    dataType() {
         return this._data.data_type;
-    };
-    return PublishedFormQuestionColumnSettings;
-}());
-exports.PublishedFormQuestionColumnSettings = PublishedFormQuestionColumnSettings;
-var PublishedFormQuestionGridSettings = /** @class */ (function () {
-    function PublishedFormQuestionGridSettings(data) {
+    }
+}
+export class PublishedFormQuestionGridSettings {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormQuestionGridSettings.prototype.rows = function () {
-        return this._data.rows.map(function (rowData) {
+    rows() {
+        return this._data.rows.map((rowData) => {
             return new PublishedFormQuestionColumnSettings(rowData);
         });
-    };
-    PublishedFormQuestionGridSettings.prototype.columns = function () {
-        return this._data.columns.map(function (columnData) {
+    }
+    columns() {
+        return this._data.columns.map((columnData) => {
             return new PublishedFormQuestionColumnSettings(columnData);
         });
-    };
-    return PublishedFormQuestionGridSettings;
-}());
-exports.PublishedFormQuestionGridSettings = PublishedFormQuestionGridSettings;
-var PublishedFormQuestionTableSettings = /** @class */ (function () {
-    function PublishedFormQuestionTableSettings(data) {
+    }
+}
+export class PublishedFormQuestionTableSettings {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormQuestionTableSettings.prototype.columns = function () {
-        return this._data.columns.map(function (columnData) {
+    columns() {
+        return this._data.columns.map((columnData) => {
             return new PublishedFormQuestionColumnSettings(columnData);
         });
-    };
-    return PublishedFormQuestionTableSettings;
-}());
-exports.PublishedFormQuestionTableSettings = PublishedFormQuestionTableSettings;
-var PublishedFormQuestionMetadata = /** @class */ (function () {
-    function PublishedFormQuestionMetadata(data) {
+    }
+}
+export class PublishedFormQuestionMetadata {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormQuestionMetadata.prototype.gridSettings = function () {
+    gridSettings() {
         return new PublishedFormQuestionGridSettings(this._data.grid_settings);
-    };
-    PublishedFormQuestionMetadata.prototype.tableSettings = function () {
+    }
+    tableSettings() {
         return new PublishedFormQuestionTableSettings(this._data.table_settings);
-    };
-    return PublishedFormQuestionMetadata;
-}());
-exports.PublishedFormQuestionMetadata = PublishedFormQuestionMetadata;
-var PublishedFormQuestion = /** @class */ (function () {
-    function PublishedFormQuestion(data) {
+    }
+}
+export class PublishedFormQuestion {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormQuestion.prototype.id = function () {
+    id() {
         return this._data.id;
-    };
-    PublishedFormQuestion.prototype.type = function () {
+    }
+    type() {
         return this._data.type;
-    };
-    PublishedFormQuestion.prototype.label = function () {
+    }
+    label() {
         return this._data.label;
-    };
-    PublishedFormQuestion.prototype.index = function () {
+    }
+    index() {
         return this._data.index;
-    };
-    PublishedFormQuestion.prototype.namedID = function () {
+    }
+    namedID() {
         return this._data.named_id;
-    };
-    PublishedFormQuestion.prototype.note = function () {
+    }
+    note() {
         return this._data.note;
-    };
-    PublishedFormQuestion.prototype.info = function () {
+    }
+    info() {
         return this._data.info;
-    };
-    PublishedFormQuestion.prototype.localisation = function () {
+    }
+    localisation() {
         return this._data.localisation;
-    };
-    PublishedFormQuestion.prototype.goesTo = function () {
+    }
+    goesTo() {
         return new PublishedFormGoesTo(this._data.goes_to);
-    };
-    PublishedFormQuestion.prototype.serviceType = function () {
+    }
+    serviceType() {
         if (this._data.service_type) {
             return new PublishedFormServiceType(this._data.service_type);
         }
         else {
             return null;
         }
-    };
-    PublishedFormQuestion.prototype.metadata = function () {
+    }
+    metadata() {
         return new PublishedFormQuestionMetadata(this._data.metadata || {});
-    };
-    PublishedFormQuestion.prototype.options = function () {
+    }
+    options() {
         return this._data.options
-            .map(function (data) { return new PublishedFormOption(data); })
-            .sort(function (a, b) { return a.index() - b.index(); });
-    };
-    return PublishedFormQuestion;
-}());
-exports.PublishedFormQuestion = PublishedFormQuestion;
-var PublishedFormSectionIcon = /** @class */ (function () {
-    function PublishedFormSectionIcon(data) {
+            .map((data) => new PublishedFormOption(data))
+            .sort((a, b) => a.index() - b.index());
+    }
+}
+export class PublishedFormSectionIcon {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormSectionIcon.prototype.namedID = function () {
+    namedID() {
         return this._data.named_id;
-    };
-    return PublishedFormSectionIcon;
-}());
-exports.PublishedFormSectionIcon = PublishedFormSectionIcon;
-var PublishedFormSection = /** @class */ (function () {
-    function PublishedFormSection(data) {
+    }
+}
+export class PublishedFormSection {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormSection.prototype.id = function () {
+    id() {
         return this._data.id;
-    };
-    PublishedFormSection.prototype.index = function () {
+    }
+    index() {
         return this._data.index;
-    };
-    PublishedFormSection.prototype.name = function () {
+    }
+    name() {
         return this._data.name;
-    };
-    PublishedFormSection.prototype.namedID = function () {
+    }
+    namedID() {
         return this._data.named_id;
-    };
-    PublishedFormSection.prototype.group = function () {
+    }
+    group() {
         return this._data.group;
-    };
-    PublishedFormSection.prototype.summary = function () {
+    }
+    summary() {
         return this._data.summary;
-    };
-    PublishedFormSection.prototype.icon = function () {
+    }
+    icon() {
         if (this._data.icon) {
             return new PublishedFormSectionIcon(this._data.icon);
         }
         else {
             return null;
         }
-    };
-    PublishedFormSection.prototype.serviceType = function () {
+    }
+    serviceType() {
         if (this._data.service_type) {
             return new PublishedFormServiceType(this._data.service_type);
         }
         else {
             return null;
         }
-    };
-    PublishedFormSection.prototype.iconURL = function (color) {
-        var icon = (this.icon() ? this.icon().namedID() : "business").toLowerCase();
-        return "/images/section-icons/".concat(icon, "-").concat(color || "black", ".svg");
-    };
-    PublishedFormSection.prototype.required = function () {
+    }
+    iconURL(color) {
+        const icon = (this.icon() ? this.icon().namedID() : "business").toLowerCase();
+        return `/images/section-icons/${icon}-${color || "black"}.svg`;
+    }
+    required() {
         return this._data.required || false;
-    };
-    PublishedFormSection.prototype.questions = function () {
+    }
+    questions() {
         return (this._data.questions || [])
-            .map(function (data) { return new PublishedFormQuestion(data); })
-            .sort(function (a, b) { return a.index() - b.index(); });
-    };
-    return PublishedFormSection;
-}());
-exports.PublishedFormSection = PublishedFormSection;
-var PublishedFormForm = /** @class */ (function () {
-    function PublishedFormForm(data) {
+            .map((data) => new PublishedFormQuestion(data))
+            .sort((a, b) => a.index() - b.index());
+    }
+}
+export class PublishedFormForm {
+    constructor(data) {
         this._data = data;
     }
-    PublishedFormForm.prototype.id = function () {
+    id() {
         return this._data.id;
-    };
-    PublishedFormForm.prototype.sections = function () {
+    }
+    sections() {
         return this._data.sections
-            .map(function (data) { return new PublishedFormSection(data); })
-            .sort(function (a, b) { return a.index() - b.index(); });
-    };
-    return PublishedFormForm;
-}());
-exports.PublishedFormForm = PublishedFormForm;
-var PublishedForm = /** @class */ (function () {
-    function PublishedForm(data) {
+            .map((data) => new PublishedFormSection(data))
+            .sort((a, b) => a.index() - b.index());
+    }
+}
+export class PublishedForm {
+    constructor(data) {
         this._data = data;
     }
-    PublishedForm.prototype.data = function () {
+    data() {
         return this._data;
-    };
-    PublishedForm.prototype.id = function () {
+    }
+    id() {
         return this._data.id;
-    };
-    PublishedForm.prototype.version = function () {
+    }
+    version() {
         return this._data.version;
-    };
-    PublishedForm.prototype.insertedAt = function () {
+    }
+    insertedAt() {
         return new Date(this._data.inserted_at + "Z");
-    };
-    PublishedForm.prototype.form = function () {
+    }
+    form() {
         return new PublishedFormForm(this._data.form);
-    };
-    PublishedForm.prototype.questionByID = function (id) {
-        return this.findQuestion(function (question) { return question.id() === id; });
-    };
-    PublishedForm.prototype.questionByNamedID = function (namedID) {
-        return this.findQuestion(function (question) { return question.namedID() === namedID; });
-    };
-    PublishedForm.prototype.findQuestion = function (check) {
-        this.form().sections().forEach(function (section) {
-            section.questions().forEach(function (question) {
+    }
+    questionByID(id) {
+        return this.findQuestion((question) => question.id() === id);
+    }
+    questionByNamedID(namedID) {
+        return this.findQuestion((question) => question.namedID() === namedID);
+    }
+    findQuestion(check) {
+        this.form().sections().forEach((section) => {
+            section.questions().forEach((question) => {
                 if (check(question)) {
                     return question;
                 }
             });
         });
         return null;
-    };
-    PublishedForm.prototype.formTypeID = function () {
+    }
+    formTypeID() {
         return this._data.form_type_id;
-    };
-    return PublishedForm;
-}());
-exports.PublishedForm = PublishedForm;
+    }
+}
 //# sourceMappingURL=PublishedForm.js.map

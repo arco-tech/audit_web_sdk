@@ -1,29 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GridInput = void 0;
-var m = require("mithril");
-exports.GridInput = {
-    view: function (_a) {
-        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, settings = _b.settings;
+import * as m from "mithril";
+export const GridInput = {
+    view: ({ attrs: { changeset, name, settings } }) => {
         return m("table.input-table", m("tr.input-table__row", [
             m("td.input-table__cell.input-table__cell--header"),
             settings
                 .columns()
-                .map(function (column) {
-                return m("td.input-table__cell.input-table__cell--header", column.title());
-            }),
-        ]), settings.rows().map(function (row, rowIndex) {
+                .map((column) => m("td.input-table__cell.input-table__cell--header", column.title())),
+        ]), settings.rows().map((row, rowIndex) => {
             return m("tr.input-table__row", [
                 m("td.input-table__cell.input-table__cell--header", row.title()),
-                settings.columns().map(function (column, columnIndex) {
-                    var isSum = row.dataType === "sum" || column.dataType === "sum";
+                settings.columns().map((column, columnIndex) => {
+                    const isSum = row.dataType === "sum" || column.dataType === "sum";
                     return m("td.input-table__cell.input-table__cell--input", [
                         isSum &&
                             m(".p-2", getCellValue(changeset.getValue(name), rowIndex, columnIndex)),
                         !isSum &&
                             m("input.input-table__cell__input", {
-                                oninput: function (event) {
-                                    var value = event.target.value;
+                                oninput: (event) => {
+                                    const value = event.target.value;
                                     setCellValue(changeset, name, settings, value, rowIndex, columnIndex);
                                 },
                                 value: getCellValue(changeset.getValue(name), rowIndex, columnIndex),
@@ -43,15 +37,15 @@ function getCellValue(gridValue, rowIndex, columnIndex) {
     return "";
 }
 function setCellValue(changeset, name, settings, value, rowIndex, columnIndex) {
-    var gridValue = duplicateAndFormatGridValue(changeset.getValue(name), settings, rowIndex, columnIndex);
+    const gridValue = duplicateAndFormatGridValue(changeset.getValue(name), settings, rowIndex, columnIndex);
     gridValue[rowIndex][columnIndex] = formatCellValue(value, settings.rows()[rowIndex], settings.columns()[columnIndex]);
     applySums(gridValue, settings);
     changeset.change(name, gridValue);
 }
 function duplicateAndFormatGridValue(gridValue, settings, rowIndex, columnIndex) {
     if (Array.isArray(gridValue)) {
-        return settings.rows().map(function (row, rowIndex) {
-            return settings.columns().map(function (column, columnIndex) {
+        return settings.rows().map((row, rowIndex) => {
+            return settings.columns().map((column, columnIndex) => {
                 if (Array.isArray(gridValue[rowIndex])) {
                     return gridValue[rowIndex][columnIndex];
                 }
@@ -62,25 +56,24 @@ function duplicateAndFormatGridValue(gridValue, settings, rowIndex, columnIndex)
         });
     }
     else {
-        return settings.rows().map(function () {
-            return settings.columns().map(function () { return null; });
+        return settings.rows().map(() => {
+            return settings.columns().map(() => null);
         });
     }
 }
-function formatCellValue(value, row, column) {
-    if (value === void 0) { value = ""; }
-    var splitValue = (value || "").split("");
-    var updatedValue = "";
+function formatCellValue(value = "", row, column) {
+    const splitValue = (value || "").split("");
+    let updatedValue = "";
     switch (row.dataType() || column.dataType()) {
         case "float":
-            for (var index in splitValue) {
+            for (const index in splitValue) {
                 if ("0123456789.-".indexOf(splitValue[index]) !== -1) {
                     updatedValue += splitValue[index];
                 }
             }
             return updatedValue;
         case "integer":
-            for (var index in splitValue) {
+            for (const index in splitValue) {
                 if ("0123456789-".indexOf(splitValue[index]) !== -1) {
                     updatedValue += splitValue[index];
                 }
@@ -91,29 +84,29 @@ function formatCellValue(value, row, column) {
     }
 }
 function applySums(gridValue, settings) {
-    var rows = settings.rows();
-    var columns = settings.columns();
-    for (var rowIndex = 0; rowIndex < rows.length; rowIndex++) {
-        for (var columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+    const rows = settings.rows();
+    const columns = settings.columns();
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
             if (getDataType(rows[rowIndex], columns[columnIndex]) === "sum") {
-                var sum = 0;
+                let sum = 0;
                 if (rows[rowIndex].dataType() === "sum") {
-                    for (var r = 0; r < rowIndex; r++) {
-                        var dataType = getDataType(rows[r], columns[columnIndex]);
+                    for (let r = 0; r < rowIndex; r++) {
+                        const dataType = getDataType(rows[r], columns[columnIndex]);
                         if (["integer", "float", "sum"].indexOf(dataType) !== -1) {
                             sum += parseFloat(gridValue[r][columnIndex]) || 0;
                         }
                     }
                 }
                 if (columns[columnIndex].dataType() === "sum") {
-                    for (var c = 0; c < columnIndex; c++) {
-                        var dataType = getDataType(rows[rowIndex], columns[c]);
+                    for (let c = 0; c < columnIndex; c++) {
+                        const dataType = getDataType(rows[rowIndex], columns[c]);
                         if (["integer", "float", "sum"].indexOf(dataType) !== -1) {
                             sum += parseFloat(gridValue[rowIndex][c]) || 0;
                         }
                     }
                 }
-                gridValue[rowIndex][columnIndex] = "".concat(sum);
+                gridValue[rowIndex][columnIndex] = `${sum}`;
             }
         }
     }

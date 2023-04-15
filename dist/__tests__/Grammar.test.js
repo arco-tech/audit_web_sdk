@@ -1,29 +1,27 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ava_1 = require("ava");
-var Grammar_1 = require("../Grammar");
-(0, ava_1.default)("capitalise", function (t) {
-    t.is((0, Grammar_1.capitalise)("test string"), "Test string");
-    t.is((0, Grammar_1.capitalise)("Already capitalised"), "Already capitalised");
-    t.is((0, Grammar_1.capitalise)("  whitespace  \n"), "Whitespace");
-    t.is((0, Grammar_1.capitalise)(""), "");
-    t.is((0, Grammar_1.capitalise)("  \n \r"), "");
+import test from "ava";
+import { capitalise, fullStop, sentence } from "../Grammar.js";
+test("capitalise", (t) => {
+    t.is(capitalise("test string"), "Test string");
+    t.is(capitalise("Already capitalised"), "Already capitalised");
+    t.is(capitalise("  whitespace  \n"), "Whitespace");
+    t.is(capitalise(""), "");
+    t.is(capitalise("  \n \r"), "");
 });
-(0, ava_1.default)("fullStop", function (t) {
-    t.is((0, Grammar_1.fullStop)("test string"), "test string.");
-    t.is((0, Grammar_1.fullStop)("already has full stop."), "already has full stop.");
-    t.is((0, Grammar_1.fullStop)("semicolon;"), "semicolon;");
-    t.is((0, Grammar_1.fullStop)("question?"), "question?");
-    t.is((0, Grammar_1.fullStop)(""), "");
-    t.is((0, Grammar_1.fullStop)(" whitespace  \n"), "whitespace.");
-    t.is((0, Grammar_1.fullStop)("  \n  \r  "), "");
+test("fullStop", (t) => {
+    t.is(fullStop("test string"), "test string.");
+    t.is(fullStop("already has full stop."), "already has full stop.");
+    t.is(fullStop("semicolon;"), "semicolon;");
+    t.is(fullStop("question?"), "question?");
+    t.is(fullStop(""), "");
+    t.is(fullStop(" whitespace  \n"), "whitespace.");
+    t.is(fullStop("  \n  \r  "), "");
 });
-(0, ava_1.default)("sentence", function (t) {
-    t.is((0, Grammar_1.sentence)("some text"), "Some text.");
-    t.is((0, Grammar_1.sentence)("Already good to go."), "Already good to go.");
-    t.is((0, Grammar_1.sentence)("  whitespace \n"), "Whitespace.");
-    t.is((0, Grammar_1.sentence)("question? \n"), "Question?");
-    t.is((0, Grammar_1.sentence)(""), "");
-    t.is((0, Grammar_1.sentence)("   \n \r "), "");
+test("sentence", (t) => {
+    t.is(sentence("some text"), "Some text.");
+    t.is(sentence("Already good to go."), "Already good to go.");
+    t.is(sentence("  whitespace \n"), "Whitespace.");
+    t.is(sentence("question? \n"), "Question?");
+    t.is(sentence(""), "");
+    t.is(sentence("   \n \r "), "");
 });
 //# sourceMappingURL=Grammar.test.js.map

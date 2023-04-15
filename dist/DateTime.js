@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.displayDate = exports.formatDate = exports.formatTime = exports.formatDateTime = exports.relative = exports.shortMonthName = exports.monthName = void 0;
-var monthNames = [
+const monthNames = [
     "January",
     "February",
     "March",
@@ -15,7 +12,7 @@ var monthNames = [
     "November",
     "December",
 ];
-var periods = [
+const periods = [
     { name: "second", milliseconds: 1000 },
     { name: "minute", milliseconds: 60000 },
     { name: "hour", milliseconds: 3600000 },
@@ -24,55 +21,48 @@ var periods = [
     { name: "month", milliseconds: 2592000000 },
     { name: "year", milliseconds: 31536000000 },
 ];
-function monthName(month) {
+export function monthName(month) {
     return monthNames[month] || null;
 }
-exports.monthName = monthName;
-function shortMonthName(month) {
+export function shortMonthName(month) {
     return monthNames[month] ? monthNames[month].substring(0, 3) : null;
 }
-exports.shortMonthName = shortMonthName;
-function relative(date) {
+export function relative(date) {
     if (!date)
         return "never";
-    var diff = new Date().getTime() - date.getTime();
-    for (var p = periods.length - 1; p >= 0; p--) {
+    const diff = new Date().getTime() - date.getTime();
+    for (let p = periods.length - 1; p >= 0; p--) {
         if (diff > periods[p].milliseconds) {
-            var time = Math.round(diff / periods[p].milliseconds);
-            return "".concat(time, " ").concat(periods[p].name).concat(time == 1 ? "" : "s", " ago");
+            const time = Math.round(diff / periods[p].milliseconds);
+            return `${time} ${periods[p].name}${time == 1 ? "" : "s"} ago`;
         }
     }
     return "now";
 }
-exports.relative = relative;
-function formatDateTime(date) {
-    return "".concat(formatDate(date), " ").concat(formatTime(date));
+export function formatDateTime(date) {
+    return `${formatDate(date)} ${formatTime(date)}`;
 }
-exports.formatDateTime = formatDateTime;
-function formatTime(date) {
-    var hours = date.getHours();
-    var displayMinutes = padNumber(date.getMinutes());
-    var displayHours = padNumber(hours % 12 === 0 ? 12 : hours % 12);
-    return "".concat(displayHours, ":").concat(displayMinutes).concat(hours >= 12 ? "pm" : "am");
+export function formatTime(date) {
+    const hours = date.getHours();
+    const displayMinutes = padNumber(date.getMinutes());
+    const displayHours = padNumber(hours % 12 === 0 ? 12 : hours % 12);
+    return `${displayHours}:${displayMinutes}${hours >= 12 ? "pm" : "am"}`;
 }
-exports.formatTime = formatTime;
-function formatDate(date) {
-    var day = padNumber(date.getDate());
-    var month = padNumber(date.getMonth() + 1);
-    var year = date.getFullYear();
-    return "".concat(day, "/").concat(month, "/").concat(year);
+export function formatDate(date) {
+    const day = padNumber(date.getDate());
+    const month = padNumber(date.getMonth() + 1);
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 }
-exports.formatDate = formatDate;
 function padNumber(num) {
-    var numString = "".concat(num);
+    const numString = `${num}`;
     return numString.length == 1 ? "0" + numString : numString;
 }
-function displayDate(date) {
+export function displayDate(date) {
     if (isNaN(date.getDate())) {
         return "not set";
     }
-    var monthName = shortMonthName(date.getMonth());
-    return "".concat(date.getDate(), " ").concat(monthName, " ").concat(date.getFullYear());
+    const monthName = shortMonthName(date.getMonth());
+    return `${date.getDate()} ${monthName} ${date.getFullYear()}`;
 }
-exports.displayDate = displayDate;
 //# sourceMappingURL=DateTime.js.map

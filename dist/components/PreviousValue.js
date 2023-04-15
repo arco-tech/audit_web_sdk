@@ -1,38 +1,33 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PreviousValue = void 0;
-var m = require("mithril");
-var Questions = require("../Questions");
-var BEM_1 = require("../BEM");
-var DateTime_1 = require("../DateTime");
-exports.PreviousValue = {
-    oninit: function (_a) {
-        var state = _a.state;
+import * as m from "mithril";
+import * as Questions from "../Questions.js";
+import { block } from "../BEM.js";
+import { displayDate } from "../DateTime.js";
+export const PreviousValue = {
+    oninit: ({ state }) => {
         state.hover = false;
         state.copyFailed = false;
     },
-    view: function (_a) {
-        var _b = _a.attrs, question = _b.question, previousValues = _b.previousValues, changeset = _b.changeset, state = _a.state;
-        var namedId = question.namedID();
+    view: ({ attrs: { question, previousValues, changeset }, state }) => {
+        const namedId = question.namedID();
         if (!namedId)
             return null;
-        var response = previousValues[namedId];
+        const response = previousValues[namedId];
         if (!response)
             return null;
-        var value = parseRespone(response);
+        const value = parseRespone(response);
         if (value == "")
             return null;
         return m(".previous-values", [
             m(".previous-values__title", "Previous response: "),
             m(".previous-values__value", value),
             m(".previous-values__copy", {
-                onclick: function () {
+                onclick: () => {
                     state.copyFailed = !Questions.setValue(question, response, changeset);
                 },
-                onmouseenter: function () {
+                onmouseenter: () => {
                     state.hover = true;
                 },
-                onmouseleave: function () {
+                onmouseleave: () => {
                     state.hover = false;
                 },
             }, [
@@ -42,7 +37,7 @@ exports.PreviousValue = {
                     width: 20.9,
                     height: 19,
                 }),
-                m((0, BEM_1.block)("previous-values__tooltip", state.hover && "open"), [
+                m(block("previous-values__tooltip", state.hover && "open"), [
                     m(".previous-values__tooltip__value", value),
                     m(".previous-values__tooltip__message", state.copyFailed ? "FAILED TO COPY" : "CLICK TO USE"),
                 ]),
@@ -50,13 +45,13 @@ exports.PreviousValue = {
         ]);
     },
 };
-var parseRespone = function (response) {
+const parseRespone = (response) => {
     if (Array.isArray(response)) {
         if (response.length > 0 && Array.isArray(response[0])) {
             return response
-                .map(function (row) {
+                .map((row) => {
                 return row
-                    .map(function (value) {
+                    .map((value) => {
                     if (!value) {
                         return "empty";
                     }
@@ -73,10 +68,10 @@ var parseRespone = function (response) {
     }
     else if (typeof response == "string" &&
         response.search(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) != -1) {
-        return (0, DateTime_1.displayDate)(new Date(response));
+        return displayDate(new Date(response));
     }
     else if (response.from || response.to) {
-        return "".concat((0, DateTime_1.displayDate)(new Date(response.from)), " - ").concat((0, DateTime_1.displayDate)(new Date(response.to)));
+        return `${displayDate(new Date(response.from))} - ${displayDate(new Date(response.to))}`;
     }
     return response.replace(",", ", ");
 };

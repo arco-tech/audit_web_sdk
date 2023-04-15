@@ -1,21 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Footer = void 0;
-var m = require("mithril");
-var BEM_1 = require("../BEM");
-var Column_1 = require("./Column");
-var ColumnContainer_1 = require("./ColumnContainer");
-exports.Footer = {
-    view: function (vnode) {
+import * as m from "mithril";
+import { block } from "../BEM.js";
+import { Column } from "./Column.js";
+import { ColumnContainer } from "./ColumnContainer.js";
+export const Footer = {
+    view: (vnode) => {
         return m(".footer", [
             m(".footer__content", [
-                m(ColumnContainer_1.ColumnContainer, {
+                m(ColumnContainer, {
                     selector: ".section__content--large.margin-x-auto",
                     modifiers: "large-cut-off",
                 }, [
-                    m(Column_1.Column, { selector: ".footer__block.padding-right-medium", flex: 1 }, [
-                        m(ColumnContainer_1.ColumnContainer, [
-                            m(Column_1.Column, { flex: 1, selector: ".padding-right-small" }, [
+                    m(Column, { selector: ".footer__block.padding-right-medium", flex: 1 }, [
+                        m(ColumnContainer, [
+                            m(Column, { flex: 1, selector: ".padding-right-small" }, [
                                 m("h4.footer__title", "ABOUT"),
                                 m("a.footer__link", {
                                     href: "https://about.businesslinkpacific.com",
@@ -27,21 +24,21 @@ exports.Footer = {
                                     href: "https://about.businesslinkpacific.com/privacy/",
                                 }, "Privacy policy"),
                             ]),
-                            m(Column_1.Column, { flex: 1 }, [
+                            m(Column, { flex: 1 }, [
                                 m("h4.footer__title", "FOLLOW US"),
-                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "facebook-icon"]), {
+                                m("a" + block("footer__link", ["icon", "facebook-icon"]), {
                                     href: "https://facebook.com/businesslinkpacific",
                                 }, "Facebook"),
-                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "twitter-icon"]), {
+                                m("a" + block("footer__link", ["icon", "twitter-icon"]), {
                                     href: "https://twitter.com/businesslinkpac",
                                 }, "Twitter"),
-                                m("a" + (0, BEM_1.block)("footer__link", ["icon", "linkedin-icon"]), {
+                                m("a" + block("footer__link", ["icon", "linkedin-icon"]), {
                                     href: "https://linkedin.com/company/business-link-pacific",
                                 }, "Linkedin"),
                             ]),
                         ]),
                     ]),
-                    m(Column_1.Column, { selector: ".padding-x-medium", flex: 1 }, [
+                    m(Column, { selector: ".padding-x-medium", flex: 1 }, [
                         m(".footer__block", [
                             m("h4.footer__title", "GENERAL ENQUIRIES"),
                             m("a.footer__link", {
@@ -64,7 +61,7 @@ exports.Footer = {
                             }, "png@businesslinkpacific.com"),
                         ]),
                     ]),
-                    m(Column_1.Column, { selector: ".padding-left-medium", flex: 1 }, [
+                    m(Column, { selector: ".padding-left-medium", flex: 1 }, [
                         m(".footer__block", [
                             m("h4.footer__title", "PARTNERS"),
                             m(".footer__text", [
@@ -72,17 +69,17 @@ exports.Footer = {
                                 "by DT Global ",
                             ]),
                         ]),
-                        m(ColumnContainer_1.ColumnContainer, {
+                        m(ColumnContainer, {
                             selector: ".margin-top-medium",
                             modifiers: "align-center"
                         }, [
-                            m(Column_1.Column, [
+                            m(Column, [
                                 m("img.footer__partner-logo", {
                                     src: "/images/" +
                                         "nz-foreign-affairs-and-trade-aid-programme-logo-white.png",
                                 }),
                             ]),
-                            m(Column_1.Column, [
+                            m(Column, [
                                 m("img.footer__partner-logo", {
                                     src: "/images/dt-global-logo-white.svg",
                                 }),

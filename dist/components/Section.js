@@ -1,13 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Section = void 0;
-var m = require("mithril");
-var BEM_1 = require("../BEM");
-exports.Section = {
-    view: function (_a) {
-        var _b = _a.attrs, _c = _b.selector, selector = _c === void 0 ? "" : _c, _d = _b.contentModifiers, contentModifiers = _d === void 0 ? [] : _d, _e = _b.modifiers, modifiers = _e === void 0 ? [] : _e, children = _a.children;
-        return m(selector + (0, BEM_1.block)("section", modifiers), [
-            m((0, BEM_1.block)("section__content", contentModifiers), children),
+import * as m from "mithril";
+import { block } from "../BEM.js";
+export const Section = {
+    view: ({ attrs: { selector = "", contentModifiers = [], modifiers = [] }, children }) => {
+        return m(selector + block("section", modifiers), [
+            m(block("section__content", contentModifiers), children),
         ]);
     },
 };

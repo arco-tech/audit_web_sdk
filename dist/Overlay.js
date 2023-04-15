@@ -1,25 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.close = exports.open = void 0;
-var m = require("mithril");
-var state = {
+import * as m from "mithril";
+const state = {
     element: null,
 };
-function open(component, attrs) {
+export function open(component, attrs) {
     m.mount(element(), {
-        view: function () {
+        view: () => {
             return m(".overlay-content-container", m(component, attrs));
         },
     });
 }
-exports.open = open;
-function close() {
+export function close() {
     if (state.element) {
         document.body.removeChild(state.element);
         state.element = null;
     }
 }
-exports.close = close;
 function element() {
     if (state.element === null) {
         state.element = document.createElement("div");
