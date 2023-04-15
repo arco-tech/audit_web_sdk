@@ -4,7 +4,7 @@ export function simulateMouseClick(element: Element): void {
     cancelable: true,
     view: window
   }));
-};
+}
 
 export function simulateInput(element: HTMLInputElement, value: any): void {
   const event = new window.Event("input", {bubbles: true});

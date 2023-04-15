@@ -128,7 +128,7 @@ function duplicateAndFormatGridValue(
 }
 
 function formatCellValue(
-  value: string = "",
+  value = "",
   row: PublishedFormQuestionColumnSettings,
   column: PublishedFormQuestionColumnSettings
 ): CellValue {
@@ -136,14 +136,14 @@ function formatCellValue(
   let updatedValue = ""
   switch (row.dataType() || column.dataType()) {
     case "float":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789.-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }
       }
       return updatedValue
     case "integer":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }

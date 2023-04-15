@@ -26,7 +26,7 @@ export const PreviousValue: m.Component<Attrs, State> = {
   view: ({ attrs: { question, previousValues, changeset }, state }) => {
     const namedId = question.namedID()
     if (!namedId) return null
-    let response = previousValues[namedId]
+    const response = previousValues[namedId]
     if (!response) return null
     const value = parseRespone(response)
     if (value == "") return null

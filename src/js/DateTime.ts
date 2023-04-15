@@ -73,6 +73,6 @@ export function displayDate(date: Date): string {
   if (isNaN(date.getDate())) {
     return "not set"
   }
-  let monthName = shortMonthName(date.getMonth());
+  const monthName = shortMonthName(date.getMonth());
   return `${date.getDate()} ${monthName} ${date.getFullYear()}`
 }

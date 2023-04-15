@@ -257,8 +257,8 @@ const types: { [type: string]: Type } = {
       if (!Array.isArray(value)) {
         return false
       }
-      for (let rowIndex in value) {
-        for (let columnIndex in value[rowIndex]) {
+      for (const rowIndex in value) {
+        for (const columnIndex in value[rowIndex]) {
           if (
             value[rowIndex][columnIndex] ||
             value[rowIndex][columnIndex] === 0
@@ -296,8 +296,8 @@ const types: { [type: string]: Type } = {
       if (!Array.isArray(value)) {
         return false
       }
-      for (let rowIndex in value) {
-        for (let columnIndex in value[rowIndex]) {
+      for (const rowIndex in value) {
+        for (const columnIndex in value[rowIndex]) {
           if (
             value[rowIndex][columnIndex] ||
             value[rowIndex][columnIndex] === 0

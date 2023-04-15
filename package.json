@@ -6,25 +6,17 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --outDir dist",
-    "lint": "tslint --project tsconfig.json",
-    "lint.fix": "tslint --project tsconfig.json --fix",
+    "lint": "npx eslint src",
     "test": "ava"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "ava": "^5.2.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
-    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.38.0",
     "jsdom": "^21.1.1",
-    "less": "^3.10.3",
-    "less-loader": "^11.1.0",
-    "mini-css-extract-plugin": "^2.7.5",
-    "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
-    "webpack": "^5.78.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "mithril": "^2.0.4"

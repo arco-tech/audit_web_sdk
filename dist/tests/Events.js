@@ -9,7 +9,6 @@ function simulateMouseClick(element) {
     }));
 }
 exports.simulateMouseClick = simulateMouseClick;
-;
 function simulateInput(element, value) {
     var event = new window.Event("input", { bubbles: true });
     element.value = value;

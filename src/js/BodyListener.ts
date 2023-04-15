@@ -33,7 +33,7 @@ export function listen(
 }
 
 export function remove(removeID: ID): void {
-  for (let eventName in listeners) {
+  for (const eventName in listeners) {
     const index = listeners[eventName].findIndex(({id}) => id === removeID);
     if (index !== -1) {
       listeners[eventName].splice(index, 1);
