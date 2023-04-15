@@ -1,5 +1,5 @@
-import * as API from "../API";
-import {RequestMethod, RequestPath, RequestOptions} from "../APITypes";
+import * as API from "../API.js";
+import {RequestMethod, RequestPath, RequestOptions} from "../APITypes.js";
 
 export function request<T>(
   method: RequestMethod,

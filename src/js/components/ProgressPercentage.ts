@@ -1,5 +1,5 @@
 import * as m from "mithril";
-import {block} from "../BEM";
+import {block} from "../BEM.js";
 
 interface Attrs {
   selector?: string;

@@ -1,12 +1,12 @@
 import * as m from "mithril";
-import {apiEndpoint} from "../Environment";
-import {loadAuthToken} from "../Storage";
+import {apiEndpoint} from "../Environment.js";
+import {loadAuthToken} from "../Storage.js";
 import {
   RequestMethod,
   RequestOptions,
   RequestPath,
   Response,
-} from "./APITypes";
+} from "./APITypes.js";
 
 const pathPrefix = "api/v1";
 

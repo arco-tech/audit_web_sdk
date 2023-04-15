@@ -1,8 +1,6 @@
 import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {block} from "../../BEM";
-import {Column} from "../Column";
-import {ColumnContainer} from "../ColumnContainer";
+import {Changeset} from "../../Changeset.js";
+import {block} from "../../BEM.js";
 
 export interface Option {
   label: string;

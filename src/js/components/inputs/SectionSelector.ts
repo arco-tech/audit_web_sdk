@@ -1,9 +1,7 @@
 import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {PublishedFormSection} from "../../PublishedForm";
-import {block} from "../../BEM";
-import {Column} from "../Column";
-import {ColumnContainer} from "../ColumnContainer";
+import {Changeset} from "../../Changeset.js";
+import {PublishedFormSection} from "../../PublishedForm.js";
+import {block} from "../../BEM.js";
 
 interface Attrs {
   sections: PublishedFormSection[];

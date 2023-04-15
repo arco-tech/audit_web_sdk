@@ -1,10 +1,10 @@
 import * as m from "mithril"
 import * as PublicFormSubmissionAPI from
-  "./api/public_forms/PublicFormSubmissionAPI"
-import { FormState } from "./FormState"
-import { Changeset } from "./Changeset"
-import { Task } from "./Task"
-import { log } from "./Log"
+  "./api/public_forms/PublicFormSubmissionAPI.js"
+import { FormState } from "./FormState.js"
+import { Changeset } from "./Changeset.js"
+import { Task } from "./Task.js"
+import { log } from "./Log.js"
 
 const loopFrequency = 1000
 const waitAfterChanges = 3000

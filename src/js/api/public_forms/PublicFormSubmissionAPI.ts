@@ -1,7 +1,6 @@
-import {FormState, FormStateValues} from "../../FormState";
-import {PublicFormSubmissionData} from "../../PublicFormSubmission";
-import {PublishedForm} from "../../PublishedForm";
-import {request} from "./API";
+import {FormState, FormStateValues} from "../../FormState.js";
+import {PublicFormSubmissionData} from "../../PublicFormSubmission.js";
+import {request} from "./API.js";
 
 interface PublicFormSubmissionParams {
   email: string;

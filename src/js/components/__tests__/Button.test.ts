@@ -1,8 +1,8 @@
 import test from "ava";
 import * as m from "mithril";
-import * as Mock from "../../tests/Mock";
-import {simulateMouseClick} from "../../tests/Events";
-import {Button} from "../Button";
+import * as Mock from "../../tests/Mock.js";
+import {simulateMouseClick} from "../../tests/Events.js";
+import {Button} from "../Button.js";
 
 test("renders", async (t) => {
   const button = m(Button, "test content");

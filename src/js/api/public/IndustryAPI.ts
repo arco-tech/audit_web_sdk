@@ -1,5 +1,5 @@
-import {Industry, IndustryData} from "../../Industry";
-import {request} from "./API";
+import {Industry, IndustryData} from "../../Industry.js";
+import {request} from "./API.js";
 
 export function industries(): Promise<Industry[]> {
   return request<IndustryData[]>("get", "industries")

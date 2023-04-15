@@ -32,6 +32,7 @@ export interface PublishedFormOptionData {
   id: number
   label: string
   index: number
+  controls_fieldset: string | null
   goes_to: PublishedFormGoesToData
   actions: []
 }
@@ -50,6 +51,7 @@ export interface PublishedFormQuestionData {
   named_id: string
   note: string | null
   info: string | null
+  fieldset: string | null
   goes_to: PublishedFormGoesToData
   service_type: PublishedFormServiceTypeData | null
   localisation: string[] | null

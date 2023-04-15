@@ -1,10 +1,10 @@
 import * as m from "mithril"
-import { Changeset } from "../Changeset"
-import { PublishedFormQuestion } from "../PublishedForm"
-import * as Questions from "../Questions"
-import { block } from "../BEM"
-import { PreviousValues } from "../PublicFormSubmission"
-import { displayDate } from "../DateTime"
+import { Changeset } from "../Changeset.js"
+import { PublishedFormQuestion } from "../PublishedForm.js"
+import * as Questions from "../Questions.js"
+import { block } from "../BEM.js"
+import { PreviousValues } from "../PublicFormSubmission.js"
+import { displayDate } from "../DateTime.js"
 
 interface Attrs {
   question: PublishedFormQuestion

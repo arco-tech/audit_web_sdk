@@ -1,12 +1,12 @@
 import * as m from "mithril";
-import { Changeset } from "../Changeset";
-import { FormState } from "../FormState";
-import { PublishedForm} from "../PublishedForm";
-import { FormField } from "./FormField";
-import { QuestionInput } from "./inputs/QuestionInput";
-import { PreviousValues } from "../PublicFormSubmission"
-import { FormSaver } from "../FormSaver";
-import { PreviousValue } from "./PreviousValue"
+import { Changeset } from "../Changeset.js";
+import { FormState } from "../FormState.js";
+import { PublishedForm} from "../PublishedForm.js";
+import { FormField } from "./FormField.js";
+import { QuestionInput } from "./inputs/QuestionInput.js";
+import { PreviousValues } from "../PublicFormSubmission.js"
+import { FormSaver } from "../FormSaver.js";
+import { PreviousValue } from "./PreviousValue.js"
 
 interface Attrs {
   publishedForm: PublishedForm;

@@ -1,6 +1,6 @@
 import * as m from "mithril"
-import { Changeset } from "../../Changeset"
-import * as FileUploadAPI from "../../api/public_forms/FileUploadAPI"
+import { Changeset } from "../../Changeset.js"
+import * as FileUploadAPI from "../../api/public_forms/FileUploadAPI.js"
 
 interface UploadStatus {
   name: string

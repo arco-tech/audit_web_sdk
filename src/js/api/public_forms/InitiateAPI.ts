@@ -1,5 +1,5 @@
-import {request} from "./API";
-import {PublicFormSubmissionData} from "../../PublicFormSubmission";
+import {request} from "./API.js";
+import {PublicFormSubmissionData} from "../../PublicFormSubmission.js";
 
 export interface InitiatePublicFormResponse {
   token: string;

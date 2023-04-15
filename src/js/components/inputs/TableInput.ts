@@ -1,9 +1,9 @@
 import * as m from "mithril"
-import { Changeset } from "../../Changeset"
+import { Changeset } from "../../Changeset.js"
 import {
   PublishedFormQuestionTableSettings,
   PublishedFormQuestionColumnSettings,
-} from "../../PublishedForm"
+} from "../../PublishedForm.js"
 
 type CellValue = string | null
 type TableValue = CellValue[][]

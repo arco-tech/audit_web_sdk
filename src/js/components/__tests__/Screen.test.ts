@@ -1,7 +1,7 @@
 import test from "ava";
 import * as m from "mithril";
-import * as Mock from "../../tests/Mock";
-import {Screen} from "../Screen";
+import * as Mock from "../../tests/Mock.js";
+import {Screen} from "../Screen.js";
 
 test("renders", async (t) => {
   const screen = m(Screen, "test content");

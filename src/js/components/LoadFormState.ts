@@ -1,16 +1,16 @@
 import * as m from "mithril";
 
-import * as Storage from "../Storage";
-import {PublishedForm, PublishedFormData} from "../PublishedForm";
-import {FormState} from "../FormState";
-import {stateDataFromSubmissionData} from "../PublicFormSubmission";
-import {log} from "../Log";
+import * as Storage from "../Storage.js";
+import {PublishedForm, PublishedFormData} from "../PublishedForm.js";
+import {FormState} from "../FormState.js";
+import {stateDataFromSubmissionData} from "../PublicFormSubmission.js";
+import {log} from "../Log.js";
 
-import * as PublicFormAPI from "../api/public_forms/PublicFormAPI";
+import * as PublicFormAPI from "../api/public_forms/PublicFormAPI.js";
 import * as PublicFormSubmissionAPI from
-  "../api/public_forms/PublicFormSubmissionAPI";
+  "../api/public_forms/PublicFormSubmissionAPI.js";
 
-import {Spinner} from "../components/Spinner";
+import {Spinner} from "../components/Spinner.js";
 
 interface CallbackParam {
   formState: FormState;

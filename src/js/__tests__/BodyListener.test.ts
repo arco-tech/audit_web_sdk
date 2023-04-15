@@ -1,6 +1,6 @@
 import test from "ava";
 import { JSDOM } from 'jsdom';
-import {listen, remove} from "../BodyListener";
+import {listen, remove} from "../BodyListener.js";
 
 test("listen and remove", (t) => {
   const dom = new JSDOM('<div id="my-element-id" />');

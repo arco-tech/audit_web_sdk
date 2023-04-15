@@ -1,7 +1,7 @@
 import * as m from "mithril";
-import {Changeset} from "../Changeset";
-import {ErrorMessage} from "./ErrorMessage";
-import { PublishedFormQuestion } from "../PublishedForm"
+import {Changeset} from "../Changeset.js";
+import {ErrorMessage} from "./ErrorMessage.js";
+import { PublishedFormQuestion } from "../PublishedForm.js"
 
 interface Attrs {
   label?: string | m.Component<any>;

@@ -1,12 +1,12 @@
 import test from "ava";
-import * as FormLogic from "../FormLogic";
+import * as FormLogic from "../FormLogic.js";
 import {
   mockFormData,
   mockOptionData,
   mockPublishedForm,
   mockQuestionData,
   mockSectionData,
-} from "../tests/PublishedFormMocks";
+} from "../tests/PublishedFormMocks.js";
 
 const publishedForm = mockPublishedForm({
   form: mockFormData({

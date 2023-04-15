@@ -6,9 +6,7 @@ import {
   PublishedFormQuestionData,
   PublishedFormSection,
   PublishedFormSectionData,
-  PublishedFormSectionIcon,
-  PublishedFormSectionIconData,
-} from "../PublishedForm";
+} from "../PublishedForm.js";
 
 export function mockPublishedForm(attrs: {[key: string]: any}): PublishedForm {
   return new PublishedForm({
@@ -64,6 +62,7 @@ export function mockQuestionData(
     note: "Note",
     info: "Info",
     label: "Some question?",
+    fieldset: null,
     goes_to: {type: "next_question"},
     localisation: null,
     options: [],
@@ -80,6 +79,7 @@ export function mockOptionData(
     label: "Some option",
     index: 1,
     actions: [],
+    controls_fieldset: null,
     goes_to: {type: "next_question"},
     ...attrs,
   };

@@ -1,4 +1,4 @@
-import {request} from "./API";
+import {request} from "./API.js";
 
 interface PublicHelpRequestParams {
   email: string;

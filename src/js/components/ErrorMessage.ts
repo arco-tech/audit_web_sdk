@@ -1,5 +1,5 @@
 import * as m from "mithril";
-import {sentence} from "../Grammar";
+import {sentence} from "../Grammar.js";
 
 interface Attrs {
   error: string | string[] | null | undefined;

@@ -1,7 +1,7 @@
 import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {Column} from "../Column";
-import {ColumnContainer} from "../ColumnContainer";
+import {Changeset} from "../../Changeset.js";
+import {Column} from "../Column.js";
+import {ColumnContainer} from "../ColumnContainer.js";
 
 interface Attrs {
   changeset: Changeset;

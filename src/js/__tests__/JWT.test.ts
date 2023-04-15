@@ -1,6 +1,6 @@
 import test from "ava";
 import { JSDOM } from 'jsdom';
-import {decodePayload, isValid} from "../JWT";
+import {decodePayload, isValid} from "../JWT.js";
 
 function toBase64(content: string): string {
   return Buffer.from(content).toString("base64");
