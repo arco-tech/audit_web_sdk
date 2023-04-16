@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Test Job
+    name: Build and test
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -37,7 +37,7 @@ jobs:
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
           TEST_OUTPUT: $
-        run: npm test
+        run: npm run build && npm run test
 
       - name: Notify test failure
         if: failure()
