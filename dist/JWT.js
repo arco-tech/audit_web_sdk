@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isValid = exports.decodePayload = void 0;
 function fromBase64(base64) {
     if (window.atob) {
         return window.atob(base64);
@@ -9,18 +6,16 @@ function fromBase64(base64) {
         return Buffer.from(base64, "base64").toString();
     }
 }
-function decodePayload(token) {
+export function decodePayload(token) {
     return JSON.parse(fromBase64(token.split(".")[1]));
 }
-exports.decodePayload = decodePayload;
-function isValid(token) {
+export function isValid(token) {
     if (!token) {
         return false;
     }
-    var now = new Date();
-    var exp = decodePayload(token).exp;
-    var expires = new Date(exp * 1000);
+    const now = new Date();
+    const { exp } = decodePayload(token);
+    const expires = new Date(exp * 1000);
     return expires.getTime() > now.getTime();
 }
-exports.isValid = isValid;
 //# sourceMappingURL=JWT.js.map

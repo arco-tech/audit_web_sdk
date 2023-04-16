@@ -1,6 +1,6 @@
-import * as m from "mithril";
-import {Spinner} from "./Spinner";
-import {Task} from "../Task";
+import m from "mithril";
+import {Spinner} from "./Spinner.js";
+import {Task} from "../Task.js";
 
 type TaskOrTasks = Task<any> | Task<any>[];
 

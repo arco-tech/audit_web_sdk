@@ -1,44 +1,26 @@
-"use strict";
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateInput = void 0;
-var m = require("mithril");
-var DateTime = require("../../DateTime");
-var BEM_1 = require("../../BEM");
-var BodyListener = require("../../BodyListener");
-exports.DateInput = {
-    oninit: function (_a) {
-        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, state = _a.state;
+import m from "mithril";
+import * as DateTime from "../../DateTime.js";
+import { block } from "../../BEM.js";
+import * as BodyListener from "../../BodyListener.js";
+export const DateInput = {
+    oninit: ({ attrs: { changeset, name }, state }) => {
         state.date = dateFromChangeset(changeset, name);
     },
-    oncreate: function (_a) {
-        var state = _a.state, dom = _a.dom;
-        state.listenerID = BodyListener.listen("click", function (event) {
+    oncreate: ({ state, dom }) => {
+        state.listenerID = BodyListener.listen("click", (event) => {
             if (!dom.contains(event.target)) {
                 state.expand = false;
                 m.redraw();
             }
         });
     },
-    onbeforeremove: function (_a) {
-        var state = _a.state;
+    onbeforeremove: ({ state }) => {
         BodyListener.remove(state.listenerID);
     },
-    view: function (_a) {
-        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, _c = _b.placeholder, placeholder = _c === void 0 ? "Select a Date" : _c, attrs = __rest(_b, ["changeset", "name", "placeholder"]), state = _a.state;
-        var date = state.date;
-        return m((0, BEM_1.block)("date-input", state.expand && "active"), {
-            onclick: function () {
+    view: ({ attrs: { changeset, name, placeholder = "Select a Date", ...attrs }, state, }) => {
+        const date = state.date;
+        return m(block("date-input", state.expand && "active"), {
+            onclick: () => {
                 if (!state.expand) {
                     state.expand = true;
                 }
@@ -50,43 +32,43 @@ exports.DateInput = {
                 m(".date-input__picker-dropdown__pickers", [
                     m(Picker, {
                         display: date.getDate(),
-                        change: function (amount) { date.setDate(date.getDate() + amount); },
+                        change: (amount) => { date.setDate(date.getDate() + amount); },
                     }),
                     m(Picker, {
                         display: DateTime.monthName(date.getMonth()),
-                        change: function (amount) { date.setMonth(date.getMonth() + amount); },
+                        change: (amount) => { date.setMonth(date.getMonth() + amount); },
                     }),
                     m(Picker, {
                         display: date.getFullYear(),
-                        change: function (amount) {
+                        change: (amount) => {
                             date.setFullYear(date.getFullYear() + amount);
                         },
                     }),
                 ]),
                 m(".date-input__picker-dropdown__button-row", [
                     m(".link.link--primary.margin-right-medium", {
-                        onclick: function () {
+                        onclick: () => {
                             state.date = dateFromChangeset(changeset, name);
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 state.expand = false;
                                 m.redraw();
                             });
                         },
                     }, "Cancel"),
                     m(".link.link--primary.margin-right-medium", {
-                        onclick: function () {
+                        onclick: () => {
                             changeset.change(name, null);
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 state.expand = false;
                                 m.redraw();
                             });
                         },
                     }, "Clear"),
                     m(".link.link--primary", {
-                        onclick: function () {
-                            var value = formatValue(date);
+                        onclick: () => {
+                            const value = formatValue(date);
                             changeset.change(name, value);
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 state.expand = false;
                                 m.redraw();
                             });
@@ -97,28 +79,27 @@ exports.DateInput = {
         ]);
     },
 };
-var Picker = {
-    view: function (_a) {
-        var _b = _a.attrs, display = _b.display, change = _b.change;
+const Picker = {
+    view: ({ attrs: { display, change } }) => {
         return m(".date-input__picker-dropdown__picker", [
-            m((0, BEM_1.block)("date-input__picker-dropdown__picker__arrow", "up"), {
-                onclick: function () { change(1); },
+            m(block("date-input__picker-dropdown__picker__arrow", "up"), {
+                onclick: () => { change(1); },
             }),
             m(".date-input__picker-dropdown__picker__value", display),
-            m((0, BEM_1.block)("date-input__picker-dropdown__picker__arrow", "down"), { onclick: function () { change(-1); } }),
+            m(block("date-input__picker-dropdown__picker__arrow", "down"), { onclick: () => { change(-1); } }),
         ]);
     },
 };
 function displayValue(value, placeholder) {
     if (value) {
-        var date = new Date(value);
+        const date = new Date(value);
         if (!isNaN(date.getTime())) {
             return m(".date-input__display-value", [
                 DateTime.displayDate(date)
             ]);
         }
     }
-    return m((0, BEM_1.block)("date-input__display-value", "placeholder"), placeholder);
+    return m(block("date-input__display-value", "placeholder"), placeholder);
 }
 function formatValue(date) {
     return zeroPad(date.getFullYear(), 4) + "-" +
@@ -126,12 +107,12 @@ function formatValue(date) {
         zeroPad(date.getDate(), 2);
 }
 function zeroPad(value, digits) {
-    var zeros = "0".repeat(digits);
-    return "".concat(zeros).concat(value).slice(-digits);
+    const zeros = "0".repeat(digits);
+    return `${zeros}${value}`.slice(-digits);
 }
 function dateFromChangeset(changeset, name) {
-    var dateValue = changeset.getValue(name);
-    var date = dateValue ? new Date(dateValue) : new Date();
+    const dateValue = changeset.getValue(name);
+    const date = dateValue ? new Date(dateValue) : new Date();
     return !isNaN(date.getTime()) ? date : new Date();
 }
 //# sourceMappingURL=DateInput.js.map

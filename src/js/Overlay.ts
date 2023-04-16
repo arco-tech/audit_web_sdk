@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 
 interface State {
   element: HTMLElement | null;

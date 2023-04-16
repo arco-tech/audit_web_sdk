@@ -1,4 +1,4 @@
-import {log} from "./Log";
+import {log} from "./Log.js";
 
 type Listener = (name: string, value: string) => void;
 

@@ -1,12 +1,12 @@
-import * as m from "mithril";
-import {block} from "../BEM";
+import m from "mithril";
+import {block} from "../BEM.js";
 
 type Modifier = "wide" | "inverse-primary";
 
 interface Attrs {
   selector?: string;
   modifiers?: Modifier | Modifier[];
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 type Vnode = m.Vnode<Attrs>;

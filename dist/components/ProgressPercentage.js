@@ -1,38 +1,35 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProgressPercentage = void 0;
-var m = require("mithril");
-var BEM_1 = require("../BEM");
-exports.ProgressPercentage = {
-    oninit: function (vnode) {
+import m from "mithril";
+import { block } from "../BEM.js";
+export const ProgressPercentage = {
+    oninit: (vnode) => {
         vnode.state.display = 0;
     },
-    onbeforeremove: function (vnode) {
+    onbeforeremove: (vnode) => {
         clearTimeout(vnode.state.timeout);
     },
-    view: function (vnode) {
+    view: (vnode) => {
         updateState(vnode);
-        var complete = vnode.state.display === 100;
-        var modifiers = complete ? ["complete"] : [];
-        var color = vnode.attrs.color || (complete ? "primary" : "grey");
-        var selector = (vnode.attrs.selector || "") +
-            ".color-".concat(color) +
-            (0, BEM_1.block)(".progress-percentage", modifiers);
-        return m(selector, "".concat(Math.round(vnode.state.display), "%"));
+        const complete = vnode.state.display === 100;
+        const modifiers = complete ? ["complete"] : [];
+        const color = vnode.attrs.color || (complete ? "primary" : "grey");
+        const selector = (vnode.attrs.selector || "") +
+            `.color-${color}` +
+            block(".progress-percentage", modifiers);
+        return m(selector, `${Math.round(vnode.state.display)}%`);
     },
 };
 function updateState(vnode) {
-    var progress = vnode.attrs.progress, _a = vnode.state, display = _a.display, timeout = _a.timeout;
-    var difference = Math.abs(progress - display);
+    const { attrs: { progress }, state: { display, timeout } } = vnode;
+    const difference = Math.abs(progress - display);
     clearTimeout(timeout);
     if (difference >= 1) {
-        var change = difference * 0.2;
+        let change = difference * 0.2;
         if (display > progress) {
             change = -change;
         }
         vnode.state.display += change;
         if (difference !== 0) {
-            vnode.state.timeout = setTimeout(function () {
+            vnode.state.timeout = setTimeout(() => {
                 updateState(vnode);
                 m.redraw();
             }, 40);

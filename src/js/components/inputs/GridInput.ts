@@ -1,9 +1,9 @@
-import * as m from "mithril"
-import { Changeset } from "../../Changeset"
+import m from "mithril"
+import { Changeset } from "../../Changeset.js"
 import {
   PublishedFormQuestionGridSettings,
   PublishedFormQuestionColumnSettings,
-} from "../../PublishedForm"
+} from "../../PublishedForm.js"
 
 type CellValue = string | null
 type GridValue = CellValue[][]
@@ -30,7 +30,7 @@ export const GridInput: m.Component<Attrs> = {
         return m("tr.input-table__row", [
           m("td.input-table__cell.input-table__cell--header", row.title()),
           settings.columns().map((column, columnIndex) => {
-            const isSum = row.dataType === "sum" || column.dataType === "sum"
+            const isSum = row.dataType() === "sum" || column.dataType() === "sum"
 
             return m("td.input-table__cell.input-table__cell--input", [
               isSum &&
@@ -128,7 +128,7 @@ function duplicateAndFormatGridValue(
 }
 
 function formatCellValue(
-  value: string = "",
+  value = "",
   row: PublishedFormQuestionColumnSettings,
   column: PublishedFormQuestionColumnSettings
 ): CellValue {
@@ -136,14 +136,14 @@ function formatCellValue(
   let updatedValue = ""
   switch (row.dataType() || column.dataType()) {
     case "float":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789.-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }
       }
       return updatedValue
     case "integer":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }

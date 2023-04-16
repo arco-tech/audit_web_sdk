@@ -1,13 +1,13 @@
-import * as FormLogic from "./FormLogic";
-import {Location} from "./Location";
-import * as Locations from "./Locations";
+import * as FormLogic from "./FormLogic.js";
+import {Location} from "./Location.js";
+import * as Locations from "./Locations.js";
 import {
   PublishedForm,
   PublishedFormQuestion,
   PublishedFormSection,
-} from "./PublishedForm";
-import * as Questions from "./Questions";
-import {validate, ValidationResult} from "./Validation";
+} from "./PublishedForm.js";
+import * as Questions from "./Questions.js";
+import {validate, ValidationResult} from "./Validation.js";
 
 export interface FormStateValues {
   [questionID: string]: any;

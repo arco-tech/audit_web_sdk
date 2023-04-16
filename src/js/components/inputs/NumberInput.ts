@@ -1,7 +1,6 @@
-import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {block} from "../../BEM";
-import {Input} from "./Input";
+import m from "mithril";
+import {Changeset} from "../../Changeset.js";
+import {block} from "../../BEM.js";
 
 interface Attrs {
   changeset: Changeset;

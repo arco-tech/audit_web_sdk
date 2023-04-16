@@ -1,7 +1,6 @@
-import * as m from "mithril";
-import {block} from "../BEM";
-import {Footer} from "./Footer";
-import {Header} from "./Header";
+import m from "mithril";
+import {Footer} from "./Footer.js";
+import {Header} from "./Header.js";
 
 interface Attrs {
   selector?: string;

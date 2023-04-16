@@ -1,9 +1,9 @@
-import * as m from "mithril"
-import { Changeset } from "../../Changeset"
+import m from "mithril"
+import { Changeset } from "../../Changeset.js"
 import {
   PublishedFormQuestionTableSettings,
   PublishedFormQuestionColumnSettings,
-} from "../../PublishedForm"
+} from "../../PublishedForm.js"
 
 type CellValue = string | null
 type TableValue = CellValue[][]
@@ -87,7 +87,7 @@ function getValue(
   name: string,
   settings: PublishedFormQuestionTableSettings
 ): TableValue {
-  let tableValue = changeset.getValue(name)
+  const tableValue = changeset.getValue(name)
   if (!Array.isArray(tableValue) || tableValue.length === 0) {
     return [settings.columns().map(() => null)]
   } else {
@@ -121,21 +121,21 @@ function setCellValue(
 }
 
 function formatCellValue(
-  value: string = "",
+  value = "",
   column: PublishedFormQuestionColumnSettings
 ): CellValue {
   const splitValue = (value || "").split("")
   let updatedValue = ""
   switch (column.dataType()) {
     case "float":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789.-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }
       }
       return updatedValue
     case "integer":
-      for (let index in splitValue) {
+      for (const index in splitValue) {
         if ("0123456789-".indexOf(splitValue[index]) !== -1) {
           updatedValue += splitValue[index]
         }

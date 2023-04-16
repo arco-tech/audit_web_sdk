@@ -1,14 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskDisplay = void 0;
-var m = require("mithril");
-var Spinner_1 = require("./Spinner");
-exports.TaskDisplay = {
-    view: function (vnode) {
-        var _a = vnode.attrs, task = _a.task, render = _a.render, renderError = _a.renderError, renderWorking = _a.renderWorking;
+import m from "mithril";
+import { Spinner } from "./Spinner.js";
+export const TaskDisplay = {
+    view: (vnode) => {
+        const { attrs: { task, render, renderError, renderWorking } } = vnode;
         switch (getStatus(task)) {
             case "working":
-                return renderWorking ? renderWorking(task) : m(Spinner_1.Spinner);
+                return renderWorking ? renderWorking(task) : m(Spinner);
             case "error":
                 return renderError ? renderError(getError(task), task) :
                     "Sorry, something went wrong.";
@@ -19,7 +16,7 @@ exports.TaskDisplay = {
 };
 function getStatus(taskOrTasks) {
     if (Array.isArray(taskOrTasks)) {
-        var statuses = taskOrTasks.map(function (task) { return task.getStatus(); });
+        const statuses = taskOrTasks.map((task) => task.getStatus());
         if (statuses.indexOf("error") !== -1)
             return "error";
         if (statuses.indexOf("working") !== -1)
@@ -33,8 +30,8 @@ function getStatus(taskOrTasks) {
 function getError(taskOrTasks) {
     if (Array.isArray(taskOrTasks)) {
         return taskOrTasks
-            .map(function (task) { return task.getError(); })
-            .filter(function (error) { return error; });
+            .map((task) => task.getError())
+            .filter((error) => error);
     }
     else {
         return taskOrTasks.getError();
@@ -42,7 +39,7 @@ function getError(taskOrTasks) {
 }
 function getResult(taskOrTasks) {
     if (Array.isArray(taskOrTasks)) {
-        return taskOrTasks.map(function (task) { return task.getResult(); });
+        return taskOrTasks.map((task) => task.getResult());
     }
     else {
         return taskOrTasks.getResult();

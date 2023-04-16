@@ -1,18 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Screen = void 0;
-var m = require("mithril");
-var Footer_1 = require("./Footer");
-var Header_1 = require("./Header");
-exports.Screen = {
-    oncreate: function (vnode) {
+import m from "mithril";
+import { Footer } from "./Footer.js";
+import { Header } from "./Header.js";
+export const Screen = {
+    oncreate: (vnode) => {
         window.scrollTo(0, 0);
     },
-    view: function (vnode) {
+    view: (vnode) => {
         return m(".screen" + (vnode.attrs.selector || ""), [
-            m(vnode.attrs.headerComponent || Header_1.Header),
+            m(vnode.attrs.headerComponent || Header),
             m(".screen__content", vnode.children),
-            m(vnode.attrs.footerComponent || Footer_1.Footer),
+            m(vnode.attrs.footerComponent || Footer),
         ]);
     },
 };

@@ -1,5 +1,5 @@
 import test from "ava";
-import {capitalise, fullStop, sentence} from "../Grammar";
+import {capitalise, fullStop, sentence} from "../Grammar.js";
 
 test("capitalise", (t) => {
   t.is(capitalise("test string"), "Test string");

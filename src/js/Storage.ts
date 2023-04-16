@@ -1,7 +1,7 @@
-import {FormState} from "./FormState";
-import {PublishedForm, PublishedFormData} from "./PublishedForm";
-import {PreviousValues} from "./PublicFormSubmission"
-import { PublicForm } from "./PublicForm";
+import {FormState} from "./FormState.js";
+import {PublishedForm, PublishedFormData} from "./PublishedForm.js";
+import {PreviousValues} from "./PublicFormSubmission.js"
+import { PublicForm } from "./PublicForm.js";
 
 interface Cache {
   publicForm: PublicForm | null;

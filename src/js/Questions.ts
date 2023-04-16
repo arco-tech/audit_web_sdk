@@ -1,24 +1,24 @@
-import * as m from "mithril"
-import { Changeset } from "./Changeset"
-import { CheckBoxList } from "./components/inputs/CheckBoxList"
-import { DateInput } from "./components/inputs/DateInput"
-import { DateRangeInput } from "./components/inputs/DateRangeInput"
-import { Input } from "./components/inputs/Input"
-import { TextArea } from "./components/inputs/TextArea"
-import { InputList } from "./components/inputs/InputList"
-import { NumberInput } from "./components/inputs/NumberInput"
-import { RadioList } from "./components/inputs/RadioList"
-import { GridInput } from "./components/inputs/GridInput"
-import { TableInput } from "./components/inputs/TableInput"
-import { Selector } from "./components/inputs/Selector"
-import {FileUploadInput} from "./components/inputs/FileUploadInput"
+import m from "mithril"
+import { Changeset } from "./Changeset.js"
+import { CheckBoxList } from "./components/inputs/CheckBoxList.js"
+import { DateInput } from "./components/inputs/DateInput.js"
+import { DateRangeInput } from "./components/inputs/DateRangeInput.js"
+import { Input } from "./components/inputs/Input.js"
+import { TextArea } from "./components/inputs/TextArea.js"
+import { InputList } from "./components/inputs/InputList.js"
+import { NumberInput } from "./components/inputs/NumberInput.js"
+import { RadioList } from "./components/inputs/RadioList.js"
+import { GridInput } from "./components/inputs/GridInput.js"
+import { TableInput } from "./components/inputs/TableInput.js"
+import { Selector } from "./components/inputs/Selector.js"
+import {FileUploadInput} from "./components/inputs/FileUploadInput.js"
 import {
   PublishedFormGoesTo,
   PublishedFormOption,
   PublishedFormQuestion,
-} from "./PublishedForm"
-import { log } from "./Log"
-import { ErrorMessage } from "./components/ErrorMessage"
+} from "./PublishedForm.js"
+import { log } from "./Log.js"
+import { ErrorMessage } from "./components/ErrorMessage.js"
 
 interface Attrs {
   name: string
@@ -257,8 +257,8 @@ const types: { [type: string]: Type } = {
       if (!Array.isArray(value)) {
         return false
       }
-      for (let rowIndex in value) {
-        for (let columnIndex in value[rowIndex]) {
+      for (const rowIndex in value) {
+        for (const columnIndex in value[rowIndex]) {
           if (
             value[rowIndex][columnIndex] ||
             value[rowIndex][columnIndex] === 0
@@ -296,8 +296,8 @@ const types: { [type: string]: Type } = {
       if (!Array.isArray(value)) {
         return false
       }
-      for (let rowIndex in value) {
-        for (let columnIndex in value[rowIndex]) {
+      for (const rowIndex in value) {
+        for (const columnIndex in value[rowIndex]) {
           if (
             value[rowIndex][columnIndex] ||
             value[rowIndex][columnIndex] === 0

@@ -1,7 +1,7 @@
 import test from "ava";
-import * as m from "mithril";
-import * as Mock from "../../tests/Mock";
-import {Screen} from "../Screen";
+import m from "mithril";
+import * as Mock from "../../tests/Mock.js";
+import {Screen} from "../Screen.js";
 
 test("renders", async (t) => {
   const screen = m(Screen, "test content");
@@ -14,7 +14,7 @@ test("renders", async (t) => {
 });
 
 test("renders selector", async (t) => {
-  const screen = m(Screen, {selector: ".test.classes"});
+  const screen = m(Screen, {selector: ".test.classes", headerComponent: null, footerComponent: null});
   const element = await Mock.mount(screen);
   t.is(element.className, "screen test classes");
 });

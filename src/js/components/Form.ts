@@ -1,6 +1,6 @@
-import * as m from "mithril";
-import {Changeset} from "../Changeset";
-import {ErrorMessage} from "./ErrorMessage";
+import m from "mithril";
+import {Changeset} from "../Changeset.js";
+import {ErrorMessage} from "./ErrorMessage.js";
 
 interface Attrs {
   changeset: Changeset;

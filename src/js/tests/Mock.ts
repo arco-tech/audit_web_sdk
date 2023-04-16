@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 
 export function createElement(parent?: Element): Element {
   const element = document.createElement("div");

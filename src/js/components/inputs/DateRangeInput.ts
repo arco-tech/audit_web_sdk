@@ -1,6 +1,6 @@
-import * as m from "mithril";
-import {DateInput} from "./DateInput";
-import {Changeset} from "../../Changeset";
+import m from "mithril";
+import {DateInput} from "./DateInput.js";
+import {Changeset} from "../../Changeset.js";
 
 interface Attrs {
   changeset: Changeset;

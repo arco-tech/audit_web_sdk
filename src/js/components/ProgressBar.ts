@@ -1,13 +1,17 @@
-import * as m from "mithril";
+import m from "mithril";
 
 interface Attrs {
   progress: number;
   color?: string;
 }
 
-type Vnode = m.Vnode<Attrs>;
+interface State {
+  initialising: boolean
+}
 
-export const ProgressBar: m.Component<Attrs> = {
+type Vnode = m.Vnode<Attrs, State>;
+
+export const ProgressBar: m.Component<Attrs, State> = {
   oninit: ({state}) => {
     state.initialising = true;
     setTimeout(() => {

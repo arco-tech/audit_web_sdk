@@ -1,12 +1,12 @@
 import test from "ava";
-import {FormState, FormStateSaver} from "../FormState";
+import {FormState, FormStateSaver} from "../FormState.js";
 import {
   mockFormData,
   mockPublishedForm,
   mockQuestionData,
   mockSection,
   mockSectionData,
-} from "../tests/PublishedFormMocks";
+} from "../tests/PublishedFormMocks.js";
 
 function mockFormState(
   data: {[key: string]: any},

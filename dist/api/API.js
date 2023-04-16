@@ -1,44 +1,27 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+import * as m from "mithril";
+import { apiEndpoint } from "../Environment.js";
+import { loadAuthToken } from "../Storage.js";
+const pathPrefix = "api/v1";
+const config = {
+    endpoint: apiEndpoint,
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.setEndpoint = exports.request = void 0;
-var m = require("mithril");
-var Environment_1 = require("../Environment");
-var Storage_1 = require("../Storage");
-var pathPrefix = "api/v1";
-var config = {
-    endpoint: Environment_1.apiEndpoint,
-};
-function request(method, path, options) {
-    if (options === void 0) { options = {}; }
-    var prefix = options.pathPrefix || pathPrefix;
-    var url = "".concat(Environment_1.apiEndpoint, "/").concat(prefix, "/").concat(path);
-    var token = options.jwt || (0, Storage_1.loadAuthToken)();
+export function request(method, path, options = {}) {
+    const prefix = options.pathPrefix || pathPrefix;
+    const url = `${apiEndpoint}/${prefix}/${path}`;
+    const token = options.jwt || loadAuthToken();
     if (token) {
-        options.headers = __assign({ Authorization: "Bearer ".concat(token) }, (options.headers || {}));
+        options.headers = {
+            Authorization: `Bearer ${token}`,
+            ...(options.headers || {})
+        };
     }
-    return m.request(__assign({ method: method, url: url }, options))
-        .then(function (_a) {
-        var data = _a.data;
-        return data;
-    })
-        .catch(function (error) {
+    return m.request({ method, url, ...options })
+        .then(({ data }) => data)
+        .catch((error) => {
         throw error;
     });
 }
-exports.request = request;
-function setEndpoint(endpoint) {
+export function setEndpoint(endpoint) {
     config.endpoint = endpoint;
 }
-exports.setEndpoint = setEndpoint;
 //# sourceMappingURL=API.js.map

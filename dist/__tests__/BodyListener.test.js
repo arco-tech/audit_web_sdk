@@ -1,17 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ava_1 = require("ava");
-var jsdom_1 = require("jsdom");
-var BodyListener_1 = require("../BodyListener");
-(0, ava_1.default)("listen and remove", function (t) {
-    var dom = new jsdom_1.JSDOM('<div id="my-element-id" />');
+import test from "ava";
+import { JSDOM } from 'jsdom';
+import { listen, remove } from "../BodyListener.js";
+test("listen and remove", (t) => {
+    const dom = new JSDOM('<div id="my-element-id" />');
     global.document = dom.window.document;
-    var clickCount = 0;
-    var id = (0, BodyListener_1.listen)("click", function () { clickCount++; });
+    let clickCount = 0;
+    const id = listen("click", () => { clickCount++; });
     t.is(clickCount, 0);
     document.body.click();
     t.is(clickCount, 1);
-    (0, BodyListener_1.remove)(id);
+    remove(id);
     document.body.click();
     t.is(clickCount, 1);
 });

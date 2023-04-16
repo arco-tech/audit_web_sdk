@@ -1,7 +1,7 @@
-import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {PublishedFormQuestion} from "../../PublishedForm";
-import * as Questions from "../../Questions";
+import m from "mithril";
+import {Changeset} from "../../Changeset.js";
+import {PublishedFormQuestion} from "../../PublishedForm.js";
+import * as Questions from "../../Questions.js";
 
 interface Attrs {
   name: string;

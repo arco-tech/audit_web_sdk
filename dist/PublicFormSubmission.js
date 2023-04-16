@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.stateDataFromSubmissionData = void 0;
-function stateDataFromSubmissionData(submission) {
+export function stateDataFromSubmissionData(submission) {
     return {
         currentSectionID: null,
         values: submission.values,
@@ -25,5 +22,4 @@ function stateDataFromSubmissionData(submission) {
         },
     };
 }
-exports.stateDataFromSubmissionData = stateDataFromSubmissionData;
 //# sourceMappingURL=PublicFormSubmission.js.map

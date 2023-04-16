@@ -1,20 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.locations = exports.locationByCode = exports.location = void 0;
-var LocationAPI = require("./api/public/LocationAPI");
-var state = {
+import * as LocationAPI from "./api/public/LocationAPI.js";
+const state = {
     locations: null,
     promise: null,
 };
-function location(id) {
-    return locations().find(function (l) { return l.id() === id; });
+export function location(id) {
+    return locations().find((l) => l.id() === id);
 }
-exports.location = location;
-function locationByCode(countryCode) {
-    return locations().find(function (l) { return l.countryCode() === countryCode; });
+export function locationByCode(countryCode) {
+    return locations().find((l) => l.countryCode() === countryCode);
 }
-exports.locationByCode = locationByCode;
-function locations() {
+export function locations() {
     if (state.locations !== null) {
         return state.locations;
     }
@@ -25,14 +20,13 @@ function locations() {
         return [];
     }
 }
-exports.locations = locations;
 function load() {
     state.promise =
         LocationAPI.locations()
-            .then(function (results) {
+            .then((results) => {
             state.locations = results;
             state.promise = null;
         })
-            .catch(function () { state.promise = null; });
+            .catch(() => { state.promise = null; });
 }
 //# sourceMappingURL=Locations.js.map

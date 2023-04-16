@@ -1,19 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.simulateInput = exports.simulateMouseClick = void 0;
-function simulateMouseClick(element) {
+export function simulateMouseClick(element) {
     element.dispatchEvent(new window.MouseEvent("click", {
         bubbles: true,
         cancelable: true,
         view: window
     }));
 }
-exports.simulateMouseClick = simulateMouseClick;
-;
-function simulateInput(element, value) {
-    var event = new window.Event("input", { bubbles: true });
+export function simulateInput(element, value) {
+    const event = new window.Event("input", { bubbles: true });
     element.value = value;
     element.dispatchEvent(event);
 }
-exports.simulateInput = simulateInput;
 //# sourceMappingURL=Events.js.map

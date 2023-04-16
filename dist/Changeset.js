@@ -1,21 +1,6 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Changeset = void 0;
-var Log_1 = require("./Log");
-var Changeset = /** @class */ (function () {
-    function Changeset(originals) {
-        if (originals === void 0) { originals = {}; }
+import { log } from "./Log.js";
+export class Changeset {
+    constructor(originals = {}) {
         this.originals = {};
         this.changes = {};
         this.responseError = null;
@@ -24,7 +9,7 @@ var Changeset = /** @class */ (function () {
         this.originals = originals || {};
     }
     // Values
-    Changeset.prototype.getValue = function (name) {
+    getValue(name) {
         if (this.changes.hasOwnProperty(name)) {
             return this.getChange(name);
         }
@@ -34,97 +19,97 @@ var Changeset = /** @class */ (function () {
         else {
             return null;
         }
-    };
-    Changeset.prototype.getValues = function () {
-        return __assign(__assign({}, this.originals), this.changes);
-    };
+    }
+    getValues() {
+        return { ...this.originals, ...this.changes };
+    }
     // Originals
-    Changeset.prototype.setOriginals = function (originals) {
+    setOriginals(originals) {
         this.originals = originals || {};
-    };
-    Changeset.prototype.getOriginal = function (name) {
+    }
+    getOriginal(name) {
         if (this.originals.hasOwnProperty(name)) {
             return this.originals[name];
         }
         else {
             return null;
         }
-    };
-    Changeset.prototype.getOriginals = function () {
+    }
+    getOriginals() {
         return this.originals;
-    };
+    }
     // Changes
-    Changeset.prototype.change = function (name, value) {
+    change(name, value) {
         this.changes[name] = value;
-        this.listeners.forEach(function (listener) {
+        this.listeners.forEach((listener) => {
             try {
                 listener(name, value);
             }
             catch (error) {
-                (0, Log_1.log)("error", error);
+                log("error", error);
             }
         });
-    };
-    Changeset.prototype.getChange = function (name) {
+    }
+    getChange(name) {
         if (this.changes.hasOwnProperty(name)) {
             return this.changes[name];
         }
         else {
             return null;
         }
-    };
-    Changeset.prototype.getChanges = function () {
+    }
+    getChanges() {
         return this.changes;
-    };
-    Changeset.prototype.hasAnyChanges = function () {
-        for (var name_1 in this.changes) {
-            if (this.hasChange(name_1)) {
+    }
+    hasAnyChanges() {
+        for (const name in this.changes) {
+            if (this.hasChange(name)) {
                 return true;
             }
         }
         return false;
-    };
-    Changeset.prototype.hasChange = function (name) {
-        var change = this.getChange(name);
+    }
+    hasChange(name) {
+        const change = this.getChange(name);
         return (this.changes.hasOwnProperty(name) &&
             this.changes[name] !== this.getOriginal(name));
-    };
-    Changeset.prototype.clearChanges = function () {
+    }
+    clearChanges() {
         this.changes = {};
-    };
+    }
     // Field Errors
-    Changeset.prototype.setFieldErrors = function (fieldErrors) {
+    setFieldErrors(fieldErrors) {
         this.fieldErrors = fieldErrors || {};
-    };
-    Changeset.prototype.setFieldError = function (name, errors) {
+    }
+    setFieldError(name, errors) {
         this.fieldErrors[name] = errors;
-    };
-    Changeset.prototype.getFieldErrors = function () {
+    }
+    getFieldErrors() {
         return this.fieldErrors;
-    };
-    Changeset.prototype.getFieldError = function (name) {
+    }
+    getFieldError(name) {
         return this.fieldErrors[name];
-    };
-    Changeset.prototype.hasFieldError = function (name) {
+    }
+    hasFieldError(name) {
         return this.getFieldError(name) ? true : false;
-    };
+    }
     // Response Error
-    Changeset.prototype.setResponseError = function (error) {
+    setResponseError(error) {
         this.responseError = error;
-    };
-    Changeset.prototype.getResponseError = function () {
+    }
+    getResponseError() {
         return this.responseError;
-    };
-    Changeset.prototype.hasResponseError = function () {
+    }
+    hasResponseError() {
         return this.getResponseError() ? true : false;
-    };
+    }
     // Errors
-    Changeset.prototype.clearErrors = function () {
+    clearErrors() {
         this.setFieldErrors({});
         this.setResponseError(null);
-    };
+    }
     // Handlers
-    Changeset.prototype.errorResponse = function (response) {
+    errorResponse(response) {
         if (typeof response === "object" && typeof response.response === "object") {
             response = response.response;
         }
@@ -139,19 +124,17 @@ var Changeset = /** @class */ (function () {
             this.setResponseError(response.errors.detail);
         }
         else {
-            (0, Log_1.log)("error", "unknown response error", response);
+            log("error", "unknown response error", response);
             this.setResponseError("something went wrong");
         }
-    };
-    Changeset.prototype.validationErrors = function (errors) {
+    }
+    validationErrors(errors) {
         this.setFieldErrors(errors);
         this.setResponseError("please fix the errors below");
-    };
+    }
     // Listeners
-    Changeset.prototype.listen = function (listener) {
+    listen(listener) {
         this.listeners.push(listener);
-    };
-    return Changeset;
-}());
-exports.Changeset = Changeset;
+    }
+}
 //# sourceMappingURL=Changeset.js.map

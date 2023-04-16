@@ -1,7 +1,7 @@
-import {request} from "./API";
-import {PublishedFormData} from "../../PublishedForm";
-import {PreviousValues} from "../../PublicFormSubmission"
-import { PublicFormData } from "../../PublicForm";
+import {request} from "./API.js";
+import {PublishedFormData} from "../../PublishedForm.js";
+import {PreviousValues} from "../../PublicFormSubmission.js"
+import { PublicFormData } from "../../PublicForm.js";
 
 export function live(publicFormID: string): Promise<PublishedFormData> {
   return request<PublishedFormData>(

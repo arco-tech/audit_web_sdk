@@ -1,6 +1,6 @@
 import test from "ava";
-import {isComplete} from "../Questions";
-import {mockOptionData, mockQuestion} from "../tests/PublishedFormMocks";
+import {isComplete} from "../Questions.js";
+import {mockOptionData, mockQuestion} from "../tests/PublishedFormMocks.js";
 
 test("isComplete text", (t) => {
   const question = mockQuestion({type: "text"});

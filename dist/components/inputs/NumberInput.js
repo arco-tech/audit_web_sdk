@@ -1,49 +1,29 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NumberInput = void 0;
-var m = require("mithril");
-var BEM_1 = require("../../BEM");
-exports.NumberInput = {
-    view: function (_a) {
-        var _b = _a.attrs, changeset = _b.changeset, name = _b.name, attrs = __rest(_b, ["changeset", "name"]);
+import m from "mithril";
+import { block } from "../../BEM.js";
+export const NumberInput = {
+    view: ({ attrs: { changeset, name, ...attrs } }) => {
         return m(".input-wrapper", [
-            m("input.input-wrapper__input", __assign({ value: changeset.getValue(name), type: "number", onkeypress: checkInput, oninput: function (event) {
-                    var value = event.target.value;
-                    var numberValue = value ? parseFloat(value) : null;
+            m("input.input-wrapper__input", {
+                value: changeset.getValue(name),
+                type: "number",
+                onkeypress: checkInput,
+                oninput: (event) => {
+                    const value = event.target.value;
+                    const numberValue = value ? parseFloat(value) : null;
                     changeset.change(name, numberValue);
-                } }, attrs)),
-            m((0, BEM_1.block)("input-wrapper__icon", ["split"]), [
-                m((0, BEM_1.block)("input-wrapper__icon__split", ["up-arrow"]), {
-                    onclick: function () {
-                        var value = changeset.getValue(name) || 0;
+                },
+                ...attrs,
+            }),
+            m(block("input-wrapper__icon", ["split"]), [
+                m(block("input-wrapper__icon__split", ["up-arrow"]), {
+                    onclick: () => {
+                        const value = changeset.getValue(name) || 0;
                         changeset.change(name, Math.round(value + 1));
                     },
                 }),
-                m((0, BEM_1.block)("input-wrapper__icon__split", ["down-arrow"]), {
-                    onclick: function () {
-                        var value = changeset.getValue(name) || 0;
+                m(block("input-wrapper__icon__split", ["down-arrow"]), {
+                    onclick: () => {
+                        const value = changeset.getValue(name) || 0;
                         changeset.change(name, Math.round(value - 1));
                     },
                 }),

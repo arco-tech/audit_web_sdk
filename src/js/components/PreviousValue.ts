@@ -1,10 +1,10 @@
-import * as m from "mithril"
-import { Changeset } from "../Changeset"
-import { PublishedFormQuestion } from "../PublishedForm"
-import * as Questions from "../Questions"
-import { block } from "../BEM"
-import { PreviousValues } from "../PublicFormSubmission"
-import { displayDate } from "../DateTime"
+import m from "mithril"
+import { Changeset } from "../Changeset.js"
+import { PublishedFormQuestion } from "../PublishedForm.js"
+import * as Questions from "../Questions.js"
+import { block } from "../BEM.js"
+import { PreviousValues } from "../PublicFormSubmission.js"
+import { displayDate } from "../DateTime.js"
 
 interface Attrs {
   question: PublishedFormQuestion
@@ -17,6 +17,14 @@ interface State {
   copyFailed: boolean
 }
 
+// simple type narrowing workaround
+function convertNumber(val: string | number | string[]): string | string[]
+{
+  if(typeof val === "number")
+    return String(val)
+  return val
+}
+
 export const PreviousValue: m.Component<Attrs, State> = {
   oninit: ({ state }) => {
     state.hover = false
@@ -26,9 +34,9 @@ export const PreviousValue: m.Component<Attrs, State> = {
   view: ({ attrs: { question, previousValues, changeset }, state }) => {
     const namedId = question.namedID()
     if (!namedId) return null
-    let response = previousValues[namedId]
+    const response = previousValues[namedId]
     if (!response) return null
-    const value = parseRespone(response)
+    const value = parseResponse(response)
     if (value == "") return null
 
     return m(".previous-values", [
@@ -40,7 +48,7 @@ export const PreviousValue: m.Component<Attrs, State> = {
           onclick: () => {
             state.copyFailed = !Questions.setValue(
               question,
-              response,
+              convertNumber(response),
               changeset
             )
           },
@@ -71,7 +79,7 @@ export const PreviousValue: m.Component<Attrs, State> = {
   },
 }
 
-const parseRespone = (response) => {
+const parseResponse = (response) => {
   if (Array.isArray(response)) {
     if (response.length > 0 && Array.isArray(response[0])) {
       return response

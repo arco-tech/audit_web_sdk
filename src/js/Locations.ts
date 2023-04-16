@@ -1,5 +1,5 @@
-import * as LocationAPI from "./api/public/LocationAPI";
-import {Location} from "./Location";
+import * as LocationAPI from "./api/public/LocationAPI.js";
+import {Location} from "./Location.js";
 
 interface State {
   locations: Location[] | null;

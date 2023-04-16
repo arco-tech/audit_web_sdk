@@ -1,5 +1,5 @@
-import {FormType, FormTypeJSON} from "../../FormType";
-import {request} from "./API";
+import {FormType, FormTypeJSON} from "../../FormType.js";
+import {request} from "./API.js";
 
 export function formType(id): Promise<FormType> {
   return request<FormTypeJSON>("get", "form-types/" + id)

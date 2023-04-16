@@ -1,11 +1,11 @@
-import {Location} from "./Location";
+import {Location} from "./Location.js";
 import {
   PublishedForm,
   PublishedFormGoesTo,
   PublishedFormQuestion,
   PublishedFormSection,
-} from "./PublishedForm";
-import * as Questions from "./Questions";
+} from "./PublishedForm.js";
+import * as Questions from "./Questions.js";
 
 export interface SectionSummary {
   validQuestions: PublishedFormQuestion[];

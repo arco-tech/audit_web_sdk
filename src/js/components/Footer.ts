@@ -1,7 +1,7 @@
-import * as m from "mithril";
-import {block} from "../BEM";
-import {Column} from "./Column";
-import {ColumnContainer} from "./ColumnContainer";
+import m from "mithril";
+import {block} from "../BEM.js";
+import {Column} from "./Column.js";
+import {ColumnContainer} from "./ColumnContainer.js";
 
 interface Attrs {}
 
@@ -13,7 +13,7 @@ export const Footer: m.Component<Attrs> = {
       m(".footer__content", [
         m(ColumnContainer, {
           selector: ".section__content--large.margin-x-auto",
-          modifiers: "large-cut-off",
+          modifiers: ["large-cut-off"],
         }, [
           m(Column, {selector: ".footer__block.padding-right-medium", flex: 1}, [
             m(ColumnContainer, [
@@ -77,7 +77,7 @@ export const Footer: m.Component<Attrs> = {
             ]),
             m(ColumnContainer, {
               selector: ".margin-top-medium",
-              modifiers: "align-center"
+              modifiers: ["align-center"]
             }, [
               m(Column, [
                 m("img.footer__partner-logo", {

@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 
 interface Attrs {
   percentage: number;
@@ -6,11 +6,15 @@ interface Attrs {
   lineWidth: number;
 }
 
+interface State {
+  initialising: boolean
+}
+
 type Vnode = m.Vnode<Attrs>;
 
 const pi = 3.14159;
 
-export const PercentageCircle: m.Component<Attrs> = {
+export const PercentageCircle: m.Component<Attrs, State> = {
   oninit: ({state}) => {
     state.initialising = true;
     setTimeout(() => {

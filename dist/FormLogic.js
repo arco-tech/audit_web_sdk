@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateLocalisation = exports.summary = void 0;
-var Questions = require("./Questions");
-function summary(section, location, values) {
-    var validQuestions = [];
-    var ignoredQuestions = [];
-    var goesTo = null;
-    section.questions().forEach(function (question) {
+import * as Questions from "./Questions.js";
+export function summary(section, location, values) {
+    const validQuestions = [];
+    const ignoredQuestions = [];
+    let goesTo = null;
+    section.questions().forEach((question) => {
         if (!validateLocalisation(question, location)) {
             if (goesTo &&
                 goesTo.type() === "question" &&
@@ -20,18 +17,16 @@ function summary(section, location, values) {
             ignoredQuestions.push(question);
         }
         else {
-            goesTo = Questions.goesTo(question, values["".concat(question.id())]);
+            goesTo = Questions.goesTo(question, values[`${question.id()}`]);
             validQuestions.push(question);
         }
     });
-    return { validQuestions: validQuestions, ignoredQuestions: ignoredQuestions };
+    return { validQuestions, ignoredQuestions };
 }
-exports.summary = summary;
-function validateLocalisation(question, location) {
-    var localisation = question.localisation();
+export function validateLocalisation(question, location) {
+    const localisation = question.localisation();
     return !location || !localisation ||
         !Array.isArray(localisation) || localisation.length === 0 ||
         localisation.indexOf(location.countryCode()) !== -1;
 }
-exports.validateLocalisation = validateLocalisation;
 //# sourceMappingURL=FormLogic.js.map

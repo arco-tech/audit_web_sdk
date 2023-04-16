@@ -3,11 +3,11 @@ on:
   push:
     branches:
       - master
-      - develop
+      - main
 
 jobs:
   test:
-    name: Test Job
+    name: Build and test
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@master
 
       - name: Install
-        run: npm install
+        run: npm ci
 
       - name: Notify install failure
         if: failure()
@@ -37,7 +37,7 @@ jobs:
         env:
           API_ENDPOINT: "https://test.dt.arco.nz"
           TEST_OUTPUT: $
-        run: npm test
+        run: npm run build && npm run test
 
       - name: Notify test failure
         if: failure()

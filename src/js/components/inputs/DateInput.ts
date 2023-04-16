@@ -1,8 +1,8 @@
-import * as m from "mithril";
-import * as DateTime from "../../DateTime";
-import {block} from "../../BEM";
-import {Changeset} from "../../Changeset";
-import * as BodyListener from "../../BodyListener";
+import m from "mithril";
+import * as DateTime from "../../DateTime.js";
+import {block} from "../../BEM.js";
+import {Changeset} from "../../Changeset.js";
+import * as BodyListener from "../../BodyListener.js";
 
 interface Attrs {
   changeset: Changeset;
@@ -13,6 +13,7 @@ interface Attrs {
 interface State {
   date: Date;
   expand: boolean;
+  listenerID: number
 }
 
 export const DateInput: m.Component<Attrs, State> = {

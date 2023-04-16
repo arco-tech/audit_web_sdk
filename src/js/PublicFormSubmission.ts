@@ -1,4 +1,4 @@
-import {FormStateData} from "./FormState";
+import {FormStateData} from "./FormState.js";
 
 export interface PublicFormSubmissionData {
   id: number;

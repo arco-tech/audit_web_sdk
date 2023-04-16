@@ -1,29 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PublicForm = void 0;
-var PublicForm = /** @class */ (function () {
-    function PublicForm(data) {
+export class PublicForm {
+    constructor(data) {
         this._data = data;
     }
-    PublicForm.prototype.data = function () {
+    data() {
         return this._data;
-    };
-    PublicForm.prototype.namedId = function () {
+    }
+    namedId() {
         return this._data.named_id;
-    };
-    PublicForm.prototype.color = function () {
+    }
+    color() {
         return this._data.colour_code;
-    };
-    PublicForm.prototype.description = function () {
+    }
+    description() {
         return this._data.description;
-    };
-    PublicForm.prototype.uiType = function () {
+    }
+    uiType() {
         return this._data.ui_type;
-    };
-    PublicForm.prototype.name = function () {
+    }
+    name() {
         return this._data.name;
-    };
-    return PublicForm;
-}());
-exports.PublicForm = PublicForm;
+    }
+}
 //# sourceMappingURL=PublicForm.js.map

@@ -1,8 +1,5 @@
-
-//dom.window.scrollTo = () => {};
-
-var jsdom = require("jsdom")
-var dom = new jsdom.JSDOM("", {
+import { JSDOM } from "jsdom";
+let dom = new JSDOM("", {
     // So we can get `requestAnimationFrame`
     pretendToBeVisual: true,
 })

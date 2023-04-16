@@ -1,7 +1,7 @@
-import * as m from "mithril";
-import {Changeset} from "../../Changeset";
-import {Column} from "../Column";
-import {ColumnContainer} from "../ColumnContainer";
+import m from "mithril";
+import {Changeset} from "../../Changeset.js";
+import {Column} from "../Column.js";
+import {ColumnContainer} from "../ColumnContainer.js";
 
 interface Attrs {
   changeset: Changeset;
@@ -22,7 +22,7 @@ export const InputList: m.Component<Attrs> = {
       valueList.map((value: string, index: number) => {
         return m(ColumnContainer, {
           selector: ".margin-bottom-extra-small",
-          modifiers: "align-center",
+          modifiers: ["align-center"],
         }, [
           m(Column, {flex: 1}, [
             m("input", {
@@ -50,7 +50,7 @@ export const InputList: m.Component<Attrs> = {
       }),
       m(ColumnContainer, {
         selector: ".margin-top-small.cursor-pointer",
-        modifiers: "align-center",
+        modifiers: ["align-center"],
         onclick: () => {
           changeset.change(name, [...valueList, ""]);
         },

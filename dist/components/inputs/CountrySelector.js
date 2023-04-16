@@ -1,23 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CountrySelector = void 0;
-var m = require("mithril");
-var LocationAPI = require("../../api/public/LocationAPI");
-var Selector_1 = require("./Selector");
-exports.CountrySelector = {
-    oninit: function (vnode) {
+import m from "mithril";
+import * as LocationAPI from "../../api/public/LocationAPI.js";
+import { Selector } from "./Selector.js";
+export const CountrySelector = {
+    oninit: (vnode) => {
         vnode.state.locations = [];
-        return LocationAPI.locations().then(function (locations) {
+        return LocationAPI.locations().then((locations) => {
             vnode.state.locations = locations;
         });
     },
-    view: function (_a) {
-        var _b = _a.attrs, name = _b.name, changeset = _b.changeset, locations = _a.state.locations;
-        return m(Selector_1.Selector, {
-            name: name,
-            changeset: changeset,
+    view: ({ attrs: { name, changeset }, state: { locations } }) => {
+        return m(Selector, {
+            name,
+            changeset,
             integerValues: true,
-            options: defaultOptions().concat(locations.map(function (location) {
+            options: defaultOptions().concat(locations.map((location) => {
                 return { label: location.name(), value: location.id() };
             })),
         });

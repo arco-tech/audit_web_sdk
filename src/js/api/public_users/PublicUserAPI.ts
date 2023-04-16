@@ -1,7 +1,7 @@
-import {request} from "./API";
+import {request} from "./API.js";
 import {
   InitiatePublicFormResponse,
-} from "../public_forms/InitiateAPI";
+} from "../public_forms/InitiateAPI.js";
 
 export interface CreatePublicUserRequest {
   password: string;

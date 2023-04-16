@@ -1,6 +1,6 @@
 export function param(name: string): string | null {
   const params = window.location.search.replace("?", "").split("&");
-  for (let index in params) {
+  for (const index in params) {
     const param = params[index].split("=");
     const key = decodeURIComponent(param[0]);
     if (key === name) {

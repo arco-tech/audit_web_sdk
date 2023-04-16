@@ -1,5 +1,5 @@
-import * as m from "mithril";
-import {Changeset} from "../../Changeset";
+import m from "mithril";
+import {Changeset} from "../../Changeset.js";
 
 interface Attrs {
   selector?: string;

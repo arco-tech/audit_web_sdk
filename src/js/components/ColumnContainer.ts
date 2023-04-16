@@ -1,5 +1,5 @@
-import * as m from "mithril";
-import {block} from "../BEM";
+import m from "mithril";
+import {block} from "../BEM.js";
 
 type Modifier = (
   "align-center" |

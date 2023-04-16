@@ -1,5 +1,5 @@
 import test from "ava";
-import {block, modifiers} from "../BEM";
+import {block, modifiers} from "../BEM.js";
 
 test("block", (t) => {
   t.is(block("block"), ".block");

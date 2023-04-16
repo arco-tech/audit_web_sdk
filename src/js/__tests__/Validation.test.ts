@@ -1,5 +1,5 @@
 import test from "ava";
-import {validate} from "../Validation";
+import {validate} from "../Validation.js";
 
 test("validate succeeds and fails", (t) => {
   const constraints = {

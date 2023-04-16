@@ -1,5 +1,5 @@
-import * as m from "mithril";
-import {block} from "../BEM";
+import m from "mithril";
+import {block} from "../BEM.js";
 
 interface Attrs {
   selector?: string;
@@ -9,7 +9,7 @@ interface Attrs {
 
 interface State {
   display: number;
-  timeout: number;
+  timeout: any;
 }
 
 type Vnode = m.Vnode<Attrs, State>;

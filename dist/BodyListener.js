@@ -1,40 +1,31 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove = exports.listen = void 0;
-var Log_1 = require("./Log");
-var idCounter = 1;
-var listeners = {};
-function listen(eventName, callback) {
+import { log } from "./Log.js";
+let idCounter = 1;
+const listeners = {};
+export function listen(eventName, callback) {
     if (!listeners[eventName]) {
         listeners[eventName] = [];
-        document.body.addEventListener(eventName, function (event) {
-            listeners[eventName].forEach(function (_a) {
-                var callback = _a.callback;
+        document.body.addEventListener(eventName, (event) => {
+            listeners[eventName].forEach(({ callback }) => {
                 try {
                     callback(event);
                 }
                 catch (error) {
-                    (0, Log_1.log)("error", error);
+                    log("error", error);
                 }
             });
         });
     }
-    var id = idCounter++;
-    listeners[eventName].push({ id: id, callback: callback });
+    const id = idCounter++;
+    listeners[eventName].push({ id, callback });
     return id;
 }
-exports.listen = listen;
-function remove(removeID) {
-    for (var eventName in listeners) {
-        var index = listeners[eventName].findIndex(function (_a) {
-            var id = _a.id;
-            return id === removeID;
-        });
+export function remove(removeID) {
+    for (const eventName in listeners) {
+        const index = listeners[eventName].findIndex(({ id }) => id === removeID);
         if (index !== -1) {
             listeners[eventName].splice(index, 1);
             break;
         }
     }
 }
-exports.remove = remove;
 //# sourceMappingURL=BodyListener.js.map

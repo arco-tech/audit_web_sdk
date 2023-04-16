@@ -1,5 +1,5 @@
 import test from "ava";
-import * as DateTime from "../DateTime";
+import * as DateTime from "../DateTime.js";
 
 test("monthName returns the correct month name", (t) => {
   t.is(DateTime.monthName(0), "January");

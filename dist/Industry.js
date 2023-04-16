@@ -1,20 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Industry = void 0;
-var Industry = /** @class */ (function () {
-    function Industry(data) {
+export class Industry {
+    constructor(data) {
         this._data = data;
     }
-    Industry.prototype.id = function () {
+    id() {
         return this._data.id;
-    };
-    Industry.prototype.namedID = function () {
+    }
+    namedID() {
         return this._data.named_id;
-    };
-    Industry.prototype.name = function () {
+    }
+    name() {
         return this._data.name;
-    };
-    return Industry;
-}());
-exports.Industry = Industry;
+    }
+}
 //# sourceMappingURL=Industry.js.map
