@@ -1,1 +1,0 @@
-{"version":3,"file":"FileUploadAPI.js","sourceRoot":"","sources":["../../../src/js/api/public_forms/FileUploadAPI.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,UAAU,CAAA;AAclC,MAAM,UAAU,MAAM,CAAC,MAAwB;IAC7C,MAAM,IAAI,GAAG,EAAE,WAAW,EAAE,MAAM,EAAE,CAAA;IACpC,OAAO,OAAO,CAAa,MAAM,EAAE,cAAc,EAAE,EAAE,IAAI,EAAE,CAAC,CAAA;AAC9D,CAAC"}
