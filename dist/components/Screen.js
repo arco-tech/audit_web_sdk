@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { Footer } from "./Footer.js";
 import { Header } from "./Header.js";
 export const Screen = {

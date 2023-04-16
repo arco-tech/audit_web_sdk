@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@ava/typescript": "^4.0.0",
+    "@types/mithril": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "ava": "^5.2.0",
@@ -21,12 +22,20 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "mithril": "^2.0.4"
+    "mithril": "^2.0.12"
   },
   "ava": {
     "typescript": {
-      "rewritePaths": {"src/js/": "dist/"},
+      "rewritePaths": {
+        "src/js/": "dist/"
+      },
       "compile": false
-    }
+    },
+    "files": [
+      "./src/js/**/__tests__/*.test.ts"
+    ],
+    "require": [
+      "./src/js/tests/Setup.js"
+    ]
   }
 }

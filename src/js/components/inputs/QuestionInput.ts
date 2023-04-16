@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import {Changeset} from "../../Changeset.js";
 import {PublishedFormQuestion} from "../../PublishedForm.js";
 import * as Questions from "../../Questions.js";

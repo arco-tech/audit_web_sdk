@@ -1,7 +1,13 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as Questions from "../Questions.js";
 import { block } from "../BEM.js";
 import { displayDate } from "../DateTime.js";
+// simple type narrowing workaround
+function convertNumber(val) {
+    if (typeof val === "number")
+        return String(val);
+    return val;
+}
 export const PreviousValue = {
     oninit: ({ state }) => {
         state.hover = false;
@@ -14,7 +20,7 @@ export const PreviousValue = {
         const response = previousValues[namedId];
         if (!response)
             return null;
-        const value = parseRespone(response);
+        const value = parseResponse(response);
         if (value == "")
             return null;
         return m(".previous-values", [
@@ -22,7 +28,7 @@ export const PreviousValue = {
             m(".previous-values__value", value),
             m(".previous-values__copy", {
                 onclick: () => {
-                    state.copyFailed = !Questions.setValue(question, response, changeset);
+                    state.copyFailed = !Questions.setValue(question, convertNumber(response), changeset);
                 },
                 onmouseenter: () => {
                     state.hover = true;
@@ -45,7 +51,7 @@ export const PreviousValue = {
         ]);
     },
 };
-const parseRespone = (response) => {
+const parseResponse = (response) => {
     if (Array.isArray(response)) {
         if (response.length > 0 && Array.isArray(response[0])) {
             return response

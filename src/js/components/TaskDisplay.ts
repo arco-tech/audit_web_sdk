@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import {Spinner} from "./Spinner.js";
 import {Task} from "../Task.js";
 

@@ -1,12 +1,12 @@
-import * as m from "mithril";
+import m from "mithril";
 import { block } from "../../BEM.js";
 export const SectionSelector = {
     view: ({ attrs: { sections, changeset } }) => {
         return sections.map((section) => {
-            const active = changeset.getValue(section.id()) || false;
+            const active = changeset.getValue(String(section.id())) || false;
             return m(".icon-selector", {
                 onclick: () => {
-                    changeset.change(section.id(), active ? false : true);
+                    changeset.change(String(section.id()), active ? false : true);
                 },
             }, [
                 m(block("icon-selector__icon", active ? "active" : []), {

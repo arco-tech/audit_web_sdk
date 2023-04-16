@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { Changeset } from "../Changeset.js";
 import { FormState } from "../FormState.js";
 import { PublishedForm} from "../PublishedForm.js";
@@ -13,9 +13,15 @@ interface Attrs {
   formState: FormState;
   hideIgnored?: boolean;
   previousValues?: PreviousValues
+  validationErrors: any
 }
 
-type Vnode = m.Vnode<Attrs>;
+interface State {
+  changeset: Changeset
+  formSaver: FormSaver
+}
+
+type Vnode = m.Vnode<Attrs, State>;
 
 export const FormQuestionBox: m.Component<Attrs> = {
   oninit: (vnode: Vnode) => {

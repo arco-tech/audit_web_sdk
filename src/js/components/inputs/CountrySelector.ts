@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as LocationAPI from "../../api/public/LocationAPI.js";
 import {Changeset} from "../../Changeset.js";
 import {Location} from "../../Location.js";
@@ -13,7 +13,7 @@ interface State {
   locations: Location[];
 }
 
-type Vnode = m.Vnode<Attrs>;
+type Vnode = m.Vnode<Attrs, State>;
 
 export const CountrySelector: m.Component<Attrs> = {
   oninit: (vnode: Vnode) => {

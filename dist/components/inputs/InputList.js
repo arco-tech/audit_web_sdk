@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { Column } from "../Column.js";
 import { ColumnContainer } from "../ColumnContainer.js";
 export const InputList = {
@@ -11,7 +11,7 @@ export const InputList = {
             valueList.map((value, index) => {
                 return m(ColumnContainer, {
                     selector: ".margin-bottom-extra-small",
-                    modifiers: "align-center",
+                    modifiers: ["align-center"],
                 }, [
                     m(Column, { flex: 1 }, [
                         m("input", {
@@ -39,7 +39,7 @@ export const InputList = {
             }),
             m(ColumnContainer, {
                 selector: ".margin-top-small.cursor-pointer",
-                modifiers: "align-center",
+                modifiers: ["align-center"],
                 onclick: () => {
                     changeset.change(name, [...valueList, ""]);
                 },

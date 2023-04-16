@@ -1,5 +1,5 @@
 import test from "ava";
-import * as m from "mithril";
+import m from "mithril";
 import * as Mock from "../Mock.js";
 import * as Assert from "../Assert.js";
 test("findElementForText successfully finds text", async (t) => {

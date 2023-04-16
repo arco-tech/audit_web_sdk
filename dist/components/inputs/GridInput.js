@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const GridInput = {
     view: ({ attrs: { changeset, name, settings } }) => {
         return m("table.input-table", m("tr.input-table__row", [
@@ -10,7 +10,7 @@ export const GridInput = {
             return m("tr.input-table__row", [
                 m("td.input-table__cell.input-table__cell--header", row.title()),
                 settings.columns().map((column, columnIndex) => {
-                    const isSum = row.dataType === "sum" || column.dataType === "sum";
+                    const isSum = row.dataType() === "sum" || column.dataType() === "sum";
                     return m("td.input-table__cell.input-table__cell--input", [
                         isSum &&
                             m(".p-2", getCellValue(changeset.getValue(name), rowIndex, columnIndex)),

@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import {Changeset} from "../Changeset.js";
 import {ErrorMessage} from "./ErrorMessage.js";
 

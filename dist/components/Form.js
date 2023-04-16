@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { ErrorMessage } from "./ErrorMessage.js";
 export const Form = {
     view: ({ attrs: { changeset, onSubmit }, children }) => {

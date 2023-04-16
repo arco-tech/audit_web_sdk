@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const TextArea = {
     view: ({ attrs: { selector, changeset, name, rows = 10, ...attrs } }) => {
         return m("textarea" + (selector || ""), {

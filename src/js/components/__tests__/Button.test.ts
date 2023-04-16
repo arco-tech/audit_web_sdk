@@ -1,5 +1,5 @@
 import test from "ava";
-import * as m from "mithril";
+import m from "mithril";
 import * as Mock from "../../tests/Mock.js";
 import {simulateMouseClick} from "../../tests/Events.js";
 import {Button} from "../Button.js";

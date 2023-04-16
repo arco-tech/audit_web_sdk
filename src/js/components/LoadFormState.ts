@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 
 import * as Storage from "../Storage.js";
 import {PublishedForm, PublishedFormData} from "../PublishedForm.js";
@@ -26,7 +26,7 @@ interface State {
   errorMessage?: string;
 }
 
-type Vnode = m.Vnode<Attrs>;
+type Vnode = m.Vnode<Attrs, State>;
 
 export const LoadFormState: m.Component<Attrs> = {
   oninit: (vnode: Vnode) => {

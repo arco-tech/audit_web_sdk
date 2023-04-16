@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 const pi = 3.14159;
 export const PercentageCircle = {
     oninit: ({ state }) => {

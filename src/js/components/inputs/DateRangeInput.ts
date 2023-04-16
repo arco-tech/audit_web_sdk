@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import {DateInput} from "./DateInput.js";
 import {Changeset} from "../../Changeset.js";
 

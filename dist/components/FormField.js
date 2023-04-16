@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { ErrorMessage } from "./ErrorMessage.js";
 export const FormField = {
     view: ({ attrs: { label, name, changeset, formSaver, input, question, ...attrs } }) => {
@@ -13,7 +13,7 @@ export const FormField = {
                 ]),
             ]),
             !formSaver && label && m(".form__field__label", label),
-            m(input, { name, changeset, question, ...attrs }),
+            m(input, { name, changeset, ...attrs }),
             m(ErrorMessage, { error: changeset.getFieldError(name) }),
         ]);
     },

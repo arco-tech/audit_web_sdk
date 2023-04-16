@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { CheckBoxList } from "./components/inputs/CheckBoxList.js";
 import { DateInput } from "./components/inputs/DateInput.js";
 import { DateRangeInput } from "./components/inputs/DateRangeInput.js";

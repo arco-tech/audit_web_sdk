@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const TableInput = {
     view: ({ attrs: { changeset, name, settings } }) => {
         const tableValue = getValue(changeset, name, settings);

@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as FileUploadAPI from "../../api/public_forms/FileUploadAPI.js";
 export const FileUploadInput = {
     oninit: ({ state }) => {

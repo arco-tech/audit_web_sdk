@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as LocationAPI from "../../api/public/LocationAPI.js";
 import { Selector } from "./Selector.js";
 export const CountrySelector = {

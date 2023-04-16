@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const Input = {
     view: ({ attrs: { selector, changeset, name, ...attrs } }) => {
         return m("input" + (selector || ""), {

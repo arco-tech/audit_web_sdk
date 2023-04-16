@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const Column = {
     view: ({ attrs: { selector = "", flex, ...attrs }, children }) => {
         return m(selector + ".column", {

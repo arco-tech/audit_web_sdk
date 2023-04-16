@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as DateTime from "../../DateTime.js";
 import { block } from "../../BEM.js";
 import * as BodyListener from "../../BodyListener.js";

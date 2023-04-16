@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as Storage from "../Storage.js";
 import { PublishedForm } from "../PublishedForm.js";
 import { FormState } from "../FormState.js";

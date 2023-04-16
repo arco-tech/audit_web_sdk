@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const HorizontalLine = {
     view: (vnode) => {
         const lineColor = vnode.attrs.lineColor || "light-grey";

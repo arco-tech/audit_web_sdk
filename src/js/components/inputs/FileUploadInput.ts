@@ -1,4 +1,4 @@
-import * as m from "mithril"
+import m from "mithril"
 import { Changeset } from "../../Changeset.js"
 import * as FileUploadAPI from "../../api/public_forms/FileUploadAPI.js"
 
@@ -19,7 +19,7 @@ interface State {
   drag?: boolean
 }
 
-export const FileUploadInput: m.Component<Attrs> = {
+export const FileUploadInput: m.Component<Attrs, State> = {
   oninit: ({ state }) => {
     state.statuses = []
   },
@@ -63,7 +63,7 @@ export const FileUploadInput: m.Component<Attrs> = {
         multiple: true,
         style: "display: none;",
         oncreate: (vnode) => {
-          state.input = vnode.dom
+          state.input = vnode.dom as HTMLInputElement
         },
         oninput: (event) => {
           Array.from(event.target.files).forEach((file) => {

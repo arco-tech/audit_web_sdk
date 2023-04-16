@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import * as DateTime from "../../DateTime.js";
 import {block} from "../../BEM.js";
 import {Changeset} from "../../Changeset.js";
@@ -13,6 +13,7 @@ interface Attrs {
 interface State {
   date: Date;
   expand: boolean;
+  listenerID: number
 }
 
 export const DateInput: m.Component<Attrs, State> = {

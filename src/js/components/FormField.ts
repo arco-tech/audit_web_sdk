@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import {Changeset} from "../Changeset.js";
 import {ErrorMessage} from "./ErrorMessage.js";
 import { PublishedFormQuestion } from "../PublishedForm.js"
@@ -22,14 +22,14 @@ export const FormField: m.Component<Attrs> = {
     const saving = formSaver && !saved && formSaver.isSaving();
     return m(".form__field", [
       formSaver && m(".form__field__label", [
-        m("div", label),
+        m("div", label as any),
         m(".form__field__label__status", [
           saved && "Saved",
           saving && "Saving...",
         ]),
       ]),
-      !formSaver && label && m(".form__field__label", label),
-      m(input, {name, changeset, question, ...attrs}),
+      !formSaver && label && m(".form__field__label", label as any),
+      m(input, {name, changeset, ...attrs}),
       m(ErrorMessage, {error: changeset.getFieldError(name)}),
     ]);
   },

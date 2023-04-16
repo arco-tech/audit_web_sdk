@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 import { Changeset } from "../Changeset.js";
 import { FormField } from "./FormField.js";
 import { QuestionInput } from "./inputs/QuestionInput.js";

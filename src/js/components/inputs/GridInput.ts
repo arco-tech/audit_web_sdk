@@ -1,4 +1,4 @@
-import * as m from "mithril"
+import m from "mithril"
 import { Changeset } from "../../Changeset.js"
 import {
   PublishedFormQuestionGridSettings,
@@ -30,7 +30,7 @@ export const GridInput: m.Component<Attrs> = {
         return m("tr.input-table__row", [
           m("td.input-table__cell.input-table__cell--header", row.title()),
           settings.columns().map((column, columnIndex) => {
-            const isSum = row.dataType === "sum" || column.dataType === "sum"
+            const isSum = row.dataType() === "sum" || column.dataType() === "sum"
 
             return m("td.input-table__cell.input-table__cell--input", [
               isSum &&

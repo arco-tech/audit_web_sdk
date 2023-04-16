@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 export const Spinner = {
     view: (vnode) => {
         return m(".spinner-container", [
