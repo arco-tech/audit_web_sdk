@@ -1,6 +1,6 @@
 {
-  "name": "audit_web_sdk",
-  "version": "0.3.0",
+  "name": "@arco-tech/audit_web_sdk",
+  "version": "0.3.1",
   "description": "",
   "author": "arco",
   "main": "dist/index.js",
@@ -37,5 +37,10 @@
     "require": [
       "./src/js/tests/Setup.js"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arco-tech/audit_web_sdk.git"
+  },
+  "publishConfig": {"registry": "https://npm.pkg.github.com"}
 }
