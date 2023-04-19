@@ -6,7 +6,8 @@
     "esModuleInterop": true,
     "target": "ES2020",
     "sourceMap": true,
-    "allowJs": false
+    "allowJs": false,
+    "declaration": true
   },
   "exclude": [
     "node_modules"
