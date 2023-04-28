@@ -6,6 +6,7 @@ import {
   mockQuestionData,
   mockSection,
   mockSectionData,
+  mockQuestion
 } from "../tests/PublishedFormMocks.js";
 
 function mockFormState(
@@ -178,6 +179,34 @@ test("findCurrentSection returns the correct section", (t) => {
   formState.changeCurrentSectionID(3);
   const secondSection = formState.findCurrentSection(publishedForm);
   t.is(secondSection.name(), "Section 3");
+});
+
+test("can find fieldset control", (t) => {
+  const publishedForm = mockPublishedForm({});
+  const formState = mockFormState({});
+  const fieldsets = formState.findVisibleFieldsets(publishedForm);
+  t.is(fieldsets.length, 0);
+});
+
+test("check for fieldset visibility succeeds", (t) => {
+  const formState = mockFormState({});
+  const visibleFieldsets = ["shown"];
+
+  // default (null) fieldset is visible
+  const empty = mockQuestion({});
+  t.true(formState.hasVisibleFieldset(empty, visibleFieldsets));
+  
+  // empty string also default
+  const zero = mockQuestion({fieldset: ""});
+  t.true(formState.hasVisibleFieldset(zero, visibleFieldsets));
+
+  // explicitly set fieldset not in list
+  const hidden = mockQuestion({fieldset: "hidden"});
+  t.false(formState.hasVisibleFieldset(hidden, visibleFieldsets));
+
+  // explicitly set fieldset is in list
+  const shown = mockQuestion({fieldset: "shown"});
+  t.true(formState.hasVisibleFieldset(shown, visibleFieldsets));
 });
 
 // failure caused by move to JSDOM

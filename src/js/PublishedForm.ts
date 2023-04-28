@@ -304,6 +304,10 @@ export class PublishedFormQuestion {
     return this._data.localisation
   }
 
+  public fieldset(): string | null {
+    return this._data.fieldset
+  }
+
   public goesTo(): PublishedFormGoesTo {
     return new PublishedFormGoesTo(this._data.goes_to)
   }

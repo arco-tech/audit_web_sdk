@@ -284,6 +284,19 @@ export class FormState {
       return true;
     }
   }
+  public hasVisibleFieldset(question: PublishedFormQuestion, visible: string[] = []): boolean {
+    const fs = question.fieldset();
+    // the default (empty/nil) fieldset is always visible
+    if(fs == null || fs == ""){
+      return true;
+    }
+    // otherwise must be in the list of visible fieldsets!
+    return visible.includes(fs);
+  }
+
+  public findVisibleFieldsets(form: PublishedForm): string[] {
+    return [];
+  }
 
   public details(): FormStateDetails {
     return this._data.details;
