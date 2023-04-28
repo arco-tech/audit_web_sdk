@@ -50,11 +50,12 @@ export const FormQuestionBox: m.Component<Attrs> = {
   }: Vnode,
   ) => {
     const section = formState.findCurrentSection(publishedForm);
+    const fieldsets = formState.findVisibleFieldsets(publishedForm);
     const {validQuestions, ignoredQuestions} = formState.summary(section);
     changeset.validationErrors(validationErrors);
     return m(".margin-top-medium", section.questions().map((question) => {
       if (formState.validateLocalisation(question)) {
-        if (validQuestions.find((q) => q.id() === question.id())) {
+        if (validQuestions.find((q) => q.id() === question.id()) || formState.hasVisibleFieldset(question, fieldsets)) {
           return [
             m(FormField, {
               name: `${question.id()}`,

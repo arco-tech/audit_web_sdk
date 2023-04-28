@@ -164,6 +164,10 @@ export class PublishedFormOption {
     return this._data.index
   }
 
+  public controls_fieldset(): string {
+    return this._data.controls_fieldset
+  }
+
   public actions(): PublishedFormAction[] {
     return this._data.actions.map((actionData) => {
       return new PublishedFormAction(actionData)
@@ -302,6 +306,10 @@ export class PublishedFormQuestion {
 
   public localisation(): string[] | null {
     return this._data.localisation
+  }
+
+  public fieldset(): string | null {
+    return this._data.fieldset
   }
 
   public goesTo(): PublishedFormGoesTo {
@@ -468,6 +476,22 @@ export class PublishedForm {
     })
 
     return null
+  }
+
+  public fieldsetControllers() {
+    let controllers = [];
+    // there must be a better way than nested for loops
+    for(const s of this.form().sections()) {
+      for(const q of s.questions()) {
+       for(const o of q.options()){
+        const fs = o.controls_fieldset();
+        if(fs != null && fs !== "") {
+          controllers.push({question: q.id(), option: o.id(), fieldset: fs })
+        }
+       }
+      }
+    }
+    return controllers;
   }
 
   public formTypeID(): number {

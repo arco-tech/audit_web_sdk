@@ -6,6 +6,7 @@ import {
   mockQuestionData,
   mockSection,
   mockSectionData,
+  mockQuestion
 } from "../tests/PublishedFormMocks.js";
 
 function mockFormState(
@@ -178,6 +179,51 @@ test("findCurrentSection returns the correct section", (t) => {
   formState.changeCurrentSectionID(3);
   const secondSection = formState.findCurrentSection(publishedForm);
   t.is(secondSection.name(), "Section 3");
+});
+
+test("can find visible fieldset", (t) => {
+  // add a multi button to control the fieldsets
+  const q = {id: 100, type: "multi_button", options: [
+    {id: 10, controls_fieldset: "set1"},
+    {id: 20, controls_fieldset: "set2"},
+    {id: 30, controls_fieldset: "set3"},
+  ]};
+
+  // create a mock form
+  const publishedForm = mockPublishedForm({
+    form: {sections:[{questions: [q]}]}
+  });
+
+  // no visible fieldsets to start
+  const formState = mockFormState({});
+  const initialState = formState.findVisibleFieldsets(publishedForm);
+  t.is(initialState.length, 0);
+  // select "set2"
+  formState.changeValue(100, [20]);
+  const fieldsets = formState.findVisibleFieldsets(publishedForm);
+  t.is(fieldsets.length, 1);
+  t.true(fieldsets.includes("set2"));
+});
+
+test("check for fieldset visibility succeeds", (t) => {
+  const formState = mockFormState({});
+  const visibleFieldsets = ["shown"];
+
+  // default (null) fieldset is visible
+  const empty = mockQuestion({});
+  t.true(formState.hasVisibleFieldset(empty, visibleFieldsets));
+  
+  // empty string also default
+  const zero = mockQuestion({fieldset: ""});
+  t.true(formState.hasVisibleFieldset(zero, visibleFieldsets));
+
+  // explicitly set fieldset not in list
+  const hidden = mockQuestion({fieldset: "hidden"});
+  t.false(formState.hasVisibleFieldset(hidden, visibleFieldsets));
+
+  // explicitly set fieldset is in list
+  const shown = mockQuestion({fieldset: "shown"});
+  t.true(formState.hasVisibleFieldset(shown, visibleFieldsets));
 });
 
 // failure caused by move to JSDOM

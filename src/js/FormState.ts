@@ -285,6 +285,35 @@ export class FormState {
     }
   }
 
+  // for a given question, determine if it is in a visible fieldset
+  public hasVisibleFieldset(question: PublishedFormQuestion, visible: string[]): boolean {
+    const fs = question.fieldset();
+    // the default (empty/nil) fieldset is always visible
+    if(fs == null || fs == ""){
+      return true;
+    }
+    // otherwise must be in the list of visible fieldsets!
+    return visible.includes(fs);
+  }
+
+  // given a form, figure out which fieldsets should be visible
+  public findVisibleFieldsets(form: PublishedForm): string[] {
+    let fieldsets = [];
+    // get the selected options of the questions
+    const controllers = form.fieldsetControllers();
+    for(const c of controllers) {
+      const selected = this.value(c.question);
+      if(!selected) {
+        continue;
+      }
+      if(selected.includes(c.option)) {
+        fieldsets.push(c.fieldset);
+      }
+    }
+
+    return fieldsets;
+  }
+
   public details(): FormStateDetails {
     return this._data.details;
   }
