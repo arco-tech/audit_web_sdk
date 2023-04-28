@@ -181,11 +181,28 @@ test("findCurrentSection returns the correct section", (t) => {
   t.is(secondSection.name(), "Section 3");
 });
 
-test("can find fieldset control", (t) => {
-  const publishedForm = mockPublishedForm({});
+test("can find visible fieldset", (t) => {
+  // add a multi button to control the fieldsets
+  const q = {id: 100, type: "multi_button", options: [
+    {id: 10, controls_fieldset: "set1"},
+    {id: 20, controls_fieldset: "set2"},
+    {id: 30, controls_fieldset: "set3"},
+  ]};
+
+  // create a mock form
+  const publishedForm = mockPublishedForm({
+    form: {sections:[{questions: [q]}]}
+  });
+
+  // no visible fieldsets to start
   const formState = mockFormState({});
+  const initialState = formState.findVisibleFieldsets(publishedForm);
+  t.is(initialState.length, 0);
+  // select "set2"
+  formState.changeValue(100, [20]);
   const fieldsets = formState.findVisibleFieldsets(publishedForm);
-  t.is(fieldsets.length, 0);
+  t.is(fieldsets.length, 1);
+  t.true(fieldsets.includes("set2"));
 });
 
 test("check for fieldset visibility succeeds", (t) => {
