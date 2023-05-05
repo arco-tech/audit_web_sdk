@@ -8,7 +8,8 @@ export type PublishedFormQuestionType = (
   "multi_button" |
   "dropdown" |
   "date" |
-  "date_range"
+  "date_range" |
+  "header"
 )
 
 export type PublishedFormGoesToType = (
