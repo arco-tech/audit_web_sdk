@@ -106,7 +106,6 @@ export class FormState {
   ): PublishedFormSection[] {
     const filtered = sections.filter((section: PublishedFormSection) => {
       return (
-        section.required() ||
         this._data.filteredSectionIDs.indexOf(section.id()) !== -1
       );
     });
