@@ -7,7 +7,7 @@ interface Attrs {
   label?: string | m.Component<any>;
   name: string;
   changeset: Changeset;
-  input: m.Component<{name: string, changeset: Changeset}>;
+  input: m.Component<{question: PublishedFormQuestion, name: string, changeset: Changeset}>;
   question: PublishedFormQuestion
   [key: string]: any;
 }
@@ -29,7 +29,7 @@ export const FormField: m.Component<Attrs> = {
         ]),
       ]),
       !formSaver && label && m(".form__field__label", label as any),
-      m(input, {name, changeset, ...attrs}),
+      m(input, {question, name, changeset, ...attrs}),
       m(ErrorMessage, {error: changeset.getFieldError(name)}),
     ]);
   },

@@ -43,7 +43,7 @@ export const NumberInput: m.Component<Attrs> = {
 };
 
 function checkInput(event: KeyboardEvent) {
-  if (".0123456789".split("").indexOf(event.key) === -1) {
+  if (".0123456789-".split("").indexOf(event.key) === -1) {
     event.preventDefault();
   }
 }

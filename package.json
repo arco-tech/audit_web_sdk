@@ -1,9 +1,10 @@
 {
   "name": "@arco-tech/audit_web_sdk",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "",
   "author": "arco",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc --outDir dist",
