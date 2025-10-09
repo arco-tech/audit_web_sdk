@@ -62,7 +62,7 @@ export const PreviousValue: m.Component<Attrs, State> = {
         [
           "copy",
           m("img.previous-values__copy__icon", {
-            src: "/images/icons/copy-with-arrow.svg",
+            src: "images/icons/copy-with-arrow.svg",
             width: 20.9,
             height: 19,
           }),

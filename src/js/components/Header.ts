@@ -12,7 +12,7 @@ export const Header: m.Component<Attrs> = {
         target: "_blank",
       }, [
         m("img.header__logo", {
-          src: "/images/blp-logo-white.svg",
+          src: "images/blp-logo-white.svg",
         }),
       ]),
     ]);
