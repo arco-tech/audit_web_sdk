@@ -81,13 +81,13 @@ export const Footer: m.Component<Attrs> = {
             }, [
               m(Column, [
                 m("img.footer__partner-logo", {
-                  src: "/images/" +
+                  src: "images/" +
                     "nz-foreign-affairs-and-trade-aid-programme-logo-white.png",
                 }),
               ]),
               m(Column, [
                 m("img.footer__partner-logo", {
-                  src: "/images/dt-global-logo-white.svg",
+                  src: "images/dt-global-logo-white.svg",
                 }),
               ]),
             ]),

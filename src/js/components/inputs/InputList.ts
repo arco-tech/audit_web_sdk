@@ -40,7 +40,7 @@ export const InputList: m.Component<Attrs> = {
             style: "width: 20px; height: 20px;",
           }, [
             m("img.cursor-pointer", {
-              src: "/images/icons/cross-circle-red.svg",
+              src: "images/icons/cross-circle-red.svg",
               onclick: () => {
                 changeset.change(name, valueList.filter((_, i) => i !== index));
               },
@@ -56,7 +56,7 @@ export const InputList: m.Component<Attrs> = {
         },
       }, [
         m("img.margin-right-small", {
-          src: "/images/icons/plus-circle-grey.svg",
+          src: "images/icons/plus-circle-grey.svg",
           style: "width: 20px",
         }),
         m(".color-grey", {style: "flex: 1"}, "add answer"),
