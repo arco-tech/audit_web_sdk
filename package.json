@@ -14,16 +14,16 @@
   "devDependencies": {
     "@ava/typescript": "^4.0.0",
     "@types/mithril": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "ava": "^5.2.0",
-    "eslint": "^8.39.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "ava": "^5.3.1",
+    "eslint": "^10.1.0",
     "jsdom": "^28.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "mithril": "^2.0.12"
+    "mithril": "^2.3.8"
   },
   "ava": {
     "typescript": {
